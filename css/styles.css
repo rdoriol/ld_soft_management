@@ -1,0 +1,139 @@
+:root {
+
+    /* COLORES PERSONALIZADOS
+------------------------------*/
+    --backgroundColor: #F1F3F4;
+    --backgroundColor: #EDEFF3;    
+    --backgroundColor: #f4f4f4;
+    --backgroundColor: #f6f6f6;
+    --backgroundColor: #d7d7d7;
+    --buttons: #007bff;
+   
+}
+
+     /* GENERAL STYLES "base.template.php"
+------------------------------*/ 
+body {
+    background-color: var(--backgroundColor);
+    font-family: Helvetica;
+}
+
+button {
+    border: none;
+    color: var(--buttons);
+    
+}
+
+button:hover {
+    background-color: var(--buttons);    
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+     /* MAIN CONTAINER "base.template.php"
+------------------------------*/  
+.main_container {
+    display: flex;
+}
+
+.item_main_container {
+   
+}
+
+.item_main_container_nav {
+    width: 20%;
+}
+
+.item_main_container_section {
+    width: 80%;
+}
+
+     /* MAIN NAVEGATION BAR "base.template.php"
+------------------------------*/   
+#main_nav {
+    position: fixed;   
+    font-size: 13px;
+}
+
+#main_nav .li_item {
+    margin-bottom: 10px;
+ }
+
+.link_item {
+    background-color: #ffffff;
+    font-weight: bold; 
+    width: 145px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.submenu {
+    display: none;
+}
+
+.submenu li {
+    padding: 5px 10px;
+}
+
+    /* para activar/desactivar botón a través de JQuery */
+.li_active {
+    background-color: var(--buttons);    
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+.li_active:hover {
+    opacity: 0.7;
+    color: #ffffff;
+}
+
+.link_subitem {
+    background-color: var(--buttons);    
+    color: #ffffff;
+    text-decoration: underline;
+    width: 130px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+            /*Responsive Web Design - MAIN NAVEGATION BAR */
+
+.mobile_menu {
+    display: none;
+}
+
+@media (max-width:700px) {
+
+    #main_nav {
+        display: none
+    }
+
+    .mobile_menu {
+        display: block;
+        top: 0;
+        right: 0;
+        position: fixed;
+    }
+
+}
+
+     /* SECTION CONTAINER "base.template.php"
+---------------------------------------------*/
+#main_container_section {
+    height: 10000px;
+    overflow-y: auto;
+}
+
+.item_main_container_section h2 { /* ELIMINAR. Unicamente para pruebas */
+    text-align: center;
+}
+
+
+     /* FOOTER "base.template.php"
+----------------------------------*/
+footer {
+    width: 100%;   
+    text-align: center;  
+    overflow-y: auto;
+    bottom: 0;
+}
