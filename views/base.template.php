@@ -52,23 +52,23 @@
         <nav class="item_main_container_nav p-2" id="main_nav">
           <ul class="menu">
             <li class="li_item" id="menu_title">
-              <button role="link" class="link_item" onClick="window.location='index.php'">Inicio</button> <!--  DARLE UNA VUELTA AL TEMA DE LINK INICIO -->
+              <button role="link" class="link_item" onClick="window.location='index.php'">Inicio</button> <!--  DAR UNA VUELTA AL TEMA DE LINK INICIO -->
             </li>
             <li class="li_item" id="menu_title">
               <button class="link_item" title="Abrir opciones clientes">Clientes <i class="fa-solid fa-caret-down"></i></button>
               <ul class="submenu">
-                <li class=""><a class="" href="index.php?pages=01.newCustomer">Alta cliente</a></li>
-                <li class=""><a class="" href="index.php?pages=02.customerFile">Ficha cliente</a></li>
-                <li class=""><a class="" href="index.php?pages=04.customersList">Listado clientes</a></li>
+                <li class=""><a class="" href="index.php?pages=01-newCustomer">Alta cliente</a></li>
+                <li class=""><a class="" href="index.php?pages=02-customerFile">Ficha cliente</a></li>
+                <li class=""><a class="" href="index.php?pages=04-customersList">Listado clientes</a></li>
               </ul>
             </li>
             
             <li class="li_item"id="menu_title">
               <button class="link_item">Proveedores <i class="fa-solid fa-caret-down"></i></button>
               <ul class="submenu">
-                <li class=""><a class="" href="index.php?pages=01.newSupplier">Alta proveedor</a></li>
-                <li class=""><a class="" href="index.php?pages=02.supplierFile">Ficha proveedor</a></li>
-                <li class=""><a class="" href="index.php?pages=04.suppliersList">Listado proveedores</a></li>
+                <li class=""><a class="" href="index.php?pages=01-newSupplier">Alta proveedor</a></li>
+                <li class=""><a class="" href="index.php?pages=02-supplierFile">Ficha proveedor</a></li>
+                <li class=""><a class="" href="index.php?pages=04-suppliersList">Listado proveedores</a></li>
               </ul>
             </li>
 
@@ -85,30 +85,30 @@
             <li class="li_item"id="menu_title">
               <button class="link_item">Ventas <i class="fa-solid fa-caret-down"></i></button>
               <ul class="submenu">
-                <li class=""><a class="" href="index.php?pages=01newOrder">Alta pedido</a></li>
-                <li class=""><a class="" href="index.php?pages=02notes">Albaranes</a></li>
-                <li class=""><a class="" href="index.php?pages=03invoice">Facturas</a></li>
-                <li class=""><a class="" href="index.php?pages=04proInvoice">Facturas proforma</a></li>
-                <li class=""><a class="" href="index.php?pages=05budgets">Presupuestos</a></li>
-                <li class=""><a class="" href="index.php?pages=06salesLists">Listado ventas</a></li>
+                <li class=""><a class="" href="index.php?pages=01-newOrder">Alta pedido</a></li>
+                <li class=""><a class="" href="index.php?pages=02-notes">Albaranes</a></li>
+                <li class=""><a class="" href="index.php?pages=03-invoice">Facturas</a></li>
+                <li class=""><a class="" href="index.php?pages=04-proInvoice">Facturas proforma</a></li>
+                <li class=""><a class="" href="index.php?pages=05-budgets">Presupuestos</a></li>
+                <li class=""><a class="" href="index.php?pages=06-salesLists">Listado ventas</a></li>
               </ul>
             </li>
 
             <li class="li_item"id="menu_title">
               <button class="link_item">Empleados <i class="fa-solid fa-caret-down"></i></button>
               <ul class="submenu">
-                <li class=""><a class="" href="#">Alta empleado</a></li>
-                <li class=""><a class="" href="#">Ficha empleado</a></li>
-                <li class=""><a class="" href="#">Listado empleados</a></li>
+                <li class=""><a class="" href="index.php?pages=01-newEmployee">Alta empleado</a></li>
+                <li class=""><a class="" href="index.php?pages=02-employeeFile">Ficha empleado</a></li>
+                <li class=""><a class="" href="index.php?pages=04-employeesList">Listado empleados</a></li>
               </ul>
             </li>
 
             <li class="li_item"id="menu_title">
               <button class="link_item">Gestión Interna <i class="fa-solid fa-caret-down"></i></button>
               <ul class="submenu">
-                <li class=""><a class="" href="#">Usuarios</a></li>
-                <li class=""><a class="" href="#">Configuración productos </a></li>
-                <li class=""><a class="" href="#">Configuración ventas</a></li>
+                <li class=""><a class="" href="index.php?pages=00-users">Usuarios</a></li>
+                <li class=""><a class="" href="index.php?pages=00-inventorySetting">Configuración productos </a></li>
+                <li class=""><a class="" href="index.php?pages=00-salesSetting">Configuración ventas</a></li>
               </ul>
             </li>
 
@@ -135,37 +135,44 @@
             <div class="text-center container" id="">
               <?php
                   /**
-                   * Lista blanca de páginas (seguridad informática) de la aplicación web que se renderizarán por pantalla.
+                   * Controlador frontal o Lista blanca de todas las páginas (seguridad informática) de la aplicación web que se renderizarán por pantalla.
                    */
                 if(isset($_GET["pages"])) 
                 {
                   $page = $_GET["pages"]; // variable que almacena el valor de la variable GET
 
-                  if($page == "01.newCustomer" ||$page == "02.customerFile" || $page == "04.customersList") 
+                  if($page == "01-newCustomer" ||$page == "02-customerFile" || $page == "04-customersList") 
                   {
                     include "pages/01.customers/" . $page . ".template.php";
                   }
-                  else if($page == "01.newSupplier" || $page == "02.supplierFile" || $page == "04.suppliersList")
+                  else if($page == "01-newSupplier" || $page == "02-supplierFile" || $page == "04-suppliersList")
                   {
                     include "pages/02.suppliers/" . $page . ".template.php";
                   }
                   else if($page == "01-newProduct" || $page == "02-productFile" || $page == "04-productsInputs" || $page == "05-productsList")
                   {
-                    include "pages/03.inventary/" . $page . ".template.php";
+                    include "pages/03.inventory/" . $page . ".template.php";
                   }
-                  else if($page == "01newOrder" || $page == "02notes" || $page == "03invoice"  || $page == "04proInvoice" || $page == "05budgets"  || $page == "06salesLists")
+                  else if($page == "01-newOrder" || $page == "02-notes" || $page == "03-invoice"  || $page == "04-proInvoice" || $page == "05-budgets"  || $page == "06-salesLists")
                   {
                     include "pages/04.sales/" . $page . ".template.php";
                   }
-
-
-
-
-
-
-
-
-
+                  else if($page == "01-newEmployee" || $page == "02-employeeFile" || $page == "04-employeesList")
+                  {
+                    include "pages/05.employees/" . $page . ".template.php";
+                  }
+                  else if($page == "00-users") // TODO añadir restos de páginas en lista blanca y enlaces correspondientes
+                  {
+                    include "pages/06.users/" . $page . ".template.php";
+                  }
+                  else if($page == "00-inventorySetting") 
+                  {
+                    include "pages/07.inventorySetting/" . $page . ".template.php";
+                  }
+                  else if($page == "00-salesSetting")
+                  {
+                    include "pages/08.salesSetting/" . $page . ".template.php";
+                  }
                   else
                   {
                     echo "error 404";

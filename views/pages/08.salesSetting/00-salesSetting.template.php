@@ -1,0 +1,1 @@
+<h1>Configuración Ventas</h1>

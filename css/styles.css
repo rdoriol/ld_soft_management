@@ -7,7 +7,9 @@
     --backgroundColor: #f4f4f4;
     --backgroundColor: #f6f6f6;
     --backgroundColor: #d7d7d7;
+    --backgroundColor: #EFF3FF;
     --buttons: #007bff;
+
    
 }
 
@@ -28,6 +30,16 @@ button:hover {
     background-color: var(--buttons);    
     color: #ffffff;
     text-decoration: underline;
+}
+
+button img { /* TODO ELIMINAR */
+    width: 13px;
+    height: 13px;
+    color: #ffffff;
+}
+
+button:hover img { /* TODO ELIMINAR*/
+    
 }
 
      /* MAIN CONTAINER "base.template.php"
@@ -79,7 +91,7 @@ button:hover {
 .li_active {
     background-color: var(--buttons);    
     color: #ffffff;
-    text-decoration: underline;
+    /*text-decoration: underline;*/
 }
 
 .li_active:hover {
@@ -88,7 +100,8 @@ button:hover {
 }
 
 .link_subitem {
-    background-color: var(--buttons);    
+    background-color: var(--buttons);   
+    font-weight: bold;
     color: #ffffff;
     text-decoration: underline;
     width: 130px;
