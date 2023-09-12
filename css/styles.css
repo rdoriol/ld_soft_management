@@ -22,25 +22,16 @@ body {
 
 button {
     border: none;
-    color: var(--buttons);
-    
+    color: var(--buttons);    
 }
 
 button:hover {
     background-color: var(--buttons);    
     color: #ffffff;
-    text-decoration: underline;
+    /* text-decoration: underline; */
+
 }
 
-button img { /* TODO ELIMINAR */
-    width: 13px;
-    height: 13px;
-    color: #ffffff;
-}
-
-button:hover img { /* TODO ELIMINAR*/
-    
-}
 
      /* MAIN CONTAINER "base.template.php"
 ------------------------------*/  
@@ -71,12 +62,17 @@ button:hover img { /* TODO ELIMINAR*/
     margin-bottom: 10px;
  }
 
-.link_item {
+ #index_button {
+    text-align: center;
+    text-transform: uppercase;
+ }
+.link_button {
     background-color: #ffffff;
     font-weight: bold; 
     width: 145px;
     padding: 5px;
     border-radius: 5px;
+    text-align: start;
 }
 
 .submenu {
@@ -99,7 +95,7 @@ button:hover img { /* TODO ELIMINAR*/
     color: #ffffff;
 }
 
-.link_subitem {
+.link_subButton {
     background-color: var(--buttons);   
     font-weight: bold;
     color: #ffffff;
@@ -133,7 +129,7 @@ button:hover img { /* TODO ELIMINAR*/
      /* SECTION CONTAINER "base.template.php"
 ---------------------------------------------*/
 #main_container_section {
-    height: 10000px;
+    height: 1000px; /* ToDo: ¿eliminar cuando se le añada contenido a la sección central? */
     overflow-y: auto;
 }
 

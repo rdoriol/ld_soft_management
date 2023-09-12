@@ -51,11 +51,11 @@
       
         <nav class="item_main_container_nav p-2" id="main_nav">
           <ul class="menu">
-            <li class="li_item" id="menu_title">
-              <button role="link" class="link_item" onClick="window.location='index.php'">Inicio</button> <!--  DAR UNA VUELTA AL TEMA DE LINK INICIO -->
+            <li class="li_item" id="">
+              <button role="link" class="link_button" id="index_button" onClick="window.location='index.php'">inicio</button> <!--  DAR UNA VUELTA AL TEMA DE LINK INICIO -->
             </li>
-            <li class="li_item" id="menu_title">
-              <button class="link_item" title="Abrir opciones clientes">Clientes <i class="fa-solid fa-caret-down"></i></button>
+            <li class="li_item" id="">
+              <button class="link_button" title="Abrir opciones clientes"><i class="fa-solid fa-caret-right"></i>&nbsp Clientes</button>
               <ul class="submenu">
                 <li class=""><a class="" href="index.php?pages=01-newCustomer">Alta cliente</a></li>
                 <li class=""><a class="" href="index.php?pages=02-customerFile">Ficha cliente</a></li>
@@ -63,8 +63,8 @@
               </ul>
             </li>
             
-            <li class="li_item"id="menu_title">
-              <button class="link_item">Proveedores <i class="fa-solid fa-caret-down"></i></button>
+            <li class="li_item" id="">
+              <button class="link_button"><i class="fa-solid fa-caret-right"></i>&nbsp Proveedores</button>
               <ul class="submenu">
                 <li class=""><a class="" href="index.php?pages=01-newSupplier">Alta proveedor</a></li>
                 <li class=""><a class="" href="index.php?pages=02-supplierFile">Ficha proveedor</a></li>
@@ -72,8 +72,8 @@
               </ul>
             </li>
 
-            <li class="li_item"id="menu_title">
-              <button class="link_item">Gestión Inventario <i class="fa-solid fa-caret-down"></i></button>
+            <li class="li_item" id="">
+              <button class="link_button"> <i class="fa-solid fa-caret-right"></i>&nbsp Gestión Inventario</button>
               <ul class="submenu">
                 <li class=""><a class="" href="index.php?pages=01-newProduct">Alta producto</a></li>
                 <li class=""><a class="" href="index.php?pages=02-productFile">Ficha producto</a></li>
@@ -82,8 +82,8 @@
               </ul>
             </li>
 
-            <li class="li_item"id="menu_title">
-              <button class="link_item">Ventas <i class="fa-solid fa-caret-down"></i></button>
+            <li class="li_item" id="">
+              <button class="link_button"><i class="fa-solid fa-caret-right"></i>&nbsp Ventas</button>
               <ul class="submenu">
                 <li class=""><a class="" href="index.php?pages=01-newOrder">Alta pedido</a></li>
                 <li class=""><a class="" href="index.php?pages=02-notes">Albaranes</a></li>
@@ -94,8 +94,8 @@
               </ul>
             </li>
 
-            <li class="li_item"id="menu_title">
-              <button class="link_item">Empleados <i class="fa-solid fa-caret-down"></i></button>
+            <li class="li_item" id="">
+              <button class="link_button"><i class="fa-solid fa-caret-right"></i>&nbsp Empleados</button>
               <ul class="submenu">
                 <li class=""><a class="" href="index.php?pages=01-newEmployee">Alta empleado</a></li>
                 <li class=""><a class="" href="index.php?pages=02-employeeFile">Ficha empleado</a></li>
@@ -103,8 +103,8 @@
               </ul>
             </li>
 
-            <li class="li_item"id="menu_title">
-              <button class="link_item">Gestión Interna <i class="fa-solid fa-caret-down"></i></button>
+            <li class="li_item" id="">
+              <button class="link_button"><i class="fa-solid fa-caret-right"></i>&nbsp Gestión Interna</button>
               <ul class="submenu">
                 <li class=""><a class="" href="index.php?pages=00-users">Usuarios</a></li>
                 <li class=""><a class="" href="index.php?pages=00-inventorySetting">Configuración productos </a></li>
