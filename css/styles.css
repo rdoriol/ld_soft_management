@@ -2,17 +2,8 @@
 
     /* COLORES PERSONALIZADOS
 ------------------------------*/
-    --backgroundColor: #F1F3F4;
-    --backgroundColor: #EDEFF3;    
-    --backgroundColor: #f4f4f4;
-    --backgroundColor: #f6f6f6;
-    --backgroundColor: #d7d7d7;
     --backgroundColor: #EFF3FF;
-    --buttons: #007bff;
-    --subButtons: #179fcd;
-   
-    --subButtons: #89a4ff;
-    --subButtons: #0096d2;
+    --buttons: #007bff; 
 
    
 
@@ -109,8 +100,7 @@ button:hover {
     background-color: var(--buttons); 
     opacity: 0.7; 
     font-weight: bold;
-    color: #ffffff;    
-    
+    color: #ffffff;       
     width: 130px;
     padding: 5px;
     border-radius: 3px;   

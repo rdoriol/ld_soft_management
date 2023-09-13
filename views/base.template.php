@@ -195,7 +195,7 @@
         <h3>footer</h3>
     </footer>
 
-    <script src="js/mainNav.js"></script>
+    <script src="js/mainNavBar.js"></script>
 
   </body>
 </html>
