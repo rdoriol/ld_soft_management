@@ -9,6 +9,12 @@
     --backgroundColor: #d7d7d7;
     --backgroundColor: #EFF3FF;
     --buttons: #007bff;
+    --subButtons: #179fcd;
+   
+    --subButtons: #89a4ff;
+    --subButtons: #0096d2;
+
+   
 
    
 }
@@ -96,14 +102,26 @@ button:hover {
 }
 
 .link_subButton {
-    background-color: var(--buttons);   
     font-weight: bold;
-    color: #ffffff;
-    text-decoration: underline;
+}
+
+.link_subButton_active {
+    background-color: var(--buttons); 
+    opacity: 0.7; 
+    font-weight: bold;
+    color: #ffffff;    
+    
     width: 130px;
     padding: 5px;
-    border-radius: 5px;
+    border-radius: 3px;   
 }
+
+.li_active:hover, .link_subButton_active:hover {
+    opacity: 0.7;
+    color: #ffffff;
+    text-decoration: none;
+}
+
 
             /*Responsive Web Design - MAIN NAVEGATION BAR */
 
