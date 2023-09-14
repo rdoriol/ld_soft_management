@@ -8,7 +8,7 @@
          * Función que incluirá el fichero con la plantilla base de todas las páginaa (base.template.php)
          */
         function ctrGetBaseTemplate() {
-            include "./views/base.template.php";
+            include "./views/00-base.template.php";
         }
      }
 

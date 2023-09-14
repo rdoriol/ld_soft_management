@@ -4,7 +4,7 @@
 ------------------------------*/
     --backgroundColor: #EFF3FF;
     --buttons: #007bff; 
-
+    --subButtons: #7bff;
    
 
    
@@ -97,8 +97,7 @@ button:hover {
 }
 
 .link_subButton_active {
-    background-color: var(--buttons); 
-    opacity: 0.7; 
+    background-color: var(--subButtons); 
     font-weight: bold;
     color: #ffffff;       
     width: 130px;
@@ -154,3 +153,11 @@ footer {
     overflow-y: auto;
     bottom: 0;
 }
+
+     /* 01.CUSTOMERS "newCustomer.template.php"
+-----------------------------------------------*/
+
+
+
+
+
