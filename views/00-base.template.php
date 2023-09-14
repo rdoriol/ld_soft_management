@@ -51,7 +51,7 @@
 
             <!-- CENTRAL MAIN CONTAINER
                  ------------------------>
-      <section class="item_main_container item_main_container_section container-fluid py-5" id="main_container_section">
+      <section class="item_main_container item_main_container_section" id="main_container_section">
           
         <div class="text-center container" id="">
           <?php
@@ -64,7 +64,7 @@
 
               if($page == "01-newCustomer" || $page == "02-customerFile" || $page == "04-customersList") 
               {
-                include "pages/01.customers/" . $page . ".template.php";
+                include "pages/01.customers/" . $page . ".template.php";     
               }
               else if($page == "01-newSupplier" || $page == "02-supplierFile" || $page == "04-suppliersList")
               {

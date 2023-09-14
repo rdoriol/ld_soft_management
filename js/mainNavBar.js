@@ -19,7 +19,7 @@ $(document).ready(function() {
         else {
             navBarReset();
             $(this).next().slideDown();                                     // abre submenus.
-            $(this).addClass("li_active");                                  // añade clase para que menú seleccionado aparezca con las propiedades css de botón activo.
+            $(this).addClass("li_active_button");                                  // añade clase para que menú seleccionado aparezca con las propiedades css de botón activo.
             $(this).children().attr("class", "fa-solid fa-caret-down");     // se cambia a icono "submenú expandido".
                
                 // bloque para almacenar los "id" y estado del menú en sesión del navegador.
@@ -32,7 +32,7 @@ $(document).ready(function() {
     /**
      * Función que marcará opciones de los submenús seleccionados con propiedades css de boton activo.
      */
-    $("ul li ul li a").click(function(e) {
+    $("ul li ul li").click(function(e) {
         $(".link_subButton").removeClass("link_subButton");
        // $(this).addClass("link_subButton_active"); de momento no utilizar
 
@@ -44,7 +44,7 @@ $(document).ready(function() {
      */
     function navBarReset() {
         $(".submenu").slideUp();                                    // cierra todos los submenus previamente abiertos.
-        $(".link_button").removeClass("li_active");                 // elimina clase con las propiedades css de botón activo de los menús seleccionados previamente.
+        $(".link_button").removeClass("li_active_button");                 // elimina clase con las propiedades css de botón activo de los menús seleccionados previamente.
         $(".fa-solid").attr("class", "fa-solid fa-caret-right");    // cambia todos los iconos al tipo "submenú contraido".
     }
 
@@ -60,7 +60,7 @@ $(document).ready(function() {
         if(reloadSubmenuShow != "undefined" && reloadSubmenuShow != null) {
             if(reloadSubmenuShow == "true") {
                 $("#" + reloadSubmenuIdStore).show();
-                $("#" + reloadButtonIdStore).addClass("li_active");
+                $("#" + reloadButtonIdStore).addClass("li_active_button");
                 $("#" + reloadButtonIdStore).children().attr("class", "fa-solid fa-caret-down");
                 $("#" + reloadAIdStore).addClass("link_subButton_active");
             }

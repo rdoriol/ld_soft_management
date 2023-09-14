@@ -1,14 +1,14 @@
-<aside class="item_main_container" id="">
-      
-      <nav class="item_main_container_nav p-2" id="main_nav">
+<aside class="item_main_container_nav" id="">
+    
+      <nav class=" p-2" id="main_nav">
         <ul class="menu">
           <li class="li_item" id="">
-            <button role="link" class="link_button" id="index_button" onClick="window.location='index.php'">inicio</button> <!--  DAR UNA VUELTA AL TEMA DE LINK INICIO -->
+            <button role="link" class="link_button <?php echo $test ?>" id="index_button" onClick="window.location='index.php'">inicio</button> <!--  DAR UNA VUELTA AL TEMA DE LINK INICIO -->
           </li>
           <li class="li_item" id="">
-            <button class="link_button" id="customers_button" title="Abrir opciones clientes"><i class="fa-solid fa-caret-right"></i>&nbsp Clientes</button>
+            <button class="link_button <?php echo $test ?>" id="customers_button" title="Abrir opciones clientes"><i class="fa-solid fa-caret-right"></i>&nbsp Clientes</button>
             <ul class="submenu" id="customers_submenu">
-              <li class="link_subButton"><a class="" id="newCustomerId" href="index.php?pages=01-newCustomer">Alta cliente</a></li>
+              <li class="link_subButton" id="newCustomerId"><a class="" href="index.php?pages=01-newCustomer">Alta cliente</a></li>
               <li class="link_subButton"><a class="" id="customerFileId" href="index.php?pages=02-customerFile">Ficha cliente</a></li>
               <li class="link_subButton"><a class="" id="customersListId" href="index.php?pages=04-customersList">Listado clientes</a></li>
             </ul>
@@ -19,7 +19,7 @@
             <ul class="submenu" id="suppliers_submenu">
               <li class="link_subButton"><a class="" id="newSupplierId" href="index.php?pages=01-newSupplier">Alta proveedor</a></li>
               <li class="link_subButton"><a class="" id="supplierFileId" href="index.php?pages=02-supplierFile">Ficha proveedor</a></li>
-              <li class="link_subButton"><a class="" id="suppliersListId" href="index.php?pages=04-suppliersList">Listado proveedores</a></li>
+              <li class="link_subButton"><a class="" id="suppliersListId" href="index.php?pages=04-suppliersList">Listado proveed</a></li>
             </ul>
           </li>
 
