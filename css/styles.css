@@ -2,22 +2,21 @@
 
     /* COLORES PERSONALIZADOS
 ------------------------------*/
-    --backgroundColor: #EFF3FF;
-    
-  
-    --backgroundColor: #778899;
-    
+    --backgroundColor: #EFF3FF;  
+    --backgroundColor: #778899;    
     --backgroundColor: #D3D3D3;
     --backgroundColor: #d7d7d7;
     
     --buttons: #007bff; 
     --subButtons: #7bff;
+
+    --formsIconsBackgroundColor: #E9ECEF;
    
 
    
 }
 
-     /* GENERAL STYLES "base.template.php"
+     /* GENERAL STYLES
 ------------------------------*/ 
 body {
     background-color: var(--backgroundColor);
@@ -32,14 +31,75 @@ button {
 button:hover {
     background-color: var(--buttons);    
     color: #ffffff;
-    /* text-decoration: underline; */
-
 }
 
 h2 {
     width: 75%;
     margin: 0 auto;
 }
+
+            /* General Forms
+            -------------- */
+.forms_flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.forms_fields {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; 
+}
+
+.forms_label {
+    margin: 0;
+    padding-left: 30px;
+    font-weight: bold;
+    font-size: 15px;
+}
+.forms_inputs_fields {
+    display: flex;
+    /*justify-content: center;*/
+}
+
+.forms_icons {
+    background-color: var(--formsIconsBackgroundColor);
+    padding: 6px;
+}
+
+.forms_inputs {
+    padding-left: 10px;
+    border: none;
+    border-radius: 3px;
+}
+
+.forms_inputs:focus {   
+   outline: 2.5px solid gold;
+}
+
+::placeholder {
+    color: #D3D3D3;
+    font-size: 13px;
+}
+
+.forms_buttons {
+    background-color: var(--buttons);
+    font-weight: bold; 
+    color: #ffffff;
+    padding: 5px;
+    border-radius: 5px;
+    text-align: center;
+    width: 100px;
+}
+
+.forms_buttons:hover {
+   /* background-color: gold;*/
+    color:#000000;
+    opacity: 0.5;
+}
+     /* END general styles
+--------------------------*/ 
+
 
      /* HEADER "01-header.template.php"
 ------------------------------*/
@@ -171,7 +231,7 @@ h2 {
      /* SECTION CONTAINER "base.template.php"
 ---------------------------------------------*/
 #main_container_section {
-    height: 1000px; /* ToDo: ¿eliminar cuando se le añada contenido a la sección central? */
+   
     overflow-y: auto;
   
 }
