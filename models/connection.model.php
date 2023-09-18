@@ -6,7 +6,7 @@
         /**
          * Método que realizará la conexión a base de datos (PDO).
          */
-        public static function mdlConnect() {
+        static public function mdlConnect() {
             $host = "localhost";
             $db = "ld_soft_gestion";
             $user = "Roberto15";

@@ -1,6 +1,6 @@
 <h2 class="li_active_page rounded">Clientes</h2>
 
-<form class="general_forms" id="new_customer_form" action="" method="post">
+<form class="general_forms" id="new_customer_form" action="" method="post" onsubmit= "">
   <h2>Alta Cliente</h2>
   <fieldset class="">
     <div class="forms_flex">
@@ -8,7 +8,7 @@
         <label class="forms_label" for="customer_name">Nombre / Razón Social</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-user forms_icons"></i>
-          <input type="text" class="forms_inputs" id="customer_name" name="customer_name" placeholder="Apellidos, Nombre"/>
+          <input type="text" class="forms_inputs" id="customer_name" name="customer_name" placeholder="Apellidos, Nombre / Empresa, S.L."/>
         </div>      
       </div>
 
@@ -21,7 +21,7 @@
       </div>
 
       <div class="forms_fields">
-        <label class="forms_label" for="customer_type">Persona física / jurídica</label>
+        <label class="forms_label" for="customer_type">Particular / Empresa</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-user forms_icons"></i>
           <input type="text" class="forms_inputs" id="customer_type" name="customer_type" placeholder="seleccionar"/>
@@ -45,7 +45,7 @@
       </div>
 
       <div class="forms_fields">
-        <label class="forms_label" for="customer_town">Población</label>
+        <label class="forms_label" for="customer_town">Ciudad</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-user forms_icons"></i>
           <input type="text" class="forms_inputs" id="customer_town" name="customer_town" placeholder="Ej: "/>
@@ -92,8 +92,28 @@
         </div>      
       </div>
     </div>
-    <button type="submit" class="forms_buttons">Grabar</button>
+    <!-- <button type="submit" class="forms_buttons" name="customer_submit">Grabar</button> -->
+    <input type="submit" disabled="true" class="forms_buttons" name="customer_submit" value="Grabar"/>
 
+    <?php 
+      $create = CustomerController::ctrCreateCustomer(); // se lanza método para grabar datos de clientes.
+        // Sentencia condicional para borrar datos almacenados en formulario html.
+      if($create == "true") {
+        echo "<script>
+                if(window.history.replaceState) {
+                window.history.replaceState(null, null, window.location.href);
+                }
+              </script>";
+        echo "<div class='alert alert-success text-center'>Registro enviado con éxito</div>";
+      }
+      else {
+        echo "<script>
+                if(window.history.replaceState) {
+                window.history.replaceState(null, null, window.location.href);
+                }
+              </script>";
+      }
+    ?>
 
 
 

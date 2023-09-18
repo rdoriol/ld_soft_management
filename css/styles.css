@@ -116,6 +116,7 @@ h2 {
 ------------------------------*/  
 .main_container {
     display: flex;
+    min-height: 800px;
 }
 
 .item_main_container_nav {
