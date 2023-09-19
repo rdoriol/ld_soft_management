@@ -38,8 +38,8 @@
                     print_r(Connection::mdlConnect->errorInfo());
                 }
 
-                $stmt->close();  //TODO PROBAR FUNCIONAMIENTO
-                $stmt = null;
+               // $stmt->close();  //TODO PROBAR FUNCIONAMIENTO
+               // $stmt = null;
             }
             catch(PDOException $ex) {
                 echo "error interno " . $ex->getMessage();

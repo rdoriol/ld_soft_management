@@ -2,7 +2,24 @@
 
 <form class="general_forms" id="new_customer_form" action="" method="post" onsubmit= "">
   <h2>Alta Cliente</h2>
+
   <fieldset class="">
+    <div class="forms_fields" id="radio_forms_fields">
+      <label class="forms_label">Tipo cliente</label>
+      <div class="forms_inputs_fields">
+
+        <label class="forms_label" for="private_customer">Particular</label>
+        <input type="radio" class="forms_inputs" id="private_customer" name="customer_type" value="Particular"/>
+
+        <label class="forms_label" for="company">Empresa</label>
+        <input type="radio" class="forms_inputs" id="company" name="customer_type" value="Empresa"/>
+
+      </div>      
+    </div>
+  </fieldset>
+
+  <fieldset class="">
+
     <div class="forms_flex">
       <div class="forms_fields">
         <label class="forms_label" for="customer_name">Nombre / Razón Social</label>
@@ -17,14 +34,6 @@
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-user forms_icons"></i>
           <input type="text" class="forms_inputs" id="customer_nifcif" name="customer_nifcif" placeholder="00000000L / B00000000"/>
-        </div>      
-      </div>
-
-      <div class="forms_fields">
-        <label class="forms_label" for="customer_type">Particular / Empresa</label>
-        <div class="forms_inputs_fields">
-          <i class="fa-solid fa-user forms_icons"></i>
-          <input type="text" class="forms_inputs" id="customer_type" name="customer_type" placeholder="seleccionar"/>
         </div>      
       </div>
 
@@ -92,8 +101,8 @@
         </div>      
       </div>
     </div>
-    <!-- <button type="submit" class="forms_buttons" name="customer_submit">Grabar</button> -->
-    <input type="submit" disabled="true" class="forms_buttons" name="customer_submit" value="Grabar"/>
+    <button type="submit" class="forms_buttons" name="customer_submit">Grabar</button> 
+     <!--<input type="submit" class="forms_buttons" name="customer_submit" value="Grabar"/> -->
 
     <?php 
       $create = CustomerController::ctrCreateCustomer(); // se lanza método para grabar datos de clientes.
@@ -104,7 +113,7 @@
                 window.history.replaceState(null, null, window.location.href);
                 }
               </script>";
-        echo "<div class='alert alert-success text-center'>Registro enviado con éxito</div>";
+        echo "<div class='alert alert-success text-center'>Registro grabado con éxito</div>";
       }
       else {
         echo "<script>
@@ -114,8 +123,6 @@
               </script>";
       }
     ?>
-
-
 
   </fieldset>
 
@@ -137,7 +144,7 @@
 
 
 
-<!-- ------------------------------------------------------------------------------------------------ -->
+<!-- ----------------------------------------- ELIMINAR TODO LO QUE HAY A PARTIR DE AQUÍ ------------------------------------------------------- -->
 <!-- ------------------------------------------------------------------------------------------------ -->
 
 <div class="d-flex-column">

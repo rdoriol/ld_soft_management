@@ -14,10 +14,10 @@
                 if(isset($_POST["customer_submit"])) {
                     if(!empty($_POST["customer_name"])) {
                         $table = "customers";
-                        $token = "prueba";
+                        $token = md5($_POST["customer_name"] . $_POST["customer_nifcif"]);
                         $data = array("token"=> $token,
                                     "customer_name" => $_POST["customer_name"],
-                                    "customer_nifcif" => $_POST["customer_name"],
+                                    "customer_nifcif" => $_POST["customer_nifcif"],
                                     "customer_type" => $_POST["customer_type"],
                                     "customer_address" => $_POST["customer_address"],
                                     "customer_postal_code" => $_POST["customer_postal_code"],

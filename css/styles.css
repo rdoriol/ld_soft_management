@@ -97,6 +97,20 @@ h2 {
     color:#000000;
     opacity: 0.5;
 }
+
+            /* General Options Bar
+            -------------- */
+
+.general_options_bar{
+    display: inline-flex;
+    justify-content: space-evenly;
+    width: 100%;
+}
+.general_searchs_forms {
+    display: inline-flex;
+    padding: 10px;
+}
+
      /* END general styles
 --------------------------*/ 
 
@@ -257,6 +271,21 @@ footer h3 {
 
      /* 01.CUSTOMERS "newCustomer.template.php"
 -----------------------------------------------*/
+
+#radio_forms_fields {
+    border: 1px solid #000000;
+    border-radius: 5px;
+    width: 240px;
+}
+
+#radio_forms_fields > label {
+    text-align: center;
+    width: 100%;  
+}
+#radio_forms_fields .forms_label {
+    font-weight: 400;
+}
+
 
 
 
