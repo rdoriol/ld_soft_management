@@ -13,9 +13,10 @@
          */
         static public function mdlCreateCustomer($table, $data) {
             $check = "false";
-            
+            $sql = "INSERT INTO $table VALUES (null, :token, :name_customer, :nif_cif, :customer_type, :address_customer, :postal_code, :town, :province, :country, :phone, :email, :contact_person, null)";
+
             try {
-                $stmt = Connection::mdlConnect()->prepare("INSERT INTO $table(token, name_customer, nif_cif, customer_type, address_customer, postal_code, town, province, country, phone, email, contact_person) VALUES (:token, :name_customer, :nif_cif, :customer_type, :address_customer, :postal_code, :town, :province, :country, :phone, :email, :contact_person)");
+                $stmt = Connection::mdlConnect()->prepare($sql);
              
                     // bloque con función bindParam() para vincular variable oculta en prepare statement con el valor recibido del form.
                 $stmt->bindParam(":token", $data["token"], PDO::PARAM_STR);
@@ -48,6 +49,44 @@
             }
             return $check;
         }
+
+        /**
+         * Función que listará los datos de la tabla seleccionada por el usuario.
+         * @param
+         * @return
+         */
+        static public function mdlToList($table, $key=null, $value=null) {
+            $sql = "";
+            try {                                         
+                                                                                        var_dump($key);
+                                                                                        var_dump($value);
+                if($key == null) {
+                    $sql = "SELECT *, DATE_FORMAT(created_date, '%d/%m/%Y') AS created_date FROM $table ORDER BY id_customer ASC";
+                }
+                else {
+                    $sql = "SELECT * FROM $table WHERE $key LIKE '%$value%' ORDER BY $key ASC";
+                }
+                
+                $stmt = Connection::mdlConnect()->prepare($sql);                                                                       
+                if($stmt->execute() && $stmt->rowCount() > 0) {                             
+                    while($rowItem = $stmt->fetchObject()) {
+                        $data[] = $rowItem;
+                    }
+                    //$stmt->close();
+                    //$stmt = null;                   
+                    return $data;
+                }
+            }
+            catch(PDOException $ex) {
+                echo "error interno mdlToList(). Error: " . $ex->getMessage();
+                $stmt->close();
+                $stmt = null;
+            }
+        }
+
+
+
+
     }
 
 

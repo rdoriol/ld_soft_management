@@ -2,19 +2,30 @@
 
 <ul class="general_options_bar" id="">
     <li>
-        <form class="general_searchs_forms" id="">     
+        <form class="general_searchs_forms" id="" action="" method="post">     
             <legend><i class="fa-solid fa-user forms_icons"></i>Buscar clientes</legend>
-            <select class="" id="" name="filter_customer_fields">
+            <select class="" id="" name="select_item">
                 <option vaule="" selected disabled="true">Filtrar búsqueda</option>
-                <option value="">Listado completo</option>
-                <option value="">2ª opcion</option>
+                <option value="full_list">Listado completo</option>
+                <option value="id_customer">Id</option>
+                <option value="name_customer">Nombre</option>
+                <option value="nif_cif">NIF_CIF</option>
+                <option value="customer_type">Particular / Empresa</option>
+                <option value="address_customer">Dirección</option>
+                <option value="postal_code">Código postal</option>
+                <option value="town">Población</option>
+                <option value="province">Provincia</option>
+                <option value="country">País</option>
+                <option value="phone">Teléfono</option>
+                <option value="email">Correo electrónico</option>
+                <option value="created_date">Fecha de alta</option>
             </select>
-            <input type="text" class="" id="" name="" placeholder="búsqueda">
-            <button type="submit" class="forms_buttons" id="" name="search_customers">buscar</button>
+            <input type="text" class="" id="" name="search_key" placeholder="búsqueda">
+            <button type="submit" class="forms_buttons" id="" name="search">buscar</button>
         </form>
     </li>
     <li>imprimir</li>
-</ul>
+</ul> 
 
 <table class="general_tables table table-striped text-center" id="customers_lists_table">
     <thead>
@@ -23,15 +34,43 @@
         </tr>
         </thead>
         <tbody>
+            <?php 
+                $key = $_POST["select_item"];
+                $value = $_POST["search_key"];                
+                
+                $dataCustomers = CustomerController::ctrToList("customers", $key, $value); 
+                foreach($dataCustomers as $item): 
+            ?>
             <tr>
+                <td> <?php echo $item->id_customer; ?> </td>
+                <td> <?php echo $item->nif_cif; ?> </td>
+                <td> <?php echo $item->name_customer; ?> </td>
+                <td> <?php echo $item->phone; ?> </td>
+                <td> <?php echo $item->email; ?> </td>
+                <td> <?php echo $item->address_customer; ?> </td>
+                <td> <?php echo $item->postal_code; ?> </td>
+                <td> <?php echo $item->town; ?> </td>
+                <td> <?php echo $item->province; ?> </td>
+                <td> <?php echo $item->country; ?> </td>
+                <td> <?php echo $item->created_date; ?> </td>
                 <td>
-                   <?php echo "ole";?>
+                <div class="btn-group">
+                        <a href="index.php?pages=01-newCustomer&token=<?php echo $item->token; ?>" class="btn btn-warning m-1"><i class="fa-sharp fa-solid fa-pencil"></i></a>
+                        <form method="post"> 
+                            <input type="hidden" value="<?php echo $item->token; ?>" name="inputDelete">
+                            <button type="submit" class="btn btn-danger m-1" name="btn-delete"><i class="fa-solid fa-trash-can"></i></button>
+                        </form>
+                    </div>
                 </td>
             </tr>
+            <?php endforeach ?>
         <tbody>
 </table>
 
-
+<!-- JavaScript para limpiar historial del formulario de búsqueda -->
+<script>                
+    window.history.replaceState(null, null, window.location.href);
+</script>
 
 
 <!-- ------------------------ ELIMINAR ---------------------------------- 

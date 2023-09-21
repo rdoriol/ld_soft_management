@@ -1,3 +1,13 @@
+<?php
+$prueba="";
+  if(isset($_GET["token"]) && !empty($_GET["token"])) {
+    $customerData = CustomerController::ctrToList("customers", "token", $_GET["token"]);
+    $prueba = $customerData[0]->name_customer;
+    echo $customerData[0]->name_customer;
+    echo $_GET["token"];
+  }
+?>
+
 <h2 class="li_active_page rounded">Clientes</h2>
 
 <form class="general_forms" id="new_customer_form" action="" method="post" onsubmit= "">
@@ -25,7 +35,7 @@
         <label class="forms_label" for="customer_name">Nombre / Razón Social</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-user forms_icons"></i>
-          <input type="text" class="forms_inputs" id="customer_name" name="customer_name" placeholder="Apellidos, Nombre / Empresa, S.L."/>
+          <input type="text" class="forms_inputs" id="customer_name" name="customer_name" placeholder="Apellidos, Nombre / Empresa, S.L." value="<?php echo $prueba ?>" />
         </div>      
       </div>
 

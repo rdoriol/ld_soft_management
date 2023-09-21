@@ -10,7 +10,7 @@ $(document).ready(function() {
     $("ul li button").click(function(e) {
         var buttonId = $(this).attr("id");
         var submenuId = $(this).next().attr("id");            
-
+                                                                                        
         if($(this).next().css("display") == "block") {
             $(this).next().slideUp();
             navBarReset();
@@ -21,12 +21,12 @@ $(document).ready(function() {
             $(this).next().slideDown();                                     // abre submenus.
             $(this).addClass("li_active_button");                                  // añade clase para que menú seleccionado aparezca con las propiedades css de botón activo.
             $(this).children().attr("class", "fa-solid fa-caret-down");     // se cambia a icono "submenú expandido".
-               
+  
                 // bloque para almacenar los "id" y estado del menú en sesión del navegador.
             sessionStorage.setItem("submenuShowStore", "true");
             sessionStorage.setItem("submenuIdStore", submenuId);
             sessionStorage.setItem("buttonIdStore", buttonId);
-        }                                         
+        }                                                                                                                
     })    
 
     /**
@@ -57,7 +57,7 @@ $(document).ready(function() {
         var reloadButtonIdStore = sessionStorage.getItem("buttonIdStore");
         var reloadAIdStore = sessionStorage.getItem("aIdStore");
 
-        if(reloadSubmenuShow != "undefined" && reloadSubmenuShow != null) {
+        if( typeof (reloadSubmenuShow != "undefined" && reloadSubmenuShow != null)) {
             if(reloadSubmenuShow == "true") {
                 $("#" + reloadSubmenuIdStore).show();
                 $("#" + reloadButtonIdStore).addClass("li_active_button");
@@ -69,29 +69,4 @@ $(document).ready(function() {
 
     reloadNavBar();
 
-    
-
- 
-
-
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-    // TODO        SCRIPT PARA UTILIZAR A TRAVÉS DE PHP
-<script>
-            $(this).next().slideDown(); // abre submenus
-            $(this).addClass("li_active");
-    </script>
-    */

@@ -41,6 +41,30 @@
             }
         }
 
+        /**
+         * Función que recibirá solicitud de listado de la "Vista" y que se comunicará con el "Modelo" para obtener los datos de la base de datos.
+         * @param $table string, $key string, $value(string, int)
+         * @return $data array de objetos con datos de la base de datos. 
+         */
+        static public function ctrToList($table, $key, $value=null) {
+            try {
+                if(/*isset($_POST["search"]) &&*/ !empty($key)) {                         
+                    if($key == "full_list") {                      
+                        $data = CustomerModel::mdlToList($table);
+                    }
+                    else {     
+                                                                                    // $foo = new ValidationController();
+                                                                                    // $value = $foo->removeAccents  ($value);                
+                        $data = CustomerModel::mdlToList($table, $key, $value);
+                    }                    
+                    return $data;
+                }
+            }
+            catch(PDOException $ex) {
+                echo "Error interno ctrToList(). Error: " . $ex->getMessage();
+            }
+        }
+
 
 
 
