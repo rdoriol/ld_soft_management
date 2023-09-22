@@ -1,10 +1,13 @@
 <?php
-$prueba="";
+    // Si existe variable GET token se lanza método para obtener datos de un cliente concreto y mostralo en form html.
+  $customerData = array();
+  
+  $particularCustomer; 
+  $privateCustomer;
+
   if(isset($_GET["token"]) && !empty($_GET["token"])) {
     $customerData = CustomerController::ctrToList("customers", "token", $_GET["token"]);
-    $prueba = $customerData[0]->name_customer;
-    echo $customerData[0]->name_customer;
-    echo $_GET["token"];
+    if($customerData[0]->customer_type == "Particular") $particularCustomer = "checked"; else $privateCustomer = "checked"; // Condición para marcar opción radio de cliente concreto. 
   }
 ?>
 
@@ -14,28 +17,37 @@ $prueba="";
   <h2>Alta Cliente</h2>
 
   <fieldset class="">
+    <div class="forms_flex">
+      <div class="forms_fields">
+        <label class="forms_label" for="customer_id">Id Cliente</label>
+        <div class="forms_inputs_fields">
+          <i class="fa-solid fa-user forms_icons"></i>
+          <input type="text" class="forms_inputs" id="customer_id" name="customer_id" placeholder="" disabled value="<?php echo $customerData[0]->id_customer ?>" />
+        </div>      
+    </div>
+
     <div class="forms_fields" id="radio_forms_fields">
-      <label class="forms_label">Tipo cliente</label>
+      <label class="forms_label" style="font-weight:600;">Tipo cliente</label>
       <div class="forms_inputs_fields">
 
         <label class="forms_label" for="private_customer">Particular</label>
-        <input type="radio" class="forms_inputs" id="private_customer" name="customer_type" value="Particular"/>
+        <input type="radio" class="forms_inputs" id="private_customer" name="customer_type" <?php echo $particularCustomer; ?> value="Particular"/>
 
         <label class="forms_label" for="company">Empresa</label>
-        <input type="radio" class="forms_inputs" id="company" name="customer_type" value="Empresa"/>
+        <input type="radio" class="forms_inputs" id="company" name="customer_type" <?php echo $privateCustomer; ?> value="Empresa"/>
 
       </div>      
     </div>
   </fieldset>
 
-  <fieldset class="">
+  <fieldset class="">   
 
     <div class="forms_flex">
       <div class="forms_fields">
         <label class="forms_label" for="customer_name">Nombre / Razón Social</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-user forms_icons"></i>
-          <input type="text" class="forms_inputs" id="customer_name" name="customer_name" placeholder="Apellidos, Nombre / Empresa, S.L." value="<?php echo $prueba ?>" />
+          <input type="text" class="forms_inputs" id="customer_name" name="customer_name" placeholder="Apellidos, Nombre / Empresa, S.L." value="<?php echo $customerData[0]->name_customer ?>"/>
         </div>      
       </div>
 
@@ -43,7 +55,7 @@ $prueba="";
         <label class="forms_label" for="customer_nifcif">NIF / CIF</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-user forms_icons"></i>
-          <input type="text" class="forms_inputs" id="customer_nifcif" name="customer_nifcif" placeholder="00000000L / B00000000"/>
+          <input type="text" class="forms_inputs" id="customer_nifcif" name="customer_nifcif" placeholder="00000000L / B00000000" value="<?php echo $customerData[0]->nif_cif ?>"/>
         </div>      
       </div>
 
@@ -51,7 +63,7 @@ $prueba="";
         <label class="forms_label" for="customer_address">Dirección</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-user forms_icons"></i>
-          <input type="text" class="forms_inputs" id="customer_address" name="customer_address" placeholder="Calle/Avda."/>
+          <input type="text" class="forms_inputs" id="customer_address" name="customer_address" placeholder="'C/' 'Avda.' 'Plaza'" value="<?php echo $customerData[0]->address_customer ?>"/>
         </div>      
       </div>
 
@@ -59,7 +71,7 @@ $prueba="";
         <label class="forms_label" for="customer_postal_code">Código Postal</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-code forms_icons"></i>
-          <input type="text" class="forms_inputs" id="customer_postal_code" name="customer_postal_code" placeholder="Ej: 41003"/>
+          <input type="text" class="forms_inputs" id="customer_postal_code" name="customer_postal_code" placeholder="Ej: 41003" value="<?php echo $customerData[0]->postal_code ?>"/>
         </div>      
       </div>
 
@@ -67,7 +79,7 @@ $prueba="";
         <label class="forms_label" for="customer_town">Ciudad</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-user forms_icons"></i>
-          <input type="text" class="forms_inputs" id="customer_town" name="customer_town" placeholder="Ej: "/>
+          <input type="text" class="forms_inputs" id="customer_town" name="customer_town" placeholder="Ej: Alcalá de Henares" value="<?php echo $customerData[0]->town ?>">
         </div>      
       </div>
 
@@ -75,7 +87,7 @@ $prueba="";
         <label class="forms_label" for="customer_province">Provincia</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-user forms_icons"></i>
-          <input type="text" class="forms_inputs" id="customer_province" name="customer_province" placeholder="Ej: ¿un select?"/>
+          <input type="text" class="forms_inputs" id="customer_province" name="customer_province" placeholder="Ej: Madrid" value="<?php echo $customerData[0]->province ?>"/>
         </div>      
       </div>
 
@@ -83,7 +95,7 @@ $prueba="";
         <label class="forms_label" for="customer_country">País</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-user forms_icons"></i>
-          <input type="text" class="forms_inputs" id="customer_country" name="customer_country" placeholder="Ej: ¿un select?"/>
+          <input type="text" class="forms_inputs" id="customer_country" name="customer_country" placeholder="Ej: España" value="<?php echo $customerData[0]->country ?>"/>
         </div>      
       </div>
 
@@ -91,7 +103,7 @@ $prueba="";
         <label class="forms_label" for="customer_phone">Teléfono</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-phone forms_icons"></i>
-          <input type="text" class="forms_inputs" id="customer_phone" name="customer_phone" placeholder="Ej: 666999666"/>
+          <input type="text" class="forms_inputs" id="customer_phone" name="customer_phone" placeholder="Ej: 666999666" value="<?php echo $customerData[0]->phone ?>"/>
         </div>      
       </div>
 
@@ -99,7 +111,7 @@ $prueba="";
         <label class="forms_label" for="customer_email">Correo electrónico</label>
         <div class="forms_inputs_fields">
           <i class="fa-sharp fa-solid fa-envelope forms_icons"></i>
-          <input type="text" class="forms_inputs" id="customer_email" name="customer_email" placeholder="ejemplo@ejemplo.com"/>
+          <input type="text" class="forms_inputs" id="customer_email" name="customer_email" placeholder="ejemplo@ejemplo.com" value="<?php echo $customerData[0]->email ?>"/>
         </div>      
       </div>
 
@@ -107,12 +119,14 @@ $prueba="";
         <label class="forms_label" for="customer_contact_person">Persona de contacto</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-users forms_icons"></i>
-          <input type="text" class="forms_inputs" id="customer_contact_person" name="customer_contact_person" placeholder="Apellidos, Nombre"/>
+          <input type="text" class="forms_inputs" id="customer_contact_person" name="customer_contact_person" placeholder="Apellidos, Nombre" value="<?php echo $customerData[0]->contact_person ?>"/>
         </div>      
       </div>
     </div>
-    <button type="submit" class="forms_buttons" name="customer_submit">Grabar</button> 
-     <!--<input type="submit" class="forms_buttons" name="customer_submit" value="Grabar"/> -->
+    <div class="btn-group p-3">
+      <button type="submit" class="btn btn-primary mr-5" name="customer_submit"><i class="fa-sharp fa-solid fa-pencil"></i>&nbsp Grabar</button> 
+      <button type="button" class="btn btn-secondary" name="delete_customer"><i class="fa-sharp fa-solid fa-trash-can"></i>&nbsp Eliminar registro</button> 
+    </div>
 
     <?php 
       $create = CustomerController::ctrCreateCustomer(); // se lanza método para grabar datos de clientes.
@@ -135,19 +149,6 @@ $prueba="";
     ?>
 
   </fieldset>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </form>
 

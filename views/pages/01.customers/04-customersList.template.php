@@ -55,7 +55,7 @@
                 <td> <?php echo $item->created_date; ?> </td>
                 <td>
                 <div class="btn-group">
-                        <a href="index.php?pages=01-newCustomer&token=<?php echo $item->token; ?>" class="btn btn-warning m-1"><i class="fa-sharp fa-solid fa-pencil"></i></a>
+                        <a href="index.php?pages=01-newCustomer&token=<?php echo $item->token; ?>" class="btn btn-warning m-1" title="Editar registro"><i class="fa-sharp fa-solid fa-pencil"></i></a>
                         <form method="post"> 
                             <input type="hidden" value="<?php echo $item->token; ?>" name="inputDelete">
                             <button type="submit" class="btn btn-danger m-1" name="btn-delete"><i class="fa-solid fa-trash-can"></i></button>
