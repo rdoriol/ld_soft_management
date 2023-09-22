@@ -21,7 +21,7 @@
                 <option value="created_date">Fecha de alta</option>
             </select>
             <input type="text" class="" id="" name="search_key" placeholder="búsqueda">
-            <button type="submit" class="forms_buttons" id="" name="search">buscar</button>
+            <button type="submit" class="btn btn-primary" id="" name="search"><i class="fa-solid fa-magnifying-glass"></i>&nbsp Buscar</button>
         </form>
     </li>
     <li>imprimir</li>

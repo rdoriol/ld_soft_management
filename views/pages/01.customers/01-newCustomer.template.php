@@ -1,14 +1,14 @@
 <?php
-    // Si existe variable GET token se lanza método para obtener datos de un cliente concreto y mostralo en form html.
   $customerData = array();
-  
   $particularCustomer; 
   $privateCustomer;
 
-  if(isset($_GET["token"]) && !empty($_GET["token"])) {
-    $customerData = CustomerController::ctrToList("customers", "token", $_GET["token"]);
-    if($customerData[0]->customer_type == "Particular") $particularCustomer = "checked"; else $privateCustomer = "checked"; // Condición para marcar opción radio de cliente concreto. 
-  }
+      // Condición para controlar si se muestran datos en el formulario o se muestra en blanco
+    if(isset($_GET["token"]) && !empty($_GET["token"])) {                                      
+      $customerData = CustomerController::ctrToList("customers", "token", $_GET["token"]);  echo $_customerData[0]->id_customer;
+    }
+      // Condición para marcar opción radio ("Particular"/"Empresa") de cliente concreto. 
+    if($customerData[0]->customer_type == "Particular") $particularCustomer = "checked"; else $privateCustomer = "checked";
 ?>
 
 <h2 class="li_active_page rounded">Clientes</h2>
@@ -16,7 +16,7 @@
 <form class="general_forms" id="new_customer_form" action="" method="post" onsubmit= "">
   <h2>Alta Cliente</h2>
 
-  <fieldset class="">
+  <fieldset class="d-flex justify-content-around"> <!-- CAMBIAR A ESTILO PROPIO CON CSS flex personalizado, no esta porquería -->
     <div class="forms_flex">
       <div class="forms_fields">
         <label class="forms_label" for="customer_id">Id Cliente</label>
@@ -37,6 +37,15 @@
         <input type="radio" class="forms_inputs" id="company" name="customer_type" <?php echo $privateCustomer; ?> value="Empresa"/>
 
       </div>      
+    </div>
+
+    <div class="forms_flex" >
+      <div class="forms_fields">
+        <label class="forms_label" for="created_date">Fecha registro</label>
+        <div class="forms_inputs_fields">
+          <i class="fa-solid fa-user forms_icons"></i>
+          <input type="text" class="forms_inputs" id="created_date" name="created_date" placeholder="" disabled value="<?php echo $customerData[0]->created_date ?>" />
+        </div>      
     </div>
   </fieldset>
 
@@ -129,9 +138,18 @@
     </div>
 
     <?php 
-      $create = CustomerController::ctrCreateCustomer(); // se lanza método para grabar datos de clientes.
+      // Bloque condicional para grabar datos nuevos de un cliente o actualizar datos de un registro existente
+      if(isset($_GET["token"]) && !empty($_GET["token"])) {
+        $updateRegister = CustomerController::ctrUpdateRegister("customers", "token", $_GET["token"]); // se lanza método para actualizar datos de clientes.
+      }
+      else {
+        $createRegister = CustomerController::ctrCreateRegister("customers"); // se lanza método para grabar datos de clientes.
+        }
+      
+
+
         // Sentencia condicional para borrar datos almacenados en formulario html.
-      if($create == "true") {
+      if($createRegister == "true" || $updateRegister == "true") {
         echo "<script>
                 if(window.history.replaceState) {
                 window.history.replaceState(null, null, window.location.href);
