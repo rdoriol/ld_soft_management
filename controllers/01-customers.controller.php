@@ -98,12 +98,44 @@
                         }
                     }
                     else {
-                        echo "<div class='text-center alert-danger rounded'><p>No grabado. <br> Campo/s vacíos</p></dv>";
+                        echo "<div class='text-center alert-danger rounded'><p>Registro no grabado. <br> Campo/s vacíos</p></dv>";
                     }
                 }             
             }
             catch(PDOException $ex) {
                 echo "Error interno ctrUpdateRegister. Error: " . $ex->getMessage();
+            }
+        }
+
+        /**
+         * Método que recibirá solicitud para eliminar de la "Vista" y se comunicará con "Modelo"para ejecturar la acción sobre la base de datos.
+         */
+        public function ctrDeleteRegister($table, $key, $value) {
+            $check = "false";
+            try {
+                if(isset($_POST["delete_customer"]) && $key == "token") {                                   
+                    if(!empty($_POST["customer_name"]) && !empty($_POST["customer_nifcif"])) {            
+                        $actualToken = CustomerModel::mdlToList($table, $key, $value);
+                        $checkToken = md5($actualToken[0]->name_customer . $actualToken[0]->nif_cif);
+
+                        if($checkToken == $value) {                                                            
+                            $deleteRegister = new CustomerModel();
+                            $deleteRegister->mdlDeleteRegister($table, $key, $value);                        
+                            $check = "true";
+                            return $check;
+                        }
+                        else {
+                             echo "<div class='text-center alert-danger rounded'><p>Error. Tokens no coinciden</p></div>";
+                        }
+                    }
+                    else {
+                        echo "<div class='text-center alert-danger rounded'><p>Registro no eliminado. <br> Campo/s vacíos</p></dv>";
+                    }
+                }
+                
+            }
+            catch(PDOException $ex) {
+                echo "Error interno ctrDeleteRegister. Error: " . $ex->getMessage();
             }
         }
 

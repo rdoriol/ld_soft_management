@@ -5,10 +5,11 @@
 
       // Condición para controlar si se muestran datos en el formulario o se muestra en blanco
     if(isset($_GET["token"]) && !empty($_GET["token"])) {                                      
-      $customerData = CustomerController::ctrToList("customers", "token", $_GET["token"]);  echo $_customerData[0]->id_customer;
+      $customerData = CustomerController::ctrToList("customers", "token", $_GET["token"]);  echo $_customerData[0]->id_customer;           
+        // Condición para marcar opción radio ("Particular"/"Empresa") de cliente concreto. 
+      if($customerData[0]->customer_type == "Particular") $particularCustomer = "checked"; else $privateCustomer = "checked";
     }
-      // Condición para marcar opción radio ("Particular"/"Empresa") de cliente concreto. 
-    if($customerData[0]->customer_type == "Particular") $particularCustomer = "checked"; else $privateCustomer = "checked";
+      
 ?>
 
 <h2 class="li_active_page rounded">Clientes</h2>
@@ -133,34 +134,45 @@
       </div>
     </div>
     <div class="btn-group p-3">
-      <button type="submit" class="btn btn-primary mr-5" name="customer_submit"><i class="fa-sharp fa-solid fa-pencil"></i>&nbsp Grabar</button> 
-      <button type="button" class="btn btn-secondary" name="delete_customer"><i class="fa-sharp fa-solid fa-trash-can"></i>&nbsp Eliminar registro</button> 
+      <button type="submit" class="btn btn-primary mr-5" id="btn_customer_submit" name="customer_submit"><i class="fa-sharp fa-solid fa-pencil"></i>&nbsp Grabar</button> 
+      <button type="submit" class="btn btn-secondary" name="delete_customer"><i class="fa-sharp fa-solid fa-trash-can"></i>&nbsp Eliminar registro</button> 
     </div>
 
+    <div><p class="alert alert-success text-center hide_alert" id="alert_success">Acción realizada con éxito</p></div>
+
     <?php 
-      // Bloque condicional para grabar datos nuevos de un cliente o actualizar datos de un registro existente
-      if(isset($_GET["token"]) && !empty($_GET["token"])) {
+        // Bloque condicional para grabar datos de un cliente nuevo o actualizar datos de un registro existente.
+      if(isset($_GET["token"]) && !empty($_GET["token"])) {        
         $updateRegister = CustomerController::ctrUpdateRegister("customers", "token", $_GET["token"]); // se lanza método para actualizar datos de clientes.
+
+        $deleteRegister = new CustomerController(); // se lanza método para eliminar registro concreto.
+        $checkDeleteRegister = $deleteRegister->ctrDeleteRegister("customers", "token", $_GET["token"]);
+
+        if($updateRegister == "true" || $checkDeleteRegister == "true") {   
+         
+     
+          echo "<script>window.location.replace('index.php?pages=01-newCustomer');</script>";  
+          //echo "<script>document.getElementsByClassName('hide_alert')[0].style.display='block';</script>";
+          
+        }
       }
       else {
         $createRegister = CustomerController::ctrCreateRegister("customers"); // se lanza método para grabar datos de clientes.
         }
-      
 
-
-        // Sentencia condicional para borrar datos almacenados en formulario html.
-      if($createRegister == "true" || $updateRegister == "true") {
+        // Sentencia condicional para borrar datos almacenados del formulario html una vez enviados.
+      if($createRegister == "true") {
         echo "<script>
                 if(window.history.replaceState) {
-                window.history.replaceState(null, null, window.location.href);
-                }
+                  window.history.replaceState(null, null, window.location.href);
+                }              
+                document.getElementsByClassName('hide_alert')[0].style.display='block';
               </script>";
-        echo "<div class='alert alert-success text-center'>Registro grabado con éxito</div>";
       }
       else {
         echo "<script>
                 if(window.history.replaceState) {
-                window.history.replaceState(null, null, window.location.href);
+                  window.history.replaceState(null, null, window.location.href);
                 }
               </script>";
       }

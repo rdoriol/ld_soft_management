@@ -21,7 +21,7 @@
                 <option value="created_date">Fecha de alta</option>
             </select>
             <input type="text" class="" id="" name="search_key" placeholder="búsqueda">
-            <button type="submit" class="btn btn-primary" id="" name="search"><i class="fa-solid fa-magnifying-glass"></i>&nbsp Buscar</button>
+            <button type="submit" class="btn btn-primary" id="btn_search" name="search"><i class="fa-solid fa-magnifying-glass"></i><a href="index.php?pages=04-customersList&select=<?php echo $_POST['select_item']  ?>">&nbsp Buscar</a></button>
         </form>
     </li>
     <li>imprimir</li>
@@ -54,13 +54,7 @@
                 <td> <?php echo $item->country; ?> </td>
                 <td> <?php echo $item->created_date; ?> </td>
                 <td>
-                <div class="btn-group">
-                        <a href="index.php?pages=01-newCustomer&token=<?php echo $item->token; ?>" class="btn btn-warning m-1" title="Editar registro"><i class="fa-sharp fa-solid fa-pencil"></i></a>
-                        <form method="post"> 
-                            <input type="hidden" value="<?php echo $item->token; ?>" name="inputDelete">
-                            <button type="submit" class="btn btn-danger m-1" name="btn-delete"><i class="fa-solid fa-trash-can"></i></button>
-                        </form>
-                    </div>
+                    <a href="index.php?pages=01-newCustomer&token=<?php echo $item->token; ?>" class="btn btn-warning m-1" title="Editar registro"><i class="fa-sharp fa-solid fa-pencil"></i></a>
                 </td>
             </tr>
             <?php endforeach ?>

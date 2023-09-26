@@ -57,9 +57,7 @@
          */
         static public function mdlToList($table, $key=null, $value=null) {
             $sql = "";
-            try {                                         
-                                                                                        var_dump($key);
-                                                                                        var_dump($value);
+            try { 
                 if($key == null) {
                     $sql = "SELECT *, DATE_FORMAT(created_date, '%d/%m/%Y') AS created_date FROM $table ORDER BY id_customer ASC";
                 }
@@ -118,6 +116,29 @@
             catch(PDOException $ex) {
                 echo "Error interno mdlUpdateRegister. Error: " . $ex->getMessage();
                 return null;
+            }
+        }
+
+        /**
+         * Método que eliminará un registro concreto.
+         * @param
+         * @return
+         */
+        public function mdlDeleteRegister($table, $key, $value) {
+            $chechk = "false";
+            try {
+                $sql = "DELETE FROM $table WHERE $key LIKE :token";
+                $stmt = Connection::mdlConnect()->prepare($sql);
+
+                $stmt->bindParam(":token", $value, PDO::PARAM_STR);
+                
+                if($stmt->execute()) {
+                    $check = "true";
+                    return $ckeck;
+                }
+            }
+            catch(PDOException $ex) {
+                echo "Error interno mdlDeleteRegister. Error: " . $ex->getMessage();
             }
         }
 
