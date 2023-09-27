@@ -21,7 +21,7 @@
                 <option value="created_date">Fecha de alta</option>
             </select>
             <input type="text" class="" id="" name="search_key" placeholder="búsqueda">
-            <button type="submit" class="btn btn-primary" id="btn_search" name="search"><i class="fa-solid fa-magnifying-glass"></i><a href="index.php?pages=04-customersList&select=<?php echo $_POST['select_item']  ?>">&nbsp Buscar</a></button>
+            <button type="submit" class="btn btn-primary" id="btn_search" name="search"><i class="fa-solid fa-magnifying-glass"></i>&nbsp Buscar</a></button>
         </form>
     </li>
     <li>imprimir</li>

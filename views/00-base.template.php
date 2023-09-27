@@ -119,5 +119,7 @@
 
     <script src="js/mainNavBar.js"></script>
 
+    <script src="views/pages/01.customers/AJAX.js"></script>
+
   </body>
 </html>

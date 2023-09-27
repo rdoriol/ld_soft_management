@@ -7,7 +7,7 @@ $(document).ready(function() {
     /**
      * Función que abrirá y cerrará los submenus al pulsar los botones del menú.
      */
-    $("ul li button").click(function(e) {
+    $(".item_main_container_nav ul li button").click(function(e) {
         var buttonId = $(this).attr("id");
         var submenuId = $(this).next().attr("id");            
                                                                                         
@@ -18,10 +18,10 @@ $(document).ready(function() {
         }
         else {
             navBarReset();
-            $(this).next().slideDown();                                     // abre submenus.
-            $(this).addClass("li_active_button");                                  // añade clase para que menú seleccionado aparezca con las propiedades css de botón activo.
-            $(this).children().attr("class", "fa-solid fa-caret-down");     // se cambia a icono "submenú expandido".
-  
+            $(this).next().slideDown();                                               // abre submenus.
+            $(this).addClass("li_active_button");                                     // añade clase para que menú seleccionado aparezca con las propiedades css de botón activo.
+            $(this).children().attr("class", "fa-solid fa_change fa-caret-down");     // se cambia a icono "submenú expandido".
+
                 // bloque para almacenar los "id" y estado del menú en sesión del navegador.
             sessionStorage.setItem("submenuShowStore", "true");
             sessionStorage.setItem("submenuIdStore", submenuId);
@@ -32,7 +32,7 @@ $(document).ready(function() {
     /**
      * Función que marcará opciones de los submenús seleccionados con propiedades css de boton activo.
      */
-    $("ul li ul li").click(function(e) {
+    $(".item_main_container_nav ul li ul li").click(function(e) {
         $(".link_subButton").removeClass("link_subButton");
        // $(this).addClass("link_subButton_active"); de momento no utilizar
 

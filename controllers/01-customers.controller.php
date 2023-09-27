@@ -46,15 +46,15 @@
          */
         static public function ctrToList($table, $key, $value=null) {  // todo MÉTODO UNIVERSAL
             try {
-                if(!empty($key) && (isset($_POST["search"]) || $key == "token")) {                         
-                    if($key == "full_list") {                      
-                        $data = CustomerModel::mdlToList($table);
-                    }
-                    else{                
+                //if(!empty($key) && (isset($_POST["search"]) || $key == "token")) {                         
+                 //   if($key == "full_list") {                      
+                 //       $data = CustomerModel::mdlToList($table);
+                 //   }
+                //    else{                
                         $data = CustomerModel::mdlToList($table, $key, $value);
-                    }                    
+                 //   }                    
                     return $data;
-                }
+                //}
             }
             catch(PDOException $ex) {
                 echo "Error interno ctrToList(). Error: " . $ex->getMessage();
@@ -118,7 +118,7 @@
                         $actualToken = CustomerModel::mdlToList($table, $key, $value);
                         $checkToken = md5($actualToken[0]->name_customer . $actualToken[0]->nif_cif);
 
-                        if($checkToken == $value) {                                                            
+                        if($checkToken == $value) {    
                             $deleteRegister = new CustomerModel();
                             $deleteRegister->mdlDeleteRegister($table, $key, $value);                        
                             $check = "true";

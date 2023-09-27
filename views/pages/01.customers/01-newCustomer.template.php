@@ -57,7 +57,9 @@
         <label class="forms_label" for="customer_name">Nombre / Razón Social</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-user forms_icons"></i>
-          <input type="text" class="forms_inputs" id="customer_name" name="customer_name" placeholder="Apellidos, Nombre / Empresa, S.L." value="<?php echo $customerData[0]->name_customer ?>"/>
+          <input type="text" class="forms_inputs" id="customer_name" name="customer_name" placeholder="Apellidos, Nombre / Empresa, S.L." value="<?php echo $customerData[0]->name_customer ?>" />
+          <i class="fa-solid fa-check fa-2xl check_ok"></i>
+          <i class="fa-solid fa-xmark fa-2xl check_ko"></i>          
         </div>      
       </div>
 
@@ -148,9 +150,7 @@
         $deleteRegister = new CustomerController(); // se lanza método para eliminar registro concreto.
         $checkDeleteRegister = $deleteRegister->ctrDeleteRegister("customers", "token", $_GET["token"]);
 
-        if($updateRegister == "true" || $checkDeleteRegister == "true") {   
-         
-     
+        if($updateRegister == "true" || $checkDeleteRegister == "true") { 
           echo "<script>window.location.replace('index.php?pages=01-newCustomer');</script>";  
           //echo "<script>document.getElementsByClassName('hide_alert')[0].style.display='block';</script>";
           

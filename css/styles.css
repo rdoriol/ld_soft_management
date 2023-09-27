@@ -60,6 +60,7 @@ h2 {
 .forms_inputs_fields {
     display: flex;
     /*justify-content: center;*/
+    align-items: center;
 }
 
 .forms_icons {
@@ -80,6 +81,18 @@ h2 {
 ::placeholder {
     color: #D3D3D3;
     font-size: 13px;
+}
+
+.check_ok{
+   padding: 5px ;
+   color: #4dd214;
+  
+}
+
+.check_ko {
+    padding: 5px;
+    color: #f41a25;
+    
 }
 
 .forms_buttons {
@@ -181,10 +194,6 @@ h2 {
     padding: 5px 10px;
     width: 100%;
     border-radius: none;
-}
-
-.submenu li a {
-    
 }
 
     /* para activar/desactivar botón a través de JQuery */

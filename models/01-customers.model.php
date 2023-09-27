@@ -63,6 +63,7 @@
                 }
                 else {
                     $sql = "SELECT * FROM $table WHERE $key LIKE '%$value%' ORDER BY $key ASC";
+                    //$sql = "SELECT * FROM $table WHERE $key = '$value' ORDER BY $key ASC";
                 }
                 
                 $stmt = Connection::mdlConnect()->prepare($sql);                                                                       
