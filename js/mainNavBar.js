@@ -45,7 +45,7 @@ $(document).ready(function() {
     function navBarReset() {
         $(".submenu").slideUp();                                    // cierra todos los submenus previamente abiertos.
         $(".link_button").removeClass("li_active_button");                 // elimina clase con las propiedades css de botón activo de los menús seleccionados previamente.
-        $(".fa-solid").attr("class", "fa-solid fa-caret-right");    // cambia todos los iconos al tipo "submenú contraido".
+        $(".item_main_container_nav .fa-solid").attr("class", "fa-solid fa-caret-right");    // cambia todos los iconos al tipo "submenú contraido".
     }
 
     /**

@@ -20,7 +20,7 @@
              
                     // bloque con función bindParam() para vincular variable oculta en prepare statement con el valor recibido del form.
                 $stmt->bindParam(":token", $data["token"], PDO::PARAM_STR);
-                $stmt->bindParam(":name_customer", $data["customer_name"], PDO::PARAM_STR);
+                $stmt->bindParam(":name_customer", trim($data["customer_name"]), PDO::PARAM_STR);
                 $stmt->bindParam(":nif_cif", $data["customer_nifcif"], PDO::PARAM_STR);
                 $stmt->bindParam(":customer_type", $data["customer_type"], PDO::PARAM_STR);
                 $stmt->bindParam(":address_customer", $data["customer_address"], PDO::PARAM_STR);

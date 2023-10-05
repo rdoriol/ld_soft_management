@@ -64,7 +64,7 @@
       </div>
 
       <div class="forms_fields">
-        <label class="forms_label" for="customer_nifcif">NIF / CIF</label>
+        <label class="forms_label" for="customer_nifcif">NIF</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-user forms_icons"></i>
           <input type="text" class="forms_inputs" id="customer_nifcif" name="customer_nifcif" placeholder="00000000L / B00000000" value="<?php echo $customerData[0]->nif_cif ?>"/>
