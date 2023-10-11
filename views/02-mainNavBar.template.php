@@ -8,9 +8,8 @@
           <li class="li_item" id="">
             <button class="link_button" id="customers_button" title="Abrir opciones clientes"><i class="fa-solid fa-caret-right"></i>&nbsp Clientes</button>
             <ul class="submenu" id="customers_submenu">
-              <li class="link_subButton" id="newCustomerId"><a class="" href="index.php?pages=01-newCustomer">Alta cliente</a></li>
-              <li class="link_subButton" id="customerFileId"><a class="" href="index.php?pages=02-customerFile">Ficha cliente</a></li>
-              <li class="link_subButton" id="customersListId"><a class="" href="index.php?pages=04-customersList">Listado clientes</a></li>
+              <li class="link_subButton" id="newCustomerId"><a class="" href="index.php?pages=01-newCustomer">Ficha cliente</a></li>             
+              <li class="link_subButton" id="customersListId"><a class="" href="index.php?pages=02-customersList">Listado clientes</a></li>
             </ul>
           </li>
           

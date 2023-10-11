@@ -58,11 +58,12 @@
               /**
                * Controlador frontal/lista blanca de todas las páginas (seguridad informática) de la aplicación web que se renderizarán por pantalla. (se alimenta de "02-mainNavBar.template.php").
                */
-            if(isset($_GET["pages"])) 
+            if(isset($_GET["pages"]) || isset($_GET["emergent"])) 
             {
               $page = $_GET["pages"]; // variable que almacena el valor de la variable GET
+              $emergent = $_GET["emergent"]; // variable que almacena el valor de la variable GET
 
-              if($page == "01-newCustomer" || $page == "02-customerFile" || $page == "04-customersList") 
+              if($page == "01-newCustomer" || $page == "02-customersList") 
               {
                 include "pages/01.customers/" . $page . ".template.php";     
               }
@@ -94,6 +95,10 @@
               {
                 include "pages/08.salesSetting/" . $page . ".template.php";
               }
+              else if($emergent == "06-search")
+              {
+                include $emergent . ".template.php";
+              }
               else
               {
                 include "04-error404.template.php";
@@ -121,5 +126,8 @@
 
     <script src="views/pages/01.customers/AJAX.js"></script>
 
+    <script src="./js/popups.js"></script>
+    
+    <script src="./js/01-customers.js"></script>
   </body>
 </html>

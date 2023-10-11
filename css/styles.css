@@ -9,7 +9,7 @@
     
     --buttons: #007bff; 
     --subButtons: #7bff;
-
+    --carbonBlack: #1c1c1c;
     --formsIconsBackgroundColor: #E9ECEF;
    
 
@@ -20,7 +20,7 @@
 ------------------------------*/ 
 body {
     background-color: var(--backgroundColor);
-    font-family: Helvetica;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 button {
@@ -36,6 +36,15 @@ button:hover {
 h2 {
     width: 75%;
     margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+.forms_subtitle {
+    background-color: gold;
+    width: 50%;
+    margin: 0 auto;
+    color: #1c1c1c;
+    margin-bottom: 50px;
 }
 
             /* General Forms
@@ -55,7 +64,7 @@ h2 {
     margin: 0;
     padding-left: 30px;
     font-weight: bold;
-    font-size: 15px;
+    font-size: 14px;
 }
 .forms_inputs_fields {
     display: flex;
@@ -114,14 +123,19 @@ h2 {
             /* General Options Bar
             -------------- */
 
-.general_options_bar{
+.general_options_bar {
     display: inline-flex;
     justify-content: space-evenly;
-    width: 100%;
+    align-items: baseline;
+    /* width: 100%; */
 }
 .general_searchs_forms {
     display: inline-flex;
     padding: 10px;
+}
+
+#btn_search2 {
+    display: none;
 }
 
      /* END general styles
@@ -161,7 +175,7 @@ h2 {
 #main_nav {
     position: fixed;
     font-size: 13px;
-    
+    font-family: Helvetica;   
 }
 
 #main_nav .li_item {
@@ -297,6 +311,20 @@ footer h3 {
 
 .hide_alert {
     display: none;
+}
+
+
+     /* 01.CUSTOMERS "customerList.template.php"
+-----------------------------------------------*/
+
+.general_tables thead {
+    font-weight: bold;
+    color: var(--carbonBlack);
+    font-size: 14px;
+}
+
+.general_tables tbody {
+    font-size: 14px;
 }
 
 

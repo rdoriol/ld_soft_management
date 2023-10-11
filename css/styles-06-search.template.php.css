@@ -1,0 +1,36 @@
+header {
+    display: none;
+}
+
+aside {
+    display: none;
+}
+
+.mobile_menu {
+    display: none;
+}
+
+footer {
+    display: none;
+}
+
+.item_main_container_section {
+    width: 100%;   
+}
+
+.main_container {
+    min-height: auto;
+}
+
+#btn_print {
+    display: none;
+}
+
+#btn_search2 {
+    display: block;
+}
+
+#btn_search {
+    display: none;
+}
+

@@ -60,13 +60,6 @@ $(document).ready(function(){
     checkFields("#customer_name", "name_customer_form");
     checkFields("#customer_nifcif", "name_nif_form");
 
-    /**
-     * 
-     */
-
-
-
-
 
 
     
