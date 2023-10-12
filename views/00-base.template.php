@@ -95,7 +95,7 @@
               {
                 include "pages/08.salesSetting/" . $page . ".template.php";
               }
-              else if($emergent == "06-search")
+              else if($emergent == "06-popUpsearch")
               {
                 include $emergent . ".template.php";
               }
@@ -123,11 +123,7 @@
             <!-- end footer -------------->
 
     <script src="js/mainNavBar.js"></script>
-
     <script src="views/pages/01.customers/AJAX.js"></script>
-
-    <script src="./js/popups.js"></script>
-    
     <script src="./js/01-customers.js"></script>
   </body>
 </html>

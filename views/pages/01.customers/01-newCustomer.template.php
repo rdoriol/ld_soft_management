@@ -22,21 +22,17 @@
 ?>
 
 
-<h2 class="li_active_page rounded">Clientes</h2>
+<h2 class="li_active_page rounded">Ficha Cliente</h2>
 
 <form class="general_forms" id="new_customer_form" action="<?php $_SERVER['REQUEST_URI']; ?>" method="post" onsubmit= "">
   <h4 class="forms_subtitle rounded">Crear | Editar | Eliminar</h4>
     
-          <!-- SEARCH BAR
-            ---------------------->
-            <?php include "views/05-searchBar.template.php9"; ?>
-
-          <!-- end search bar -------->
+         
   <ul class="d-flex justify-content-first">
     <li><button type="button" class="search_bar m-1 alert-info rounded" id="search_customer" onClick=""><i class="fa-solid fa-magnifying-glass"></i>&nbsp Buscar Cliente</button></li>
     <li><button class="print_bar m-1 alert-info rounded"><i class="fa-solid fa-print"></i>&nbspImprimir</button></li>
   </ul>
-
+                                                   
   <fieldset class="d-flex justify-content-around"> <!-- CAMBIAR A ESTILO PROPIO CON CSS flex personalizado, no esta porquería -->
     <div class="forms_flex">
       <div class="forms_fields">
@@ -153,15 +149,16 @@
         </div>      
       </div>
     </div>
+    <input type="text" id="tokenCustomer" disabled value="" /> <!-- input oculto que recibirá valor de token de subventana -->
     <div class="btn-group p-3">
       <button type="submit" class="btn btn-primary mr-5" id="btn_customer_submit" name="customer_submit"><i class="fa-sharp fa-solid fa-pencil"></i>&nbsp Grabar</button> 
       <button type="button" role="link" class="btn btn-secondary mr-5" name="exit_customer" onClick="window.location='index.php?pages=01-newCustomer'"><i class="fa-sharp fa-solid fa-rectangle-xmark"></i>&nbsp Cerrar registro</button>
       <button type="submit" class="btn btn-danger" name="delete_customer"><i class="fa-sharp fa-solid fa-trash-can"></i>&nbsp Eliminar registro</button> 
     </div>
 
-    <div><p class="alert alert-success text-center hide_alert" id="alert_success">Operación realizada con éxito</p></div> <!-- Oculto por defecto con css -->
+    <div><p class="alert alert-success text-center hide_alert" id="alert_success">Operación realizada con éxito</p></div> <!-- Mensaje oculto por defecto con css -->
 
-    <div class="modal fade" id="success_modal" role="dialog">  <!-- modal bootstrap 4  -->
+    <div class="modal fade" id="success_modal" role="dialog">  <!-- MODAL DE CONFIRMACIÓN DE OPERACIÓN bootstrap 4  -->
       <div class="modal-dialog">
           <div class="modal-content">
               <div class="modal-header">                 

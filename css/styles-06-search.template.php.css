@@ -34,3 +34,8 @@ footer {
     display: none;
 }
 
+#customers_lists_table .table_search:hover {
+    cursor: pointer;  
+    background-color: #007BFF;   
+    color: #ffffff;
+}

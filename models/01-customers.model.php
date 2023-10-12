@@ -62,7 +62,8 @@
                     $sql = "SELECT *, DATE_FORMAT(created_date, '%d/%m/%Y') AS created_date FROM $table ORDER BY id_customer ASC";
                 }
                 else {
-                    $sql = "SELECT *, DATE_FORMAT(created_date, '%d/%m/%Y') AS created_date FROM $table WHERE $key LIKE '%$value%' ORDER BY $key ASC";                    
+                    $sql = "SELECT *, DATE_FORMAT(created_date, '%d/%m/%Y') AS created_date FROM $table WHERE $key LIKE '%$value%' ORDER BY $key ASC";  
+                                     
                 }
                 
                 $stmt = Connection::mdlConnect()->prepare($sql);                                                                       

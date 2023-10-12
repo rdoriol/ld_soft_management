@@ -31,26 +31,26 @@ $(document).ready(function(){
                                                     console.log("Valor obtenido del form: " + nameFormValue);  // todo ELIMINAR
                 // Se genera formulario para comunicarse con fichero php (name y su valor)
             var dataForm = new FormData(); 
-                            // name       valor  (para php [$_POST])
+                            // name       valor  (para php $_POST[])
             dataForm.append(nameForm, nameFormValue);
                                                       
             $.ajax({
-            url: "ajax/ajax_customers.php",
-            method: "POST",
-            data: dataForm,
-            cache: false,
-            contentType: false,
-            processData: false,
-            dataType: "json",
-            success: function(request) {
-                                            console.log("Valor obtenido de base de datos: " + request); // todo ELIMINAR
-                            if(request == "true") {                            
-                                checkKo(selector); // 
-                            
-                            }
-                            else {                           
-                                checkOk(selector);    
-                            }               
+                url: "ajax/ajax_customers.php",
+                method: "POST",
+                data: dataForm,
+                cache: false,
+                contentType: false,
+                processData: false,
+                dataType: "json",
+                success: function(request) { 
+                                                console.log("Valor obtenido de base de datos: " + request); // todo ELIMINAR
+                                if(request == "true") {                            
+                                    checkKo(selector); // 
+                                
+                                }
+                                else {                           
+                                    checkOk(selector);    
+                                }               
                 }
             })    
         })
@@ -61,6 +61,50 @@ $(document).ready(function(){
     checkFields("#customer_nifcif", "name_nif_form");
 
 
+/* BLOQUE DE FUNCIONES para obtener datos de base de datos y renderizarlos en los inputs del formulario. COMUNICACIÓN AJAX
+-----------------------------------------------------------------------------------------*/
+    /**
+     * Función que obtendrá datos de subventana buscador
+     */
+    
+    function iniciar() {
+
+        $("#customers_lists_table .table_search").click(function(){
+
+            window.opener.console.log("hola desde ventana padre por JQuery");
+           $valueToken = $(".tokenValueSearch").text();
+
+         
+            window.opener.document.getElementById("tokenCustomer").value = $valueToken;
+        })
+    }
+    
+    iniciar(); // Se lanza la función para que esté alerta a posible llamada.
+
+
+    
+
+
+
 
     
 })
+/*
+function pruebas() {
+    console.log("prueba desde ventana compadre");
+    
+}
+*/
+    /**
+     * Función que obtendrá datos de subventana hija
+     * Se lanzará directamente embebida en código html ("06-popUpsearch.template.php")
+     *@return string respuesta
+     */
+  /*   function getSubwindowValues(respuesta) {     
+        
+        var respuesta = window.opener.document.getElementById("tokenCustomer").value = respuesta;
+        window.opener.pruebas();
+       // closeSubwindow();
+        return respuesta;
+    }
+    */

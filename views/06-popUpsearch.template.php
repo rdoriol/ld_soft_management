@@ -14,7 +14,7 @@
 <table class="general_tables table table-striped text-center" id="customers_lists_table">
     <thead>
         <tr>
-            <th>Id</th><th>NIF</th><th>Nombre</th><th>Editar</th>
+            <th>Id</th><th>NIF</th><th>Nombre</th>
         </tr>
         </thead>
         <tbody>
@@ -22,18 +22,18 @@
                 $key = $_POST["select_item"];
                 $value = $_POST["search_key"];                
                 
-                $dataCustomers = CustomerController::ctrToList("customers", $key, $value); 
-                foreach($dataCustomers as $item): 
+                $dataCustomers = CustomerController::ctrToList("customers", $key, $value);       
+                foreach($dataCustomers as $item):                        
             ?>
-            <tr>
-                <td> <?php echo $item->id_customer; ?> </td>
+            <!-- <tr class="table_search" title="Seleccionar" onClick="getSubwindowValues(<?php // echo '\''. $item->token .'\''; ?>);">       -->
+            <tr class="table_search" title="Seleccionar"> 
+                <td> <?php echo $item->id_customer;?> </td>           
                 <td> <?php echo $item->nif_cif; ?> </td>
-                <td> <?php echo $item->name_customer; ?> </td>                             
-                <td>
-                    <a href="index.php?pages=01-newCustomer&token=<?php echo $item->token; ?>" class="btn btn-warning m-1" title="Ver / Editar registro"><i class="fa-sharp fa-solid fa-pencil"></i></a>
-                </td>
-            </tr>
-            <?php endforeach ?>
+                <td> <?php echo $item->name_customer; ?> </td> 
+                <!-- <td><input type="text" disabled id="token" value="<?php echo $item->token; ?>"/></td>   -->
+                <td class="tokenValueSearch" value=""> <?php echo $item->token; ?></td>
+            </tr>                                                               
+            <?php endforeach ?>   
         <tbody>
 </table>
 
