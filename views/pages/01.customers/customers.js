@@ -1,3 +1,6 @@
+    /* BLOQUE COMPROBACIÓN CAMPOS CON EN TIEMPO REAL Y CON AJAX 
+    -----------------------------------------------------------*/
+
 /**
  * 
  */
@@ -65,8 +68,7 @@ $(document).ready(function(){
 -----------------------------------------------------------------------------------------*/
     /**
      * Función que obtendrá datos de subventana buscador
-     */
-    
+     */    
     function iniciar() {
 
         $("#customers_lists_table .table_search").click(function(){
@@ -108,3 +110,30 @@ function pruebas() {
         return respuesta;
     }
     */
+
+
+    /* BLOQUE SUBVENTANA BUSCADOR DE REGISTROS
+    -----------------------------------------*/
+    
+    var ventana; // variable que almacenará subventana abierta
+    /**
+     * Función que abrirá ventana emergente (popUp) con buscador
+     */   
+    //function openSubwindow() {
+        $("#search_customer").click(function(){
+            var options = "width=500px, height=500px, top=300px, left=200px, resizable=no, scrollbars=no, location=no, directories=no";
+            ventana = window.open("index.php?emergent=06-popUpsearch", "Búsqueda", options); 
+        })
+    //}
+
+    // Se lanza función para que esté siempre espectante.
+   // openSubwindow();
+
+    /**
+     * Función que cerrará la subventana
+     */
+    function closeSubwindow() {       
+        if(ventana != "") {
+            window.close();
+        }       
+    }

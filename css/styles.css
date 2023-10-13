@@ -72,13 +72,15 @@ h2 {
 
 .forms_icons {
     background-color: var(--formsIconsBackgroundColor);
-    padding: 6px;
+    padding: 5px;
 }
 
 .forms_inputs {
     padding-left: 10px;
     border: none;
     border-radius: 3px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
 }
 
 .forms_inputs:focus {   
