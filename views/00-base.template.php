@@ -122,8 +122,7 @@
 
             <!-- end footer -------------->
 
-    <script src="js/mainNavBar.js"></script>
-    <script src="views/pages/01.customers/customers.js"></script>
-    <script src="./js/01-customers.js"></script>
+    <script src="./js/mainNavBar.js"></script>
+    <script src="./views/pages/01.customers/customers.js"></script>
   </body>
 </html>

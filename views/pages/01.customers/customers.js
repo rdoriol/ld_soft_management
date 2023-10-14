@@ -1,4 +1,4 @@
-    /* BLOQUE COMPROBACIÓN CAMPOS CON EN TIEMPO REAL Y CON AJAX 
+    /* BLOQUE COMPROBACIÓN CAMPOS FORMULARIO EN TIEMPO REAL Y CON AJAX 
     -----------------------------------------------------------*/
 
 /**
@@ -38,7 +38,7 @@ $(document).ready(function(){
             dataForm.append(nameForm, nameFormValue);
                                                       
             $.ajax({
-                url: "ajax/ajax_customers.php",
+                url: "./ajax/ajax_customers.php",
                 method: "POST",
                 data: dataForm,
                 cache: false,
@@ -63,71 +63,28 @@ $(document).ready(function(){
     checkFields("#customer_name", "name_customer_form");
     checkFields("#customer_nifcif", "name_nif_form");
 
-
-/* BLOQUE DE FUNCIONES para obtener datos de base de datos y renderizarlos en los inputs del formulario. COMUNICACIÓN AJAX
------------------------------------------------------------------------------------------*/
-    /**
-     * Función que obtendrá datos de subventana buscador
-     */    
-    function iniciar() {
-
-        $("#customers_lists_table .table_search").click(function(){
-
-            window.opener.console.log("hola desde ventana padre por JQuery");
-           $valueToken = $(".tokenValueSearch").text();
-
-         
-            window.opener.document.getElementById("tokenCustomer").value = $valueToken;
-        })
-    }
-    
-    iniciar(); // Se lanza la función para que esté alerta a posible llamada.
-
-
-    
-
-
-
-
-    
 })
-/*
-function pruebas() {
-    console.log("prueba desde ventana compadre");
-    
-}
-*/
-    /**
-     * Función que obtendrá datos de subventana hija
-     * Se lanzará directamente embebida en código html ("06-popUpsearch.template.php")
-     *@return string respuesta
-     */
-  /*   function getSubwindowValues(respuesta) {     
-        
-        var respuesta = window.opener.document.getElementById("tokenCustomer").value = respuesta;
-        window.opener.pruebas();
-       // closeSubwindow();
-        return respuesta;
-    }
-    */
 
 
     /* BLOQUE SUBVENTANA BUSCADOR DE REGISTROS
     -----------------------------------------*/
-    
-    var ventana; // variable que almacenará subventana abierta
-    /**
-     * Función que abrirá ventana emergente (popUp) con buscador
-     */   
-    //function openSubwindow() {
-        $("#search_customer").click(function(){
-            var options = "width=500px, height=500px, top=300px, left=200px, resizable=no, scrollbars=no, location=no, directories=no";
-            ventana = window.open("index.php?emergent=06-popUpsearch", "Búsqueda", options); 
-        })
-    //}
+var ventana; // variable que almacenará subventana abierta
 
-    // Se lanza función para que esté siempre espectante.
-   // openSubwindow();
+$(document).ready(function(){
+
+    /**
+     * Función que abrirá subventana (popUp) con buscador
+     */   
+    $("#search_customer").click(function(){
+        var options = "width=500px, height=500px, top=100px, left=500px, resizable=no, scrollbars=no, location=no, directories=no";
+        ventana = window.open("index.php?emergent=06-popUpsearch", "Búsqueda", options); 
+    })
+
+    
+   
+
+
+})
 
     /**
      * Función que cerrará la subventana
@@ -137,3 +94,59 @@ function pruebas() {
             window.close();
         }       
     }
+
+    /**
+     * Función que conectará con fichero php "ajax/ajax_search_subwindow"
+     */
+    function getRegisterAjax() {
+
+        var tokenValue = $("#tokenCustomer").val(); // Se obtiene valor a buscar en la base de datos
+       
+        var dataForm = new FormData();
+        //                name      value   // Se generan datos de form para enviarlos en formato PHP ($_POST[])
+        dataForm.append("token", tokenValue);
+                                                                console.log(tokenValue);
+        
+        $.ajax({
+            url: "./ajax/ajax_search_subwindow.php",
+            method: "POST",
+            data: dataForm,
+            cache: false,
+            contentType: false,
+            processData: false,
+            dataType: "json",
+            success: function(request){
+                        if(request) {                           
+                                                
+                            $("#customer_id").val(request[0].id_customer);
+                            $("#private_customer").val(request[0].customer_type);
+                            $("#created_date").val(request[0].created_date);
+                            $("#customer_name").val(request[0].name_customer);
+                            $("#customer_nifcif").val(request[0].nif_cif);
+                            $("#customer_address").val(request[0].address_customer);
+                            $("#customer_postal_code").val(request[0].postal_code);
+                            $("#customer_town").val(request[0].town);
+                            $("#customer_province").val(request[0].province);
+                            $("#customer_country").val(request[0].country);
+                            $("#customer_phone").val(request[0].phone);
+                            $("#customer_email").val(request[0].email);
+                            $("#customer_contact_person").val(request[0].contact_person);
+
+                            // $("#tokenCustomer").val() = "";  // todo Se borra el registro aquí o en otra parte????
+                        }
+            }
+        })
+    } 
+    
+    /**
+     * Función que obtendrá datos de subventana hija
+     * Se lanzará directamente embebida en código html ("06-popUpsearch.template.php")
+     * @return string respuesta
+    */
+    function getSubwindowValues(respuesta) {  
+       
+        window.opener.$("#tokenCustomer").val(respuesta);
+        window.opener.getRegisterAjax();
+        closeSubwindow();        
+    }
+

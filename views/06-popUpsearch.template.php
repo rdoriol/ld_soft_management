@@ -25,13 +25,13 @@
                 $dataCustomers = CustomerController::ctrToList("customers", $key, $value);       
                 foreach($dataCustomers as $item):                        
             ?>
-            <!-- <tr class="table_search" title="Seleccionar" onClick="getSubwindowValues(<?php // echo '\''. $item->token .'\''; ?>);">       -->
-            <tr class="table_search" title="Seleccionar"> 
+            <tr class="table_search" title="Seleccionar" onClick="getSubwindowValues(<?php echo '\''. $item->token .'\''; ?>);">
+            <!-- <tr class="table_search" title="Seleccionar"> -->
                 <td> <?php echo $item->id_customer;?> </td>           
                 <td> <?php echo $item->nif_cif; ?> </td>
                 <td> <?php echo $item->name_customer; ?> </td> 
                 <!-- <td><input type="text" disabled id="token" value="<?php // echo $item->token; ?>"/></td>   -->
-                <td class="tokenValueSearch" value=""> <?php echo $item->token; ?></td>
+                <!-- <td class="tokenValueSearch" value=""> <?php //echo $item->token; ?></td> -->
             </tr>                                                               
             <?php endforeach ?>   
         <tbody>

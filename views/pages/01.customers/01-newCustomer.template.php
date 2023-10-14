@@ -80,7 +80,7 @@
       <div class="forms_fields">
         <label class="forms_label" for="customer_nifcif">NIF</label>
         <div class="forms_inputs_fields">
-          <i class="fa-solid fa-passport forms_icons"></i>
+          <i class="fa-solid fa-address-card forms_icons"></i>
           <input type="text" class="forms_inputs" id="customer_nifcif" name="customer_nifcif" placeholder="00000000L / B00000000" value="<?php echo $customerData[0]->nif_cif ?>"/>
         </div>      
       </div>
@@ -88,7 +88,7 @@
       <div class="forms_fields">
         <label class="forms_label" for="customer_address">Dirección</label>
         <div class="forms_inputs_fields">
-          <i class="fa-solid fa-address-card forms_icons"></i>
+          <i class="fa-solid fa-house forms_icons"></i>
           <input type="text" class="forms_inputs" id="customer_address" name="customer_address" placeholder="'C/' 'Avda.' 'Plaza'" value="<?php echo $customerData[0]->address_customer ?>"/>
         </div>      
       </div>
@@ -149,7 +149,9 @@
         </div>      
       </div>
     </div>
-    <input type="text" id="tokenCustomer" disabled value="" /> <!-- input oculto que recibirá valor de token de subventana -->
+
+    <input type="hidden" id="tokenCustomer" disabled placeholder="tokenValue Subwindow" value="" /> <!-- input oculto que recibirá valor de token de subventana -->
+    
     <div class="btn-group p-3">
       <button type="submit" class="btn btn-primary mr-5" id="btn_customer_submit" name="customer_submit"><i class="fa-sharp fa-solid fa-pencil"></i>&nbsp Grabar</button> 
       <button type="button" role="link" class="btn btn-secondary mr-5" name="exit_customer" onClick="window.location='index.php?pages=01-newCustomer'"><i class="fa-sharp fa-solid fa-rectangle-xmark"></i>&nbsp Cerrar registro</button>
