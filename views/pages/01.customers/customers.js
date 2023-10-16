@@ -119,7 +119,7 @@ $(document).ready(function(){
                         if(request) {                           
                                                 
                             $("#customer_id").val(request[0].id_customer);
-                            $("#private_customer").val(request[0].customer_type);
+                            getValueType(request[0].customer_type); // se lanza función para seleccionar "tipo de cliente"
                             $("#created_date").val(request[0].created_date);
                             $("#customer_name").val(request[0].name_customer);
                             $("#customer_nifcif").val(request[0].nif_cif);
@@ -130,9 +130,10 @@ $(document).ready(function(){
                             $("#customer_country").val(request[0].country);
                             $("#customer_phone").val(request[0].phone);
                             $("#customer_email").val(request[0].email);
-                            $("#customer_contact_person").val(request[0].contact_person);
+                            $("#customer_contact_person").val(request[0].contact_person);  
+                            //$("#tokenValue").val(request[0].token);                          
 
-                            // $("#tokenCustomer").val() = "";  // todo Se borra el registro aquí o en otra parte????
+                            // $("#tokenCustomer").val() = "";  // todo -> Se borra el registro aquí o en otra parte????
                         }
             }
         })
@@ -148,5 +149,19 @@ $(document).ready(function(){
         window.opener.$("#tokenCustomer").val(respuesta);
         window.opener.getRegisterAjax();
         closeSubwindow();        
+    }
+
+    /**
+     * Función para utilizar en getRegisterAjax(), para seleccionar el valor del "tipo de cliente"
+     */
+    function getValueType(value) {
+        if(value == "Particular") {
+            $("#private_customer").prop("checked", true);
+            $("#company").prop("checked", false);
+        }
+        else {
+            $("#private_customer").prop("checked", false);
+            $("#company").prop("checked", true);
+        }
     }
 

@@ -85,7 +85,7 @@
                         $checkToken = md5($oldToken[0]->name_customer . "+" . $oldToken[0]->nif_cif);
                        
                         if($checkToken == $value) {       
-                            // bloque para validaciones                            
+                                // bloque para validaciones                            
                             $validateFormatFields = ValidationController::validateFieldsFormats($_POST["customer_nifcif"], $_POST["customer_postal_code"], $_POST["customer_phone"], $_POST["customer_email"]); // Método para validar formatos de campos del formulario. 
                                
                             if($validateFormatFields == "true" ) {  // TODO. Pendiente de mejora persona: Implementar validación de nombres coincidentes en base de datos (en función de si es cliente tipo particular o empresa)

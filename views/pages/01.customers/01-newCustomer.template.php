@@ -5,19 +5,20 @@
   
       // Condición para controlar si se muestran datos en el formulario o se muestra en blanco
     if(isset($_GET["token"]) && !empty($_GET["token"])) {                                      
-      $customerData = CustomerController::ctrToList("customers", "token", $_GET["token"]);  echo $_customerData[0]->id_customer;           
+      $customerData = CustomerController::ctrToList("customers", "token", $_GET["token"]);           
         // Condición para marcar opción radio ("Particular"/"Empresa") de cliente concreto. 
       if($customerData[0]->customer_type == "Particular") $particularCustomer = "checked"; else $privateCustomer = "checked";
-      
-      echo "<script>
-              if(window.sessionStorage.getItem('modalAlert') == 'true') {
-                $(function(){ 
-                  $('#success_modal').modal('show');
-                });
-                window.sessionStorage.setItem('modalAlert', 'false');
-              }
-            </script>"; 
     }
+
+     // script javascript para lanzar ventana modal confirmando actualizaciones o eliminaciones.
+    echo "<script>
+    if(window.sessionStorage.getItem('modalAlert') == 'true') {
+      $(function(){ 
+        $('#success_modal').modal('show');
+      });
+      window.sessionStorage.setItem('modalAlert', 'false');
+    }
+  </script>"; 
       
 ?>
 
@@ -149,9 +150,9 @@
         </div>      
       </div>
     </div>
-
-    <input type="hidden" id="tokenCustomer" disabled placeholder="tokenValue Subwindow" value="" /> <!-- input oculto que recibirá valor de token de subventana -->
-    
+   
+    <input type="text" id="tokenCustomer" name="tokenCustomer" placeholder="tokenValue Subwindow" value="" /> <!-- input oculto que recibirá valor de token de subventana -->
+           
     <div class="btn-group p-3">
       <button type="submit" class="btn btn-primary mr-5" id="btn_customer_submit" name="customer_submit"><i class="fa-sharp fa-solid fa-pencil"></i>&nbsp Grabar</button> 
       <button type="button" role="link" class="btn btn-secondary mr-5" name="exit_customer" onClick="window.location='index.php?pages=01-newCustomer'"><i class="fa-sharp fa-solid fa-rectangle-xmark"></i>&nbsp Cerrar registro</button>
@@ -175,38 +176,50 @@
  
 
     <?php 
-        // Bloque condicional para grabar datos de un cliente nuevo o actualizar datos de un registro existente.
-      if(isset($_GET["token"]) && !empty($_GET["token"])) {        
-          $updateRegister = CustomerController::ctrUpdateRegister("customers", "token", $_GET["token"]);    // se lanza método para actualizar datos de clientes.
+        /* Bloque condicional para grabar datos de un cliente nuevo, actualizar o eliminar datos de un registro existente
+        -----------------------------------------------------------------------------------------------------------------*/
+      if(isset($_GET["token"]) && !empty($_GET["token"])) {                        
+         
+        $updateRegister = CustomerController::ctrUpdateRegister("customers", "token", $_GET["token"]);    // se lanza método para actualizar datos de clientes.
 
-          $deleteRegister = new CustomerController(); 
-          $checkDeleteRegister = $deleteRegister->ctrDeleteRegister("customers", "token", $_GET["token"]);   // se lanza método para eliminar registro concreto.
+        $deleteRegister = new CustomerController(); 
+        $checkDeleteRegister = $deleteRegister->ctrDeleteRegister("customers", "token", $_GET["token"]);   // se lanza método para eliminar registro concreto.
+      }
+      else if(isset($_POST["tokenCustomer"]) && !empty($_POST["tokenCustomer"])) {   
+      
+        $updateRegister = CustomerController::ctrUpdateRegister("customers", "token", $_POST["tokenCustomer"]);    // se lanza método para actualizar datos de clientes.
 
-          if($updateRegister == "true") { 
+        $deleteRegister = new CustomerController(); 
+        $checkDeleteRegister = $deleteRegister->ctrDeleteRegister("customers", "token", $_POST["tokenCustomer"]);   // se lanza método para eliminar registro concreto.
+      }
+      else {     
+        $createRegister = CustomerController::ctrCreateRegister("customers"); // se lanza método para grabar datos de clientes.
+      }
+       
+        /* Bloque condicional para lanzar ventana modal en función del éxito de la operación realizada
+        ---------------------------------------------------------------------------------------------*/
+      if($updateRegister == "true") { 
 
-            $newToken = md5(ucwords($_POST["customer_name"] . "+" . strtoupper($_POST["customer_nifcif"])));   // Se genera nuevo token para poder recargar página con datos actualizados.        
+        $newToken = md5(ucwords($_POST["customer_name"] . "+" . strtoupper($_POST["customer_nifcif"])));   // Se genera nuevo token para poder recargar página con datos actualizados.        
 
-              // 1º se guarda estado de la actualización/borrado en variable de sesión para a continuación poder lanzar ventana modal al recargar página.
-              // 2º se refresca página con datos del registro actualizados. 
-            echo "<script>
-                    window.sessionStorage.setItem('modalAlert', 'true'); 
-                    window.location.replace('index.php?pages=01-newCustomer&token=$newToken');
-                  </script>";   
-          }
-          if($checkDeleteRegister == "true") {
+          // 1º se guarda estado de la actualización/borrado en variable de sesión para a continuación poder lanzar ventana modal al recargar página.
+          // 2º se refresca página con datos del registro actualizados. 
+        echo "<script>
+                window.sessionStorage.setItem('modalAlert', 'true');
+                window.location.replace('index.php?pages=01-newCustomer&token=$newToken');
+              </script>";   
+      }
+      else if($checkDeleteRegister == "true") {
             echo "<script>
                     window.sessionStorage.setItem('modalAlert', 'true'); 
                     window.location.replace('index.php?pages=01-newCustomer');
                   </script>"; 
-          }
-      }
-      else {
-          $createRegister = CustomerController::ctrCreateRegister("customers"); // se lanza método para grabar datos de clientes.
       }
     ?>
 
     <?php
-        // Bloque condicional para borrar datos almacenados del formulario html una vez enviados.
+        /* Bloque condicional para borrar datos almacenados del formulario html una vez enviados.
+        ----------------------------------------------------------------------------------------*/
       if($createRegister == "true" || $updateRegister == "true" || $checkDeleteRegister == "true") {
         echo "<script>
                 if(window.history.replaceState) {

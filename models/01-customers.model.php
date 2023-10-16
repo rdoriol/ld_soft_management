@@ -126,7 +126,7 @@
          * @return
          */
         public function mdlDeleteRegister($table, $key, $value) {
-            $chechk = "false";
+            $check = "false";
             try {
                 $sql = "DELETE FROM $table WHERE $key LIKE :token";
                 $stmt = Connection::mdlConnect()->prepare($sql);
