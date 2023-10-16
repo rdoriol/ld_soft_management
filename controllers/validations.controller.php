@@ -23,19 +23,19 @@
         }
 
         /**
-         * Método para validar formato de NIF
+         * Método para validar formatos de NIF
          * @param string $nif
          * @return string $check
          */
         static public function checkNif($nif) {
             $patternDni = "/^[0-9]{8}[A-Za-z]{1}$/";
-            $patternCif;
-            $patternNifM;
-            $patternNie;
+            $patternCif = "/^[A-Za-z]{1}[0-9]{8}$/";
+            $patternNifM = "/^[Mm]{1}[0-9]{7}[A-Za-z]{1}$/";
+            $patternNie = "/^[XYZzyz]{1}[0-9]{7}[A-Za-z]{1}$/";
             $ckeck = "false";
             
             try {
-                if(!preg_match($patternDni, $nif)/* || preg_match($patternCif, $nif) || preg_match($patternNifM, $nif) || preg_match($patternNie, $nif)*/) {
+                if(!preg_match($patternDni, $nif) && !preg_match($patternCif, $nif) && !preg_match($patternNifM, $nif) && !preg_match($patternNie, $nif)) {
                     $ckeck = "true";
                 }
                 return $ckeck;
@@ -101,6 +101,27 @@
         }
 
         /**
+         * Método para comprobar formato de campos que solo admitan valores con letras, espacios, puntos y guiones medios
+         * @param string $field
+         * @return string $ckeck
+         */
+        static public function checkLettersFormats($field) {
+            $check = "false";
+            $pattern = "/^[A-Za-zÑñsáéíóúÁÉÍÓÚ\s\.\-]+$/";
+            try {
+                if(preg_match($pattern, $field)) {                   
+                }
+                else {
+                    $check = "true";
+                }
+                return $check;
+            }
+            catch(PDOException $ex) {
+                echo "error interno checkLettersFormats(). Error: " . $ex->getMessage();
+            }
+        }
+
+        /**
          * Método para comprobar campos del formulario coincidentes con registros ya existentes en base de datos.
          * @param strings $table, $key, $value 
          * @return string $check
@@ -162,17 +183,20 @@
          * @param strings $nifValue, $postalCodeValue, $phoneValue, $emailValue
          * @return string $check
          */
-        static public function validateFieldsFormats($nifValue, $postalCodeValue, $phoneValue, $emailValue) {
+        static public function validateFieldsFormats($nifValue, $postalCodeValue, $phoneValue, $emailValue, $town, $province, $country) {
             $check = "false";
             try {
                 $correctFormat = self::checkNif($nifValue);                    // método que comprueba si el formato de "NIF" es correto.
                 $formatPostalCode = self::checkPostalCode($postalCodeValue);   // método que comrpueba si el formato del código postal es correcto.            
                 $formatPhone = self::checkPhone($phoneValue);                  // método que comrpueba si el formato del teléfono es correcto.
                 $formatEmail = self::checkEmail($emailValue);                  // método que comrpueba si el formato del correo electrónico es correcto.
+                $formatTown = self::checkLettersFormats($town);                // método que comrpueba si el formato del campo ciudad solo tiene letras.
+                $formatProvince = self::checkLettersFormats($province);        // método que comrpueba si el formato del campo provincia solo tiene letras.
+                $formatCountry = self::checkLettersFormats($country);          // método que comrpueba si el formato del campo país solo tiene letras.
 
                 // Bloque condicional para contemplar las distintas posiblidades con sus respectivos mensajes de avisos personalizados
-                if($correctFormat == "false" && $formatPostalCode == "false" && $formatPhone == "false" && $formatEmail == "false") {
-                    $check = "true";
+                if($correctFormat == "false" && $formatPostalCode == "false" && $formatPhone == "false" && $formatEmail == "false" && $formatTown == "false" && $formatProvince == "false" && $formatCountry == "false") {
+                    $check = "true"; // To_do los campos están correctos
                 }
                 else {
                    if($correctFormat  == "true") {
@@ -186,6 +210,15 @@
                     }  
                     if($formatPhone == "true") {
                         echo "<div class='text-center alert-danger rounded'><p>El formato del campo <b><i>Teléfono</i></b> es erroneo<br>Ejemplos válidos: +34666999666 / +34 666999666 / 666999666</p></div>";
+                    }  
+                    if($formatTown == "true") {
+                        echo "<div class='text-center alert-danger rounded'><p>El formato del campo <b><i>Ciudad</i></b> es erroneo<br>Ejemplos válidos: Alcalá de Henares / Getafe / Montequinto - Dos Hermanas</p></div>";
+                    }  
+                    if($formatProvince == "true") {
+                        echo "<div class='text-center alert-danger rounded'><p>El formato del campo <b><i>Provincia</i></b> es erroneo<br>Ejemplos válidos: Madrid / Nueva York</p></div>";
+                    }  
+                    if($formatCountry == "true") {
+                        echo "<div class='text-center alert-danger rounded'><p>El formato del campo <b><i>País</i></b> es erroneo<br>Ejemplos válidos: España / Estados Unidos</p></div>";
                     }              
                 }                                     
                 return $check;                

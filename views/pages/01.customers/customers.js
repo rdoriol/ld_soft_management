@@ -130,10 +130,7 @@ $(document).ready(function(){
                             $("#customer_country").val(request[0].country);
                             $("#customer_phone").val(request[0].phone);
                             $("#customer_email").val(request[0].email);
-                            $("#customer_contact_person").val(request[0].contact_person);  
-                            //$("#tokenValue").val(request[0].token);                          
-
-                            // $("#tokenCustomer").val() = "";  // todo -> Se borra el registro aquí o en otra parte????
+                            $("#customer_contact_person").val(request[0].contact_person);      
                         }
             }
         })

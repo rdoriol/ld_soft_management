@@ -14,9 +14,13 @@
             try {
                 if(isset($_POST["customer_submit"])) {     
                     if(!empty($_POST["customer_name"]) && !empty($_POST["customer_nifcif"]) && !empty($_POST["customer_type"])) {  
-                        
-                        $validateExistsFields =  ValidationController::validateExistsFields($table, "name_customer", "nif_cif", $_POST["customer_name"], $_POST["customer_nifcif"]); // Método para comprobar valores coincidentes en base de datos.
-                        $validateFormatFields = ValidationController::validateFieldsFormats($_POST["customer_nifcif"], $_POST["customer_postal_code"], $_POST["customer_phone"], $_POST["customer_email"]); // Método para validar formatos de campos del formulario.
+
+                            // Método para comprobar valores coincidentes en base de datos.
+                        $validateExistsFields =  ValidationController::validateExistsFields($table, "name_customer", "nif_cif", $_POST["customer_name"], $_POST["customer_nifcif"]); 
+                           
+                            // Método para validar formatos de campos del formulario.
+                        $validateFormatFields = ValidationController::validateFieldsFormats($_POST["customer_nifcif"], $_POST["customer_postal_code"], $_POST["customer_phone"], $_POST["customer_email"], $_POST["customer_town"], $_POST["customer_province"], $_POST["customer_country"]); 
+                       
                         if($validateExistsFields == "true" && $validateFormatFields == "true") {                                                                             
                             $token = md5(ucwords($_POST["customer_name"]) . "+" . strtoupper($_POST["customer_nifcif"])); // Se genera token para seguridad informática.
                             
