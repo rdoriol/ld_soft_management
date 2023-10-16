@@ -158,9 +158,12 @@
       <button type="button" role="link" class="btn btn-secondary mr-5" name="exit_customer" onClick="window.location='index.php?pages=01-newCustomer'"><i class="fa-sharp fa-solid fa-rectangle-xmark"></i>&nbsp Cerrar registro</button>
       <button type="submit" class="btn btn-danger" name="delete_customer"><i class="fa-sharp fa-solid fa-trash-can"></i>&nbsp Eliminar registro</button> 
     </div>
-
-    <div><p class="alert alert-success text-center hide_alert" id="alert_success">Operación realizada con éxito</p></div> <!-- Mensaje oculto por defecto con css -->
-
+                    <!-- Mensajes ocultos de validaciones y realización de operaciones -->
+    <div><p class="alert alert-success text-center hide_alert" id="alert_success">Operación realizada con éxito</p></div>
+                    <!-- -------------------------------------------------------------  -->
+    <div class='text-center alert-danger rounded name_field_duplicate'><p>El <i><b>Nombre/Razón Social</b></i> introducido ya existe en la base de datos.</p></div>
+    <div class='text-center alert-danger rounded nif_field_duplicate'><p>El <i><b>NIF</b></i> introducido ya existe en la base de datos.</p></div>
+    
     <div class="modal fade" id="success_modal" role="dialog">  <!-- MODAL DE CONFIRMACIÓN DE OPERACIÓN bootstrap 4  -->
       <div class="modal-dialog">
           <div class="modal-content">

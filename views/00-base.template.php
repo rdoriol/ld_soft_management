@@ -124,5 +124,6 @@
 
     <script src="./js/mainNavBar.js"></script>
     <script src="./views/pages/01.customers/customers.js"></script>
+    <script src="./views/pages/01.customers/customers_validations.js"></script>
   </body>
 </html>

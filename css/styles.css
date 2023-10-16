@@ -327,6 +327,14 @@ footer h3 {
     font-size: 14px;
 }
 
+.name_field_duplicate {
+    display: none;
+}
+
+.nif_field_duplicate {
+    display: none;
+}
+
 
 
 

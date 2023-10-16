@@ -149,7 +149,7 @@
         }
     
         /**
-         * Método para validar por completo campos del formulario (formatos válidos, coindicencias de registros en base de datos, etc...)
+         * Método para validar todos los campos coincidentes con campos en la base de datos
          * @param strings $table, $nif, $customerNameValue, $customerNifValue
          * @return string $check
          */
