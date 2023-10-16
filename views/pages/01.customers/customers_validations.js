@@ -31,7 +31,7 @@ $(document).ready(function(){
                 success: function(request) { 
                                     
                             if(request) {
-                                lanzarMensaje(selector, request); // se lanza función para mostrar mensajes de errores de cada campo.
+                                sentMessages(selector, request); // se lanza función para mostrar mensajes de errores de cada campo.
                             }
                 }
             })    
@@ -42,7 +42,53 @@ $(document).ready(function(){
     checkFields("#customer_name", "name_customer_form");
     checkFields("#customer_nifcif", "name_nif_form");
 
-    
+      /**
+         * Método para validar formatos de NIF
+         * @param string nif
+         * @return string check
+         */
+      function checkNif(nif) {
+        var patternDni = /^[0-9]{8}[A-Za-z]{1}$/;        
+        var patternCif = /^[A-Za-z]{1}[0-9]{8}$/;
+        var patternNifM = /^[Mm]{1}[0-9]{7}[A-Za-z]{1}$/;
+        var patternNie = /^[XYZzyz]{1}[0-9]{7}[A-Za-z]{1}$/;
+        var ckeck = "false";
+            
+        if(!patternDni.test(nif) && !patternCif.test(nif) && !patternNifM.test(nif) && !patternNie.test(nif)) {
+            ckeck = "true";    
+            console.log("pepote");       
+        }
+        return ckeck;
+        }
+
+           /**
+         * Método para comprobar formato campo "Código Postal"
+         * @param string postalCode
+         * @return string check
+         */
+           function checkPostalCode(postalCode) {
+            var check = "false";
+            
+                if(postalCode.NaN || postalCode.length > 5) {
+                    check = "true";
+                
+                return check;
+                }
+            } // todo -> seguir validaciones por aquí
+
+        /*$("#customer_nifcif").change(function(){
+            var resultado = checkNif($(this).val()); 
+            var selector = $(this);     
+                                                         console.log("resultado función: " + resultado);    
+            if(resultado == "true") {
+                checkKo("#customer_nifcif");
+                $(".error_format_nif").css("display", "block");                  
+            }
+            else {
+                checkOk($(this)); 
+                $(".error_format_nif").css("display", "none");  
+            }
+        })  
      
 
         /* BLOQUE PARA MOSTRAR MENSAJES DE ERROR MODIFICANDO DOM HTML Y CSS
@@ -62,17 +108,28 @@ $(document).ready(function(){
     function checkOk(selector) {
         $(selector).removeClass("alert-danger");
         $(selector).addClass("alert-success");
-        $(selector).css("border", "2px solid green");
-        //$(selector).css("display", "block");
+        $(selector).css("border", "2px solid green");         
+    }
+
+     /**
+     * Función para modificar estilos-DOM del documento HTML. Estilos para limpiar mensajes previos.
+     */
+    function cleanCheck(selector) {
+        $(selector).removeClass("alert-success");
+        $(selector).removeClass("alert-danger");
+        $(selector).css("border", "none");
     }
 
     /**
-    * Función para mostrar mensajes de alerta en función del campo erroneo
+    * Función para mostrar mensajes personalizados de alerta en función del campo erroneo
     * @param string selector, request
     */
-    function lanzarMensaje(selector, request, ) {
-                                                               
+    function sentMessages(selector, request) {
+        cleanCheck(selector); // se limpian los mensajes de errores previos.
+
+            //Bloque para validar y lanzar mensajes de errores para campo nombre
         if(selector == "#customer_name") {
+           
             if(request == "true") {
                 checkKo(selector);
                 $(".name_field_duplicate").css("display", "block");
@@ -82,14 +139,28 @@ $(document).ready(function(){
                 $(".name_field_duplicate").css("display", "none");
             }
         }
+            // Bloque para validar campo nif (formato y duplicidad en base de datos)
         else if(selector == "#customer_nifcif") {
-            if(request == "true") {
+
+            cleanCheck(selector); // se limpian los mensajes de error previos.
+            var checkFormatNif = checkNif($("#customer_nifcif").val()); // se lanza función para comprobar formato de NIF
+            
+            if(checkFormatNif == "true") {  // Si el formato es incorrecto
                 checkKo(selector);
-                $(".nif_field_duplicate").css("display", "block");
+                $(".error_format_nif").css("display", "block"); 
             }
-            else {
-                checkOk(selector);
-                $(".nif_field_duplicate").css("display", "none");
+            else {  // Si el formato es correcto
+                checkOk(selector); 
+                $(".error_format_nif").css("display", "none");
+
+                if(request == "true") { // Si el formato es correcto a continuación se comprueba que no exista nif duplicado
+                    checkKo(selector);
+                    $(".nif_field_duplicate").css("display", "block");
+                }
+                else {
+                    checkOk(selector);
+                    $(".nif_field_duplicate").css("display", "none");
+                }
             }
         }
     } 

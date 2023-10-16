@@ -327,11 +327,16 @@ footer h3 {
     font-size: 14px;
 }
 
+    /* Mensajes de error ocultos de campos formularios */
 .name_field_duplicate {
     display: none;
 }
 
 .nif_field_duplicate {
+    display: none;
+}
+
+.error_format_nif {
     display: none;
 }
 
