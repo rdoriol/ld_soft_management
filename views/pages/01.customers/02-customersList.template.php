@@ -23,7 +23,7 @@
                 foreach($dataCustomers as $item): 
             ?>
             <tr>
-                <td> <?php echo $item->id_customer; ?> </td>
+                <td> <?php echo $item->id; ?> </td>
                 <td> <?php echo $item->nif_cif; ?> </td>
                 <td> <?php echo $item->name_customer; ?> </td>
                 <td> <?php echo $item->phone; ?> </td>

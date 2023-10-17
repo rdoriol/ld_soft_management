@@ -1,18 +1,16 @@
 <?php
-  $customerData = array();
-  $particularCustomer; 
-  $privateCustomer;
-  
+  $supplierData = array();
+    
       // Condición para controlar si se muestran datos en el formulario o se muestra en blanco
     if(isset($_GET["token"]) && !empty($_GET["token"])) {                                      
-      $customerData = CustomerController::ctrToList("customers", "token", $_GET["token"]);
+      $supplierData = CustomerController::ctrToList("suppliers", "token", $_GET["token"]);
     }
 
      // script javascript para lanzar ventana modal confirmando actualizaciones o eliminaciones.
     echo "<script>
     if(window.sessionStorage.getItem('modalAlert') == 'true') {
       $(function(){ 
-        $('#success_modal').modal('show');
+        $('#supplier_success_modal').modal('show');
       });
       window.sessionStorage.setItem('modalAlert', 'false');
     }
@@ -27,7 +25,7 @@
   <h4 class="forms_subtitle rounded">Altas | Modificar | Eliminar</h4>
     
          
-  <ul class="d-flex justify-content-first">
+  <ul class="d-flex justify-content-first"> 
     <li><button type="button" class="search_bar m-1 alert-info rounded" id="search_supplier" onClick=""><i class="fa-solid fa-magnifying-glass"></i>&nbsp Buscar Proveedor</button></li>
     <li><button type="button" class="print_bar m-1 alert-info rounded" id="print_supplier"><i class="fa-solid fa-print"></i>&nbspImprimir</button></li>
   </ul>
@@ -38,7 +36,7 @@
         <label class="forms_label" for="supplier_id">Id Proveedor</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-list-ol forms_icons"></i>
-          <input type="text" class="forms_inputs" id="supplier_id" name="supplier_id" placeholder="" disabled value="<?php echo $customerData[0]->id_customer ?>" />
+          <input type="text" class="forms_inputs" id="supplier_id" name="supplier_id" placeholder="" disabled value="<?php echo $supplierData[0]->id ?>" />
         </div>      
     </div>
 
@@ -47,7 +45,7 @@
         <label class="forms_label" for="supplier_created_date">Fecha registro</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-calendar-days forms_icons"></i>
-          <input type="text" class="forms_inputs" id="supplier_created_date" name="supplier_created_date" placeholder="" disabled value="<?php echo $customerData[0]->created_date ?>" />
+          <input type="text" class="forms_inputs" id="supplier_created_date" name="supplier_created_date" placeholder="" disabled value="<?php echo $supplierData[0]->created_date ?>" />
         </div>      
     </div>
   </fieldset>
@@ -59,7 +57,7 @@
         <label class="forms_label" for="supplier_name">Nombre Proveedor</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-user forms_icons"></i>
-          <input type="text" class="forms_inputs" id="supplier_name" name="supplier_name" placeholder="Empresa, S.L." value="<?php echo $customerData[0]->name_customer ?>" />
+          <input type="text" class="forms_inputs" id="supplier_name" name="supplier_name" placeholder="Empresa, S.L." value="<?php echo $supplierData[0]->name_supplier ?>" />
         </div>      
       </div>
 
@@ -67,7 +65,7 @@
         <label class="forms_label" for="supplier_nif">NIF</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-address-card forms_icons"></i>
-          <input type="text" class="forms_inputs" id="supplier_nif" name="supplier_nif" placeholder="00000000L / B00000000" value="<?php echo $customerData[0]->nif_cif ?>"/>
+          <input type="text" class="forms_inputs" id="supplier_nif" name="supplier_nif" placeholder="00000000L / B00000000" value="<?php echo $supplierData[0]->nif ?>"/>
         </div>      
       </div>
 
@@ -75,7 +73,7 @@
         <label class="forms_label" for="supplier_address">Dirección</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-house forms_icons"></i>
-          <input type="text" class="forms_inputs" id="supplier_address" name="supplier_address" placeholder="C/ / Avda. / Plaza" value="<?php echo $customerData[0]->address_customer ?>"/>
+          <input type="text" class="forms_inputs" id="supplier_address" name="supplier_address" placeholder="C/ / Avda. / Plaza" value="<?php echo $supplierData[0]->address ?>"/>
         </div>      
       </div>
 
@@ -83,7 +81,7 @@
         <label class="forms_label" for="supplier_postal_code">Código Postal</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-envelopes-bulk forms_icons"></i>
-          <input type="text" class="forms_inputs" id="supplier_postal_code" name="supplier_postal_code" placeholder="Ej: 41003" value="<?php echo $customerData[0]->postal_code ?>"/>
+          <input type="text" class="forms_inputs" id="supplier_postal_code" name="supplier_postal_code" placeholder="Ej: 41003" value="<?php echo $supplierData[0]->postal_code ?>"/>
         </div>      
       </div>
 
@@ -91,7 +89,7 @@
         <label class="forms_label" for="supplier_town">Ciudad</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-tree-city forms_icons"></i>
-          <input type="text" class="forms_inputs" id="supplier_town" name="supplier_town" placeholder="Ej: Villaluenga del Rosario" value="<?php echo $customerData[0]->town ?>">
+          <input type="text" class="forms_inputs" id="supplier_town" name="supplier_town" placeholder="Ej: Villaluenga del Rosario" value="<?php echo $supplierData[0]->town ?>">
         </div>      
       </div>
 
@@ -99,7 +97,7 @@
         <label class="forms_label" for="supplier_province">Provincia</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-city forms_icons"></i>
-          <input type="text" class="forms_inputs" id="supplier_province" name="supplier_province" placeholder="Ej: Cádiz" value="<?php echo $customerData[0]->province ?>"/>
+          <input type="text" class="forms_inputs" id="supplier_province" name="supplier_province" placeholder="Ej: Cádiz" value="<?php echo $supplierData[0]->province ?>"/>
         </div>      
       </div>
 
@@ -107,7 +105,7 @@
         <label class="forms_label" for="supplier_country">País</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-earth-americas forms_icons"></i>
-          <input type="text" class="forms_inputs" id="supplier_country" name="supplier_country" placeholder="Ej: España" value="<?php echo $customerData[0]->country ?>"/>
+          <input type="text" class="forms_inputs" id="supplier_country" name="supplier_country" placeholder="Ej: España" value="<?php echo $supplierData[0]->country ?>"/>
         </div>      
       </div>
 
@@ -115,7 +113,7 @@
         <label class="forms_label" for="supplier_phone">Teléfono</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-phone forms_icons"></i>
-          <input type="text" class="forms_inputs" id="supplier_phone" name="supplier_phone" placeholder="Ej: 666999666 / +34 666333555" value="<?php echo $customerData[0]->phone ?>"/>
+          <input type="text" class="forms_inputs" id="supplier_phone" name="supplier_phone" placeholder="Ej: 666999666 / +34 666333555" value="<?php echo $supplierData[0]->phone ?>"/>
         </div>      
       </div>
 
@@ -123,7 +121,7 @@
         <label class="forms_label" for="supplier_email">Correo electrónico</label>
         <div class="forms_inputs_fields">
           <i class="fa-sharp fa-solid fa-envelope forms_icons"></i>
-          <input type="text" class="forms_inputs" id="supplier_email" name="supplier_email" placeholder="proveedor@ejemplo.com" value="<?php echo $customerData[0]->email ?>"/>
+          <input type="text" class="forms_inputs" id="supplier_email" name="supplier_email" placeholder="proveedor@ejemplo.com" value="<?php echo $supplierData[0]->email ?>"/>
         </div>      
       </div>
 
@@ -131,7 +129,7 @@
         <label class="forms_label" for="supplier_web">Web corporativa</label>
         <div class="forms_inputs_fields">
           <i class="fa-sharp fa-solid fa-globe forms_icons"></i>
-          <input type="text" class="forms_inputs" id="supplier_web" name="supplier_web" placeholder="https://www.proveedor.com" value="<?php echo $customerData[0]->email ?>"/>
+          <input type="text" class="forms_inputs" id="supplier_web" name="supplier_web" placeholder="https://www.proveedor.com" value="<?php echo $supplierData[0]->web ?>"/>
         </div>      
       </div>
 
@@ -139,7 +137,7 @@
         <label class="forms_label" for="supplier_contact_person">Persona de contacto</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-users forms_icons"></i>
-          <input type="text" class="forms_inputs" id="supplier_contact_person" name="supplier_contact_person" placeholder="Apellidos, Nombre" value="<?php echo $customerData[0]->contact_person ?>"/>
+          <input type="text" class="forms_inputs" id="supplier_contact_person" name="supplier_contact_person" placeholder="Apellidos, Nombre" value="<?php echo $supplierData[0]->contact_person ?>"/>
         </div>      
       </div>
     </div>
@@ -180,18 +178,18 @@
         /* Bloque condicional para grabar datos de un cliente nuevo, actualizar o eliminar datos de un registro existente
         -----------------------------------------------------------------------------------------------------------------*/
       if(isset($_GET["token"]) && !empty($_GET["token"])) {                        
-         
-        $updateRegister = CustomerController::ctrUpdateRegister("customers", "token", $_GET["token"]);    // se lanza método para actualizar datos de clientes.
-
-        $deleteRegister = new CustomerController(); 
-        $checkDeleteRegister = $deleteRegister->ctrDeleteRegister("customers", "token", $_GET["token"]);   // se lanza método para eliminar registro concreto.
+                     
+        $updateSupplier = SupplierController::ctrUpdateSupplier("suppliers", "token", $_GET["token"]);    // se lanza método para actualizar datos de clientes.
+      
+        $deleteSupplier = new SupplierController(); 
+        $checkDeleteSupplier = $deleteSupplier->ctrDeleteSupplier("suppliers", "token", $_GET["token"]);   // se lanza método para eliminar registro concreto.
       }
       else if(isset($_POST["tokenSupplier"]) && !empty($_POST["tokenSupplier"])) {   
       
-        $updateRegister = CustomerController::ctrUpdateRegister("customers", "token", $_POST["tokenCustomer"]);    // se lanza método para actualizar datos de clientes.
+        $updateSupplier = SupplierController::ctrUpdateSupplier("suppliers", "token", $_POST["tokenSupplier"]);    // se lanza método para actualizar datos de proveedores.
 
-        $deleteRegister = new CustomerController(); 
-        $checkDeleteRegister = $deleteRegister->ctrDeleteRegister("customers", "token", $_POST["tokenCustomer"]);   // se lanza método para eliminar registro concreto.
+        $deleteSupplier = new SupplierController(); 
+        $checkDeleteSupplier = $deleteSupplier->ctrDeleteSupplier("suppliers", "token", $_POST["tokenSupplier"]);   // se lanza método para eliminar registro concreto.
       }
       else {     
         $createSupplier = SupplierController::ctrCreateSupplier("suppliers"); // se lanza método para grabar datos de proveedor.
@@ -199,9 +197,9 @@
        
         /* Bloque condicional para lanzar ventana modal en función del éxito de la operación realizada
         ---------------------------------------------------------------------------------------------*/
-      if($updateRegister == "true") { 
+      if($updateSupplier == "true") { 
 
-        $newToken = md5(ucwords($_POST["customer_name"] . "+" . strtoupper($_POST["customer_nifcif"])));   // Se genera nuevo token para poder recargar página con datos actualizados.        
+        $newToken = md5(ucwords($_POST["supplier_name"] . "+" . strtoupper($_POST["supplier_nif"])));   // Se genera nuevo token para poder recargar página con datos actualizados.        
 
           // 1º se guarda estado de la actualización/borrado en variable de sesión para a continuación poder lanzar ventana modal al recargar página.
           // 2º se refresca página con datos del registro actualizados. 
@@ -210,7 +208,7 @@
                 window.location.replace('index.php?pages=01-newSupplier&token=$newToken');
               </script>";   
       }
-      else if($checkDeleteRegister == "true") {
+      else if($checkDeleteSupplier == "true") {
             echo "<script>
                     window.sessionStorage.setItem('modalAlert', 'true'); 
                     window.location.replace('index.php?pages=01-newSupplier');
@@ -221,7 +219,7 @@
     <?php
         /* Bloque condicional para borrar datos almacenados del formulario html una vez enviados.
         ----------------------------------------------------------------------------------------*/
-      if($createSupplier == "true" /*|| $updateRegister == "true" || $checkDeleteRegister == "true"*/) {
+      if($createSupplier == "true" || $updateSupplier == "true" || $checkDeleteRegister == "true") {
         echo "<script>
                 if(window.history.replaceState) {
                   window.history.replaceState(null, null, window.location.href);

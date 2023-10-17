@@ -69,7 +69,7 @@ $(document).ready(function(){
         var check = false;
         cleanCheck("#customer_postal_code");    // se limpian mensajes de errores previos
         
-        if(isNaN(postalCode) || postalCode.length > 5) {
+        if(isNaN(postalCode) || postalCode.length != 5) {
             check = true;        
         }
         return check;

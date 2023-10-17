@@ -22,7 +22,7 @@ footer {
     min-height: auto;
 }
 
-#btn_print {
+#btn_print, #btn_print_supplier {
     display: none;
 }
 
@@ -30,11 +30,7 @@ footer {
     display: block;
 }
 
-#btn_search {
-    display: none;
-}
-
-#customers_lists_table .table_search:hover {
+#customers_lists_table .table_search:hover, #supplier_lists_table .table_search:hover {
     cursor: pointer;  
     background-color: #007BFF;   
     color: #ffffff;

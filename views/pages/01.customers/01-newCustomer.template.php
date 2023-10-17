@@ -40,7 +40,7 @@
         <label class="forms_label" for="customer_id">Id Cliente</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-list-ol forms_icons"></i>
-          <input type="text" class="forms_inputs" id="customer_id" name="customer_id" placeholder="" disabled value="<?php echo $customerData[0]->id_customer ?>" />
+          <input type="text" class="forms_inputs" id="customer_id" name="customer_id" placeholder="" disabled value="<?php echo $customerData[0]->id ?>" />
         </div>      
     </div>
 

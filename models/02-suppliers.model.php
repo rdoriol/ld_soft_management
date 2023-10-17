@@ -50,6 +50,50 @@
             return $check;
         }
 
+        // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+         //todo-> Para LISTAR/LEER registros de la tabla "suppliers" se utiliza método "mdlToList()" implementado en la clase "CustomerModel" ("models/01-customers.model.php") 
+        // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+
+         /**
+         * Método que actualizará los datos de un registro concreto.
+         * @param
+         * @return
+         */
+        static public function mdlUpdateSupplier($table, $key, $value, $data) { 
+            $check = "false";
+            try {
+                $updateString = "token = :newToken, name_supplier = :supplier_name, nif = :supplier_nif, address = :supplier_address, postal_code = :supplier_postal_code, town = :supplier_town, province = :supplier_province, country = :supplier_country, phone = :supplier_phone, email = :supplier_email, web = :supplier_web, contact_person = :supplier_contact_person";
+                $sql = "UPDATE $table SET $updateString WHERE $key LIKE '%$value%'";
+                $stmt = Connection::mdlConnect()->prepare($sql);
+                
+                    // bloque con función bindParam() para vincular variable oculta en prepare statement con el valor recibido del form.
+                $stmt->bindParam(":newToken", $data["newToken"], PDO::PARAM_STR);
+                $stmt->bindParam(":supplier_name", $data["supplier_name"], PDO::PARAM_STR);
+                $stmt->bindParam(":supplier_nif", $data["supplier_nif"], PDO::PARAM_STR);                
+                $stmt->bindParam(":supplier_address", $data["supplier_address"], PDO::PARAM_STR);
+                $stmt->bindParam(":supplier_postal_code", $data["supplier_postal_code"], PDO::PARAM_INT);
+                $stmt->bindParam(":supplier_town", $data["supplier_town"], PDO::PARAM_STR);
+                $stmt->bindParam(":supplier_province", $data["supplier_province"], PDO::PARAM_STR);
+                $stmt->bindParam(":supplier_country", $data["supplier_country"], PDO::PARAM_STR);
+                $stmt->bindParam(":supplier_phone", $data["supplier_phone"], PDO::PARAM_STR);
+                $stmt->bindParam(":supplier_email", $data["supplier_email"], PDO::PARAM_STR);
+                $stmt->bindParam(":supplier_web", $data["supplier_web"], PDO::PARAM_STR);
+                $stmt->bindParam(":supplier_contact_person", $data["supplier_contact_person"], PDO::PARAM_STR);
+
+                if($stmt->execute()) {
+                $check = "true";
+                }
+                return $check;
+            }
+            catch(PDOException $ex) {
+                echo "<div class='text-center alert-danger rounded'><p>El <b><i>NIF</i></b> (" . $data['supplier_nif'] . ") introducido ya existe en la base de datos.<br><br><b>No permitido:</b> " . $ex->getMessage() . "</p></div>";
+                return null;
+            }
+        }
+
+        // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+         //todo-> Para ELIMINAR registros de la tabla "suppliers" se utiliza método "mdlDeleteRegister()" implementado en la clase "CustomerModel" ("models/01-customers.model.php") 
+        // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     }

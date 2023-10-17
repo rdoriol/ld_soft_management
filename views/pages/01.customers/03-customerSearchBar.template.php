@@ -5,7 +5,7 @@
             <select class="" id="" name="select_item">
                 <option vaule="" selected disabled="true">Filtrar búsqueda</option>
                 <option value="full_list">Listado completo</option>
-                <option value="id_customer">Id</option>
+                <option value="id">Id</option>
                 <option value="name_customer">Nombre</option>
                 <option value="nif_cif">NIF</option>
                 <option value="customer_type">Particular / Empresa</option>
@@ -18,8 +18,8 @@
                 <option value="email">Correo electrónico</option>
              </select>
             <input type="text" class="" id="" name="search_key" placeholder="búsqueda">
-            <button type="submit" class="btn btn-primary" id="btn_search" name="search"><i class="fa-solid fa-magnifying-glass"></i>&nbsp Buscar</a></button>
-            <button type="submit" class="btn btn-primary" id="btn_search2" name="search"><i class="fa-solid fa-magnifying-glass"></i></a></button>
+            <button type="submit" class="btn btn-primary" id="btn_search" name="search"><i class="fa-solid fa-magnifying-glass"></i></button>
+           
         </form>
     </li>
     <li><button class="print_bar m-1 alert-info rounded" id="btn_print"><i class="fa-solid fa-print"></i>&nbspImprimir</button></li>

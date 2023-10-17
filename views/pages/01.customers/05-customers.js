@@ -32,8 +32,8 @@ $(document).ready(function(){
        
         var dataForm = new FormData();
         //                name      value   // Se generan datos de form para enviarlos en formato PHP ($_POST[])
-        dataForm.append("token", tokenValue);
-                                                                console.log(tokenValue);
+        dataForm.append("tokenCustomer", tokenValue);
+                                                               console.log(tokenValue);
         
         $.ajax({
             url: "./ajax/ajax_search_subwindow.php",

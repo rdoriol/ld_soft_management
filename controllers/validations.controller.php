@@ -53,7 +53,7 @@
         static public function checkPostalCode($postalCode) {
             $check = "false";
             try {
-                if(!is_numeric($postalCode) || strlen($postalCode) > 5) {
+                if(!is_numeric($postalCode) || strlen($postalCode) != 5) {
                     $check = "true";
                 }
                 return $check;
@@ -71,7 +71,7 @@
         static public function checkPhone($phone) {
             $check = "false";
             try {
-                if(strlen($postalCode) > 13) {
+                if(strlen($phone) > 13 || strlen($phone) < 9) {
                     $check = "true";
                 }
                 return $check;
@@ -179,7 +179,7 @@
         }
 
         /**
-         * Método para validar formatos de los campos del formulario
+         * Método para iniciar la validación de los formatos de todos los campos del formulario
          * @param strings $nifValue, $postalCodeValue, $phoneValue, $emailValue
          * @return string $check
          */
@@ -204,10 +204,7 @@
                     }                    
                     if($formatPostalCode == "true") {
                         echo "<div class='text-center alert-danger rounded'><p>El formato del campo <b><i>Código Postal</i></b> es erroneo<br>Ejemplo válido: 28005</p></div>";
-                    }    
-                    if($formatEmail == "true") {
-                        echo "<div class='text-center alert-danger rounded'><p>El formato del campo <b><i>Correo Electrónico</i></b> es erroneo<br>Ejemplo válido: usuario@ejemplo.com</p></div>";
-                    }  
+                    }   
                     if($formatPhone == "true") {
                         echo "<div class='text-center alert-danger rounded'><p>El formato del campo <b><i>Teléfono</i></b> es erroneo<br>Ejemplos válidos: +34666999666 / +34 666999666 / 666999666</p></div>";
                     }  
@@ -219,7 +216,10 @@
                     }  
                     if($formatCountry == "true") {
                         echo "<div class='text-center alert-danger rounded'><p>El formato del campo <b><i>País</i></b> es erroneo<br>Ejemplos válidos: España / Estados Unidos</p></div>";
-                    }              
+                    }   
+                    if($formatEmail == "true") {
+                        echo "<div class='text-center alert-danger rounded'><p>El formato del campo <b><i>Correo Electrónico</i></b> es erroneo<br>Ejemplo válido: usuario@ejemplo.com</p></div>";
+                    }             
                 }                                     
                 return $check;                
             }

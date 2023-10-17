@@ -59,7 +59,7 @@
          * @param $table string, $key string, $value(string, int)
          * @return $data array de objetos con datos de la base de datos. 
          */
-        static public function ctrToList($table, $key, $value=null) {  // todo MÉTODO UNIVERSAL
+        static public function ctrToList($table, $key, $value=null) {  // todo MÉTODO UNIVERSAL PARA TODA LA APLICACIÓN
             try {                
                 if(isset($_POST["search"]) && $key == "full_list") {                      
                     $data = CustomerModel::mdlToList($table);

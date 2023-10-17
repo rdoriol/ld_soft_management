@@ -7,11 +7,11 @@
 
         <!-- SEARCH BAR
             ---------------------->
-        <?php include "03-customerSearchBar.template.php"; ?>
+        <?php include "03-supplierSearchBar.template.php"; ?>
 
         <!-- end search bar -------->
 
-<table class="general_tables table table-striped text-center" id="customers_lists_table">
+<table class="general_tables table table-striped text-center" id="supplier_lists_table">
     <thead>
         <tr>
             <th>Id</th><th>NIF</th><th>Nombre</th>
@@ -22,13 +22,13 @@
                 $key = $_POST["select_item"];
                 $value = $_POST["search_key"];                
                 
-                $dataCustomers = CustomerController::ctrToList("customers", $key, $value);       
+                $dataCustomers = CustomerController::ctrToList("suppliers", $key, $value);       
                 foreach($dataCustomers as $item):                        
             ?>
-            <tr class="table_search" title="Seleccionar" onClick="getSubwindowValues(<?php echo '\''. $item->token .'\''; ?>);">
+            <tr class="table_search" title="Seleccionar" onClick="getSubwindowSupplier(<?php echo '\''. $item->token .'\''; ?>);">
                 <td> <?php echo $item->id;?> </td>           
-                <td> <?php echo $item->nif_cif; ?> </td>
-                <td> <?php echo $item->name_customer; ?> </td>                 
+                <td> <?php echo $item->nif; ?> </td>
+                <td> <?php echo $item->name_supplier; ?> </td>                 
             </tr>                                                               
             <?php endforeach ?>   
         <tbody>

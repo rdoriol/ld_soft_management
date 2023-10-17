@@ -67,7 +67,7 @@
               {
                 include "pages/01.customers/" . $page . ".template.php";     
               }
-              else if($page == "01-newSupplier" || $page == "02-suppliersList")
+              else if($page == "01-newSupplier" || $page == "02-suppliersList" || $page == "04-supplierPopUpSearch")
               {
                 include "pages/02.suppliers/" . $page . ".template.php";
               }
