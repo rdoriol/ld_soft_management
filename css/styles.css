@@ -327,7 +327,9 @@ footer h3 {
     font-size: 14px;
 }
 
-    /* Mensajes de error ocultos de campos formularios */
+    /* Hidde error messages - Forms fields 
+    --------------------------------------------------*/
+
 .name_field_duplicate {
     display: none;
 }
@@ -340,6 +342,9 @@ footer h3 {
     display: none;
 }
 
+.error_format_postal_code {
+    display: none;
+}
 
 
 

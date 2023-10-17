@@ -31,7 +31,7 @@
          
   <ul class="d-flex justify-content-first">
     <li><button type="button" class="search_bar m-1 alert-info rounded" id="search_customer" onClick=""><i class="fa-solid fa-magnifying-glass"></i>&nbsp Buscar Cliente</button></li>
-    <li><button class="print_bar m-1 alert-info rounded"><i class="fa-solid fa-print"></i>&nbspImprimir</button></li>
+    <li><button type="button" class="print_bar m-1 alert-info rounded" id="print"><i class="fa-solid fa-print"></i>&nbspImprimir</button></li>
   </ul>
                                                    
   <fieldset class="d-flex justify-content-around"> <!-- CAMBIAR A ESTILO PROPIO CON CSS flex personalizado, no esta porquería -->
@@ -165,6 +165,7 @@
     <div class='text-center alert-danger rounded name_field_duplicate'><p>El <i><b>Nombre/Razón Social</b></i> introducido ya existe en la base de datos.</p></div>
     <div class='text-center alert-danger rounded nif_field_duplicate'><p>El <i><b>NIF</b></i> introducido ya existe en la base de datos.</p></div>
     <div class='text-center alert-danger rounded error_format_nif'><p>El formato del campo <b><i>NIF</i></b> es erroneo<br>Ejemplos válidos: Dni 12345678X / Cif B12345678 / NIE X1234567S</p></div>
+    <div class='text-center alert-danger rounded error_format_postal_code'><p>El formato del campo <b><i>Código Postal</i></b> es erroneo<br>Ejemplos válidos: 28081 / 41003</p></div>
                      <!-- -------------------------------------------------------------  -->
                      
     <div class="modal fade" id="success_modal" role="dialog">  <!-- MODAL DE CONFIRMACIÓN DE OPERACIÓN bootstrap 4  -->

@@ -42,53 +42,55 @@ $(document).ready(function(){
     checkFields("#customer_name", "name_customer_form");
     checkFields("#customer_nifcif", "name_nif_form");
 
-      /**
-         * Método para validar formatos de NIF
-         * @param string nif
-         * @return string check
-         */
-      function checkNif(nif) {
+    /**
+     * Método para validar formatos de NIF
+     * @param string nif
+     * @return string check
+     */
+    function checkNif(nif) {
         var patternDni = /^[0-9]{8}[A-Za-z]{1}$/;        
         var patternCif = /^[A-Za-z]{1}[0-9]{8}$/;
         var patternNifM = /^[Mm]{1}[0-9]{7}[A-Za-z]{1}$/;
         var patternNie = /^[XYZzyz]{1}[0-9]{7}[A-Za-z]{1}$/;
-        var ckeck = "false";
-            
+        var ckeck = false;
+
         if(!patternDni.test(nif) && !patternCif.test(nif) && !patternNifM.test(nif) && !patternNie.test(nif)) {
-            ckeck = "true";    
-            console.log("pepote");       
+            ckeck = true;                    
         }
         return ckeck;
+    }
+
+    /**
+     * Método para comprobar formato campo "Código Postal"
+     * @param string postalCode
+     * @return string check
+     */
+    function checkPostalCode(postalCode) {
+        var check = false;
+        cleanCheck("#customer_postal_code");    // se limpian mensajes de errores previos
+        
+        if(isNaN(postalCode) || postalCode.length > 5) {
+            check = true;        
         }
+        return check;
+    } 
+    /**
+     * Se lanza función checkPostalCode() al detectar algún cambio en el campo "Código Postal"
+     */
+    $("#customer_postal_code").change(function(){
+        var formatPostalCode = checkPostalCode($(this).val());
+        if(formatPostalCode == true) {
+            checkKo($(this));
+            $(".error_format_postal_code").css("display", "block");
+        }
+        else {
+            checkOk($(this));
+            $(".error_format_postal_code").css("display", "none");
+        }
+    })
 
-           /**
-         * Método para comprobar formato campo "Código Postal"
-         * @param string postalCode
-         * @return string check
-         */
-           function checkPostalCode(postalCode) {
-            var check = "false";
-            
-                if(postalCode.NaN || postalCode.length > 5) {
-                    check = "true";
-                
-                return check;
-                }
-            } // todo -> seguir validaciones por aquí
 
-        /*$("#customer_nifcif").change(function(){
-            var resultado = checkNif($(this).val()); 
-            var selector = $(this);     
-                                                         console.log("resultado función: " + resultado);    
-            if(resultado == "true") {
-                checkKo("#customer_nifcif");
-                $(".error_format_nif").css("display", "block");                  
-            }
-            else {
-                checkOk($(this)); 
-                $(".error_format_nif").css("display", "none");  
-            }
-        })  
+   
      
 
         /* BLOQUE PARA MOSTRAR MENSAJES DE ERROR MODIFICANDO DOM HTML Y CSS
@@ -145,7 +147,7 @@ $(document).ready(function(){
             cleanCheck(selector); // se limpian los mensajes de error previos.
             var checkFormatNif = checkNif($("#customer_nifcif").val()); // se lanza función para comprobar formato de NIF
             
-            if(checkFormatNif == "true") {  // Si el formato es incorrecto
+            if(checkFormatNif == true) {  // Si el formato es incorrecto
                 checkKo(selector);
                 $(".error_format_nif").css("display", "block"); 
             }

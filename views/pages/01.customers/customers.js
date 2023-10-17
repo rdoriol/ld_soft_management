@@ -1,5 +1,6 @@
     /* BLOQUE SUBVENTANA BUSCADOR DE REGISTROS
     -----------------------------------------*/
+    
 var ventana; // variable que almacenará subventana abierta
 
 $(document).ready(function(){
