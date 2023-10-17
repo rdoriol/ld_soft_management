@@ -7,7 +7,7 @@
 
         <!-- SEARCH BAR
             ---------------------->
-        <?php include "views/05-searchBar.template.php"; ?>
+        <?php include "03-customerSearchBar.template.php"; ?>
 
         <!-- end search bar -------->
 
@@ -26,12 +26,9 @@
                 foreach($dataCustomers as $item):                        
             ?>
             <tr class="table_search" title="Seleccionar" onClick="getSubwindowValues(<?php echo '\''. $item->token .'\''; ?>);">
-            <!-- <tr class="table_search" title="Seleccionar"> -->
                 <td> <?php echo $item->id_customer;?> </td>           
                 <td> <?php echo $item->nif_cif; ?> </td>
-                <td> <?php echo $item->name_customer; ?> </td> 
-                <!-- <td><input type="text" disabled id="token" value="<?php // echo $item->token; ?>"/></td>   -->
-                <!-- <td class="tokenValueSearch" value=""> <?php //echo $item->token; ?></td> -->
+                <td> <?php echo $item->name_customer; ?> </td>                 
             </tr>                                                               
             <?php endforeach ?>   
         <tbody>

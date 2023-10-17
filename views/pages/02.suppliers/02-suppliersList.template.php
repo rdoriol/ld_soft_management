@@ -1,10 +1,11 @@
-<h2 class="li_active_page rounded">Listado Clientes</h2>
+<h2 class="li_active_page rounded">Listados Proveedores</h2>
 
 <h4 class="forms_subtitle rounded">Buscar Registros</h4>
 
         <!-- SEARCH BAR
             ---------------------->
-        <?php include "03-customerSearchBar.template.php"; ?>
+
+        <?php  include "03-searchBar.template.php"; ?>
 
         <!-- end search bar -------->
 

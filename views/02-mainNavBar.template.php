@@ -16,9 +16,8 @@
           <li class="li_item" id="">
             <button class="link_button" id="suppliers_button" title="Abrir opciones proveedores"><i class="fa-solid fa-caret-right"></i>&nbsp Proveedores</button>
             <ul class="submenu" id="suppliers_submenu">
-              <li class="link_subButton" id="newSupplierId"><a class="" href="index.php?pages=01-newSupplier">Alta proveedor</a></li>
-              <li class="link_subButton" id="supplierFileId"><a class="" href="index.php?pages=02-supplierFile">Ficha proveedor</a></li>
-              <li class="link_subButton" id="suppliersListId"><a class="" href="index.php?pages=04-suppliersList">Listado proveed</a></li>
+              <li class="link_subButton" id="newSupplierId"><a class="" href="index.php?pages=01-newSupplier">Alta proveedor</a></li>              
+              <li class="link_subButton" id="suppliersListId"><a class="" href="index.php?pages=02-suppliersList">Listado proveed</a></li>
             </ul>
           </li>
 

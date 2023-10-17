@@ -58,16 +58,16 @@
               /**
                * Controlador frontal/lista blanca de todas las páginas (seguridad informática) de la aplicación web que se renderizarán por pantalla. (se alimenta de "02-mainNavBar.template.php").
                */
-            if(isset($_GET["pages"]) || isset($_GET["emergent"])) 
+            if(isset($_GET["pages"]) /*|| isset($_GET["emergent"])*/) 
             {
               $page = $_GET["pages"]; // variable que almacena el valor de la variable GET
-              $emergent = $_GET["emergent"]; // variable que almacena el valor de la variable GET
+              //$emergent = $_GET["emergent"]; // variable que almacena el valor de la variable GET
 
-              if($page == "01-newCustomer" || $page == "02-customersList") 
+              if($page == "01-newCustomer" || $page == "02-customersList" || $page == "04-customerPopUpSearch") 
               {
                 include "pages/01.customers/" . $page . ".template.php";     
               }
-              else if($page == "01-newSupplier" || $page == "02-supplierFile" || $page == "04-suppliersList")
+              else if($page == "01-newSupplier" || $page == "02-suppliersList")
               {
                 include "pages/02.suppliers/" . $page . ".template.php";
               }
@@ -95,10 +95,10 @@
               {
                 include "pages/08.salesSetting/" . $page . ".template.php";
               }
-              else if($emergent == "06-popUpsearch")
+              /*else if($emergent == "06-popUpsearch")
               {
                 include $emergent . ".template.php";
-              }
+              }*/
               else
               {
                 include "04-error404.template.php";
@@ -123,8 +123,14 @@
             <!-- end footer -------------->
 
     <script src="./js/mainNavBar.js"></script>
-    <script src="./views/pages/01.customers/customers.js"></script>
-    <script src="./views/pages/01.customers/customers_validations.js"></script>
-    <script src="./views/pages/01.customers/print.js"></script>
+
+    <script src="./views/pages/01.customers/05-customers.js"></script>
+    <script src="./views/pages/01.customers/06-customers_validations.js"></script>
+    <script src="./views/pages/01.customers/07-print.js"></script>
+
+    <script src="./views/pages/02.suppliers/05-suppliers.js"></script>
+    <script src="./views/pages/02.suppliers/06-suppliers_validations.js"></script>
+    <script src="./views/pages/02.suppliers/07-print.js"></script>
+
   </body>
 </html>

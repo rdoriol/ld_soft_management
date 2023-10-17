@@ -5,9 +5,11 @@
 
     require_once "./controllers/baseTemplate.controller.php";
     require_once "./controllers/01-customers.controller.php";
+    require_once "./controllers/02-suppliers.controller.php";
     require_once "./controllers/validations.controller.php";
 
     require_once "./models/01-customers.model.php";
+    require_once "./models/02-suppliers.model.php";
    
     $render = new BaseTemplateController();
     $render->ctrGetBaseTemplate();
