@@ -1,8 +1,10 @@
-  /* BLOQUE COMPROBACIÓN CAMPOS FORMULARIO EN TIEMPO REAL Y CON AJAX 
+
+ 
+    /* BLOQUE COMPROBACIÓN CAMPOS FORMULARIO EN TIEMPO REAL Y CON AJAX 
     -----------------------------------------------------------*/
 
 /**
- * 
+ * Comprobación de formatos y duplicidad del formulario Cliente
  */
 $(document).ready(function(){
 
@@ -31,7 +33,7 @@ $(document).ready(function(){
                 success: function(request) { 
                                     
                             if(request) {
-                                sentMessages(selector, request); // se lanza función para mostrar mensajes de errores de cada campo.
+                                sentCustomerMessages(selector, request); // se lanza función para mostrar mensajes de errores de cada campo.                                
                             }
                 }
             })    
@@ -40,93 +42,13 @@ $(document).ready(function(){
 
         // Se lanza función ckeckFields(selector)
     checkFields("#customer_name", "name_customer_form");
-    checkFields("#customer_nifcif", "name_nif_form");
-
-    /**
-     * Método para validar formatos de NIF
-     * @param string nif
-     * @return string check
-     */
-    function checkNif(nif) {
-        var patternDni = /^[0-9]{8}[A-Za-z]{1}$/;        
-        var patternCif = /^[A-Za-z]{1}[0-9]{8}$/;
-        var patternNifM = /^[Mm]{1}[0-9]{7}[A-Za-z]{1}$/;
-        var patternNie = /^[XYZzyz]{1}[0-9]{7}[A-Za-z]{1}$/;
-        var ckeck = false;
-
-        if(!patternDni.test(nif) && !patternCif.test(nif) && !patternNifM.test(nif) && !patternNie.test(nif)) {
-            ckeck = true;                    
-        }
-        return ckeck;
-    }
-
-    /**
-     * Método para comprobar formato campo "Código Postal"
-     * @param string postalCode
-     * @return string check
-     */
-    function checkPostalCode(postalCode) {
-        var check = false;
-        cleanCheck("#customer_postal_code");    // se limpian mensajes de errores previos
-        
-        if(isNaN(postalCode) || postalCode.length != 5) {
-            check = true;        
-        }
-        return check;
-    } 
-    /**
-     * Se lanza función checkPostalCode() al detectar algún cambio en el campo "Código Postal"
-     */
-    $("#customer_postal_code").change(function(){
-        var formatPostalCode = checkPostalCode($(this).val());
-        if(formatPostalCode == true) {
-            checkKo($(this));
-            $(".error_format_postal_code").css("display", "block");
-        }
-        else {
-            checkOk($(this));
-            $(".error_format_postal_code").css("display", "none");
-        }
-    })
-
-
-   
-     
-
-        /* BLOQUE PARA MOSTRAR MENSAJES DE ERROR MODIFICANDO DOM HTML Y CSS
-        ------------------------------------------------------------------ */
-    /**
-     * Función para modificar estilos-DOM del documento HTML. Estilos para validación incorrecta.
-     */
-    function checkKo(selector) {
-        $(selector).removeClass("alert-success");
-        $(selector).addClass("alert-danger");
-        $(selector).css("border", "2px solid red");
-    }
-
-    /**
-     * Función para modificar estilos-DOM del documento HTML. Estilos para validación correcta.
-     */
-    function checkOk(selector) {
-        $(selector).removeClass("alert-danger");
-        $(selector).addClass("alert-success");
-        $(selector).css("border", "2px solid green");         
-    }
+    checkFields("#customer_nifcif", "name_nif_form");    
 
      /**
-     * Función para modificar estilos-DOM del documento HTML. Estilos para limpiar mensajes previos.
-     */
-    function cleanCheck(selector) {
-        $(selector).removeClass("alert-success");
-        $(selector).removeClass("alert-danger");
-        $(selector).css("border", "none");
-    }
-
-    /**
     * Función para mostrar mensajes personalizados de alerta en función del campo erroneo
     * @param string selector, request
     */
-    function sentMessages(selector, request) {
+     function sentCustomerMessages(selector, request) {
         cleanCheck(selector); // se limpian los mensajes de errores previos.
 
             //Bloque para validar y lanzar mensajes de errores para campo nombre
@@ -167,15 +89,116 @@ $(document).ready(function(){
         }
     } 
 
+    /**
+     * Se lanza función checkPostalCode() al detectar algún cambio en el campo del formulario "Código Postal"
+     */
+    $("#customer_postal_code").change(function(){
+        var formatPostalCode = checkPostalCode($(this), $(this).val());
+        if(formatPostalCode == true) {
+            checkKo($(this));
+            $(".error_format_postal_code").css("display", "block");
+        }
+        else {
+            checkOk($(this));
+            $(".error_format_postal_code").css("display", "none");
+        }
+    })
 
-
-    
-     
-
-
-
-
-
-    
-
+    /**
+     * Se lanza función checkPhone() al detectar algún cambio en el campo del formulario "Teléfono"
+     */
+        $("#customer_phone").change(function(){
+            var formatPhone = checkPhone($(this), $(this).val());
+            if(formatPhone == true) {
+                checkKo($(this));
+                $(".error_format_phone").css("display", "block");
+            }
+            else {
+                checkOk($(this));
+                $(".error_format_phone").css("display", "none");
+            }
+        })
 })
+
+/* -- A partir de aquí Funciones fuera de "$(document).ready()" para poder utilizarlas en otros archivos .js -- */
+
+    /* FUNCIONES PARA MODIFICAR DOM HTML Y CSS 
+        ----------------------------------- */
+
+/**
+ * Función para modificar estilos-DOM del documento HTML. Estilos para validación incorrecta.
+ */
+function checkKo(selector) {
+    $(selector).removeClass("alert-success");
+    $(selector).addClass("alert-danger");
+    $(selector).css("border", "2px solid red");
+}
+
+/**
+ * Función para modificar estilos-DOM del documento HTML. Estilos para validación correcta.
+ */
+function checkOk(selector) {
+    $(selector).removeClass("alert-danger");
+    $(selector).addClass("alert-success");
+    $(selector).css("border", "2px solid green");         
+}
+
+    /**
+ * Función para modificar estilos-DOM del documento HTML. Estilos para limpiar mensajes previos.
+ */
+function cleanCheck(selector) {
+    $(selector).removeClass("alert-success");
+    $(selector).removeClass("alert-danger");
+    $(selector).css("border", "none");
+}
+
+/* FUNCIONES PARA VALIDAR FORMATOS
+------------------------------ */
+
+/**
+ * Método para validar formatos de NIF
+ * @param string nif
+ * @return string check
+ */
+function checkNif(nif) {
+    var patternDni = /^[0-9]{8}[A-Za-z]{1}$/;        
+    var patternCif = /^[A-Za-z]{1}[0-9]{8}$/;
+    var patternNifM = /^[Mm]{1}[0-9]{7}[A-Za-z]{1}$/;
+    var patternNie = /^[XYZzyz]{1}[0-9]{7}[A-Za-z]{1}$/;
+    var ckeck = false;
+
+    if(!patternDni.test(nif) && !patternCif.test(nif) && !patternNifM.test(nif) && !patternNie.test(nif)) {
+        ckeck = true;                    
+    }
+    return ckeck;
+}
+
+/**
+ * Método para comprobar formato campo "Código Postal"
+ * @param string postalCode
+ * @return string check
+ */
+function checkPostalCode(selector, postalCode) {
+    var check = false;
+    cleanCheck(selector);    // se limpian mensajes de errores previos
+    
+    if(isNaN(postalCode) || postalCode.length != 5) {
+        check = true;        
+    }
+    return check;
+}
+
+/**
+ * Método para comprobar formato campo "Teléfono"
+ * @param string phone
+ * @return string check
+ */
+function checkPhone(selector, phone) {
+    check = false;
+    cleanCheck(selector);    // se limpian mensajes de errores previos
+
+    if(phone.length > 13 || phone.length < 9) {
+        check = true;
+    }
+    return check;
+}

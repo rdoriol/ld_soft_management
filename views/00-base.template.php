@@ -71,7 +71,7 @@
               {
                 include "pages/02.suppliers/" . $page . ".template.php";
               }
-              else if($page == "01-newProduct" || $page == "02-productFile" || $page == "04-productsInputs" || $page == "05-productsList")
+              else if($page == "01-newProduct" || $page == "02-productsInputs" || $page == "03-productsList" || $page == "05-inventoryPopUpSearch")
               {
                 include "pages/03.inventory/" . $page . ".template.php";
               }
@@ -126,11 +126,17 @@
 
     <script src="./views/pages/01.customers/05-customers.js"></script>
     <script src="./views/pages/01.customers/06-customers_validations.js"></script>
-    <script src="./views/pages/01.customers/07-print.js"></script>
+    <script src="./views/pages/01.customers/07-customers_prints.js"></script>
 
     <script src="./views/pages/02.suppliers/05-suppliers.js"></script>
     <script src="./views/pages/02.suppliers/06-suppliers_validations.js"></script>
-    <script src="./views/pages/02.suppliers/07-print.js"></script>
+    <script src="./views/pages/02.suppliers/07-suppliers_prints.js"></script>
+
+    <script src="./views/pages/03.inventory/06-inventory.js"></script>
+    <script src="./views/pages/02.suppliers/07-inventory_validations.js"></script>
+    <script src="./views/pages/02.suppliers/08-inventory_prints.js"></script>
+
+
 
   </body>
 </html>

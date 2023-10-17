@@ -166,6 +166,7 @@
     <div class='text-center alert-danger rounded nif_field_duplicate'><p>El <i><b>NIF</b></i> introducido ya existe en la base de datos.</p></div>
     <div class='text-center alert-danger rounded error_format_nif'><p>El formato del campo <b><i>NIF</i></b> es erroneo<br>Ejemplos válidos: Dni 12345678X / Cif B12345678 / NIE X1234567S</p></div>
     <div class='text-center alert-danger rounded error_format_postal_code'><p>El formato del campo <b><i>Código Postal</i></b> es erroneo<br>Ejemplos válidos: 28081 / 41003</p></div>
+    <div class='text-center alert-danger rounded error_format_phone'><p>El formato del campo <b><i>Teléfono</i></b> es erroneo<br>Ejemplos válidos: +34 666999333 / 666999333</p></div>
                      <!-- -------------------------------------------------------------  -->
                      
     <div class="modal fade" id="success_modal" role="dialog">  <!-- MODAL DE CONFIRMACIÓN DE OPERACIÓN bootstrap 4  -->

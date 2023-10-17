@@ -16,18 +16,17 @@
           <li class="li_item" id="">
             <button class="link_button" id="suppliers_button" title="Abrir opciones proveedores"><i class="fa-solid fa-caret-right"></i>&nbsp Proveedores</button>
             <ul class="submenu" id="suppliers_submenu">
-              <li class="link_subButton" id="newSupplierId"><a class="" href="index.php?pages=01-newSupplier">Alta proveedor</a></li>              
-              <li class="link_subButton" id="suppliersListId"><a class="" href="index.php?pages=02-suppliersList">Listado proveed</a></li>
+              <li class="link_subButton" id="newSupplierId"><a class="" href="index.php?pages=01-newSupplier">Ficha proveedor</a></li>              
+              <li class="link_subButton" id="suppliersListId"><a class="" href="index.php?pages=02-suppliersList">Listado proveedores </a></li>
             </ul>
           </li>
 
           <li class="li_item" id="">
             <button class="link_button" id="inventory_button" title="Abrir opciones gestión inventario"> <i class="fa-solid fa-caret-right"></i>&nbsp Gestión Inventario</button>
             <ul class="submenu" id="inventory_submenu">
-              <li class="link_subButton" id="newProductId"><a class="" href="index.php?pages=01-newProduct">Alta producto</a></li>
-              <li class="link_subButton" id="productFileId"><a class="" href="index.php?pages=02-productFile">Ficha producto</a></li>
-              <li class="link_subButton" id="productsInputsId"><a class="" href="index.php?pages=04-productsInputs">Entradas productos</a></li>
-              <li class="link_subButton" id="productsListId"><a class="" href="index.php?pages=05-productsList">Listado productos</a></li>
+              <li class="link_subButton" id="newProductId"><a class="" href="index.php?pages=01-newProduct">Ficha producto</a></li>
+              <li class="link_subButton" id="productsInputsId"><a class="" href="index.php?pages=02-productsInputs">Entradas productos</a></li>
+              <li class="link_subButton" id="productsListId"><a class="" href="index.php?pages=03-productsList">Listado productos</a></li>
             </ul>
           </li>
 

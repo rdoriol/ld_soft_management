@@ -31,7 +31,7 @@
     }
 
     /**
-     * Objeto que recibirá variable POST de "AJAX.js" y lanzará función php "checkhFieldAjax()".
+     * Objeto que recibirá variable POST de "AJAX.js" y lanzará función php "checkhFieldAjax()" para tabla Customers
      */
     if(isset($_POST["name_customer_form"]) && !empty($_POST["name_customer_form"])) {
         $ajaxObject = new AjaxValidation();
@@ -43,9 +43,25 @@
     if(isset($_POST["name_nif_form"]) && !empty($_POST["name_nif_form"])) {
         $ajaxObject = new AjaxValidation();
         $ajaxObject->customerFieldMatch = $_POST["name_nif_form"];
-        $ajaxObject->checkFieldAjax("customers", "nif_cif");
-       
+        $ajaxObject->checkFieldAjax("customers", "nif_cif");}
+
+    /**
+     * Objeto que recibirá variable POST de "AJAX.js" y lanzará función php "checkhFieldAjax()" para tabla Suppliers
+     */
+    if(isset($_POST["name_supplier_form"]) && !empty($_POST["name_supplier_form"])) {
+        $ajaxObject = new AjaxValidation();
+        $ajaxObject->customerFieldMatch = $_POST["name_supplier_form"];
+        $ajaxObject->checkFieldAjax("suppliers", "name_supplier");
     }
+
+    if(isset($_POST["nif_supplier_form"]) && !empty($_POST["nif_supplier_form"])) {
+        $ajaxObject = new AjaxValidation();
+        $ajaxObject->customerFieldMatch = $_POST["nif_supplier_form"];
+        $ajaxObject->checkFieldAjax("suppliers", "nif");
+    }
+
+
+    
 
 
 
