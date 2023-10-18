@@ -186,7 +186,7 @@
         static public function validateFieldsFormats($nifValue, $postalCodeValue, $phoneValue, $emailValue, $town, $province, $country) {
             $check = "false";
             try {
-                $correctFormat = self::checkNif($nifValue);                    // método que comprueba si el formato de "NIF" es correto.
+                $formatNif = self::checkNif($nifValue);                    // método que comprueba si el formato de "NIF" es correto.
                 $formatPostalCode = self::checkPostalCode($postalCodeValue);   // método que comrpueba si el formato del código postal es correcto.            
                 $formatPhone = self::checkPhone($phoneValue);                  // método que comrpueba si el formato del teléfono es correcto.
                 $formatEmail = self::checkEmail($emailValue);                  // método que comrpueba si el formato del correo electrónico es correcto.
@@ -195,11 +195,11 @@
                 $formatCountry = self::checkLettersFormats($country);          // método que comrpueba si el formato del campo país solo tiene letras.
 
                 // Bloque condicional para contemplar las distintas posiblidades con sus respectivos mensajes de avisos personalizados
-                if($correctFormat == "false" && $formatPostalCode == "false" && $formatPhone == "false" && $formatEmail == "false" && $formatTown == "false" && $formatProvince == "false" && $formatCountry == "false") {
+                if($formatNif == "false" && $formatPostalCode == "false" && $formatPhone == "false" && $formatEmail == "false" && $formatTown == "false" && $formatProvince == "false" && $formatCountry == "false") {
                     $check = "true"; // To_do los campos están correctos
                 }
                 else {
-                   if($correctFormat  == "true") {
+                   if($formatNif  == "true") {
                         echo "<div class='text-center alert-danger rounded'><p>El formato del campo <b><i>NIF</i></b> es erroneo<br>Ejemplos válidos: Dni 12345678X / Cif B12345678 / NIE X1234567S</p></div>";
                     }                    
                     if($formatPostalCode == "true") {

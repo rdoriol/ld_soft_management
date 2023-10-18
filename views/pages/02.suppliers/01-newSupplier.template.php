@@ -142,7 +142,7 @@
       </div>
     </div>
                 <!-- input oculto que recibirá valor de token de subventana -->
-    <input type="text" id="tokenSupplier" name="tokenSupplier" placeholder="tokenValue Subwindow" value="" /> 
+    <input type="hidden" id="tokenSupplier" name="tokenSupplier" placeholder="tokenValue Subwindow" value="" /> 
                 <!-- ------------------------------------------------------- -->
 
     <div class="btn-group p-3">

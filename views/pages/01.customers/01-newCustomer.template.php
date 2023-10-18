@@ -150,9 +150,11 @@
         </div>      
       </div>
     </div>
-   
-    <input type="text" id="tokenCustomer" name="tokenCustomer" placeholder="tokenValue Subwindow" value="" /> <!-- input oculto que recibirá valor de token de subventana -->
-           
+
+                    <!-- input oculto que recibirá valor de token de subventana -->
+    <input type="hidden" id="tokenCustomer" name="tokenCustomer" placeholder="tokenValue Subwindow" value="" /> 
+                    <!-- ----------------------------------------------------------  -->
+
     <div class="btn-group p-3">
       <button type="submit" class="btn btn-primary mr-5" id="btn_customer_submit" name="customer_submit"><i class="fa-sharp fa-solid fa-pencil"></i>&nbsp Grabar</button> 
       <button type="button" role="link" class="btn btn-secondary mr-5" name="exit_customer" onClick="window.location='index.php?pages=01-newCustomer'"><i class="fa-sharp fa-solid fa-rectangle-xmark"></i>&nbsp Cerrar registro</button>

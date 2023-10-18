@@ -55,9 +55,9 @@
         }
 
 
-        /* Para LISTAR/LEER registros de la tabla "suppliers" se utiliza método "ctrToList()" implementado en la clase 
-            "CustomerController" ("controllers/01-customers.controller.php") 
-        ---------------------------------------------------------------------------------------------------------------*/
+        // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+            //todo-> Para LISTAR/LEER registros de la tabla "suppliers" se utiliza método "ctrToList()" implementado en la clase "CustomerController" ("controllers/01-customers.controller.php")
+        // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------   
 
 
          /**
@@ -76,9 +76,9 @@
                        
                         if($checkToken == $value) {       
                                 // bloque para validaciones                            
-                          //todo  $validateFormatFields = ValidationController::validateFieldsFormats($_POST["customer_nifcif"], $_POST["customer_postal_code"], $_POST["customer_phone"], $_POST["customer_email"]); // Método para validar formatos de campos del formulario. 
+                            $validateFormatFields = ValidationController::validateFieldsFormats($_POST["supplier_nif"], $_POST["supplier_postal_code"], $_POST["supplier_phone"], $_POST["supplier_email"], $_POST["supplier_town"], $_POST["supplier_province"], $_POST["supplier_country"]); // Método para validar formatos de campos del formulario. 
                                
-                            //todo if($validateFormatFields == "true" ) {  // TODO. Pendiente de mejora personal: Implementar validación de nombres coincidentes en base de datos (en función de si es cliente tipo particular o empresa)
+                            if($validateFormatFields == "true" ) {  // TODO. Pendiente de mejora personal: Implementar validación de nombres coincidentes en base de datos (en función de si es cliente tipo particular o empresa)
         
                                 $newToken = md5(ucwords($_POST["supplier_name"]) . "+" . strtoupper($_POST["supplier_nif"])); // Se genera nuevo token para seguridad informática.
                                 $data = array(  "newToken"=> $newToken,
@@ -96,14 +96,17 @@
                                 
                                 $updateSupplier = SupplierModel::mdlUpdateSupplier($table, $key, $value, $data);
                                 return $updateSupplier;
-                           //todo }
+                            }
+                            else {
+                                echo "<div class='text-center alert-warning rounded'><p class='font-weight-bold'>REGISTRO NO GRABADO</p></div>";
+                            }
                         }
                         else {
                             echo "<div class='text-center alert-danger rounded'><p>Error. Tokens no coinciden</p></div>";
                         }
                     }
                     else {
-                        echo "<div class='text-center alert-danger rounded'><p class='font-weight-bold'>No grabado.</p><p class='font-weight-bold'>Los siguientes campos son obligatorios:</p><ul><li>Tipo cliente</li><li>Nombre / Razón Social</li><li>NIF</li></ul></div>";
+                        echo "<div class='text-center alert-danger rounded'><p class='font-weight-bold'>No grabado.</p><p class='font-weight-bold'>Los siguientes campos son obligatorios:</p><ul><li>Nombre proveedor</li><li>NIF</li><li>Dirección</li><li>Código Postal</li><li>Ciudad</li><li>Provincia</li></ul></div>";
                     }
                 }             
             }
@@ -112,7 +115,7 @@
             }
         }
 
-/**
+        /**
          * Método que recibirá solicitud para eliminar de la "Vista" y se comunicará con "Modelo"para ejecturar la acción sobre la base de datos.
          */
         public function ctrDeleteSupplier($table, $key, $value) {
