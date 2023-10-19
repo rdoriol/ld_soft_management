@@ -22,8 +22,8 @@
                 $key = $_POST["select_item"];
                 $value = $_POST["search_key"];                
                 
-                $dataCustomers = CustomerController::ctrToList("suppliers", $key, $value);       
-                foreach($dataCustomers as $item):                        
+                $dataSuppliers = CustomerController::ctrToList("suppliers", $key, $value);       
+                foreach($dataSuppliers as $item):                        
             ?>
             <tr class="table_search" title="Seleccionar" onClick="getSubwindowSupplier(<?php echo '\''. $item->token .'\''; ?>);">
                 <td> <?php echo $item->id;?> </td>           

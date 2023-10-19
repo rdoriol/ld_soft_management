@@ -12,7 +12,7 @@
                 <option value="name_product_category">Categoría</option>               
              </select>
             <input type="text" class="" id="" name="search_key" placeholder="búsqueda">
-            <button type="submit" class="btn btn-primary" id="btn_search_supplier" name="search"><i class="fa-solid fa-magnifying-glass"></i></button>
+            <button type="submit" class="btn btn-primary" id="btn_search_product" name="search"><i class="fa-solid fa-magnifying-glass"></i></button>
         </form>
     </li>
     <li><button class="print_bar m-1 alert-info rounded" id="btn_print_inventory"><i class="fa-solid fa-print"></i>&nbspImprimir</button></li>

@@ -22,7 +22,7 @@ footer {
     min-height: auto;
 }
 
-#btn_print, #btn_print_supplier {
+#btn_print, #btn_print_supplier, #btn_print_inventory {
     display: none;
 }
 
@@ -30,7 +30,8 @@ footer {
     display: block;
 }
 
-#customers_lists_table .table_search:hover, #supplier_lists_table .table_search:hover {
+#customers_lists_table .table_search:hover, #supplier_lists_table .table_search:hover, 
+#products_lists_table .table_search:hover {
     cursor: pointer;  
     background-color: #007BFF;   
     color: #ffffff;

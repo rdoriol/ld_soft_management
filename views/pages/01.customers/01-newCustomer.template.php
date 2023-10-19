@@ -34,7 +34,7 @@
     <li><button type="button" class="print_bar m-1 alert-info rounded" id="print"><i class="fa-solid fa-print"></i>&nbspImprimir</button></li>
   </ul>
                                                    
-  <fieldset class="d-flex justify-content-around"> <!-- CAMBIAR A ESTILO PROPIO CON CSS flex personalizado, no esta porquería -->
+  <fieldset class="d-flex justify-content-around"> <!-- CAMBIAR A ESTILO PROPIO CON CSS flex personalizado -->
     <div class="forms_flex">
       <div class="forms_fields">
         <label class="forms_label" for="customer_id">Id Cliente</label>
@@ -183,6 +183,8 @@
           </div>
       </div>
     </div>
+
+    
  
 
     <?php 
@@ -218,7 +220,7 @@
                 window.sessionStorage.setItem('modalAlert', 'true');
                 window.location.replace('index.php?pages=01-newCustomer&token=$newToken');
               </script>";   
-      }
+      } 
       else if($checkDeleteRegister == "true") {
             echo "<script>
                     window.sessionStorage.setItem('modalAlert', 'true'); 

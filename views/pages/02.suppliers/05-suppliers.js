@@ -26,12 +26,12 @@
         /**
          * Función que conectará con fichero php "ajax/ajax_search_subwindow"
          */
-        function getRegisterSupplierAjax() {
+        function getRegisterSupplierAjax() {                console.log("entra");
     
             var tokenValue = $("#tokenSupplier").val(); // Se obtiene valor a buscar en la base de datos
-           
+console.log(tokenValue);
             var dataForm = new FormData();
-            //                name      value   // Se generan datos de form para enviarlos en formato PHP ($_POST[])
+            //                   name          value   // Se generan datos de form para enviarlos en formato PHP ($_POST[])
             dataForm.append("tokenSupplier", tokenValue);
                                                                    console.log(tokenValue);
             

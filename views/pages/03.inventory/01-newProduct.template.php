@@ -24,13 +24,14 @@
 <form class="general_forms" id="new_supplier_form" action="<?php $_SERVER['REQUEST_URI']; ?>" method="post" onsubmit="">
   <h4 class="forms_subtitle rounded">Altas | Modificar | Eliminar</h4>
     
-         
+                                            <!-- Lista de botones "Buscar" e "Imprimir" -->
   <ul class="d-flex justify-content-first"> 
     <li><button type="button" class="search_bar m-1 alert-info rounded" id="search_product" onClick=""><i class="fa-solid fa-magnifying-glass"></i>&nbsp Buscar Producto</button></li>
     <li><button type="button" class="print_bar m-1 alert-info rounded" id="print_product"><i class="fa-solid fa-print"></i>&nbspImprimir</button></li>
   </ul>
-                                                   
-  <fieldset class="d-flex justify-content-around"> <!-- //todo-> CAMBIAR A ESTILO PROPIO CON CSS flex personalizado, no esta porquería -->
+                                            <!-- --------------------------------------- -->      
+
+  <fieldset class="d-flex justify-content-around"> <!-- //todo-> CAMBIAR A ESTILO PROPIO CON CSS flex personalizado -->
     <div class="forms_flex">
       <div class="forms_fields">
         <label class="forms_label" for="product_id">Id Producto</label>
@@ -45,8 +46,8 @@
         <div class="forms_inputs_fields">
             <i class="fa-solid fa-house forms_icons"></i> 
 
-            <select class="" id="" name="select_item_category"> <?php echo "hola"; ?>
-                <option value="<?php echo $productData[0]->id_product_category; ?>" selected><?php echo $productData[0]->name_product_category; ?></option>
+            <select class="" id="" name="select_item_category"> <?php echo "hola"; ?> <!-- //todo-> DUDA PELUDA DONDE SE COLOCA EL id para recibir dato AJAX -->
+                <option id="select_item_category" value="<?php echo $productData[0]->id_product_category; ?>" selected><?php echo $productData[0]->name_product_category; ?></option>
                 <?php                  // Select con categoría de productos almacenada en la tabla "product_categories" de la base de datos
                   $selectCategory = InventoryController::ctrToListCategoryProduct("product_categories", null);                                     
                   foreach($selectCategory as $item):
@@ -138,7 +139,7 @@
       </div>
 
                 <!-- input oculto que recibirá valor de token de subventana -->
-        <input type="text" id="tokenProduct" name="tokenProduct" placeholder="tokenValue Subwindow" value="" /> 
+        <input type="hidden" id="tokenProduct" name="tokenProduct" placeholder="tokenValue Subwindow" value="" /> 
                 <!-- ------------------------------------------------------- -->
     </div>
     <div class="btn-group p-3 ">
@@ -173,7 +174,7 @@
     <?php 
         /* Bloque condicional para grabar datos de un cliente nuevo, actualizar o eliminar datos de un registro existente
         -----------------------------------------------------------------------------------------------------------------*/
-      if(isset($_GET["token"]) && !empty($_GET["token"])) {     echo $_GET["token"];                   
+      if(isset($_GET["token"]) && !empty($_GET["token"])) {                
                      
         $updateProduct = InventoryController::ctrUpdateProduct("products", "token_product", $_GET["token"]);    // se lanza método para actualizar datos de clientes.
       

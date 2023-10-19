@@ -66,6 +66,7 @@
          * @return
          */
         static public function ctrUpdateSupplier($table, $key, $value) {
+            $validationsOk = "ko"; 
             try {
                 if(isset($_POST["supplier_submit"]) && $key = "token") {
                     if(!empty($_POST["supplier_name"]) && !empty($_POST["supplier_nif"]) && !empty($_POST["supplier_address"]) && !empty($_POST["supplier_postal_code"]) && !empty($_POST["supplier_town"]) && !empty($_POST["supplier_province"])) {                           
@@ -75,34 +76,56 @@
                         $checkToken = md5($oldToken[0]->name_supplier . "+" . $oldToken[0]->nif);
                        
                         if($checkToken == $value) {       
-                                // bloque para validaciones                            
+                              // BLOQUE PARA VALIDACIONES DE FORMATOS DE LOS CAMPOS Y COINCIDENCIAS DE VALORES EN BASE DE DATOS     ---------------              
                             $validateFormatFields = ValidationController::validateFieldsFormats($_POST["supplier_nif"], $_POST["supplier_postal_code"], $_POST["supplier_phone"], $_POST["supplier_email"], $_POST["supplier_town"], $_POST["supplier_province"], $_POST["supplier_country"]); // Método para validar formatos de campos del formulario. 
                                
-                            if($validateFormatFields == "true" ) {  // TODO. Pendiente de mejora personal: Implementar validación de nombres coincidentes en base de datos (en función de si es cliente tipo particular o empresa)
-        
-                                $newToken = md5(ucwords($_POST["supplier_name"]) . "+" . strtoupper($_POST["supplier_nif"])); // Se genera nuevo token para seguridad informática.
-                                $data = array(  "newToken"=> $newToken,
-                                                "supplier_name" => ucwords($_POST["supplier_name"]),
-                                                "supplier_nif" => strtoupper($_POST["supplier_nif"]),
-                                                "supplier_address" => $_POST["supplier_address"],
-                                                "supplier_postal_code" => $_POST["supplier_postal_code"],
-                                                "supplier_town" => ucwords($_POST["supplier_town"]),
-                                                "supplier_province" => ucfirst($_POST["supplier_province"]),
-                                                "supplier_country" => ucwords($_POST["supplier_country"]),
-                                                "supplier_phone" => $_POST["supplier_phone"],
-                                                "supplier_email" => strtolower($_POST["supplier_email"]),
-                                                "supplier_web" => strtolower($_POST["supplier_web"]),
-                                                "supplier_contact_person" => ucwords($_POST["supplier_contact_person"]) );
-                                
-                                $updateSupplier = SupplierModel::mdlUpdateSupplier($table, $key, $value, $data);
-                                return $updateSupplier;
-                            }
-                            else {
-                                echo "<div class='text-center alert-warning rounded'><p class='font-weight-bold'>REGISTRO NO GRABADO</p></div>";
-                            }
+                            if($validateFormatFields == "true" ) {
+                                        // Al ser los formatos correctos, a continuación se contemplan las distintas posibilades de coincidencias de valores en la base de datos
+                                if($oldToken[0]->name_supplier == $_POST["supplier_name"] && $oldToken[0]->nif == $_POST["supplier_nif"]) {                                      
+                                    $validationsOk = "ok";
+                                }
+                                else if(($oldToken[0]->name_supplier != $_POST["supplier_name"] && $oldToken[0]->nif == $_POST["supplier_nif"])) {
+                                    $checkName = ValidationController::checkFieldPhp($table, "name_supplier",  $_POST["supplier_name"] ); // método para validar coincidencias en campo nombre
+                                    if($checkName == "false") {
+                                        $validationsOk = "ok";
+                                    }
+                                    else {
+                                        echo "<div class='text-center alert-danger rounded'><p>El <b><i>Nombre</i></b> introducido ya existe en la base de datos.</p></div>";
+                                    }
+                                }
+                                else if(($oldToken[0]->name_supplier == $_POST["supplier_name"] && $oldToken[0]->nif != $_POST["supplier_nif"])) {
+                                    $checkNif = ValidationController::checkFieldPhp($table, "nif",  $_POST["supplier_nif"]); // método para validar coincidencias en campo NIF
+                                    if($checkNif == "false") {
+                                        $validationsOk = "ok";
+                                    }
+                                    else {
+                                        echo "<div class='text-center alert-danger rounded'><p>El <b><i>Nif</i></b>introducido ya existe en la base de datos.</p></div>";
+                                    }
+                                }
+                            }             // FIN BLOQUE PARA VALIDACIONES       ------------------------------------------   
+                        
                         }
                         else {
                             echo "<div class='text-center alert-danger rounded'><p>Error. Tokens no coinciden</p></div>";
+                        }
+
+                        if($validationsOk == "ok") {
+                            $newToken = md5(ucwords($_POST["supplier_name"]) . "+" . strtoupper($_POST["supplier_nif"])); // Se genera nuevo token para seguridad informática.
+                            $data = array(  "newToken"=> $newToken,
+                                            "supplier_name" => ucwords($_POST["supplier_name"]),
+                                            "supplier_nif" => strtoupper($_POST["supplier_nif"]),
+                                            "supplier_address" => $_POST["supplier_address"],
+                                            "supplier_postal_code" => $_POST["supplier_postal_code"],
+                                            "supplier_town" => ucwords($_POST["supplier_town"]),
+                                            "supplier_province" => ucfirst($_POST["supplier_province"]),
+                                            "supplier_country" => ucwords($_POST["supplier_country"]),
+                                            "supplier_phone" => $_POST["supplier_phone"],
+                                            "supplier_email" => strtolower($_POST["supplier_email"]),
+                                            "supplier_web" => strtolower($_POST["supplier_web"]),
+                                            "supplier_contact_person" => ucwords($_POST["supplier_contact_person"]) );
+                            
+                            $updateSupplier = SupplierModel::mdlUpdateSupplier($table, $key, $value, $data);
+                            return $updateSupplier;     
                         }
                     }
                     else {

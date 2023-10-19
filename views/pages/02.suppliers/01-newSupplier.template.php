@@ -2,7 +2,7 @@
   $supplierData = array();
     
       // Condición para controlar si se muestran datos en el formulario o se muestra en blanco
-    if(isset($_GET["token"]) && !empty($_GET["token"])) {                                      
+    if((isset($_GET["token"]) && !empty($_GET["token"])) /*|| (isset($_POST["tokenSupplier"]) && !empty($_POST["tokenSupplier"])) */) {                                      
       $supplierData = CustomerController::ctrToList("suppliers", "token", $_GET["token"]);
     }
 
@@ -197,7 +197,7 @@
        
         /* Bloque condicional para lanzar ventana modal en función del éxito de la operación realizada
         ---------------------------------------------------------------------------------------------*/
-      if($updateSupplier == "true") { 
+      if($updateSupplier) { 
 
         $newToken = md5(ucwords($_POST["supplier_name"] . "+" . strtoupper($_POST["supplier_nif"])));   // Se genera nuevo token para poder recargar página con datos actualizados.        
 

@@ -138,7 +138,7 @@
                     $matchValue2 = self::removeAccents(strtolower($item->$key)); 
                                                                                        
                     if(strcasecmp($matchValue1, $matchValue2) === 0) {
-                        $check = "true";
+                        $check = "true";    // valores coincidentes 
                     }
                 }                                                                      
                 return $check;
@@ -158,11 +158,11 @@
             try {      
                 $existsCustomerName = self::checkFieldPhp($table, $nameKey, $nameValue);    // método que comrpueba si ya existe el valor "nombre/razón social" en la base de datos.
                 $existsNif = self::checkFieldPhp($table, $nifKey, $nifValue);               // método que comrpueba si ya existe el valor "NIF" en la base de datos.
-
+                
                     // Bloque condicional para contemplar las distintas posiblidades con sus respectivos mensajes de avisos personalizados
                 if($existsCustomerName == "false" && $existsNif == "false") {
                     $check = "true";
-                }
+                } 
                 else {
                     if($existsCustomerName == "true") {
                         echo "<div class='text-center alert-danger rounded'><p>El <b><i>Nombre/Razón Social</i></b> ($nameValue) introducido ya existe en la base de datos.</p></div>";

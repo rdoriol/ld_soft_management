@@ -46,7 +46,7 @@ $(document).ready(function(){
             success: function(request){
                         if(request) {                           
                                                 
-                            $("#customer_id").val(request[0].id_customer);
+                            $("#customer_id").val(request[0].id);
                             getValueType(request[0].customer_type); // se lanza función para seleccionar "tipo de cliente"
                             $("#created_date").val(request[0].created_date);
                             $("#customer_name").val(request[0].name_customer);

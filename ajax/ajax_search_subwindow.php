@@ -1,18 +1,32 @@
 <?php
     require_once "../controllers/01-customers.controller.php";
+    require_once "../controllers/03-inventory.controller.php";
     require_once "../controllers/validations.controller.php";
 
     require_once "../models/01-customers.model.php";
+    require_once "../models/03-inventory.model.php";
 
     /**
-     * Clase que enviará via AJAX registros de la base de datos a "01.customers/customers.js"
+     * Clase que enviará via AJAX registros de la base de datos al documento HTML, pasando previamente por ficheros .js
      */
     class Search {
 
+        /**
+         * Método que leera datos de la base de datos para enviarlos a "01.customers/customers.js" y "02.suppliers/suppliers.js", para a continuación renderizarlos vía AJAX
+         */
         static public function toListDb($table, $key, $value) {
             $resultData = array();
             try {
-                $resultData = CustomerController::ctrToList($table, $key, $value);
+                switch ($key) {
+                    case "token":
+                        $resultData = CustomerController::ctrToList($table, $key, $value);
+                        break;
+                    case "token_product":
+                        $resultData = InventoryController::ctrToListProduct($table, $key, $value);
+                        break;
+                    default:
+                       echo "No se ha recibido campo ni valor a buscar";
+                }                
                 echo json_encode($resultData);
             }
             catch(PDOException $ex) {
@@ -34,6 +48,13 @@
     else if(isset($_POST["tokenSupplier"]) && !empty($_POST["tokenSupplier"])) { 
         $searchSupplier = new Search();
         $searchSupplier->toListDb("suppliers", "token", $_POST["tokenSupplier"]);
+    }
+     /**
+     * Objeto que recibirá datos del formulario AJAX generado en "03.inventory/inventory.js"
+     */
+    else if(isset($_POST["tokenProduct"]) && !empty(($_POST["tokenProduct"]))) {
+        $searchProduct = new Search();
+        $searchProduct->toListDb("products", "token_product", $_POST["tokenProduct"]);
     }
 
     

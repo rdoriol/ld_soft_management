@@ -79,41 +79,67 @@
          * @param
          * @return
          */
-        static public function ctrUpdateRegister($table, $key, $value) {
+        static public function ctrUpdateRegister($table, $key, $value) {  
+            $validationsOk = "ko";              
             try {
-                if(isset($_POST["customer_submit"]) && $key = "token") {
-                    if(!empty($_POST["customer_name"]) && !empty($_POST["customer_nifcif"]) && !empty($_POST["customer_type"])) {                           
+                if(isset($_POST["customer_submit"]) && $key = "token") {            
+                    if(!empty($_POST["customer_name"]) && !empty($_POST["customer_nifcif"]) && !empty($_POST["customer_type"])) {                                   
     
                             // Bloque para comprobar que el token de la vista coincide con el token almacenado en la base de datos [seguridad informática]
                         $oldToken = CustomerModel::mdlToList($table, $key, $value);
                         $checkToken = md5($oldToken[0]->name_customer . "+" . $oldToken[0]->nif_cif);
                        
-                        if($checkToken == $value) {       
-                                // bloque para validaciones                            
-                            $validateFormatFields = ValidationController::validateFieldsFormats($_POST["customer_nifcif"], $_POST["customer_postal_code"], $_POST["customer_phone"], $_POST["customer_email"]); // Método para validar formatos de campos del formulario. 
-                               
-                            if($validateFormatFields == "true" ) {  // TODO. Pendiente de mejora persona: Implementar validación de nombres coincidentes en base de datos (en función de si es cliente tipo particular o empresa)
-        
-                                $newToken = md5(ucwords($_POST["customer_name"]) . "+" . strtoupper($_POST["customer_nifcif"])); // Se genera nuevo token para seguridad informática.
-                                $data = array(  "newToken"=> $newToken,
-                                                "customer_name" => ucwords($_POST["customer_name"]),
-                                                "customer_nifcif" => strtoupper($_POST["customer_nifcif"]),
-                                                "customer_type" => $_POST["customer_type"],
-                                                "customer_address" => $_POST["customer_address"],
-                                                "customer_postal_code" => $_POST["customer_postal_code"],
-                                                "customer_town" => ucwords($_POST["customer_town"]),
-                                                "customer_province" => ucfirst($_POST["customer_province"]),
-                                                "customer_country" => ucwords($_POST["customer_country"]),
-                                                "customer_phone" => $_POST["customer_phone"],
-                                                "customer_email" => strtolower($_POST["customer_email"]),
-                                                "customer_contact_person" => ucwords($_POST["customer_contact_person"]) );
+                        if($checkToken == $value) {     
+                                // BLOQUE PARA VALIDACIONES DE FORMATOS DE LOS CAMPOS Y COINCIDENCIAS DE VALORES EN BASE DE DATOS     ---------------              
+                                                
+                            $validateFormatFields = ValidationController::validateFieldsFormats($_POST["customer_nifcif"], $_POST["customer_postal_code"], $_POST["customer_phone"], $_POST["customer_email"], $_POST["customer_town"], $_POST["customer_province"], $_POST["customer_country"]); // Método para validar formatos de campos del formulario. 
                                 
-                                $updateRegister = CustomerModel::mdlUpdateRegister($table, $key, $value, $data);
-                                return $updateRegister;
-                            }
+                            if($validateFormatFields == "true") {   
+                                    // Al ser los formatos correctos, a continuación se contemplan las distintas posibilades de coincidencias de valores en la base de datos
+                                if($oldToken[0]->name_customer == $_POST["customer_name"] && $oldToken[0]->nif_cif == $_POST["customer_nifcif"]) {                                      
+                                    $validationsOk = "ok";
+                                }
+                                else if(($oldToken[0]->name_customer != $_POST["customer_name"] && $oldToken[0]->nif_cif == $_POST["customer_nifcif"])) {
+                                    $checkName = ValidationController::checkFieldPhp($table, "name_customer",  $_POST["customer_name"] ); // método para validar coincidencias en campo nombre
+                                    if($checkName == "false") {
+                                        $validationsOk = "ok";
+                                    }
+                                    else {
+                                        echo "<div class='text-center alert-danger rounded'><p>El <b><i>Nombre/Razón Social</i></b> introducido ya existe en la base de datos.</p></div>";
+                                    }
+                                }
+                                else if(($oldToken[0]->name_customer == $_POST["customer_name"] && $oldToken[0]->nif_cif != $_POST["customer_nifcif"])) {
+                                    $checkNif = ValidationController::checkFieldPhp($table, "nif_cif",  $_POST["customer_nifcif"]); // método para validar coincidencias en campo NIF
+                                    if($checkNif == "false") {
+                                        $validationsOk = "ok";
+                                    }
+                                    else {
+                                        echo "<div class='text-center alert-danger rounded'><p>El <b><i>Nif</i></b>introducido ya existe en la base de datos.</p></div>";
+                                    }
+                                }
+                            }             // FIN BLOQUE PARA VALIDACIONES       ------------------------------------------      
                         }
                         else {
                             echo "<div class='text-center alert-danger rounded'><p>Error. Tokens no coinciden</p></div>";
+                        }
+                            // En función del resultado almacenado en la variable $validationsOk se llamará al método para actulizar o no
+                        if($validationsOk == "ok") {
+                            $newToken = md5(ucwords($_POST["customer_name"]) . "+" . strtoupper($_POST["customer_nifcif"])); // Se genera nuevo token para seguridad informática.
+                            $data = array(  "newToken"=> $newToken,
+                                            "customer_name" => ucwords($_POST["customer_name"]),
+                                            "customer_nifcif" => strtoupper($_POST["customer_nifcif"]),
+                                            "customer_type" => $_POST["customer_type"],
+                                            "customer_address" => $_POST["customer_address"],
+                                            "customer_postal_code" => $_POST["customer_postal_code"],
+                                            "customer_town" => ucwords($_POST["customer_town"]),
+                                            "customer_province" => ucfirst($_POST["customer_province"]),
+                                            "customer_country" => ucwords($_POST["customer_country"]),
+                                            "customer_phone" => $_POST["customer_phone"],
+                                            "customer_email" => strtolower($_POST["customer_email"]),
+                                            "customer_contact_person" => ucwords($_POST["customer_contact_person"]) );
+                            
+                            $updateRegister = CustomerModel::mdlUpdateRegister($table, $key, $value, $data);
+                            return $updateRegister;      
                         }
                     }
                     else {
