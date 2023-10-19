@@ -1,5 +1,5 @@
 <?php
-    require_once "validations.controller.php";
+    require_once "validations_general.controller.php";
 
      /**
      * Clase que implementará métodos para realizar CRUD recibiendo datos de la Vista y enviándolos al Modelo.
@@ -91,6 +91,7 @@
                                     }
                                     else {
                                         echo "<div class='text-center alert-danger rounded'><p>El <b><i>Nombre</i></b> introducido ya existe en la base de datos.</p></div>";
+                                        echo "<div class='text-center alert-warning rounded'><p class='font-weight-bold'>REGISTRO NO GRABADO</p></div>";
                                     }
                                 }
                                 else if(($oldToken[0]->name_supplier == $_POST["supplier_name"] && $oldToken[0]->nif != $_POST["supplier_nif"])) {
@@ -99,7 +100,8 @@
                                         $validationsOk = "ok";
                                     }
                                     else {
-                                        echo "<div class='text-center alert-danger rounded'><p>El <b><i>Nif</i></b>introducido ya existe en la base de datos.</p></div>";
+                                        echo "<div class='text-center alert-danger rounded'><p>El <b><i>Nif</i></b> introducido ya existe en la base de datos.</p></div>";
+                                        echo "<div class='text-center alert-warning rounded'><p class='font-weight-bold'>REGISTRO NO GRABADO</p></div>";
                                     }
                                 }
                             }             // FIN BLOQUE PARA VALIDACIONES       ------------------------------------------   

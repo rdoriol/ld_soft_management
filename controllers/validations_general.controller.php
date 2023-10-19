@@ -1,5 +1,4 @@
-<?php 
-    require_once "01-customers.controller.php";
+<?php     
 
     class ValidationController {
 
@@ -121,6 +120,16 @@
             }
         }
 
+        static public function checkNumbersFormat($field) {  //todo-> eliminar???? sirve para algo??
+            $check ="false";
+            try {
+
+            }
+            catch(PDOException $ex) {
+            echo "error interno checkNumbersFormat(). Error: " . $ex->getMessage();
+            }
+        }
+
         /**
          * Método para comprobar campos del formulario coincidentes con registros ya existentes en base de datos.
          * @param strings $table, $key, $value 
@@ -149,7 +158,7 @@
         }
     
         /**
-         * Método para validar todos los campos coincidentes con campos en la base de datos
+         * Método para validar todos los campos coincidentes con campos en la base de datos. (En su interior se llaman a varios métodos de campos coincidentes)
          * @param strings $table, $nif, $customerNameValue, $customerNifValue
          * @return string $check
          */
@@ -179,7 +188,7 @@
         }
 
         /**
-         * Método para iniciar la validación de los formatos de todos los campos del formulario
+         * Método para iniciar la validación de los formatos de todos los campos del formulario 01-newCustomer.template y 02-newSupplier.template
          * @param strings $nifValue, $postalCodeValue, $phoneValue, $emailValue
          * @return string $check
          */

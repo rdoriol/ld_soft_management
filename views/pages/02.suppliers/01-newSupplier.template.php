@@ -2,8 +2,8 @@
   $supplierData = array();
     
       // Condición para controlar si se muestran datos en el formulario o se muestra en blanco
-    if((isset($_GET["token"]) && !empty($_GET["token"])) /*|| (isset($_POST["tokenSupplier"]) && !empty($_POST["tokenSupplier"])) */) {                                      
-      $supplierData = CustomerController::ctrToList("suppliers", "token", $_GET["token"]);
+    if((isset($_GET["token"]) && !empty($_GET["token"])) || (isset($_POST["tokenSupplier"]) && !empty($_POST["tokenSupplier"]))) {                                      
+      $supplierData = CustomerController::ctrToList("suppliers", "token", $_GET["token"]);            // se llama a método si existe variable GET["token"]
     }
 
      // script javascript para lanzar ventana modal confirmando actualizaciones o eliminaciones.
@@ -141,8 +141,8 @@
         </div>      
       </div>
     </div>
-                <!-- input oculto que recibirá valor de token de subventana -->
-    <input type="hidden" id="tokenSupplier" name="tokenSupplier" placeholder="tokenValue Subwindow" value="" /> 
+                <!-- input oculto que recibirá valor de token de ventana principal y subventana buscador -->    
+    <input type="hidden" id="tokenSupplier" name="tokenSupplier" placeholder="tokenValue Subwindow" value="<?php echo $supplierData[0]->token; ?>" /> 
                 <!-- ------------------------------------------------------- -->
 
     <div class="btn-group p-3">

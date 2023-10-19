@@ -4,7 +4,7 @@
   $privateCustomer;
   
       // Condición para controlar si se muestran datos en el formulario o se muestra en blanco
-    if(isset($_GET["token"]) && !empty($_GET["token"])) {                                      
+    if((isset($_GET["token"]) && !empty($_GET["token"])) || isset($_POST["tokenCustomer"]) && !empty($_POST["tokenCustomer"])) {                                      
       $customerData = CustomerController::ctrToList("customers", "token", $_GET["token"]);           
         // Condición para marcar opción radio ("Particular"/"Empresa") de cliente concreto. 
       if($customerData[0]->customer_type == "Particular") $particularCustomer = "checked"; else $privateCustomer = "checked";
@@ -151,8 +151,8 @@
       </div>
     </div>
 
-                    <!-- input oculto que recibirá valor de token de subventana -->
-    <input type="hidden" id="tokenCustomer" name="tokenCustomer" placeholder="tokenValue Subwindow" value="" /> 
+                    <!-- input oculto que recibirá valor de token de subventana y ventana principal  -->
+    <input type="hidden" id="tokenCustomer" name="tokenCustomer" placeholder="tokenValue Subwindow" value="<?php echo $customerData[0]->token; ?>" /> 
                     <!-- ----------------------------------------------------------  -->
 
     <div class="btn-group p-3">

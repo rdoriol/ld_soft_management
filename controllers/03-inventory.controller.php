@@ -1,5 +1,5 @@
 <?php
-    require_once "validations.controller.php";
+    require_once "04-inventoryValidations.controller.php";
 
      /**
      * Clase que implementará métodos para realizar CRUD recibiendo datos de la Vista y enviándolos al Modelo.
@@ -11,17 +11,25 @@
          * @param string $table
          */
         static public function ctrCreateProduct($table) {  
+            $validationsOK = "ko";
             try {
                 if(isset($_POST["btn_product_submit"])) {     
                     if(!empty($_POST["select_item_category"]) && !empty($_POST["or_original_product"]) && !empty($_POST["product_name"])) { 
 
                             // Método para comprobar valores coincidentes en base de datos.
-                        //todo $validateExistsFields =  ValidationController::validateExistsFields($table, "name_supplier", "nif", $_POST["supplier_name"], $_POST["supplier_nif"]); 
-                           
+                       $existsOrProduct =  InventaryValidationController::existInventoryField($table, "or_product", $_POST["or_original_product"]); 
+    
                             // Método para validar formatos de campos del formulario.
                         //todo $validateFormatFields = ValidationController::validateFieldsFormats($_POST["supplier_nif"], $_POST["supplier_postal_code"], $_POST["supplier_phone"], $_POST["supplier_email"], $_POST["supplier_town"], $_POST["supplier_province"], $_POST["supplier_country"]); 
                        
-                        //todo if($validateExistsFields == "true" && $validateFormatFields == "true") {                                                                             
+                        if($existsOrProduct == "false") { 
+                            $validationsOk = "ok"; 
+                        }
+                        else { 
+                            echo "<div class='text-center alert-danger rounded'><p>La <b><i>Ref. Original</i></b> introducida ya existe en la base de datos.</p></div>";
+                        }//todo SEGUIR POR AQUÍ
+
+                        if($validationsOk == "ok") {
                             $token = md5(ucfirst($_POST["product_name"]) . "+" . strtoupper($_POST["or_original_product"])); // Se genera token para seguridad informática.
 
                             $data = array(  "token"=> $token,
@@ -34,10 +42,11 @@
     
                             $createProduct = InventoryModel::mdlCreateProduct($table, $data);
                             return $createProduct;
-                       //todo }
-                       //todo else {
-                           //todo echo "<div class='text-center alert-warning rounded'><p class='font-weight-bold'>REGISTRO NO GRABADO</p></div>";
-                        //todo }
+                        }
+                        else {
+                            echo "<div class='text-center alert-warning rounded'><p class='font-weight-bold'>REGISTRO NO GRABADO</p></div>";
+                        }
+                        
                     }
                     else {
                         echo "<div class='text-center alert-danger rounded'><p class='font-weight-bold'>No grabado.</p><p class='font-weight-bold'>Los siguientes campos son obligatorios:</p><ul><li>Categoría producto</li><li>Referencia original</li><li>Nombre Producto</li></ul></div>";

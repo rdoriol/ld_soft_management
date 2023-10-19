@@ -1,10 +1,10 @@
 <?php
   $productData = array();
-    //$categoryProductData = array();
+   
       // Condición para controlar si se muestran datos en el formulario o se muestra en blanco
-    if(isset($_GET["token"]) && !empty($_GET["token"])) {                                    
-      $productData = InventoryController::ctrToListProduct("products", "token_product", $_GET["token"]);     // se llama a función para leer datos de la tabla "products"      
-    }       
+  if((isset($_GET["token"]) && !empty($_GET["token"])) || (isset($_POST["tokenProduct"]) && !empty($_POST["tokenProduct"]))) {                                    
+    $productData = InventoryController::ctrToListProduct("products", "token_product", $_GET["token"]);     // se llama a función para leer datos de la tabla "products"      
+  }       
 
      // script javascript para lanzar ventana modal confirmando actualizaciones o eliminaciones.
     echo "<script>
@@ -139,7 +139,7 @@
       </div>
 
                 <!-- input oculto que recibirá valor de token de subventana -->
-        <input type="hidden" id="tokenProduct" name="tokenProduct" placeholder="tokenValue Subwindow" value="" /> 
+        <input type="text" id="tokenProduct" name="tokenProduct" placeholder="tokenValue Subwindow" value="<?php echo $productData[0]->token_product; ?>" /> 
                 <!-- ------------------------------------------------------- -->
     </div>
     <div class="btn-group p-3 ">
