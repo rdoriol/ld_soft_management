@@ -108,25 +108,13 @@
             $check = "false";
             $pattern = "/^[A-Za-zÑñsáéíóúÁÉÍÓÚ\s\.\-]+$/";
             try {
-                if(preg_match($pattern, $field)) {                   
-                }
-                else {
-                    $check = "true";
-                }
+                if(!preg_match($pattern, $field)) {   
+                    $check = "true";                
+                }              
                 return $check;
             }
             catch(PDOException $ex) {
                 echo "error interno checkLettersFormats(). Error: " . $ex->getMessage();
-            }
-        }
-
-        static public function checkNumbersFormat($field) {  //todo-> eliminar???? sirve para algo??
-            $check ="false";
-            try {
-
-            }
-            catch(PDOException $ex) {
-            echo "error interno checkNumbersFormat(). Error: " . $ex->getMessage();
             }
         }
 

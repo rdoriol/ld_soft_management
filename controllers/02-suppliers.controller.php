@@ -22,20 +22,21 @@
                         $validateFormatFields = ValidationController::validateFieldsFormats($_POST["supplier_nif"], $_POST["supplier_postal_code"], $_POST["supplier_phone"], $_POST["supplier_email"], $_POST["supplier_town"], $_POST["supplier_province"], $_POST["supplier_country"]); 
                        
                         if($validateExistsFields == "true" && $validateFormatFields == "true") {                                                                             
-                            $token = md5(ucwords($_POST["supplier_name"]) . "+" . strtoupper($_POST["supplier_nif"])); // Se genera token para seguridad informática.
+                            $token = md5(trim(ucwords($_POST["supplier_name"])) . "+" . trim(strtoupper($_POST["supplier_nif"]))); // Se genera token para seguridad informática.
                             
                             $data = array(  "token"=> $token,
-                                            "supplier_name" => ucwords($_POST["supplier_name"]),
-                                            "supplier_nif" => strtoupper($_POST["supplier_nif"]),
-                                            "supplier_address" => $_POST["supplier_address"],
-                                            "supplier_postal_code" => $_POST["supplier_postal_code"],
-                                            "supplier_town" => ucwords($_POST["supplier_town"]),
-                                            "supplier_province" => ucfirst($_POST["supplier_province"]),
-                                            "supplier_country" => ucwords($_POST["supplier_country"]),
-                                            "supplier_phone" => $_POST["supplier_phone"],
-                                            "supplier_email" => strtolower($_POST["supplier_email"]),
-                                            "supplier_web" => strtolower($_POST["supplier_web"]),
-                                            "supplier_contact_person" => ucwords($_POST["supplier_contact_person"]) );
+                                            "supplier_name" => trim(ucwords($_POST["supplier_name"])),
+                                            "supplier_nif" => trim(strtoupper($_POST["supplier_nif"])),
+                                            "supplier_address" => trim($_POST["supplier_address"]),
+                                            "supplier_postal_code" => trim($_POST["supplier_postal_code"]),
+                                            "supplier_town" => trim(ucwords($_POST["supplier_town"])),
+                                            "supplier_province" => trim(ucfirst($_POST["supplier_province"])),
+                                            "supplier_country" => trim(ucwords($_POST["supplier_country"])),
+                                            "supplier_phone" => trim($_POST["supplier_phone"]),
+                                            "supplier_email" => trim(strtolower($_POST["supplier_email"])),
+                                            "supplier_web" => trim(strtolower($_POST["supplier_web"])),
+                                            "supplier_contact_person" => trim(ucwords($_POST["supplier_contact_person"])) 
+                                        );
 
                             $createRegister = SupplierModel::mdlCreateSupplier($table, $data);
                             return $createRegister;
@@ -65,7 +66,7 @@
          * @param
          * @return
          */
-        static public function ctrUpdateSupplier($table, $key, $value) {
+        static public function ctrUpdateSupplier($table, $key, $value) {        // Nota: método excesivamente grande, dividir en dos.
             $validationsOk = "ko"; 
             try {
                 if(isset($_POST["supplier_submit"]) && $key = "token") {
@@ -112,19 +113,20 @@
                         }
 
                         if($validationsOk == "ok") {
-                            $newToken = md5(ucwords($_POST["supplier_name"]) . "+" . strtoupper($_POST["supplier_nif"])); // Se genera nuevo token para seguridad informática.
+                            $newToken = md5(trim(ucwords($_POST["supplier_name"])) . "+" . trim(strtoupper($_POST["supplier_nif"]))); // Se genera nuevo token para seguridad informática.
                             $data = array(  "newToken"=> $newToken,
-                                            "supplier_name" => ucwords($_POST["supplier_name"]),
-                                            "supplier_nif" => strtoupper($_POST["supplier_nif"]),
-                                            "supplier_address" => $_POST["supplier_address"],
-                                            "supplier_postal_code" => $_POST["supplier_postal_code"],
-                                            "supplier_town" => ucwords($_POST["supplier_town"]),
-                                            "supplier_province" => ucfirst($_POST["supplier_province"]),
-                                            "supplier_country" => ucwords($_POST["supplier_country"]),
-                                            "supplier_phone" => $_POST["supplier_phone"],
-                                            "supplier_email" => strtolower($_POST["supplier_email"]),
-                                            "supplier_web" => strtolower($_POST["supplier_web"]),
-                                            "supplier_contact_person" => ucwords($_POST["supplier_contact_person"]) );
+                                            "supplier_name" => trim(ucwords($_POST["supplier_name"])),
+                                            "supplier_nif" => trim(strtoupper($_POST["supplier_nif"])),
+                                            "supplier_address" => trim($_POST["supplier_address"]),
+                                            "supplier_postal_code" => trim($_POST["supplier_postal_code"]),
+                                            "supplier_town" => trim(ucwords($_POST["supplier_town"])),
+                                            "supplier_province" => trim(ucfirst($_POST["supplier_province"])),
+                                            "supplier_country" => trim(ucwords($_POST["supplier_country"])),
+                                            "supplier_phone" => trim($_POST["supplier_phone"]),
+                                            "supplier_email" => trim(strtolower($_POST["supplier_email"])),
+                                            "supplier_web" => trim(strtolower($_POST["supplier_web"])),
+                                            "supplier_contact_person" => trim(ucwords($_POST["supplier_contact_person"])) 
+                                        );
                             
                             $updateSupplier = SupplierModel::mdlUpdateSupplier($table, $key, $value, $data);
                             return $updateSupplier;     

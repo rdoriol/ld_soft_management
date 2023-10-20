@@ -1,5 +1,6 @@
 <?php 
     require_once "validations_general.controller.php";
+    
     /**
      * Clase para implementar métodos devalidaciones para carpeta "03.inventory"
      */

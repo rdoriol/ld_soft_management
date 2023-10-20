@@ -197,14 +197,14 @@
        
         /* Bloque condicional para lanzar ventana modal en función del éxito de la operación realizada
         ---------------------------------------------------------------------------------------------*/
-      if($updateSupplier) { 
+      if($updateSupplier) {  
 
-        $newToken = md5(ucwords($_POST["supplier_name"] . "+" . strtoupper($_POST["supplier_nif"])));   // Se genera nuevo token para poder recargar página con datos actualizados.        
+        $newToken = md5(trim(ucwords($_POST["supplier_name"]) . "+" . trim(strtoupper($_POST["supplier_nif"]))));   // Se genera nuevo token para poder recargar página con datos actualizados.        
 
           // 1º se guarda estado de la actualización/borrado en variable de sesión para a continuación poder lanzar ventana modal al recargar página.
           // 2º se refresca página con datos del registro actualizados. 
         echo "<script>
-                window.sessionStorage.setItem('modalAlert', 'true');
+                window.sessionStorage.setItem('modalAlert', 'true');                
                 window.location.replace('index.php?pages=01-newSupplier&token=$newToken');
               </script>";   
       }

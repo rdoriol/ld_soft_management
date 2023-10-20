@@ -26,7 +26,7 @@
         /**
          * Función que conectará con fichero php "ajax/ajax_search_subwindow"
          */
-        function getRegisterSupplierAjax() {                console.log("entra");
+        function getRegisterSupplierAjax(token=null) {                console.log("entra");
     
             var tokenValue = $("#tokenSupplier").val(); // Se obtiene valor a buscar en la base de datos
 console.log(tokenValue);

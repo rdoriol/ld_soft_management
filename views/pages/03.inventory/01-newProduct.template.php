@@ -4,8 +4,7 @@
       // Condición para controlar si se muestran datos en el formulario o se muestra en blanco
   if((isset($_GET["token"]) && !empty($_GET["token"])) || (isset($_POST["tokenProduct"]) && !empty($_POST["tokenProduct"]))) {                                    
     $productData = InventoryController::ctrToListProduct("products", "token_product", $_GET["token"]);     // se llama a función para leer datos de la tabla "products"      
-  }       
-
+  }
      // script javascript para lanzar ventana modal confirmando actualizaciones o eliminaciones.
     echo "<script>
     if(window.sessionStorage.getItem('modalAlert') == 'true') {
@@ -21,7 +20,7 @@
 
 <h2 class="li_active_page rounded">Ficha Productos</h2>
 
-<form class="general_forms" id="new_supplier_form" action="<?php $_SERVER['REQUEST_URI']; ?>" method="post" onsubmit="">
+<form class="general_forms" id="new_supplier_form" action="<?php echo $SESSION['PHP_SELF']; ?>" method="post" onsubmit="">
   <h4 class="forms_subtitle rounded">Altas | Modificar | Eliminar</h4>
     
                                             <!-- Lista de botones "Buscar" e "Imprimir" -->
@@ -37,7 +36,7 @@
         <label class="forms_label" for="product_id">Id Producto</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-list-ol forms_icons"></i>
-          <input type="text" class="forms_inputs" id="product_id" name="product_id" placeholder="" disabled value="<?php echo $productData[0]->id_product ?>" />
+          <input type="text" class="forms_inputs" id="product_id" name="product_id" placeholder="" disabled value="<?php echo $productData[0]->id_product; ?>" />
         </div>      
     </div>
 
@@ -46,12 +45,14 @@
         <div class="forms_inputs_fields">
             <i class="fa-solid fa-house forms_icons"></i> 
 
-            <select class="" id="" name="select_item_category"> <?php echo "hola"; ?> <!-- //todo-> DUDA PELUDA DONDE SE COLOCA EL id para recibir dato AJAX -->
+            <select class="" id="" name="select_item_category"> 
                 <option id="select_item_category" value="<?php echo $productData[0]->id_product_category; ?>" selected><?php echo $productData[0]->name_product_category; ?></option>
-                <?php                  // Select con categoría de productos almacenada en la tabla "product_categories" de la base de datos
-                  $selectCategory = InventoryController::ctrToListCategoryProduct("product_categories", null);                                     
+               
+                <?php                  
+                  $selectCategory = InventoryController::ctrToListCategoryProduct("product_categories", null); // Select con categoría de productos almacenada en la tabla "product_categories" de la base de datos
                   foreach($selectCategory as $item):
                 ?>
+
                 <option value="<?php echo $item->id_product_category; ?>"><?php echo $item->name_product_category; ?></option>
                <?php endforeach; ?>
             </select>
@@ -63,7 +64,7 @@
         <label class="forms_label" for="product_created_date">Fecha registro</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-calendar-days forms_icons"></i>
-          <input type="text" class="forms_inputs" id="product_created_date" name="product_created_date" placeholder="" disabled value="<?php echo $productData[0]->created_date_product ?>" />
+          <input type="text" class="forms_inputs" id="product_created_date" name="product_created_date" placeholder="" disabled value="<?php echo $productData[0]->created_date_product; ?>" />
         </div>      
     </div>
   </fieldset>
@@ -75,7 +76,7 @@
         <label class="forms_label" for="or_original_product">Referencia Original</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-address-card forms_icons"></i>
-          <input type="text" class="forms_inputs" id="or_original_product" name="or_original_product" placeholder="C2540A" value="<?php echo $productData[0]->or_product ?>"/>
+          <input type="text" class="forms_inputs" id="or_original_product" name="or_original_product" placeholder="C2540A" value="<?php echo $productData[0]->or_product; ?>"/>
         </div>      
       </div> 
 
@@ -83,7 +84,7 @@
         <label class="forms_label" for="product_name">Nombre Producto</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-user forms_icons"></i>
-          <input type="text" class="forms_inputs" id="product_name" name="product_name" placeholder="Tóner laser HP" value="<?php echo $productData[0]->name_product ?>" />
+          <input type="text" class="forms_inputs" id="product_name" name="product_name" placeholder="Tóner laser HP" value="<?php echo $productData[0]->name_product; ?>" />
         </div>      
       </div>
 
@@ -91,7 +92,7 @@
         <label class="forms_label" for="product_description">Descripción producto</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-envelopes-bulk forms_icons"></i>
-          <input type="text" class="forms_inputs" id="product_description" name="product_description" placeholder="Ej: Compatible con impresoras..." value="<?php echo $productData[0]->description_product ?>"/>
+          <input type="text" class="forms_inputs" id="product_description" name="product_description" placeholder="Ej: Compatible con impresoras..." value="<?php echo $productData[0]->description_product; ?>"/>
         </div>      
       </div>
     </div>
@@ -101,7 +102,7 @@
         <label class="forms_label" for="product_unit">Unidades</label>  
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-tree-city forms_icons"></i>
-          <input type="text" class="forms_inputs" id="product_unit" name="product_unit" placeholder="" disabled value="<?php echo $productData[0]->units_product ?>">
+          <input type="text" class="forms_inputs" id="product_unit" name="product_unit" placeholder="" disabled value="<?php echo $productData[0]->units_product; ?>">
         </div>      
       </div>
 
@@ -109,7 +110,7 @@
         <label class="forms_label" for="last_cost_product">Último coste producto</label> 
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-city forms_icons"></i>
-          <input type="text" class="forms_inputs" id="last_cost_product" name="last_cost_product" placeholder="" disabled value="<?php echo $productData[0]->last_unit_cost_product ?>"/>
+          <input type="text" class="forms_inputs" id="last_cost_product" name="last_cost_product" placeholder="" disabled value="<?php echo $productData[0]->last_unit_cost_product; ?>"/>
         </div>      
       </div>
 
@@ -117,7 +118,7 @@
         <label class="forms_label" for="sale_price_product">Precio de venta</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-earth-americas forms_icons"></i>
-          <input type="text" class="forms_inputs" id="sale_price_product" name="sale_price_product" placeholder="" value="<?php echo $productData[0]->sale_price_product ?>"/>
+          <input type="text" class="forms_inputs" id="sale_price_product" name="sale_price_product" placeholder="" value="<?php echo $productData[0]->sale_price_product; ?>"/>
         </div>      
       </div>     
 
@@ -194,15 +195,15 @@
        
         /* Bloque condicional para lanzar ventana modal en función del éxito de la operación realizada
         ---------------------------------------------------------------------------------------------*/
-      if($updateProduct == "true") { 
+      if($updateProduct == "true") {                
 
-        $newToken = md5(ucwords($_POST["product_name"] . "+" . strtoupper($_POST["or_original_product"])));   // Se genera nuevo token para poder recargar página con datos actualizados.        
+        $newToken = md5(ucfirst($_POST["product_name"] . "+" . strtoupper($_POST["or_original_product"])));   // Se genera nuevo token para poder recargar página con datos actualizados.        
 
           // 1º se guarda estado de la actualización/borrado en variable de sesión para a continuación poder lanzar ventana modal al recargar página.
-          // 2º se refresca página con datos del registro actualizados. 
+          // 2º se refresca página con datos del registro actualizado. 
         echo "<script>
                 window.sessionStorage.setItem('modalAlert', 'true');
-                window.location.replace('index.php?pages=01-newProduct&token=$newToken');
+                window.location.replace('index.php?pages=01-newProduct');
               </script>";   
       }
       else if($checkDeleteProduct == "true") {

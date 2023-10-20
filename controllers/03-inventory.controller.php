@@ -15,21 +15,11 @@
             try {
                 if(isset($_POST["btn_product_submit"])) {     
                     if(!empty($_POST["select_item_category"]) && !empty($_POST["or_original_product"]) && !empty($_POST["product_name"])) { 
+                            
+                            // Se lanza método para validar formatos y campos coincidentes de los valores del formulario
+                        $validationsOK = self::validateProductFields($table);
 
-                            // Método para comprobar valores coincidentes en base de datos.
-                       $existsOrProduct =  InventaryValidationController::existInventoryField($table, "or_product", $_POST["or_original_product"]); 
-    
-                            // Método para validar formatos de campos del formulario.
-                        //todo $validateFormatFields = ValidationController::validateFieldsFormats($_POST["supplier_nif"], $_POST["supplier_postal_code"], $_POST["supplier_phone"], $_POST["supplier_email"], $_POST["supplier_town"], $_POST["supplier_province"], $_POST["supplier_country"]); 
-                       
-                        if($existsOrProduct == "false") { 
-                            $validationsOk = "ok"; 
-                        }
-                        else { 
-                            echo "<div class='text-center alert-danger rounded'><p>La <b><i>Ref. Original</i></b> introducida ya existe en la base de datos.</p></div>";
-                        }//todo SEGUIR POR AQUÍ
-
-                        if($validationsOk == "ok") {
+                        if($validationsOK == "ok") {
                             $token = md5(ucfirst($_POST["product_name"]) . "+" . strtoupper($_POST["or_original_product"])); // Se genera token para seguridad informática.
 
                             $data = array(  "token"=> $token,
@@ -46,7 +36,7 @@
                         else {
                             echo "<div class='text-center alert-warning rounded'><p class='font-weight-bold'>REGISTRO NO GRABADO</p></div>";
                         }
-                        
+                                        
                     }
                     else {
                         echo "<div class='text-center alert-danger rounded'><p class='font-weight-bold'>No grabado.</p><p class='font-weight-bold'>Los siguientes campos son obligatorios:</p><ul><li>Categoría producto</li><li>Referencia original</li><li>Nombre Producto</li></ul></div>";
@@ -57,8 +47,6 @@
                 echo "Error ctrCreateProduct(). Error: " . $ex->getMessage();
             }
         }
-
-    
 
         /**
          * Método que recibirá solicitud de listado de la "Vista" y que se comunicará con el "Modelo" para obtener los datos de la base de datos.
@@ -105,22 +93,24 @@
          * @param
          * @return
          */
-        static public function ctrUpdateProduct($table, $key, $value) {         
+        static public function ctrUpdateProduct($table, $key, $value) {       
+            $validationsUpdate = "ko";  
             try {
                 if(isset($_POST["btn_product_submit"]) && $key == "token_product") {  
                     if(!empty($_POST["select_item_category"]) && !empty($_POST["or_original_product"]) && !empty($_POST["product_name"])) {                           
     
                             // Bloque para comprobar que el token de la vista coincide con el token almacenado en la base de datos [seguridad informática]
                         $oldToken = InventoryModel::mdlToListProduct($table, $key, $value);
-                        $checkToken = md5($oldToken[0]->name_product . "+" . $oldToken[0]->or_product);
-                       
+                        $checkToken = md5(ucfirst($oldToken[0]->name_product) . "+" . strtoupper($oldToken[0]->or_product));
+              
                         if($checkToken == $value) {       
                                 // bloque para validaciones                            
-                            //todo $validateFormatFields = ValidationController::validateFieldsFormats($_POST["supplier_nif"], $_POST["supplier_postal_code"], $_POST["supplier_phone"], $_POST["supplier_email"], $_POST["supplier_town"], $_POST["supplier_province"], $_POST["supplier_country"]); // Método para validar formatos de campos del formulario. 
+                            $validationsUpdate = self::validateProductFields($table, $key, $value);
                                
-                           //todo if($validateFormatFields == "true" ) {  // TODO. Pendiente de mejora personal: Implementar validación de nombres coincidentes en base de datos (en función de si es cliente tipo particular o empresa)
+                           if($validationsUpdate == "ok" ) { 
         
-                                $newToken = md5(ucwords($_POST["product_name"]) . "+" . strtoupper($_POST["or_original_product"])); // Se genera nuevo token para seguridad informática.
+                                $newToken = md5(trim(ucfirst($_POST["product_name"])) . "+" . trim(strtoupper($_POST["or_original_product"]))); // Se genera nuevo token para seguridad informática.
+             
                                 $data = array(  "newToken"=> $newToken,                                               
                                                 "select_item_category" => $_POST["select_item_category"],
                                                 "or_original_product" => strtoupper($_POST["or_original_product"]),
@@ -131,10 +121,10 @@
                                 
                                 $updateProduct = InventoryModel::mdlUpdateProduct($table, $key, $value, $data);
                                 return $updateProduct;
-                            //todo }
-                           //todo else {
-                                //todo echo "<div class='text-center alert-warning rounded'><p class='font-weight-bold'>REGISTRO NO GRABADO</p></div>";
-                           //todo  }
+                            }
+                            else {
+                                echo "<div class='text-center alert-warning rounded'><p class='font-weight-bold'>REGISTRO NO GRABADO</p></div>";
+                            }
                         }
                         else {
                             echo "<div class='text-center alert-danger rounded'><p>Error. Tokens no coinciden</p></div>";
@@ -183,4 +173,87 @@
             }
         }
 
-    }
+    
+
+        /**
+         * Método para lanzar validaciones de formatos y valores coincidentes en base de datos de los campos recibidos del formulario. 
+         * Se lanzará exclusivamente desde el interior de los métodos para crear y actualizar de 03-inventory.controller
+         * @param string @table
+         * @return string $checkValidations,  $checkFormat1,  $checkFormat2
+         */
+        static public function validateProductFields($table, $key=null, $value=null) {
+            $checkFormat1 = "ko";
+            $checkFormat2 = "ko";
+            $checkValidations = "ko";
+            try {
+                // La comprobación de que los valores recibidos no estén vacíos se realizará directamente en los métodos de crear y actualizar.
+                        
+                    // Bloque condicional para validar formatos
+                if(is_numeric($_POST["product_name"]) || is_numeric($_POST["product_description"])) {
+                    echo "<div class='text-center alert-danger rounded'><p>Los campos <b><i>Nombre Producto</i></b> y <b><i>Descripción Producto</i></b> deben contener caracteres alfanuméricos.</p></div>";
+                }
+                else {
+                    $checkFormat1 = "ok";
+                }
+                if(!empty($_POST["sale_price_product"]) && !is_numeric($_POST["sale_price_product"])) {
+                        echo "<div class='text-center alert-danger rounded'><p>El campo <b><i>Precio de venta</i></b> solo admite valores numéricos.</p></div>";
+                }
+                else {
+                    $checkFormat2 = "ok";
+                }
+
+                    // Una vez superada validaciones de formatos. Bloque condicional para validar valores coincidentes en la base de datos
+                    if($checkFormat1 == "ok" && $checkFormat2 == "ok"){   
+
+                        // Se carga listado de registros en la tabla productos, que será de utilidad para el método de actualizar
+                    $listProducts = self::ctrToListProduct($table, $key, $value);
+
+                            // Se lanzan métodos para comprobar valores coincidentes en base de datos.
+                    $existsOr =  InventaryValidationController::existInventoryField($table, "or_product", $_POST["or_original_product"]); 
+                    $existsName = InventaryValidationController::existInventoryField($table, "name_product", $_POST["product_name"]);
+                        
+                    // Si los valores no coinciden con los de la base de datos o son del mmismo registro
+                    if(($existsOr == "false" && $existsName == "false") || ($listProducts[0]->name_product == $_POST["product_name"] && $listProducts[0]->or_product == $_POST["or_original_product"]) ) { 
+                        $checkValidations = "ok";                      
+                    }
+                    else if ($existsOr == "true" && $existsName == "false") {
+                        if($listProducts[0]->or_product == $_POST["or_original_product"]) {
+                            $checkValidations = "ok";
+                        }
+                        else {
+                            echo "<div class='text-center alert-danger rounded'><p>La <b><i>Referencia Original</i></b> introducida ya existe en la base de datos.</p></div>";
+                        }
+                    }
+                    else if($existsOr == "false" && $existsName == "true") {  
+                        if($listProducts[0]->name_product == $_POST["product_name"]) {
+                            $checkValidations = "ok";
+                        }
+                        else {
+                            echo "<div class='text-center alert-danger rounded'><p>El <b><i>Nombre Producto Original</i></b> introducido ya existe en la base de datos.</p></div>";
+                        }  
+                    }
+                    else if($existsOr == "true" && $existsName == "true") {
+                        if($listProducts[0]->name_product != $_POST["product_name"] && $listProducts[0]->or_product == $_POST["or_original_product"]) {
+                            echo "<div class='text-center alert-danger rounded'><p>El <b><i>Nombre Producto Original</i></b> introducido ya existe en la base de datos.</p></div>";
+                        }
+                        else if($listProducts[0]->name_product == $_POST["product_name"] && $listProducts[0]->or_product != $_POST["or_original_product"]) {
+                            echo "<div class='text-center alert-danger rounded'><p>La <b><i>Referencia Original</i></b> introducida ya existe en la base de datos.</p></div>";
+                        }
+                        else if($listProducts[0]->name_product != $_POST["product_name"] && $listProducts[0]->or_product != $_POST["or_original_product"]) {
+                            echo "<div class='text-center alert-danger rounded'><p>La <b><i>Referencia Original</i></b> introducida ya existe en la base de datos.</p></div>";
+                            echo "<div class='text-center alert-danger rounded'><p>El <b><i>Nombre Producto Original</i></b> introducido ya existe en la base de datos.</p></div>";
+                        }
+                        else {
+                            $checkValidations = "ok";
+                        }
+                    }                                                                
+                }                                 
+                return $checkValidations;
+            }
+            catch(PDOException $ex) {
+                echo "Error validateProductFields(). Error: " . $ex->getMessage();
+            }
+        }
+
+    }   
+
