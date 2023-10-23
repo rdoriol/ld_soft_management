@@ -151,8 +151,12 @@
 
                     <!-- Mensajes ocultos de validaciones y realización de operaciones -->
     <div><p class="alert alert-success text-center hide_alert" id="alert_success">Operación realizada con éxito</p></div>
-                   
-    <div class='text-center alert-danger rounded name_field_duplicate'><p>El <i><b>Nombre</b></i> introducido ya existe en la base de datos.</p></div>
+    
+    <div class='text-center alert-danger rounded require_fields'><p class='font-weight-bold'>Los siguientes campos son obligatorios:</p><ul><li>Categoría producto</li><li>Referencia original</li><li>Nombre Producto</li></ul></div>
+    
+    <div class='text-center alert-danger rounded name_field_duplicate'><p>La <i><b>Referencia Original</b></i> introducida ya existe en la base de datos.</p></div>
+
+    <div class='text-center alert-danger rounded nif_field_duplicate'><p>El <i><b>Nombre</b></i> introducido ya existe en la base de datos.</p></div>
     
     <div class='text-center alert-danger rounded error_format_nif'><p>El formato del campo <b><i>NIF</i></b> es erroneo<br>Ejemplos válidos: Dni 12345678X / Cif B12345678 / NIE X1234567S</p></div>
     

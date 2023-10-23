@@ -6,7 +6,7 @@
     
 
     /**
-    * 
+    * Clase para validaciones vía Ajax con base de datos
     */
     class AjaxValidation {
 
@@ -30,37 +30,47 @@
         }
     }
 
-    /**
-     * Objeto que recibirá variable POST de "AJAX.js" y lanzará función php "checkhFieldAjax()" para tabla Customers
-     */
-    if(isset($_POST["name_customer_form"]) && !empty($_POST["name_customer_form"])) {
-        $ajaxObject = new AjaxValidation();
-        $ajaxObject->customerFieldMatch = $_POST["name_customer_form"];
-        $ajaxObject->checkFieldAjax("customers", "name_customer");
-       
-    }
 
-    if(isset($_POST["name_nif_form"]) && !empty($_POST["name_nif_form"])) {
-        $ajaxObject = new AjaxValidation();
-        $ajaxObject->customerFieldMatch = $_POST["name_nif_form"];
-        $ajaxObject->checkFieldAjax("customers", "nif_cif");}
 
     /**
-     * Objeto que recibirá variable POST de "AJAX.js" y lanzará función php "checkhFieldAjax()" para tabla Suppliers
+     * Bloque para llamar a función Ajax según el name del formulario recibido
      */
-    if(isset($_POST["name_supplier_form"]) && !empty($_POST["name_supplier_form"])) {
-        $ajaxObject = new AjaxValidation();
-        $ajaxObject->customerFieldMatch = $_POST["name_supplier_form"];
-        $ajaxObject->checkFieldAjax("suppliers", "name_supplier");
+
+            // Se captura el name recibido y se almacena en variable para itilizarla en una condición switch case
+    foreach(array_keys($_POST) as $name) {
+        $postName = $name;
+    }     
+                
+    switch ($postName) {
+           
+        // Bloque que recibirá variable $_POST y lanzará función php "checkhFieldAjax" para tabla Customers
+        case "name_customer_form":
+            $ajaxObject = new AjaxValidation();
+            $ajaxObject->customerFieldMatch = $_POST["name_customer_form"];
+            $ajaxObject->checkFieldAjax("customers", "name_customer");
+            break;
+        case "name_nif_form":
+            $ajaxObject = new AjaxValidation();
+            $ajaxObject->customerFieldMatch = $_POST["name_nif_form"];
+            $ajaxObject->checkFieldAjax("customers", "nif_cif");
+            break;
+            
+            // Bloque que recibirá variable $_POST y lanzará función php "checkhFieldAjax" para tabla Suppliers
+        case "name_supplier_form":
+            $ajaxObject = new AjaxValidation();
+            $ajaxObject->customerFieldMatch = $_POST["name_supplier_form"];
+            $ajaxObject->checkFieldAjax("suppliers", "name_supplier");
+            break;
+        case "nif_supplier_form":
+            $ajaxObject = new AjaxValidation();
+            $ajaxObject->customerFieldMatch = $_POST["nif_supplier_form"];
+            $ajaxObject->checkFieldAjax("suppliers", "nif");
+            break;
+
+        defautl: echo "no se ha recibido valor name";
+
     }
-
-    if(isset($_POST["nif_supplier_form"]) && !empty($_POST["nif_supplier_form"])) {
-        $ajaxObject = new AjaxValidation();
-        $ajaxObject->customerFieldMatch = $_POST["nif_supplier_form"];
-        $ajaxObject->checkFieldAjax("suppliers", "nif");
-    }
-
-
+    
     
 
 

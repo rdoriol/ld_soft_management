@@ -4,7 +4,7 @@
     /**
      * Clase para implementar métodos devalidaciones para carpeta "03.inventory"
      */
-    class InventaryValidationController {
+    class InventoryValidationController {
 
         static public function existInventoryField($table, $key, $value) {
             $check = "false";

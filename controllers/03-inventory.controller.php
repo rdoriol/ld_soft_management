@@ -1,5 +1,5 @@
 <?php
-    require_once "04-inventoryValidations.controller.php";
+    require_once "04-inventory_validations.controller.php";
 
      /**
      * Clase que implementará métodos para realizar CRUD recibiendo datos de la Vista y enviándolos al Modelo.
@@ -209,8 +209,8 @@
                     $listProducts = self::ctrToListProduct($table, $key, $value);
 
                             // Se lanzan métodos para comprobar valores coincidentes en base de datos.
-                    $existsOr =  InventaryValidationController::existInventoryField($table, "or_product", $_POST["or_original_product"]); 
-                    $existsName = InventaryValidationController::existInventoryField($table, "name_product", $_POST["product_name"]);
+                    $existsOr =  InventoryValidationController::existInventoryField($table, "or_product", $_POST["or_original_product"]); 
+                    $existsName = InventoryValidationController::existInventoryField($table, "name_product", $_POST["product_name"]);
                         
                     // Si los valores no coinciden con los de la base de datos o son del mmismo registro
                     if(($existsOr == "false" && $existsName == "false") || ($listProducts[0]->name_product == $_POST["product_name"] && $listProducts[0]->or_product == $_POST["or_original_product"]) ) { 

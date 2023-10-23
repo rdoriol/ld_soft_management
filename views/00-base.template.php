@@ -133,7 +133,7 @@
     <script src="./views/pages/02.suppliers/07-suppliers_prints.js"></script>
 
     <script src="./views/pages/03.inventory/06-inventory.js"></script>
-    <script src="./views/pages/03.inventory/07-inventory_validations.js"></script>
+    <script src="./views/pages/03.inventory/07-inventory_validations.js"></script>    
     <script src="./views/pages/03.inventory/08-inventory_prints.js"></script>
 
   </body>
