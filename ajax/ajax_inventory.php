@@ -10,6 +10,7 @@
     class AjaxInventoryValidation {
 
         public $productFieldMatch;
+                                    public $tokenProductValue;
 
         /**
          * Método para comprobar con AJAX si el valor introducido en formulario ya existe en la base de datos.
@@ -19,8 +20,10 @@
         public function checkInventoryFieldAjax($table, $key) {
             $check = "false";
             try {      
-                $value = $this->productFieldMatch;     // Se almacena en variable valor obtenido del formulario.        
-                $check = InventoryValidationController::existInventoryField($table, $key, $value);    // Se lanza función para comprobar coincidencias de campos existentes.                
+                $value = $this->productFieldMatch;      // Se almacena en variable valor obtenido del formulario.   
+                            $tokenValue = $this->tokenProductValue;      // Se almacena en variable valor token
+                $check = InventoryValidationController::existInventoryField($table, $key, $value, $tokenValue);    // Se lanza función para comprobar coincidencias de campos existentes.                
+                
                 echo json_encode($check);
             }
             catch(PDOException $ex) {
@@ -34,6 +37,13 @@
      */
     if(isset($_POST["ref_name_form"]) && !empty($_POST["ref_name_form"])) { 
         $inventoryObject = new AjaxInventoryValidation();
-        $inventoryObject->productFieldMatch = $_POST["ref_name_form"]; 
+        $inventoryObject->productFieldMatch = $_POST["ref_name_form"];
+        $inventoryObject->tokenProductValue = $_POST["tokenProduct"];
         $inventoryObject->checkInventoryFieldAjax("products", "or_product");
+    }
+    else if(isset($_POST["product_name_form"]) && !empty($_POST["product_name_form"])) {
+        $inventoryObject = new AjaxInventoryValidation();
+        $inventoryObject->productFieldMatch = $_POST["product_name_form"];
+        $inventoryObject->tokenProductValue = $_POST["tokenProduct"];
+        $inventoryObject->checkInventoryFieldAjax("products", "name_product");
     }

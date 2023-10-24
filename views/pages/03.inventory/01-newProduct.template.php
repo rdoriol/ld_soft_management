@@ -20,7 +20,7 @@
 
 <h2 class="li_active_page rounded">Ficha Productos</h2>
 
-<form class="general_forms" id="new_supplier_form" action="<?php echo $SESSION['PHP_SELF']; ?>" method="post" onsubmit="">
+<form class="general_forms" id="new_product_form" action="<?php echo $SESSION['PHP_SELF']; ?>" method="post" onsubmit="">
   <h4 class="forms_subtitle rounded">Altas | Modificar | Eliminar</h4>
     
                                             <!-- Lista de botones "Buscar" e "Imprimir" -->
@@ -45,8 +45,8 @@
         <div class="forms_inputs_fields">
             <i class="fa-solid fa-house forms_icons"></i> 
 
-            <select class="" id="" name="select_item_category"> 
-                <option id="select_item_category" value="<?php echo $productData[0]->id_product_category; ?>" selected><?php echo $productData[0]->name_product_category; ?></option>
+            <select class="" id="select_item_category" name="select_item_category"> 
+                <option id="select_item_category99" value="<?php echo $productData[0]->id_product_category; ?>" selected><?php echo $productData[0]->name_product_category; ?></option>
                
                 <?php                  
                   $selectCategory = InventoryController::ctrToListCategoryProduct("product_categories", null); // Select con categoría de productos almacenada en la tabla "product_categories" de la base de datos
@@ -154,11 +154,15 @@
     
     <div class='text-center alert-danger rounded require_fields'><p class='font-weight-bold'>Los siguientes campos son obligatorios:</p><ul><li>Categoría producto</li><li>Referencia original</li><li>Nombre Producto</li></ul></div>
     
-    <div class='text-center alert-danger rounded name_field_duplicate'><p>La <i><b>Referencia Original</b></i> introducida ya existe en la base de datos.</p></div>
+    <div class='text-center alert-danger rounded or_field_duplicate'><p>La <i><b>Referencia Original</b></i> introducida ya existe en la base de datos.</p></div>
 
-    <div class='text-center alert-danger rounded nif_field_duplicate'><p>El <i><b>Nombre</b></i> introducido ya existe en la base de datos.</p></div>
+    <div class='text-center alert-danger rounded error_format_name'><p>El formato del campo <b><i>Nombre</i></b> es erroneo<br>Solo admite caracteres alfanuméricos</p></div>
+
+    <div class='text-center alert-danger rounded name_field_duplicate'><p>El <i><b>Nombre</b></i> introducido ya existe en la base de datos.</p></div>
     
-    <div class='text-center alert-danger rounded error_format_nif'><p>El formato del campo <b><i>NIF</i></b> es erroneo<br>Ejemplos válidos: Dni 12345678X / Cif B12345678 / NIE X1234567S</p></div>
+    <div class='text-center alert-danger rounded error_format_description'><p>El formato del campo <b><i>Descripción producto</i></b> es erroneo<br>Solo admite caracteres alfanuméricos</p></div>
+
+    <div class='text-center alert-danger rounded error_format_sales_price'><p>El formato del campo <b><i>Precio de venta</i></b> es erroneo<br>Solo admite caracteres numéricos</p></div>
     
                      <!-- -------------------------------------------------------------  -->
                      

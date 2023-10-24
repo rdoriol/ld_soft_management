@@ -6,7 +6,7 @@
      */
     class InventoryValidationController {
 
-        static public function existInventoryField($table, $key, $value) {
+        static public function existInventoryField($table, $key, $value, $tokenValueForm=null) {
             $check = "false";
             try {                   
                 $matchValue1 = ValidationController::removeAccents($value);  
@@ -16,9 +16,13 @@
 
                 foreach($value2 as $item) {  
                     $matchValue2 = ValidationController::removeAccents(strtolower($item->$key)); 
+                    
                                                                                        
                     if(strcasecmp($matchValue1, $matchValue2) === 0) {    
-                        $check = "true";    // valores coincidentes 
+                        $valueToken = $item->token_product;
+                        if($valueToken != $tokenValueForm) {
+                            $check = "true";    // valores coincidentes con otro registro de la base de datos
+                        }
                     }
                 }            
                 return $check;

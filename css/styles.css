@@ -354,6 +354,21 @@ footer h3 {
     display: none;
 }
 
+.or_field_duplicate {
+    display: none;
+}
+.error_format_name {
+    display: none;
+}
+
+.error_format_description {
+    display: none;
+}
+
+.error_format_sales_price {
+    display: none;
+}
+
 
 
 
