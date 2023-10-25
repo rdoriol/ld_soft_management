@@ -2,11 +2,11 @@
  * Fichero para validaciones de formulario Product vía .js y AJAX
  */
 
-    // Se inicializan variables para chequear formatos y coincidencias de los campos del form
-var checkOr = false;
-var checkName = false; 
-var checkDescription = false;
-//var checkSalePrice  = false;
+    // Se inicializan variables para chequear formatos y coincidencias de los campos del form. (Se inicializan a true para evitar problemas con métodos de otros ficheros)
+var checkOr = true;
+var checkName = true; 
+var checkDescription = true;
+var checkSalePrice  = true;
 
 $(document).ready(function(){
 
@@ -19,12 +19,12 @@ $(document).ready(function(){
 
         $(selector).bind("keyup", function() {
             var value = $(this).val();
-                                            var tokenValue = $("#tokenProduct").val();
+            var tokenValue = $("#tokenProduct").val();
                                            
             var dataForm = new FormData();     
 
             dataForm.append(nameForm, value);
-                                            dataForm.append("tokenProduct", tokenValue);                     
+            dataForm.append("tokenProduct", tokenValue);                     
 
             $.ajax({                                  
                 url: "./ajax/ajax_inventory.php",
@@ -34,7 +34,7 @@ $(document).ready(function(){
                 contentType: false,
                 processData: false,
                 dataType: "json",
-                success: function(request) {                     console.log("que llega de php por ajax: " + request);  
+                success: function(request) {                    
                             if(request) {  
                                 sentProductMessages(selector, request); // Si hay respuesta AJAX se lanza función para mostrar mensajes de error
                             }
@@ -115,7 +115,7 @@ $(document).ready(function(){
             if(!isNaN($(this).val())) {              
                 checkKo(this);
                 $(".error_format_description").css("display", "block"); 
-                checkDescription = false; // Se almacena como campo válido (no es obligatorio)
+                checkDescription = false; 
             }
             else {
                 cleanCheck(this);
@@ -138,7 +138,7 @@ $(document).ready(function(){
                 if(isNaN($(this).val())) {              
                     checkKo(this);
                     $(".error_format_sales_price").css("display", "block"); 
-                    checkSalePrice = false; // Se almacena como campo válido (no es obligatorio)
+                    checkSalePrice = false;
                 }
                 else {
                     cleanCheck(this);
@@ -156,12 +156,12 @@ $(document).ready(function(){
     function checkEmptyFields() {
         var emptyCategory = false; var emptyOr = false; var emptyName = false; var checkAllFields = false;
 
-            if($("#select_item_category").val() == "") {
-                checkKo("#select_item_category");
+            if($("#father_select_item_category").val() == "") {
+                checkKo("#father_select_item_category");
                 $(".require_fields").css("display", "block");           
             }
             else {
-                cleanCheck("#select_item_category");
+                cleanCheck("#father_select_item_category");
                 $(".require_fields").css("display", "none");
                 emptyCategory = true;
             }
@@ -193,8 +193,8 @@ $(document).ready(function(){
     /**
      * Función que capturará evento submit del formulario y le permitirá enviar datos del formulario según resultado de las validaciones
      */
-   // $("#btn_product_submit").click(function(){
-    $("#new_product_form").submit(function(){
+    $("#btn_product_submit").click(function(){
+    //$("#new_product_form").submit(function(){
             // Se lanza función para comprobar valores vacíos en campos obligatorios"
         var emptyFields = checkEmptyFields();
 

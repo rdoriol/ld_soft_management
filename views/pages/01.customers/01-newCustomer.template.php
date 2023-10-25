@@ -221,7 +221,7 @@
                 window.location.replace('index.php?pages=01-newCustomer&token=$newToken');
               </script>";   
       } 
-      else if($checkDeleteRegister == "true") {
+      else if($checkDeleteRegister == "true" || $createRegister == "true") {
             echo "<script>
                     window.sessionStorage.setItem('modalAlert', 'true'); 
                     window.location.replace('index.php?pages=01-newCustomer');

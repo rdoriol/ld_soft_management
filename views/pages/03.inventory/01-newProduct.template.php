@@ -4,6 +4,7 @@
       // Condición para controlar si se muestran datos en el formulario o se muestra en blanco
   if((isset($_GET["token"]) && !empty($_GET["token"])) || (isset($_POST["tokenProduct"]) && !empty($_POST["tokenProduct"]))) {                                    
     $productData = InventoryController::ctrToListProduct("products", "token_product", $_GET["token"]);     // se llama a función para leer datos de la tabla "products"      
+    $productData = InventoryController::ctrToListProduct("products", "token_product", $_SESSION["tokenProduct"]);     // se llama a función para leer datos de la tabla "products"      
   }
      // script javascript para lanzar ventana modal confirmando actualizaciones o eliminaciones.
     echo "<script>
@@ -16,7 +17,6 @@
   </script>"; 
       
 ?>
-
 
 <h2 class="li_active_page rounded">Ficha Productos</h2>
 
@@ -45,8 +45,8 @@
         <div class="forms_inputs_fields">
             <i class="fa-solid fa-house forms_icons"></i> 
 
-            <select class="" id="select_item_category" name="select_item_category"> 
-                <option id="select_item_category99" value="<?php echo $productData[0]->id_product_category; ?>" selected><?php echo $productData[0]->name_product_category; ?></option>
+            <select class="" id="father_select_item_category" name="select_item_category"> 
+                <option id="select_item_category" value="<?php echo $productData[0]->id_product_category; ?>" selected><?php echo $productData[0]->name_product_category; ?></option>
                
                 <?php                  
                   $selectCategory = InventoryController::ctrToListCategoryProduct("product_categories", null); // Select con categoría de productos almacenada en la tabla "product_categories" de la base de datos
@@ -140,13 +140,13 @@
       </div>
 
                 <!-- input oculto que recibirá valor de token de subventana -->
-        <input type="text" id="tokenProduct" name="tokenProduct" placeholder="tokenValue Subwindow" value="<?php echo $productData[0]->token_product; ?>" /> 
+        <input type="hidden" id="tokenProduct" name="tokenProduct" placeholder="tokenValue Subwindow" value="<?php echo $productData[0]->token_product; ?>" /> 
                 <!-- ------------------------------------------------------- -->
     </div>
     <div class="btn-group p-3 ">
       <button type="submit" class="btn btn-primary mr-5" id="btn_product_submit" name="btn_product_submit"><i class="fa-sharp fa-solid fa-pencil"></i>&nbsp Grabar</button> 
       <button type="button" role="link" class="btn btn-secondary mr-5" name="exit_product" onClick="window.location='index.php?pages=01-newProduct'"><i class="fa-sharp fa-solid fa-rectangle-xmark"></i>&nbsp Cerrar registro</button>
-      <button type="submit" class="btn btn-danger" name="delete_product"><i class="fa-sharp fa-solid fa-trash-can"></i>&nbsp Eliminar registro</button> 
+      <button type="submit" class="btn btn-danger" id="btn_product_delete" name="delete_product" data-toggle="modal" data-target="#delete_modal"><i class="fa-sharp fa-solid fa-trash-can"></i>&nbsp Eliminar registro</button> 
     </div>
 
                     <!-- Mensajes ocultos de validaciones y realización de operaciones -->
@@ -178,6 +178,7 @@
           </div>
       </div>
     </div>
+
  
 
     <?php 
@@ -214,7 +215,7 @@
                 window.location.replace('index.php?pages=01-newProduct');
               </script>";   
       }
-      else if($checkDeleteProduct == "true") {
+      else if($checkDeleteProduct == "true" || $createProduct == "true") {
             echo "<script>
                     window.sessionStorage.setItem('modalAlert', 'true'); 
                     window.location.replace('index.php?pages=01-newProduct');

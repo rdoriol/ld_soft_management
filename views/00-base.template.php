@@ -34,7 +34,7 @@
     
 </head>
 <body>
-
+                                                 
             <!-- HEADER
                  ---------------------->
     <?php include "01-header.template.php"; ?>
@@ -52,8 +52,15 @@
             <!-- CENTRAL MAIN CONTAINER
                  ------------------------>
       <section class="item_main_container item_main_container_section" id="main_container_section">
-          
-        <div class="text-center container" id="">
+
+        <div class="text-center container" id="">   
+                       
+            <!-- DELETE REGISTER MODAL
+                 ----------------------->
+              <?php include "05-modalDeleteRegister.template.php"; ?>
+
+            <!-- end delete register modal -->  
+
           <?php
               /**
                * Controlador frontal/lista blanca de todas las páginas (seguridad informática) de la aplicación web que se renderizarán por pantalla. (se alimenta de "02-mainNavBar.template.php").
@@ -112,10 +119,11 @@
         </div>
 
       </section>
-            <!-- end central main container -->
+            <!-- end central main container --> 
 
     </main>
 
+    
              <!-- FOOTER
                  ------------------------> 
     <?php include "03-footer.template.php"; ?>

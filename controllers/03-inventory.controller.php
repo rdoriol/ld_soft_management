@@ -143,10 +143,11 @@
         /**
          * Método que recibirá solicitud para eliminar de la "Vista" y se comunicará con "Modelo"para ejecturar la acción sobre la base de datos.
          */
-        public function ctrDeleteProduct($table, $key, $value) {
+        public function ctrDeleteProduct($table, $key, $value, $name=null) {
             $check = "false";
-            try {
-                if(isset($_POST["delete_product"]) && $key == "token_product") {                                   
+            
+            try {  
+                if( (isset($_POST["delete_product"]) || $name == "delete_product") && $key == "token_product") {                                   
                     if(!empty($_POST["select_item_category"]) && !empty($_POST["or_original_product"]) && !empty($_POST["product_name"])) {              
                         $actualToken = InventoryModel::mdlToListProduct($table, $key, $value);
                         $checkToken = md5($actualToken[0]->name_product . "+" . $actualToken[0]->or_product);
@@ -254,6 +255,51 @@
                 echo "Error validateProductFields(). Error: " . $ex->getMessage();
             }
         }
+
+
+
+  /**
+         * Método que recibirá solicitud para eliminar de la "Vista" y se comunicará con "Modelo"para ejecturar la acción sobre la base de datos.
+         */
+        public function ctrDeleteProduct22($table, $key, $value, $name=null) {
+            $check = "false";
+            
+            try {  
+                if( (isset($_POST["delete_product"]) || $name == "delete_product") && $key == "token_product") {                                   
+                              
+                        $actualToken = InventoryModel::mdlToListProduct($table, $key, $value);
+                        $checkToken = md5($actualToken[0]->name_product . "+" . $actualToken[0]->or_product);
+
+                        if($checkToken == $value) {    
+                            $deleteProduct = new CustomerModel();
+                            $deleteProduct->mdlDeleteRegister($table, $key, $value); 
+                                              
+                            $check = "true";
+                            return $check;
+                        }
+                        else {
+                             echo "<div class='text-center alert-danger rounded'><p>Error. Tokens no coinciden</p></div>";
+                        }
+                    
+                  
+                }
+                
+            }
+            catch(PDOException $ex) {
+                echo "Error interno ctrDeleteProduct. Error: " . $ex->getMessage();
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
 
     }   
 

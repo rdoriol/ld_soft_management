@@ -138,6 +138,15 @@ h2 {
     display: none;
 }
 
+        /* Delete Register Modal
+        ------------------------*/
+
+#delete_modal {
+   
+}
+
+
+
      /* END general styles
 --------------------------*/ 
 
@@ -169,6 +178,7 @@ h2 {
 .item_main_container_section {
     width: 87%;   
 }
+
 
      /* MAIN NAVEGATION BAR "base.template.php"
 -----------------------------------------------*/   

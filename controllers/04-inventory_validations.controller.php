@@ -21,7 +21,7 @@
                     if(strcasecmp($matchValue1, $matchValue2) === 0) {    
                         $valueToken = $item->token_product;
                         if($valueToken != $tokenValueForm) {
-                            $check = "true";    // valores coincidentes con otro registro de la base de datos
+                            $check = "true";    // valor coincidente con otro registro de la base de datos (no se permite)
                         }
                     }
                 }            

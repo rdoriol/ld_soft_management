@@ -12,6 +12,22 @@ $(document).ready(function(){
         var options = "width=550px, height=500px, top=100px, left=500px, resizable=no, scrollbars=no, location=no, directories=no";
         productWindow = window.open("index.php?pages=05-inventoryPopUpSearch", "Búsqueda", options); 
     })
+
+    /**
+     * Función que abrirá modal para preguntar a usario si desea eliminar registro seleccionado
+     */
+    $("#btn_product_delete").click(function(){
+        if($("#select_item_category").val() != "" && $("#or_original_product").val() != "" && $("#product_name").val() != "") {
+            $("#delete_modal").modal("show");
+            $("#btn_ok").click(function(){
+                $("#delete_modal").modal("hide");
+                deleteProductsAjax();
+                window.sessionStorage.setItem('modalAlert', 'true');
+                window.location.replace('index.php?pages=01-newProduct');
+            })                                        
+        }
+       return false;
+    })
 })
 
 /**
@@ -32,7 +48,7 @@ function getRegisterProductAjax() {
    
     var dataForm = new FormData(); 
     //                    name         value   // Se generan datos de form para enviarlos en formato PHP ($_POST[])
-    dataForm.append("tokenProduct", tokenValue);    console.log(tokenValue);                                       
+    dataForm.append("tokenProduct", tokenValue);                                      
    
     $.ajax({
         url: "./ajax/ajax_search_subwindow.php",
@@ -72,5 +88,30 @@ function getSubwindowProduct(respuesta) {
     closeSubwindow();        
 }
 
+/**
+ * Función que conectará vía AJAX con PHP para eliminar registro de la base de datos
+ */
+function deleteProductsAjax() {
+    var tokenDelete = $("#tokenProduct").val();  
+
+    var dataForm = new FormData();
+
+    dataForm.append("token_product_form", tokenDelete);
+                                                                           
+    $.ajax({
+        url: "./ajax/ajax_inventory.php",
+        method: "POST",
+        data: dataForm,
+        cache: false,
+        contentType: false,
+        processData: false,
+        dataType: "json",
+        success: function(request){             
+                    if(request == "true") {                                                                                 
+                       return true;                                                      
+                    }
+        }
+    })
+}
 
     

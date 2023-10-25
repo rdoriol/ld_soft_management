@@ -208,7 +208,7 @@
                 window.location.replace('index.php?pages=01-newSupplier&token=$newToken');
               </script>";   
       }
-      else if($checkDeleteSupplier == "true") {
+      else if($checkDeleteSupplier == "true" || $createSupplier == "true") {
             echo "<script>
                     window.sessionStorage.setItem('modalAlert', 'true'); 
                     window.location.replace('index.php?pages=01-newSupplier');
