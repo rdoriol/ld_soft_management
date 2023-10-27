@@ -37,6 +37,10 @@ h2 {
     margin-bottom: 20px;
 }
 
+input {
+    background-color: #ffffff;
+}
+
 .forms_subtitle {
     background-color: gold;
     width: 50%;
@@ -382,4 +386,66 @@ footer h3 {
 
 
 
+     /* 03.INVENTORY "productsInputs.template.php"
+-----------------------------------------------*/
 
+
+#products_inputs_form th {
+    font-weight: bold;
+    font-size: 15px;
+}
+
+#products_inputs_form td {
+    font-size: 15px;
+}
+
+.ref {
+    width: 20px;
+}
+
+.desc {
+    width: 500px;
+}
+
+.cant {
+    width: 10px;
+}
+
+.pr {
+    width: 100px;
+}
+
+.des {
+    width: 10px;
+}
+
+.total {
+    width: 100px;
+}
+
+.align_icon {
+    display: flex;
+    justify-content: center;
+}
+
+.div_id_product_item {
+    width: 50px;
+}
+
+.product_item_id {
+    width: 100%
+}
+
+#products_inputs_form .forms_icons {
+    padding: 4.5px;
+}
+
+#products_inputs_form .search:hover {
+    cursor: pointer;
+    opacity: 0.6;
+}
+
+
+.inputs_width {
+    width: 100%;
+}
