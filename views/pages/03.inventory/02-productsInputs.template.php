@@ -89,12 +89,12 @@
                         for($i = 1; $i <= 5; $i++) {
                         
                             echo '<tr class="row_item">                                    
-                                    <td id="'.$i.'"><div class="forms_inputs_fields table_inputs_fields div_id_product_item align_icon"><i class="fa-solid fa-magnifying-glass forms_icons search_icon" id="btn_input_search_product" title="Buscar producto"></i><input type="text" class="forms_inputs product_item_id" id="id_product_item'. $i .'" name="id_product_item'. $i .'" placeholder="Id" value="" /></div></td>
+                                    <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields div_id_product_item align_icon"><i class="fa-solid fa-magnifying-glass forms_icons search_icon" id="btn_input_search_product" title="Buscar producto"></i><input type="text" class="forms_inputs product_item_id input_id" id="id_product_item'. $i .'" name="id_product_item'. $i .'" placeholder="Id" value="" /></div></td>
                                     <td><div class="forms_inputs_fields table_inputs_fields"><input type="text" class="forms_inputs inputs_width" id="product_name_item'.$i.'" name="product_name_item'.$i.'" placeholder="Nombre del producto" value="" /></div></td>
                                     <td><div class="forms_inputs_fields table_inputs_fields"><input type="number" class="forms_inputs inputs_width" id="amount_item'.$i.'" name="amount_item'.$i.'" placeholder="" value="" /></div></td>
                                     <td><div class="forms_inputs_fields table_inputs_fields"><input type="number" class="forms_inputs inputs_width" id="price_item'.$i.'" name="price_item'.$i.'" placeholder="" value="" /></div></td>
                                     <td><div class="forms_inputs_fields table_inputs_fields"><input type="number" class="forms_inputs inputs_width" id="discount_item'.$i.'" name="discount_item'.$i.'" placeholder="" value="" /></div></td>
-                                    <td><div class="forms_inputs_fields table_inputs_fields"><input type="number" class="forms_inputs inputs_width" id="total_item'.$i.'" name="total_item'.$i.'" placeholder="0 €" disabled value="" /><button type="reset" class="btn btn-danger btn-sm, p-0 pl-1 pr-1 ml-1" id="" name="" ><i class="fa-sharp fa-solid fa-trash-can fa-2s"></i></button></div></td>
+                                    <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="number" class="forms_inputs inputs_width" id="total_item'.$i.'" name="total_item'.$i.'" placeholder="0 €" disabled value="" /><button type="button" class="btn btn-danger btn-sm, p-0 pl-1 pr-1 ml-1 delete_row_input" id="" ><i class="fa-sharp fa-solid fa-trash-can fa-2s"></i></button></div></td>
                                   </tr>';
                         }
                     ?>
@@ -131,15 +131,14 @@
             </table>
         </div>
     </div>
+                                                  <!-- ELEMENTOS INPUTS OCULTOS -->
 
-
-
-
-                <!-- input oculto que recibirá valor de token de subventana -->
+                        <!-- input oculto que recibirá valor de token de subventana -->
         <input type="hidden" id="tokenInputs" name="tokenInputs" placeholder="tokenValue Subwindow" value="<?php echo $inputProductData[0]->token_input_product; ?>" /> 
-                <!-- ------------------------------------------------------- -->
-
-    
+                        <!-- input oculto que almacenará valor de atributo "id" de la fila seleccionada -->
+        <input type="text" id="row_number_selected" placeholder="nº fila seleccionada" value="" />
+                                                 
+                                                  <!-- -------------------------- -->
 
     <div class="btn-group p-3 ">
       <button type="submit" class="btn btn-primary mr-5" id="btn_input_product_submit" name="btn_input_product_submit"><i class="fa-sharp fa-solid fa-pencil"></i>&nbsp Grabar</button>

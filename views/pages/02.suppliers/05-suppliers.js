@@ -12,6 +12,13 @@
             var options = "width=500px, height=500px, top=100px, left=500px, resizable=no, scrollbars=no, location=no, directories=no";
             supplierWindow = window.open("index.php?pages=04-supplierPopUpSearch", "Búsqueda", options); 
         })
+
+        /**
+         * Función que cerrará ventana de subventana buscador
+         */
+        $("#btn_suppliers_close").click(function(){
+            closeSubwindow();
+        })
     })
     
         /**

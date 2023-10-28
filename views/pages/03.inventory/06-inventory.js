@@ -28,6 +28,13 @@ $(document).ready(function(){
         }
        return false;
     })
+
+    /**
+     * Función que cerrará ventana de subventana buscador
+     */
+    $("#btn_input_product_close").click(function(){
+        closeSubwindow();
+    })
 })
 
 /**
@@ -43,9 +50,9 @@ function closeSubwindow() {
  * Función que conectará con fichero php "ajax/ajax_search_subwindow"
  */
 function getRegisterProductAjax(value = null) {             
-    //var rowNumber = $(this).parent().parent().attr("id");    console.log(rowNumber); // se captura número de fila
-    var tokenValue = $("#tokenProduct").val(); // Se obtiene valor a buscar en la base de datos
-   
+    var rowNumber = $("#row_number_selected").val();    // Se obtiene valor de atributo "id" de fila seleccionada en 02-productsInputs.template.php
+    var tokenValue = $("#tokenProduct").val();          // Se obtiene valor a buscar en la base de datos
+                                
     var dataForm = new FormData(); 
     //                    name         value   // Se generan datos de form para enviarlos en formato PHP ($_POST[])
     dataForm.append("tokenProduct", tokenValue);               
@@ -77,9 +84,9 @@ function getRegisterProductAjax(value = null) {
 
                         /* Bloque para mostrar datos en 02-productsInputs.template.php
                             -----------------------------------------------------------*/                      
-                        $("#id_product_item1").val(request[0].id_product);
-                        $("#product_name_item1").val(request[0].name_product);
-                        $("#price_item1").val(request[0].sale_price_product);
+                        $("#id_product_item" + rowNumber).val(request[0].id_product);
+                        $("#product_name_item" + rowNumber).val(request[0].name_product);
+                        $("#price_item" + rowNumber).val(request[0].sale_price_product);
                     }
         }
     })
@@ -91,7 +98,7 @@ function getRegisterProductAjax(value = null) {
  * @return string respuesta
 */
 function getSubwindowProduct(respuesta) {  
-  var rowNumber = window.opener.$(this).parent().parent().attr("id");    console.log(rowNumber); // se captura número de fila
+    // var pepe = window.opener.$("#row_number_selected").val();
     window.opener.$("#tokenProduct").val(respuesta);
     window.opener.getRegisterProductAjax();
     closeSubwindow();        

@@ -12,6 +12,13 @@ $(document).ready(function(){
         var options = "width=500px, height=500px, top=100px, left=500px, resizable=no, scrollbars=no, location=no, directories=no";
         ventana = window.open("index.php?pages=04-customerPopUpSearch", "Búsqueda", options); 
     })
+
+      /**
+         * Función que cerrará ventana de subventana buscador
+         */
+      $("#btn_customers_close").click(function(){
+        closeSubwindow();
+    })
 })
 
     /**
