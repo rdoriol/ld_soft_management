@@ -9,6 +9,7 @@
     --subButtons: #7bff;
     --carbonBlack: #1c1c1c;
     --formsIconsBackgroundColor: #E9ECEF;
+    --headerFotter: #183153;
    
 
    
@@ -158,7 +159,7 @@ input {
      /* HEADER "01-header.template.php"
 ------------------------------*/
  header {
-    background-color: #000000;
+    background-color: var(--headerFotter);
     margin-bottom: 50px;
  }
 
@@ -175,7 +176,6 @@ input {
 
 .item_main_container_nav {
     width: 13%;
-    border-right: 2px solid #ffffff;
     /* overflow-y: scroll; */
 }
 
@@ -294,7 +294,7 @@ input {
      /* FOOTER "03-footer.template.php"
 ----------------------------------*/
 footer {
-    background-color: #000000;
+    background-color: var(--headerFotter);
     width: 100%;   
     text-align: center;  
     overflow-y: auto;
@@ -429,18 +429,18 @@ footer h3 {
 }
 
 .div_id_product_item {
-    width: 50px;
+    width: 100%;
 }
 
 .product_item_id {
     width: 100%
 }
 
-#products_inputs_form .forms_icons {
-    padding: 4.5px;
+#products_inputs_form .search_icon {
+   padding: 4%;
 }
 
-#products_inputs_form .search:hover {
+#products_inputs_form .search_icon:hover {
     cursor: pointer;
     opacity: 0.6;
 }

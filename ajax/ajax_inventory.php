@@ -23,7 +23,7 @@
         public function checkInventoryFieldAjax($table, $key) {
             $check = "false";
             try {      
-                $value = $this->productFieldMatch;             // Se almacena en variable valor obtenido del formulario.   
+                $value = $this->productFieldMatch;              // Se almacena en variable valor obtenido del formulario.   
                 $tokenValue = $this->tokenProductDelete;        // Se almacena en variable valor token
                 $check = InventoryValidationController::existInventoryField($table, $key, $value, $tokenValue);    // Se lanza función para comprobar coincidencias de campos existentes.                
                 

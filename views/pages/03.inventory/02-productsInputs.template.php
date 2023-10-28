@@ -58,15 +58,14 @@
             </select>
         </div>      
       </div>
-
-    <div class="forms_flex" >
+   
       <div class="forms_fields">
         <label class="forms_label" for="product_created_date">Fecha entrada</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-calendar-days forms_icons"></i>
-          <input type="text" class="forms_inputs" id="product_created_date" name="product_created_date" placeholder="auto" disabled value="<?php echo $inputProductData[0]->created_date_product; ?>" />
+          <input type="text" class="forms_inputs" id="input_product_created_date" name="input_product_created_date" placeholder="auto" disabled value="<?php echo $inputProductData[0]->created_date_product; ?>" />
         </div>      
-    </div>
+      </div>
   </fieldset>
 
   <fieldset class="">   
@@ -78,31 +77,35 @@
                 <thead>
                     <tr>
 		                <th class="ref" title="Referencia / Id producto">Ref.</th>
-                        <th class="desc">Descripción</th>
+                        <th class="desc">Concepto</th>
                         <th class="cant" title="Cantidad">Cant.</th>
                         <th class="pr">Precio</th>
 		                <th class="des" title="Descuento %">Desc.</th>
                         <th class="total">Total</th>
                     </tr>
                 </thead>          
-                <tbody class="row_item">               
+                <tbody class="rows_items">                               
                     <?php                                               //  Bucle para generar mismo tipo de columnas modificando unicamente el id y name del elemento html input
                         for($i = 1; $i <= 5; $i++) {
                         
-                            echo '<tr>
-                                    <td class="align_icon"><i class="fa-solid fa-magnifying-glass forms_icons search" title="Buscar producto"></i><div class="forms_inputs_fields table_inputs_fields div_id_product_item"><input type="text" class="forms_inputs product_item_id" id="id_product_item'. $i .'" name="id_product_item'. $i .'" placeholder="Id" value="" /></div></td>
-                                    <td><div class="forms_inputs_fields table_inputs_fields"><input type="text" class="forms_inputs inputs_width" id="product_name_item'.$i.'" name="product_name_item'.$i.'" placeholder="Descripción del producto" value="" /></div></td>
+                            echo '<tr class="row_item">                                    
+                                    <td id="'.$i.'"><div class="forms_inputs_fields table_inputs_fields div_id_product_item align_icon"><i class="fa-solid fa-magnifying-glass forms_icons search_icon" id="btn_input_search_product" title="Buscar producto"></i><input type="text" class="forms_inputs product_item_id" id="id_product_item'. $i .'" name="id_product_item'. $i .'" placeholder="Id" value="" /></div></td>
+                                    <td><div class="forms_inputs_fields table_inputs_fields"><input type="text" class="forms_inputs inputs_width" id="product_name_item'.$i.'" name="product_name_item'.$i.'" placeholder="Nombre del producto" value="" /></div></td>
                                     <td><div class="forms_inputs_fields table_inputs_fields"><input type="number" class="forms_inputs inputs_width" id="amount_item'.$i.'" name="amount_item'.$i.'" placeholder="" value="" /></div></td>
                                     <td><div class="forms_inputs_fields table_inputs_fields"><input type="number" class="forms_inputs inputs_width" id="price_item'.$i.'" name="price_item'.$i.'" placeholder="" value="" /></div></td>
                                     <td><div class="forms_inputs_fields table_inputs_fields"><input type="number" class="forms_inputs inputs_width" id="discount_item'.$i.'" name="discount_item'.$i.'" placeholder="" value="" /></div></td>
-                                    <td><div class="forms_inputs_fields table_inputs_fields"><input type="number" class="forms_inputs inputs_width" id="total_item'.$i.'" name="total_item'.$i.'" placeholder="0 €" disabled value="" /></div></td>
-                                </tr>';
+                                    <td><div class="forms_inputs_fields table_inputs_fields"><input type="number" class="forms_inputs inputs_width" id="total_item'.$i.'" name="total_item'.$i.'" placeholder="0 €" disabled value="" /><button type="reset" class="btn btn-danger btn-sm, p-0 pl-1 pr-1 ml-1" id="" name="" ><i class="fa-sharp fa-solid fa-trash-can fa-2s"></i></button></div></td>
+                                  </tr>';
                         }
                     ?>
+                            <!-- input oculto para recibir/capturar valor token de subventana buscador -->
+                    <input type="hidden" id="tokenProduct" placeholder="tokenValue Subwindow. Hide" value="" /> 
+
                 </tbody>
                 <tfoot>
-                    <tr>
-                        <td colspan="5" class="text-right">Subtotal</td>
+                    <tr>   
+                        <td colspan="1"><button type="button" class="btn btn-primary mr-5" id="btn_input_product_row" name="btn_input_product_row" title="Añadir líneas de productos"><i class="fa-sharp fa-solid fa-plus"></i></button></td>
+                        <td colspan="4" class="text-right">Subtotal</td>
                         <td><div class="forms_inputs_fields table_inputs_fields"><input type="number" class="forms_inputs inputs_width" id="subtotal_input" name="subtotal_input" placeholder="0 €" disabled value="" /></div></td>
                     </tr>
                     <tr>
@@ -133,13 +136,13 @@
 
 
                 <!-- input oculto que recibirá valor de token de subventana -->
-        <input type="hidden" id="tokenProduct" name="tokenProduct" placeholder="tokenValue Subwindow" value="<?php echo $inputProductData[0]->token_product; ?>" /> 
+        <input type="hidden" id="tokenInputs" name="tokenInputs" placeholder="tokenValue Subwindow" value="<?php echo $inputProductData[0]->token_input_product; ?>" /> 
                 <!-- ------------------------------------------------------- -->
 
     
 
     <div class="btn-group p-3 ">
-      <button type="submit" class="btn btn-primary mr-5" id="btn_input_product_submit" name="btn_input_product_submit"><i class="fa-sharp fa-solid fa-pencil"></i>&nbsp Grabar</button> 
+      <button type="submit" class="btn btn-primary mr-5" id="btn_input_product_submit" name="btn_input_product_submit"><i class="fa-sharp fa-solid fa-pencil"></i>&nbsp Grabar</button>
       <button type="button" role="link" class="btn btn-secondary mr-5" name="exit_input_product" onClick="window.location='index.php?pages=02-productsInputs'"><i class="fa-sharp fa-solid fa-rectangle-xmark"></i>&nbsp Cerrar registro</button>
       <button type="submit" class="btn btn-danger" id="btn_product_delete" name="delete_product" data-toggle="modal" data-target="#delete_modal"><i class="fa-sharp fa-solid fa-trash-can"></i>&nbsp Eliminar registro</button> 
     </div>

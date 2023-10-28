@@ -24,6 +24,9 @@
                     case "token_product":
                         $resultData = InventoryController::ctrToListProduct($table, $key, $value);
                         break;
+                    case "id_product":
+                        $resultData = InventoryController::ctrToListProduct($table, $key, $value);
+                        break;
                     default:
                        echo "No se ha recibido campo ni valor a buscar";
                 }                
@@ -55,6 +58,14 @@
     else if(isset($_POST["tokenProduct"]) && !empty(($_POST["tokenProduct"]))) {
         $searchProduct = new Search();
         $searchProduct->toListDb("products", "token_product", $_POST["tokenProduct"]);
+    }
+
+    /**
+     * Objeto que recibirá datos del formulario AJAX generado en "03.inventory/products_inputs.js"
+     */
+    else if(isset($_POST["idProduct"]) && !empty(($_POST["idProduct"]))) {
+        $searchProduct = new Search();
+        $searchProduct->toListDb("products", "id_product", $_POST["idProduct"]);
     }
 
     
