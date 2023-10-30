@@ -140,7 +140,7 @@
       </div>
 
                 <!-- input oculto que recibirá valor de token de subventana -->
-        <input type="hidden" id="tokenProduct" name="tokenProduct" placeholder="tokenValue Subwindow" value="<?php echo $productData[0]->token_product; ?>" /> 
+        <input type="text" id="tokenProduct" name="tokenProduct" placeholder="tokenValue Subwindow" value="<?php echo $productData[0]->token_product; ?>" /> 
                 <!-- ------------------------------------------------------- -->
     </div>
     <div class="btn-group p-3 ">

@@ -34,8 +34,8 @@ $(document).ready(function(){
                 contentType: false,
                 processData: false,
                 dataType: "json",
-                success: function(request) {                    
-                            if(request) {  
+                success: function(request) {        
+                            if(request) {   
                                 sentProductMessages(selector, request); // Si hay respuesta AJAX se lanza función para mostrar mensajes de error
                             }
                         }

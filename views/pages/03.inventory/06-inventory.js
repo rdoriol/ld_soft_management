@@ -49,14 +49,15 @@ function closeSubwindow() {
  /**
  * Función que conectará con fichero php "ajax/ajax_search_subwindow"
  */
-function getRegisterProductAjax(value = null) {             
-    var rowNumber = $("#row_number_selected").val();    // Se obtiene valor de atributo "id" de fila seleccionada en 02-productsInputs.template.php
-    var tokenValue = $("#tokenProduct").val();          // Se obtiene valor a buscar en la base de datos
-                                
+function getRegisterProductAjax() {             
+    var rowNumber = $("#row_number_selected").val();        // Se obtiene valor de atributo "id" (número de fila) de fila seleccionada en 02-productsInputs.template.php
+    var tokenValue = $("#tokenProduct").val();              // Se obtiene valor a buscar en la base de datos
+    var idValue = $("#id_product_item" + rowNumber).val();  // Se obtiene valor del id a buscar en base de datos
+   
     var dataForm = new FormData(); 
     //                    name         value   // Se generan datos de form para enviarlos en formato PHP ($_POST[])
     dataForm.append("tokenProduct", tokenValue);               
-    dataForm.append("idProduct", value);                       
+    dataForm.append("idProduct", idValue);                       
    
     $.ajax({
         url: "./ajax/ajax_search_subwindow.php",
@@ -67,7 +68,7 @@ function getRegisterProductAjax(value = null) {
         processData: false,
         dataType: "json",
         success: function(request){           
-                    if(request) {                                                                                 
+                    if(request) {                                                                           
                                    
                             /* Bloque para mostrar datos en 01-newProduct.template.php
                             -----------------------------------------------------------*/
@@ -87,9 +88,11 @@ function getRegisterProductAjax(value = null) {
                         $("#id_product_item" + rowNumber).val(request[0].id_product);
                         $("#product_name_item" + rowNumber).val(request[0].name_product);
                         $("#price_item" + rowNumber).val(request[0].sale_price_product);
+                        $("#request_ajax").val("true");                    
                     }
+                  
         }
-    })
+    })    
 } 
 
 /**
@@ -98,7 +101,6 @@ function getRegisterProductAjax(value = null) {
  * @return string respuesta
 */
 function getSubwindowProduct(respuesta) {  
-    // var pepe = window.opener.$("#row_number_selected").val();
     window.opener.$("#tokenProduct").val(respuesta);
     window.opener.getRegisterProductAjax();
     closeSubwindow();        
@@ -108,7 +110,7 @@ function getSubwindowProduct(respuesta) {
  * Función que conectará vía AJAX con PHP para eliminar registro de la base de datos
  */
 function deleteProductsAjax() {
-   // var tokenDelete = $("#tokenProduct").val();  
+    var tokenDelete = $("#tokenProduct").val();  
 
     var dataForm = new FormData();
 

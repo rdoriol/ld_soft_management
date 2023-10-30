@@ -24,7 +24,7 @@
             $check = "false";
             try {      
                 $value = $this->productFieldMatch;              // Se almacena en variable valor obtenido del formulario.   
-                $tokenValue = $this->tokenProductDelete;        // Se almacena en variable valor token
+                $tokenValue = $this->tokenProductValue;        // Se almacena en variable valor token
                 $check = InventoryValidationController::existInventoryField($table, $key, $value, $tokenValue);    // Se lanza función para comprobar coincidencias de campos existentes.                
                 
                 echo json_encode($check);
@@ -65,7 +65,7 @@
     else if(isset($_POST["product_name_form"]) && !empty($_POST["product_name_form"])) {
         $inventoryObject = new AjaxInventory();
         $inventoryObject->productFieldMatch = $_POST["product_name_form"];
-        $inventoryObject->tokenProductValue = $_POST["product_name_form"];
+        $inventoryObject->tokenProductValue = $_POST["tokenProduct"];
         $inventoryObject->checkInventoryFieldAjax("products", "name_product");
     }
 

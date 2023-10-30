@@ -383,6 +383,15 @@ footer h3 {
     display: none;
 }
 
+.error_field {
+    display: none;
+    
+}
+
+.error_amount_field {
+    display: none;
+}
+
 
 
 
@@ -400,11 +409,11 @@ footer h3 {
 }
 
 .ref {
-    width: 20px;
+    width: 10px;
 }
 
 .desc {
-    width: 500px;
+    width: 300px;
 }
 
 .cant {
@@ -437,7 +446,7 @@ footer h3 {
 }
 
 #products_inputs_form .search_icon {
-   padding: 4%;
+   padding: 3.5%;
 }
 
 #products_inputs_form .search_icon:hover {

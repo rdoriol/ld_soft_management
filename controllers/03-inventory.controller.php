@@ -21,7 +21,7 @@
 
                         if($validationsOK == "ok") {
                             $token = md5(ucfirst($_POST["product_name"]) . "+" . strtoupper($_POST["or_original_product"])); // Se genera token para seguridad informática.
-
+                                    
                             $data = array(  "token"=> $token,
                                             "select_item_category" => $_POST["select_item_category"],
                                             "or_original_product" => strtoupper($_POST["or_original_product"]),
@@ -101,15 +101,15 @@
     
                             // Bloque para comprobar que el token de la vista coincide con el token almacenado en la base de datos [seguridad informática]
                         $oldToken = InventoryModel::mdlToListProduct($table, $key, $value);
-                        $checkToken = md5(ucfirst($oldToken[0]->name_product) . "+" . strtoupper($oldToken[0]->or_product));
-              
+                        $checkToken = md5(ucfirst($oldToken[0]->name_product) . "+" . strtoupper($oldToken[0]->or_product)); //todo 
+
                         if($checkToken == $value) {       
                                 // bloque para validaciones                            
                             $validationsUpdate = self::validateProductFields($table, $key, $value);
                                
                            if($validationsUpdate == "ok" ) { 
         
-                                $newToken = md5(trim(ucfirst($_POST["product_name"])) . "+" . trim(strtoupper($_POST["or_original_product"]))); // Se genera nuevo token para seguridad informática.
+                                $newToken = md5(ucfirst($_POST["product_name"]) . "+" . strtoupper($_POST["or_original_product"])); // Se genera nuevo token para seguridad informática.
              
                                 $data = array(  "newToken"=> $newToken,                                               
                                                 "select_item_category" => $_POST["select_item_category"],
@@ -215,7 +215,7 @@
                         
                     // Si los valores no coinciden con los de la base de datos o son del mmismo registro
                     if(($existsOr == "false" && $existsName == "false") || ($listProducts[0]->name_product == $_POST["product_name"] && $listProducts[0]->or_product == $_POST["or_original_product"]) ) { 
-                        $checkValidations = "ok";                      
+                        $checkValidations = "ok";                
                     }
                     else if ($existsOr == "true" && $existsName == "false") {
                         if($listProducts[0]->or_product == $_POST["or_original_product"]) {
@@ -230,17 +230,17 @@
                             $checkValidations = "ok";
                         }
                         else {
-                            echo "<div class='text-center alert-danger rounded'><p>El <b><i>Nombre Producto Original</i></b> introducido ya existe en la base de datos.</p></div>";
+                            echo "<div class='text-center alert-danger rounded'><p>El <b><i>Nombre</i></b> introducido ya existe en la base de datos.</p></div>";
                         }  
                     }
                     else if($existsOr == "true" && $existsName == "true") {
-                        if($listProducts[0]->name_product != $_POST["product_name"] && $listProducts[0]->or_product == $_POST["or_original_product"]) {
-                            echo "<div class='text-center alert-danger rounded'><p>El <b><i>Nombre Producto Original</i></b> introducido ya existe en la base de datos.</p></div>";
+                        if( ($listProducts[0]->name_product != $_POST["product_name"] && $listProducts[0]->or_product == $_POST["or_original_product"]) && $listProducts[0]->token_product != $_POST["tokenProduct"] ) {
+                            echo "<div class='text-center alert-danger rounded'><p>El pepe <b><i>Nombre Producto</i></b> introducido ya existe en la base de datos.</p></div>";
                         }
-                        else if($listProducts[0]->name_product == $_POST["product_name"] && $listProducts[0]->or_product != $_POST["or_original_product"]) {
+                        else if( ($listProducts[0]->name_product == $_POST["product_name"] && $listProducts[0]->or_product != $_POST["or_original_product"]) && $listProducts[0]->token_product != $_POST["tokenProduct"] ) {
                             echo "<div class='text-center alert-danger rounded'><p>La <b><i>Referencia Original</i></b> introducida ya existe en la base de datos.</p></div>";
                         }
-                        else if($listProducts[0]->name_product != $_POST["product_name"] && $listProducts[0]->or_product != $_POST["or_original_product"]) {
+                        else if( ($listProducts[0]->name_product != $_POST["product_name"] && $listProducts[0]->or_product != $_POST["or_original_product"]) && $listProducts[0]->token_product != $_POST["tokenProduct"] ) {
                             echo "<div class='text-center alert-danger rounded'><p>La <b><i>Referencia Original</i></b> introducida ya existe en la base de datos.</p></div>";
                             echo "<div class='text-center alert-danger rounded'><p>El <b><i>Nombre Producto Original</i></b> introducido ya existe en la base de datos.</p></div>";
                         }

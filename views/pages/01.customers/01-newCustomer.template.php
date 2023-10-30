@@ -33,7 +33,7 @@
     <li><button type="button" class="search_bar m-1 alert-info rounded" id="search_customer" onClick=""><i class="fa-solid fa-magnifying-glass"></i>&nbsp Buscar Cliente</button></li>
     <li><button type="button" class="print_bar m-1 alert-info rounded" id="print"><i class="fa-solid fa-print"></i>&nbspImprimir</button></li>
   </ul>
-                                                   
+                                                                                                                                                               <div id="printCustomer">                        
   <fieldset class="d-flex justify-content-around"> <!-- CAMBIAR A ESTILO PROPIO CON CSS flex personalizado -->
     <div class="forms_flex">
       <div class="forms_fields">
@@ -150,6 +150,7 @@
         </div>      
       </div>
     </div>
+                                                                                                                                                                  </div>   
 
                     <!-- input oculto que recibirá valor de token de subventana y ventana principal  -->
     <input type="hidden" id="tokenCustomer" name="tokenCustomer" placeholder="tokenValue Subwindow" value="<?php echo $customerData[0]->token; ?>" /> 
