@@ -54,7 +54,7 @@
         $("#products_inputs_form .delete_row_input").click(function(){
            
              var rowNumberDelete = $(this).parent().parent().attr("class");
-             cleanAllRow(rowNumberDelete);
+             cleanAllRow(rowNumberDelete);             
            
         })
 
@@ -63,9 +63,9 @@
          */
         $("#products_inputs_form .amounts, #products_inputs_form .price, #products_inputs_form .discount, #products_inputs_form #discount_input").change(function(){
               
-            calcRow();              // Se lanza función para calcular y mostrar importe total de fila seleccionada
-            calcSubtotalRows();     // Se lanza función para calcular y mostrar importe subtotal de todas las filas
-            calcTotalInputsProducts();
+            calcRow();                  // Se lanza función para calcular y mostrar importe total de fila seleccionada
+            calcSubtotalRows();         // Se lanza función para calcular y mostrar importe subtotal de todas las filas
+            calcTotalInputsProducts();  // Se lanza función para calcular y mostrar importe total de de las entradas de productos
         }) 
 
         /**
@@ -93,6 +93,7 @@
  * Función que limpiará todos los campos de la fila seleccionada
  */
 function cleanAllRow(rowNumber) {
+        // Limpiezas de todos los campos de la fila
     $("#id_product_item" + rowNumber).val("");
     $("#product_name_item" + rowNumber).val("");
     $("#amount_item" + rowNumber).val("");
@@ -101,13 +102,21 @@ function cleanAllRow(rowNumber) {
     $("#total_item" + rowNumber).val("");
     $("#row_number_selected").val(""); 
     $("#request_ajax").val("false"); 
-        
+
+        // Si hubiera un valor almacenado en el array de la fila seleccionada se coloca a 0 para recalculo correcto
+    arrayResult[rowNumberDelete - 1] = 0;         
+
         // Limpieza de mensajes de errores y advertencias
     cleanCheck("#amount_item" + rowNumber);
     cleanCheck("#price_item" + rowNumber);
     cleanCheck("#discount_item" + rowNumber);
     $(".error_amount_field").css("display", "none");
     $(".error_field").css("display", "none");
+    
+        // Al limpiar todos los campos de una fila se recalculan los importes       
+        calcRow();                  
+        calcSubtotalRows();         
+        calcTotalInputsProducts();  
 }
 
  /**
@@ -145,7 +154,7 @@ function calcRow() {
    
 var arrayResult = new Array(); // Se declara array para almacenar de forma asociativa los resultados de cada fila en función calcSubtotalRows()
 
-function calcSubtotalRows() {
+function calcSubtotalRows() {      
     var rowNumber = $("#row_number_selected").val();        // Se obtiene y almacena número de fila
     var totalResult = 0;
 

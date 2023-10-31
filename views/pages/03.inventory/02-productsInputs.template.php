@@ -1,11 +1,11 @@
 <?php
-  $productData = array();
+  $productInputData = array();
    
       // Condición para controlar si se muestran datos en el formulario o se muestra en blanco
-  if((isset($_GET["token"]) && !empty($_GET["token"])) || (isset($_POST["tokenProduct"]) && !empty($_POST["tokenProduct"]))) {                                    
+  /*if((isset($_GET["token"]) && !empty($_GET["token"])) || (isset($_POST["tokenProduct"]) && !empty($_POST["tokenProduct"]))) {                                    
     $inputProductData = InventoryController::ctrToListProduct("products", "token_product", $_GET["token"]);     // se llama a función para leer datos de la tabla "products"      
     $inputProductData = InventoryController::ctrToListProduct("products", "token_product", $_SESSION["tokenProduct"]);     // se llama a función para leer datos de la tabla "products"      
-  }
+  }*/
      // script javascript para lanzar ventana modal confirmando actualizaciones o eliminaciones.
     echo "<script>
     if(window.sessionStorage.getItem('modalAlert') == 'true') {
@@ -20,7 +20,7 @@
 
 <h2 class="li_active_page rounded">Entradas Productos</h2>
 
-<form class="general_forms" id="products_inputs_form" action="<?php echo $SESSION['PHP_SELF']; ?>" method="post" onsubmit="">
+<form class="general_forms" id="products_inputs_form" action="" method="post" onsubmit="">
   <h4 class="forms_subtitle rounded">Movimiento de entradas | Modificar | Eliminar</h4>
     
                                             <!-- Lista de botones "Buscar" e "Imprimir" -->
@@ -45,15 +45,15 @@
         <div class="forms_inputs_fields">
             <i class="fa-solid fa-house forms_icons"></i> 
 
-            <select class="" id="father_select_item_category" name="select_item_category"> 
-                <option id="select_item_category99" value="<?php //echo $inputProductData[0]->id; ?>" selected><?php //echo $inputProductData[0]->name_supplier; ?></option>
+            <select class="" id="father_select_item_category" name="select_supplier"> 
+                <option id="select_supplier" value="<?php //echo $inputProductData[0]->id; ?>" selected><?php //echo $inputProductData[0]->name_supplier; ?></option>
                
                 <?php                  
                   $selectCategory = CustomerController::ctrToList("suppliers", null); // Select con proveedores almacenados en la tabla "suppliers" de la base de datos
                   foreach($selectCategory as $item):
                 ?>
 
-                <option value="<?php //echo $item->id; ?>"><?php echo $item->name_supplier; ?></option>
+                <option value="<?php echo $item->id; ?>"><?php echo $item->name_supplier; ?></option>
                <?php endforeach; ?>
             </select>
         </div>      
@@ -64,7 +64,7 @@
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-calendar-days forms_icons"></i>
           <input type="text" class="forms_inputs" id="input_product_created_date" name="input_product_created_date" placeholder="auto" disabled value="<?php echo $inputProductData[0]->created_date_product; ?>" />
-        </div>      
+        </div>     
       </div>
   </fieldset>
 
@@ -88,10 +88,11 @@
                     <?php  
                           //  Bucle para generar mismo tipo de columnas modificando unicamente el id y name del elemento html input          
                         for($i = 1; $i <= 5; $i++) {                        
-                            echo '<tr class="row_item">                                    
+                            echo '<tr class="row_item">    
+                                    <input type="hidden" name="numbers_rows[]" value="' . $i . '">                          
                                     <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields div_id_product_item align_icon"><i class="fa-solid fa-magnifying-glass forms_icons search_icon" id="btn_input_search_product" title="Buscar producto"></i><input type="text" class="forms_inputs product_item_id input_id" id="id_product_item'. $i .'" name="id_product_item'. $i .'" placeholder="Id" value="" /></div></td>
                                     <td><div class="forms_inputs_fields table_inputs_fields"><input type="text" class="forms_inputs inputs_width" id="product_name_item'.$i.'" name="product_name_item'.$i.'" placeholder="Nombre del producto" value="" /></div></td>
-                                    <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="number" class="forms_inputs inputs_width amounts" id="amount_item'.$i.'" name="amount_item'.$i.'" placeholder="0" value="" /></div></td>
+                                    <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="number" class="forms_inputs inputs_width amounts" id="amount_item'.$i.'" name="amount_item'.$i.'" placeholder="0" value="0" /></div></td>
                                     <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="number" class="forms_inputs inputs_width price" id="price_item'.$i.'" name="price_item'.$i.'" placeholder="0 €" value="" /></div></td>
                                     <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="number" class="forms_inputs inputs_width discount" id="discount_item'.$i.'" name="discount_item'.$i.'" placeholder="0 %" value="" /></div></td>
                                     <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="number" class="forms_inputs inputs_width total_item_row" id="total_item'.$i.'" name="total_item'.$i.'" placeholder="0 €" disabled value="" /><button type="button" class="btn btn-danger btn-sm p-0 pl-1 pr-1 ml-1 delete_row_input" id="" ><i class="fa-sharp fa-solid fa-trash-can fa-2s"></i></button></div></td>
@@ -99,17 +100,18 @@
                         }
                           // Bucle igual que el anterior pero oculto, será el usuario quien decida visualizarlo
                         for($i = 6; $i <= 10; $i++) { 
-                          echo '<tr class="row_item hidden_rows">                                    
+                          echo '<tr class="row_item hidden_rows"> 
+                                  <input type="hidden" name="numbers_rows[]" value="' . $i . '">            
                                   <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields div_id_product_item align_icon"><i class="fa-solid fa-magnifying-glass forms_icons search_icon" id="btn_input_search_product" title="Buscar producto"></i><input type="text" class="forms_inputs product_item_id input_id" id="id_product_item'. $i .'" name="id_product_item'. $i .'" placeholder="Id" value="" /></div></td>
                                   <td><div class="forms_inputs_fields table_inputs_fields"><input type="text" class="forms_inputs inputs_width" id="product_name_item'.$i.'" name="product_name_item'.$i.'" placeholder="Nombre del producto" value="" /></div></td>
-                                  <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="number" class="forms_inputs inputs_width amounts" id="amount_item'.$i.'" name="amount_item'.$i.'" placeholder="" value="" /></div></td>
+                                  <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="number" class="forms_inputs inputs_width amounts" id="amount_item'.$i.'" name="amount_item'.$i.'" placeholder="" value="0" /></div></td>
                                   <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="number" class="forms_inputs inputs_width price" id="price_item'.$i.'" name="price_item'.$i.'" placeholder="" value="" /></div></td>
                                   <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="number" class="forms_inputs inputs_width discount" id="discount_item'.$i.'" name="discount_item'.$i.'" placeholder="" value="" /></div></td>
                                   <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="number" class="forms_inputs inputs_width total_item_row" id="total_item'.$i.'" name="total_item'.$i.'" placeholder="0 €" disabled value="" /><button type="button" class="btn btn-danger btn-sm p-0 pl-1 pr-1 ml-1 delete_row_input" id="" ><i class="fa-sharp fa-solid fa-trash-can fa-2s"></i></button></div></td>
                                 </tr>';
-                        }
+                        } 
                     ?>
-                           
+                          
 
                 </tbody>
                 <tfoot>
@@ -128,7 +130,7 @@
                     <tr>
                         <td colspan="5" class="text-right">Subtotal con descuento (€)</td>
                         <td><div class="forms_inputs_fields table_inputs_fields"><input type="number" class="forms_inputs inputs_width number_input" id="subtotal_discount_input" name="subtotal_discount_input" placeholder="0 €" disabled value="" /></div></td>
-                    </tr>
+                    </tr>  
                     <tr>
                         <td colspan="5" class="text-right">Impuestos (21%)</td>
                         <td><div class="forms_inputs_fields table_inputs_fields"><input type="number" class="forms_inputs inputs_width number_input" id="tax_input" name="tax_input" placeholder="0 €" disabled value="" /></div></td>
@@ -172,16 +174,6 @@
     
     <div class='text-center alert-danger rounded require_fields'><p class='font-weight-bold'>Los siguientes campos son obligatorios:</p><ul><li>Categoría producto</li><li>Referencia original</li><li>Nombre Producto</li></ul></div>
     
-    <div class='text-center alert-danger rounded or_field_duplicate'><p>La <i><b>Referencia Original</b></i> introducida ya existe en la base de datos.</p></div>
-
-    <div class='text-center alert-danger rounded error_format_name'><p>El formato del campo <b><i>Nombre</i></b> es erroneo<br>Solo admite caracteres alfanuméricos</p></div>
-
-    <div class='text-center alert-danger rounded name_field_duplicate'><p>El <i><b>Nombre</b></i> introducido ya existe en la base de datos.</p></div>
-    
-    <div class='text-center alert-danger rounded error_format_description'><p>El formato del campo <b><i>Descripción producto</i></b> es erroneo<br>Solo admite caracteres alfanuméricos</p></div>
-
-    <div class='text-center alert-danger rounded error_format_sales_price'><p>El formato del campo <b><i>Precio de venta</i></b> es erroneo<br>Solo admite caracteres numéricos</p></div>
-    
                      <!-- -------------------------------------------------------------  -->
                      
     <div class="modal fade" id="product_success_modal" role="dialog">  <!-- MODAL DE CONFIRMACIÓN DE OPERACIÓN bootstrap 4  -->
@@ -216,8 +208,13 @@
         $deleteProduct = new InventoryController();   //todo-> Finalmente no se utilizará, esta acción se realizará via AJAX. Eliminar más adelante
         $checkDeleteProduct = $deleteProduct->ctrDeleteProduct("products", "token_product", $_POST["tokenProduct"]);   // se lanza método para eliminar registro concreto.
       }
-      else {     
-        $createProduct = InventoryController::ctrCreateProduct("products"); // se lanza método para grabar datos de proveedor.
+      else {    
+          // Se recorre el array $rowNumber para verificar que filas se van a enviar al archivo controller para crear el movimiento de entrada del producto
+        foreach($_POST["numbers_rows"] as $item) {
+          if(!empty($_POST["id_product_item" . $item])) {   
+            $createProductInput = ProductInputController::ctrCreateProductInput("inputs_product", $item); // se lanza método para grabar datos de entradas de productos.
+          }
+        }  
       }
        
         /* Bloque condicional para lanzar ventana modal en función del éxito de la operación realizada
@@ -264,3 +261,4 @@
   </fieldset>
 
 </form>
+
