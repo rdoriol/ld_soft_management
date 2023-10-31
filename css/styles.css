@@ -417,7 +417,7 @@ footer h3 {
 }
 
 .cant {
-    width: 10px;
+    width: 1px;
 }
 
 .pr {
@@ -454,7 +454,18 @@ footer h3 {
     opacity: 0.6;
 }
 
+.amounts, .price, .discount, .total_item_row, .number_input {
+    text-align: end;
+}
 
 .inputs_width {
     width: 100%;
+}
+
+.btn_minus {
+    display: none;
+}
+
+#products_inputs_form .hidden_rows {
+    display: none;
 }

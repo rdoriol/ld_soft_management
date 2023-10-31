@@ -21,16 +21,18 @@
         $("#products_inputs_form .input_id").change(function() { 
             var rowNumber = $(this).parent().parent().attr("class");     // Se obtiene número de fila
             $("#row_number_selected").val(rowNumber);                    // Se almacena número de fila en input oculto número de fila seleccionada  
+
                 // Se limpian unidades e importes calculados previamente
             $("#amount_item" + rowNumber).val("");  
             $("#total_item" + rowNumber).val("");
             $("#request_ajax").val("false"); 
            
             
-            idValue = $(this).val();  // Se obtiene "id" de producto a buscar en base de datos (vía AJAX)
+            //idValue = $(this).val();  // Se obtiene "id" de producto a buscar en base de datos (vía AJAX)
             
             getRegisterProductAjax(); // Se lanza función ubicada en 03.inventory/06-inventory.js   
-                                                                    
+                  
+                // Si el id del producto no existe en la base de datos se limpian todos los campos de la fila
             if($("#request_ajax").val() == "false") {  
                 $("#id_product_item" + rowNumber).val("");  
                 $("#product_name_item" + rowNumber).val("");  
@@ -44,16 +46,15 @@
                 $(".error_amount_field").css("display", "none");
                 $(".error_field").css("display", "none"); 
             }
-               
         })
 
         /**
-         * Función que limpiará campos de una fila seleccionada
+         * Función que eliminará campos de una fila seleccionada
          */
         $("#products_inputs_form .delete_row_input").click(function(){
            
              var rowNumberDelete = $(this).parent().parent().attr("class");
-             cleanRow(rowNumberDelete);
+             cleanAllRow(rowNumberDelete);
            
         })
 
@@ -66,6 +67,24 @@
             calcSubtotalRows();     // Se lanza función para calcular y mostrar importe subtotal de todas las filas
             calcTotalInputsProducts();
         }) 
+
+        /**
+         * Función que al hacer click en botón añadirá más líneas de productos
+         */
+        $("#btn_add_product_row").click(function() {                    
+            $(".hidden_rows").css("display", "revert");
+            $(".btn_add").css("display", "none");
+            $(".btn_minus").css("display", "block");
+        })
+        
+        /**
+         * Función inversa a la anterior. Al hacer click en botón restará las líneas de productos añadidas anteriormente
+         */
+             $("#btn_delete_product_row").click(function() {                    
+                $(".hidden_rows").css("display", "none");
+                $(".btn_minus").css("display", "none");
+                $(".btn_add").css("display", "block");                
+            })
 
     })
 
@@ -96,7 +115,7 @@ function cleanAllRow(rowNumber) {
  */
 function calcRow() {               
     // var checkCalcRow = false;
-    var result = 0;
+    var result = 0.00;
     var rowNumberValue =  $("#row_number_selected").val();          // Se obtiene y almacena en variable número de fila  
     var amount = $("#amount_item" + rowNumberValue).val();          // Se obtine y almacena en variable número de unidades de producto
     var priceItem = $("#price_item" + rowNumberValue).val();        // Se obtine y almacena en variable precio unitario de producto
@@ -113,8 +132,9 @@ function calcRow() {
             // Se calcula el importe total de la fila 
         result += amount * priceItem / (1 + discount/100);                                          
 
-            // Se muestra por pantalla resultado total del cálculo
-        $("#total_item" + rowNumberValue).val(result);
+            // Se muestra por pantalla resultado total del cálculo, redondeando a dos decimales
+        $("#total_item" + rowNumberValue).val(   (Math.round(result * 100) / 100).toFixed(2) );
+       
     }
     else {
         $("#total_item" + rowNumberValue).val("");
@@ -129,12 +149,12 @@ function calcSubtotalRows() {
     var rowNumber = $("#row_number_selected").val();        // Se obtiene y almacena número de fila
     var totalResult = 0;
 
-    arrayResult[rowNumber - 1] = parseFloat($("#total_item" + rowNumber).val());
+    arrayResult[rowNumber - 1] = $("#total_item" + rowNumber).val();
                                                                                         console.log(arrayResult);
    for(var i = 0; i < arrayResult.length; i++) {
-        totalResult += arrayResult[i];
+        totalResult += parseFloat(arrayResult[i]);
    }   
-   $("#subtotal_input").val(totalResult);                                                                                     console.log("Resultado todas las filas: " + totalResult);
+   $("#subtotal_input").val( (Math.round(totalResult * 100) / 100).toFixed(2) );                                                                                     console.log("Resultado todas las filas: " + totalResult);
 }
 
 function calcTotalInputsProducts() {
@@ -142,14 +162,14 @@ function calcTotalInputsProducts() {
     var subtotal = $("#subtotal_input").val();
     var inputDiscount = $("#discount_input").val();
 
-    var subtotalWithDiscount = subtotal / (1+inputDiscount/100);
-    $("#subtotal_discount_input").val(subtotalWithDiscount);
+    var subtotalWithDiscount = parseFloat(subtotal / (1 + inputDiscount/100));
+    $("#subtotal_discount_input").val( (Math.round(subtotalWithDiscount * 100) / 100).toFixed(2) );
     
-    var tax = (21/100) * subtotalWithDiscount;
-    $("#tax_input").val(tax);
+    var tax = (21/100) * parseFloat(subtotalWithDiscount);
+    $("#tax_input").val( (Math.round(tax * 100) / 100).toFixed(2) );
 
-    var totalInputProduct = subtotalWithDiscount + tax;
-    $("#total_input").val(totalInputProduct);
+    var totalInputProduct = parseFloat(subtotalWithDiscount) + parseFloat(tax);
+    $("#total_input").val( (Math.round(totalInputProduct * 100) / 100).toFixed(2) );
 }
 
 /**
