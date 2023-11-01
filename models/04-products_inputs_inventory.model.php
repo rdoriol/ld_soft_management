@@ -13,25 +13,23 @@
          */
         static public function mdlCreateProductInput($table, $data) {
             $check = "false";
-            $sql = "INSERT INTO $table VALUES (null, :token, :id_sppplier, :id_product, :input_units, :unit_cost_product, :unit_discount_product, :total_row_input, :subtotal_inputs, :discount_input, :subtotal_with_discount, :tax_input, :total_input, null, :created_date_input)";
+            $sql = "INSERT INTO $table VALUES (null,  :id_sppplier, :token, :input_number, :id_product, :product_name_item, :input_units, :unit_cost_product, :unit_discount_product, :total_row_input, null, null, null, null, null, null, null)";
 
             try {
                 $stmt = Connection::mdlConnect()->prepare($sql);
              
                     // bloque con función bindParam() para vincular variable oculta en prepare statement con el valor recibido del form.
-                $stmt->bindParam(":token", $data[""], PDO::PARAM_STR);
-                $stmt->bindParam(":id_sppplier", $data[""], PDO::PARAM_INT);
-                $stmt->bindParam(":id_product", $data[""], PDO::PARAM_INT);                
-                $stmt->bindParam(":input_units", $data[""], PDO::PARAM_INT);
-                $stmt->bindParam(":unit_cost_product", $data[""]);
-                $stmt->bindParam(":unit_discount_product", $data[""]);
-                $stmt->bindParam(":total_row_input", $data[""]);
-                $stmt->bindParam(":subtotal_inputs", $data[""]);
-                $stmt->bindParam(":discount_input", $data[""]);
-                $stmt->bindParam(":subtotal_with_discount", $data[""]);
-                $stmt->bindParam(":tax_input", $data[""]);
-                $stmt->bindParam(":total_input", $data[""]);
-                $stmt->bindParam(":created_date_input", $data[""]);
+                $stmt->bindParam(":token", $data["token"], PDO::PARAM_STR);
+                $stmt->bindParam(":input_number", $data["??????"], PDO::PARAM_INT);
+                $stmt->bindParam(":id_sppplier", $data["select_supplier"], PDO::PARAM_INT);                
+                $stmt->bindParam(":id_product", $data["id_product_item"], PDO::PARAM_INT); 
+                $stmt->bindParam(":product_name_item", $data["product_concept"], PDO::PARAM_STR);                 
+                $stmt->bindParam(":input_units", $data["amount_item"], PDO::PARAM_INT);
+                $stmt->bindParam(":unit_cost_product", $data["price_item"]);
+                $stmt->bindParam(":unit_discount_product", $data["discount_item"]);
+                $stmt->bindParam(":total_row_input", $data["total_item"]);
+                
+               
             
                 if($stmt->execute()) {
                     $check = "true";
