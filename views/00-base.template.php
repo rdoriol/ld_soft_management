@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>login - LD Soft Gestión</title>
+    <title>login - LD Soft Gestión</title>   
     
     <!-- RESET CSS DE NAVEGADORES
         ---------------------->
@@ -131,7 +131,7 @@
             <!-- end footer -------------->
 
     <script src="./js/mainNavBar.js"></script>
-
+    
     <script src="./views/pages/01.customers/05-customers.js"></script>
     <script src="./views/pages/01.customers/06-customers_validations.js"></script>
     <script src="./views/pages/01.customers/07-customers_prints.js"></script>

@@ -145,5 +145,44 @@
             //todo-> Para ELIMINAR registros de la tabla "products" se utiliza método "mdlDeleteRegister()" implementado en la clase "CustomerModel" ("models/01-customers.model.php") 
         // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+        /**
+         * Método para actualizar stock y precio de coste de los productos ya existentes 
+         */
+        static public function mdlUpdateStockProducts($table, $idValue, $amount, $costPrice) {
+            $check = "false";
+            try {
+                    // Se obtiene número de unidades de productos existentes en la base de datos
+                $product = self::mdlToListProduct($table, "id_product", $idValue);
+                $numberUnitsProduct = $product[0]->units_product;
+
+                    // Al número de unnidades anterior se le suman las que se van añadir
+                $currentNumberUnits = $amount + $numberUnitsProduct;
+                
+                    // Se realiza actualización del producto
+                $updateString = "units_product = :units_product,  last_unit_cost_product = :last_unit_cost_product";
+                $sql = "UPDATE $table SET $updateString WHERE id_product = $idValue";
+                $stmt = Connection::mdlConnect()->prepare($sql);
+
+                  // bloque con función bindParam() para vincular variable oculta en prepare statement con el valor recibido del form.
+                $stmt->bindParam(":units_product", $currentNumberUnits, PDO::PARAM_INT);               
+                $stmt->bindParam(":last_unit_cost_product", $costPrice);
+
+                if($stmt->execute()) {
+                    $check = "true";
+                }
+                return $check;
+            }
+            catch(PDOException $ex) {
+                echo "Error interno updateStockProducts" . $ex->getMessage();       
+            }
+        }
 
     }
+
+
+
+
+
+
+
+   

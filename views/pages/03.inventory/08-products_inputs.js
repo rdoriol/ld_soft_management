@@ -22,10 +22,11 @@
             var rowNumber = $(this).parent().parent().attr("class");     // Se obtiene número de fila
             $("#row_number_selected").val(rowNumber);                    // Se almacena número de fila en input oculto número de fila seleccionada  
 
-                // Se limpian unidades e importes calculados previamente
-            $("#amount_item" + rowNumber).val("");  
+                // Se limpian unidades e importes calculados previamente, así como el token oculto previamente almacenado
+            $("#amount_item" + rowNumber).val("0");  
             $("#total_item" + rowNumber).val("");
             $("#request_ajax").val("false"); 
+            $("#tokenProduct").val("");
            
             
             //idValue = $(this).val();  // Se obtiene "id" de producto a buscar en base de datos (vía AJAX)
@@ -36,8 +37,8 @@
             if($("#request_ajax").val() == "false") {  
                 $("#id_product_item" + rowNumber).val("");  
                 $("#product_name_item" + rowNumber).val("");  
-                $("#price_item" + rowNumber).val("");
-                $("#amount_item" + rowNumber).val("");  
+                $("#price_item" + rowNumber).val("0");
+                $("#amount_item" + rowNumber).val("0");  
                 $("#total_item" + rowNumber).val("");
 
                 cleanCheck("#amount_item" + rowNumber);
@@ -125,25 +126,24 @@ function cleanAllRow(rowNumber) {
 function calcRow() {               
     // var checkCalcRow = false;
     var result = 0.00;
-    var rowNumberValue =  $("#row_number_selected").val();          // Se obtiene y almacena en variable número de fila  
-    var amount = $("#amount_item" + rowNumberValue).val();          // Se obtine y almacena en variable número de unidades de producto
-    var priceItem = $("#price_item" + rowNumberValue).val();        // Se obtine y almacena en variable precio unitario de producto
-    var discount = $("#discount_item" + rowNumberValue).val();      // Se obtine y almacena en variable porcentaje de descuento de producto
+    var rowNumberValue =  $("#row_number_selected").val();                      // Se obtiene y almacena en variable número de fila  
+    var amount = $("#amount_item" + rowNumberValue).val();                      // Se obtiene y almacena en variable número de unidades de producto
+    var priceItem = parseFloat($("#price_item" + rowNumberValue).val());        // Se obtiene y almacena en variable precio unitario de producto
+    var discount = parseFloat($("#discount_item" + rowNumberValue).val());      // Se obtiene y almacena en variable porcentaje de descuento de producto
 
         // Bloque para validaciones de los valores obtenidos
     var checkAmount = validateFieldsInputs($("#amount_item" + rowNumberValue), amount); 
     var checkPriceItem = validateFieldsInputs($("#price_item" + rowNumberValue), priceItem);
     var checkDiscount = validateFieldsInputs($("#discount_item" + rowNumberValue), discount);
-                                                                                                                    console.log(checkAmount, checkPriceItem, checkDiscount);
-    if(checkAmount == true && checkPriceItem == true && checkDiscount == true) {
-       // checkCalcRow = true;
 
+    if(checkAmount == true && checkPriceItem == true && checkDiscount == true) {
+      
             // Se calcula el importe total de la fila 
         result += amount * priceItem / (1 + discount/100);                                          
 
             // Se muestra por pantalla resultado total del cálculo, redondeando a dos decimales
-        $("#total_item" + rowNumberValue).val(   (Math.round(result * 100) / 100).toFixed(2) );
-       
+        $("#total_item" + rowNumberValue).val( (Math.round(result * 100) / 100).toFixed(2) );
+        
     }
     else {
         $("#total_item" + rowNumberValue).val("");
@@ -196,7 +196,8 @@ function validateFieldsInputs(selector, value) {
         $(".error_field").css("display", "block");
     }
     else if(selector.hasClass("amounts")) {       
-        if(pattern.test(value) == false) {
+       // if(pattern.test(value) == false) {
+            if(!isNaN(value) == false) {
             checkKo(selector);
             $(".error_amount_field").css("display", "block");
         }

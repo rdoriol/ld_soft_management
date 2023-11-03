@@ -87,7 +87,7 @@ function getRegisterProductAjax() {
                             -----------------------------------------------------------*/                      
                         $("#id_product_item" + rowNumber).val(request[0].id_product);
                         $("#product_name_item" + rowNumber).val(request[0].name_product);
-                        $("#price_item" + rowNumber).val(request[0].sale_price_product);
+                       // $("#price_item" + rowNumber).val(request[0].sale_price_product); // Eliminar línea (cuando se haya implementado facturación)
                         $("#request_ajax").val("true");                    
                     }
                   

@@ -33,10 +33,13 @@
   <fieldset class="d-flex justify-content-around"> <!-- //todo-> CAMBIAR A ESTILO PROPIO CON CSS flex personalizado -->
     <div class="forms_flex">
       <div class="forms_fields">
+          <?php 
+            $inputNumber = ProductInputController::ctrGenerateInputNumber("inputs_product")  // Se lanza método para asignar número de entrada de forma automática
+          ?>
         <label class="forms_label" for="input_prodcut_id">Nº Entrada</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-list-ol forms_icons"></i>
-          <input type="text" class="forms_inputs" id="input_prodcut_id" name="input_prodcut_id" placeholder="auto" disabled value="<?php echo $inputProductData[0]->id_product; ?>" />
+          <input type="text" class="forms_inputs" id="input_number" name="input_number" placeholder="auto" readonly value="<?php echo $inputNumber; ?>" />         
         </div>      
     </div>
 
@@ -63,7 +66,7 @@
         <label class="forms_label" for="product_created_date">Fecha entrada</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-calendar-days forms_icons"></i>
-          <input type="text" class="forms_inputs" id="input_product_created_date" name="input_product_created_date" placeholder="auto" disabled value="<?php echo $inputProductData[0]->created_date_product; ?>" />
+          <input type="text" class="forms_inputs text-center" id="input_product_created_date" name="input_product_created_date" placeholder="auto" disabled value="<?php echo date("d/m/Y"); ?> <?php echo $inputProductData[0]->created_date_product; ?>" />
         </div>     
       </div>
   </fieldset>
@@ -93,9 +96,9 @@
                                     <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields div_id_product_item align_icon"><i class="fa-solid fa-magnifying-glass forms_icons search_icon" id="btn_input_search_product" title="Buscar producto"></i><input type="text" class="forms_inputs product_item_id input_id" id="id_product_item'. $i .'" name="id_product_item'. $i .'" placeholder="Id" value="" /></div></td>
                                     <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="text" class="forms_inputs inputs_width" id="product_name_item'.$i.'" name="product_name_item'.$i.'" placeholder="Nombre del producto" value="" /></div></td>
                                     <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="number" class="forms_inputs inputs_width amounts" id="amount_item'.$i.'" name="amount_item'.$i.'" placeholder="0" value="0" /></div></td>
-                                    <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="text" class="forms_inputs inputs_width price" id="price_item'.$i.'" name="price_item'.$i.'" placeholder="0 €" value="" /></div></td>
-                                    <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="text" class="forms_inputs inputs_width discount" id="discount_item'.$i.'" name="discount_item'.$i.'" placeholder="0 %" value="" /></div></td>
-                                    <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="text" class="forms_inputs inputs_width total_item_row" id="total_item'.$i.'" name="total_item'.$i.'" placeholder="0 €" disabled value="" /><button type="button" class="btn btn-danger btn-sm p-0 pl-1 pr-1 ml-1 delete_row_input" id="" ><i class="fa-sharp fa-solid fa-trash-can fa-2s"></i></button></div></td>
+                                    <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="text" class="forms_inputs inputs_width price" id="price_item'.$i.'" name="price_item'.$i.'" placeholder="0 €" value="0" /></div></td>
+                                    <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="text" class="forms_inputs inputs_width discount" id="discount_item'.$i.'" name="discount_item'.$i.'" placeholder="0 %" value="0" /></div></td>
+                                    <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="text" class="forms_inputs inputs_width total_item_row" id="total_item'.$i.'" name="total_item'.$i.'" placeholder="0 €" readonly value="" /><button type="button" class="btn btn-danger btn-sm p-0 pl-1 pr-1 ml-1 delete_row_input" id="" ><i class="fa-sharp fa-solid fa-trash-can fa-2s"></i></button></div></td>
                                 </tr>';
                         }
                           // Bucle igual que el anterior pero oculto, será el usuario quien decida visualizarlo
@@ -107,7 +110,7 @@
                                   <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="number" class="forms_inputs inputs_width amounts" id="amount_item'.$i.'" name="amount_item'.$i.'" placeholder="" value="0" /></div></td>
                                   <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="text" class="forms_inputs inputs_width price" id="price_item'.$i.'" name="price_item'.$i.'" placeholder="" value="" /></div></td>
                                   <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="text" class="forms_inputs inputs_width discount" id="discount_item'.$i.'" name="discount_item'.$i.'" placeholder="" value="" /></div></td>
-                                  <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="text" class="forms_inputs inputs_width total_item_row" id="total_item'.$i.'" name="total_item'.$i.'" placeholder="0 €" disabled value="" /><button type="button" class="btn btn-danger btn-sm p-0 pl-1 pr-1 ml-1 delete_row_input" id="" ><i class="fa-sharp fa-solid fa-trash-can fa-2s"></i></button></div></td>
+                                  <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="text" class="forms_inputs inputs_width total_item_row" id="total_item'.$i.'" name="total_item'.$i.'" placeholder="0 €" readonly value="" /><button type="button" class="btn btn-danger btn-sm p-0 pl-1 pr-1 ml-1 delete_row_input" id="" ><i class="fa-sharp fa-solid fa-trash-can fa-2s"></i></button></div></td>
                                 </tr>';
                         } 
                     ?>
@@ -121,25 +124,25 @@
                           <div colspan="1"><button type="button" class="btn btn-primary mr-5 btn_minus" id="btn_delete_product_row" name="" title="Eliminar líneas de productos"><i class="fa-sharp fa-solid fa-minus"></i></button></div>  
                         </td>
                         <td colspan="4" class="text-right">Subtotal (€)</td>
-                        <td><div class="forms_inputs_fields table_inputs_fields"><input type="number" class="forms_inputs inputs_width number_input" id="subtotal_input" name="subtotal_input" placeholder="0 €" disabled value="" /></div></td>
+                        <td><div class="forms_inputs_fields table_inputs_fields"><input type="text" step="0.01"class="forms_inputs inputs_width number_input" id="subtotal_input" name="subtotal_input" placeholder="0 €" readonly value="" /></div></td>
                     </tr> 
                     <tr>
                         <td colspan="5" class="text-right">Descuento (%)</td>
-                        <td><div class="forms_inputs_fields table_inputs_fields"><input type="number" class="forms_inputs inputs_width number_input" id="discount_input" name="discount_input" placeholder="0 %" value="" /></div></td>
+                        <td><div class="forms_inputs_fields table_inputs_fields"><input type="text" step="0.01"class="forms_inputs inputs_width number_input" id="discount_input" name="discount_input" placeholder="0 %" value="" /></div></td>
                     </tr>
                     <tr>
                         <td colspan="5" class="text-right">Subtotal con descuento (€)</td>
-                        <td><div class="forms_inputs_fields table_inputs_fields"><input type="number" class="forms_inputs inputs_width number_input" id="subtotal_discount_input" name="subtotal_discount_input" placeholder="0 €" disabled value="" /></div></td>
+                        <td><div class="forms_inputs_fields table_inputs_fields"><input type="text" step="0.01"class="forms_inputs inputs_width number_input" id="subtotal_discount_input" name="subtotal_discount_input" placeholder="0 €" readonly value="" /></div></td>
                     </tr>  
                     <tr>
                         <td colspan="5" class="text-right">Impuestos (21%)</td>
-                        <td><div class="forms_inputs_fields table_inputs_fields"><input type="number" class="forms_inputs inputs_width number_input" id="tax_input" name="tax_input" placeholder="0 €" disabled value="" /></div></td>
+                        <td><div class="forms_inputs_fields table_inputs_fields"><input type="text" step="0.01"class="forms_inputs inputs_width number_input" id="tax_input" name="tax_input" placeholder="0 €" readonly value="" /></div></td>
                     </tr>
                     <tr>
                         <td colspan="5" class="text-right font-weight-bold">
                             <h4>Total (€)</h4></td>
                         <td>
-                            <h4><div class="forms_inputs_fields table_inputs_fields font-weight-bold"><input type="number" class="forms_inputs inputs_width number_input" id="total_input" name="total_input" placeholder="0 €" disabled value="" /></div></h4>
+                            <h4><div class="forms_inputs_fields table_inputs_fields font-weight-bold"><input type="number" class="forms_inputs inputs_width number_input" id="total_input" name="total_input" placeholder="0 €" readonly value="" /></div></h4>
                         </td>
                     </tr>
                 </tfoot>
