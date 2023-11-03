@@ -21,11 +21,11 @@
 <h2 class="li_active_page rounded">Entradas Productos</h2>
 
 <form class="general_forms" id="products_inputs_form" action="" method="post" onsubmit="">
-  <h4 class="forms_subtitle rounded">Movimiento de entradas | Modificar | Eliminar</h4>
+  <h4 class="forms_subtitle rounded">Movimientos de entradas</h4>
     
                                             <!-- Lista de botones "Buscar" e "Imprimir" -->
   <ul class="d-flex justify-content-first"> 
-    <li><button type="button" class="search_bar m-1 alert-info rounded" id="search_product" onClick=""><i class="fa-solid fa-magnifying-glass"></i>&nbsp Historial de entradas</button></li>
+    <li><button type="button" class="search_bar m-1 alert-info rounded" id="search_inputs_products"><i class="fa-solid fa-magnifying-glass"></i>&nbsp Historial de entradas</button></li>
     <li><button type="button" class="print_bar m-1 alert-info rounded" id="print_product"><i class="fa-solid fa-print"></i>&nbspImprimir</button></li>
   </ul>
                                             <!-- --------------------------------------- -->      
@@ -66,7 +66,7 @@
         <label class="forms_label" for="product_created_date">Fecha entrada</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-calendar-days forms_icons"></i>
-          <input type="text" class="forms_inputs text-center" id="input_product_created_date" name="input_product_created_date" placeholder="auto" disabled value="<?php echo date("d/m/Y"); ?> <?php echo $inputProductData[0]->created_date_product; ?>" />
+          <input type="text" class="forms_inputs" id="input_product_created_date" name="input_product_created_date" placeholder="auto" disabled value="<?php echo date("d/m/Y"); ?> <?php echo $inputProductData[0]->created_date_product; ?>" />
         </div>     
       </div>
   </fieldset>
@@ -141,8 +141,8 @@
                     <tr>
                         <td colspan="5" class="text-right font-weight-bold">
                             <h4>Total (€)</h4></td>
-                        <td>
-                            <h4><div class="forms_inputs_fields table_inputs_fields font-weight-bold"><input type="number" class="forms_inputs inputs_width number_input" id="total_input" name="total_input" placeholder="0 €" readonly value="" /></div></h4>
+                        <td class="total_field">
+                            <h3><div class="forms_inputs_fields table_inputs_fields font-weight-bold"><input type="number" class="forms_inputs inputs_width number_input" id="total_input" name="total_input" placeholder="0 €" readonly value="" /></div></h3>
                         </td>
                     </tr>
                 </tfoot>
@@ -152,9 +152,9 @@
                                                   <!-- ELEMENTOS INPUTS OCULTOS -->
 
                         <!-- input oculto que recibirá valor de token de subventana -->
-        <input type="hidden" id="tokenInputs" name="tokenInputs" placeholder="tokenValue Subwindow" value="<?php echo $inputProductData[0]->token_input_product; ?>" /> 
+        <input type="hidden" id="tokenInputs" name="tokenInputs" placeholder="tokenInputs Subwindow" value="<?php //echo $inputProductData[0]->token_input_product; ?>" /> 
                         <!-- input oculto para recibir/capturar valor token de subventana buscador para búsqueda de productos  -->
-         <input type="hidden" id="tokenProduct" placeholder="tokenValue Subwindow. Hide" value="" />
+         <input type="hidden" id="tokenProduct" placeholder="tokenProduct Subwindow. Hide" value="" />
                         <!-- input oculto que almacenará valor de atributo "id" de la fila seleccionada -->
         <input type="hidden" id="row_number_selected" placeholder="nº fila seleccionada" value="" />
                         <!-- input oculto que almacenará chequeo de respuesta ajax de la fila seleccionada -->
@@ -164,8 +164,7 @@
 
     <div class="btn-group p-3 ">
       <button type="submit" class="btn btn-primary mr-5" id="btn_input_product_submit" name="btn_input_product_submit"><i class="fa-sharp fa-solid fa-pencil"></i>&nbsp Grabar</button>
-      <button type="button" role="link" class="btn btn-secondary mr-5" name="exit_input_product" onClick="window.location='index.php?pages=02-productsInputs'"><i class="fa-sharp fa-solid fa-rectangle-xmark"></i>&nbsp Cerrar registro</button>
-      <button type="submit" class="btn btn-danger" id="btn_product_delete" name="delete_product" data-toggle="modal" data-target="#delete_modal"><i class="fa-sharp fa-solid fa-trash-can"></i>&nbsp Eliminar registro</button> 
+      <button type="button" role="link" class="btn btn-secondary mr-5" name="exit_input_product" onClick="window.location='index.php?pages=02-productsInputs'"><i class="fa-sharp fa-solid fa-rectangle-xmark"></i>&nbsp Cerrar registro</button>      
     </div>
 
                     <!-- Mensajes ocultos de validaciones y realización de operaciones -->
@@ -175,7 +174,7 @@
 
     <div class="text-center alert-danger rounded error_amount_field"><p>El campo <i><b>Cant.</b></i> solo admiten caracteres numéricos sin decimales.</p></div>
     
-    <div class='text-center alert-danger rounded require_fields'><p class='font-weight-bold'>Los siguientes campos son obligatorios:</p><ul><li>Categoría producto</li><li>Referencia original</li><li>Nombre Producto</li></ul></div>
+    <div class='text-center alert-danger rounded require_fields'><p class='font-weight-bold'>Los siguientes campos son obligatorios:</p><ul><li>Proveedor</li><li>Ref.</li><li>Concepto</li><li>Cant.</li><li>Precio (€)</li></ul></div>
     
                      <!-- -------------------------------------------------------------  -->
                      

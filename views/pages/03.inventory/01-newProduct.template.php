@@ -36,7 +36,7 @@
         <label class="forms_label" for="product_id">Id Producto</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-list-ol forms_icons"></i>
-          <input type="text" class="forms_inputs" id="product_id" name="product_id" placeholder="" disabled value="<?php echo $productData[0]->id_product; ?>" />
+          <input type="text" class="forms_inputs" id="product_id" name="product_id" placeholder="auto" disabled value="<?php echo $productData[0]->id_product; ?>" />
         </div>      
     </div>
 
@@ -64,7 +64,7 @@
         <label class="forms_label" for="product_created_date">Fecha registro</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-calendar-days forms_icons"></i>
-          <input type="text" class="forms_inputs" id="product_created_date" name="product_created_date" placeholder="" disabled value="<?php echo $productData[0]->created_date_product; ?>" />
+          <input type="text" class="forms_inputs" id="product_created_date" name="product_created_date" placeholder="" disabled value="<?php echo date("d/m/Y"); ?> <?php echo $productData[0]->created_date_product; ?>" />
         </div>      
     </div>
   </fieldset>
@@ -102,7 +102,7 @@
         <label class="forms_label" for="product_unit">Unidades</label>  
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-tree-city forms_icons"></i>
-          <input type="text" class="forms_inputs" id="product_unit" name="product_unit" placeholder="" disabled value="<?php echo $productData[0]->units_product; ?>">
+          <input type="text" class="forms_inputs" id="product_unit" name="product_unit" placeholder="auto" disabled value="<?php echo $productData[0]->units_product; ?>">
         </div>      
       </div>
 
@@ -110,7 +110,7 @@
         <label class="forms_label" for="last_cost_product">Último coste producto</label> 
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-city forms_icons"></i>
-          <input type="text" class="forms_inputs" id="last_cost_product" name="last_cost_product" placeholder="" disabled value="<?php echo $productData[0]->last_unit_cost_product; ?>"/>
+          <input type="text" class="forms_inputs" id="last_cost_product" name="last_cost_product" placeholder="auto" disabled value="<?php echo $productData[0]->last_unit_cost_product; ?>"/>
         </div>      
       </div>
 
@@ -120,27 +120,12 @@
           <i class="fa-solid fa-earth-americas forms_icons"></i>
           <input type="text" class="forms_inputs" id="sale_price_product" name="sale_price_product" placeholder="" value="<?php echo $productData[0]->sale_price_product; ?>"/>
         </div>      
-      </div>     
+      </div>    
 
-      <div class="forms_fields">
-        <label class="forms_label" for="supplier_product">Proveedores</label> <!-- // todo-> Se alimenta de tabla de movimiento de entradas o de product_suppliers?? -->
-        <div class="forms_inputs_fields">
-            <i class="fa-solid fa-house forms_icons"></i> 
-
-            <select class="" id="" name="supplier_product">
-                <option vaule="" selected hidden="true">suministrado por</option>
-                <?php   /*                    //todo Select con categoría de productos almacenada en la tabla "product_categories" de la base de datos
-                    $selectCategory = CustomerController::ctrToList("product_categories", null);                                     
-                    foreach($selectCategory as $item):*/
-                ?>
-                <option disabled value="<?php// echo $item->id; ?>"><?php //echo $item->name_product_category; ?></option>
-               <?php// endforeach ?>
-            </select>
-        </div>      
-      </div>
+     
 
                 <!-- input oculto que recibirá valor de token de subventana -->
-        <input type="text" id="tokenProduct" name="tokenProduct" placeholder="tokenValue Subwindow" value="<?php echo $productData[0]->token_product; ?>" /> 
+        <input type="hidden" id="tokenProduct" name="tokenProduct" placeholder="tokenValue Subwindow" value="<?php echo $productData[0]->token_product; ?>" /> 
                 <!-- ------------------------------------------------------- -->
     </div>
     <div class="btn-group p-3 ">

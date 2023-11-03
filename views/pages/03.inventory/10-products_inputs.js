@@ -1,4 +1,4 @@
- /* BLOQUE SUBVENTANA BUSCADOR DE REGISTROS
+ /* BLOQUE SUBVENTANA BUSCADOR DE REGISTROS - CÁLCULOS DE CAMPOS - VALIDACIONES INPUTS PRODUCTS
     -----------------------------------------*/
     
     var productWindow; // variable que almacenará subventana abierta
@@ -27,20 +27,17 @@
             $("#total_item" + rowNumber).val("");
             $("#request_ajax").val("false"); 
             $("#tokenProduct").val("");
-           
-            
             //idValue = $(this).val();  // Se obtiene "id" de producto a buscar en base de datos (vía AJAX)
             
             getRegisterProductAjax(); // Se lanza función ubicada en 03.inventory/06-inventory.js   
                   
-                // Si el id del producto no existe en la base de datos se limpian todos los campos de la fila
+                // Si el id del producto no existe en la base de datos se limpian todos los campos de la fila y eliminan mensajes de error previos
             if($("#request_ajax").val() == "false") {  
                 $("#id_product_item" + rowNumber).val("");  
                 $("#product_name_item" + rowNumber).val("");  
-                $("#price_item" + rowNumber).val("0");
-                $("#amount_item" + rowNumber).val("0");  
+                $("#price_item" + rowNumber).val(0);
+                $("#amount_item" + rowNumber).val(0);  
                 $("#total_item" + rowNumber).val("");
-
                 cleanCheck("#amount_item" + rowNumber);
                 cleanCheck("#price_item" + rowNumber);
                 cleanCheck("#discount_item" + rowNumber);
@@ -55,12 +52,11 @@
         $("#products_inputs_form .delete_row_input").click(function(){
            
              var rowNumberDelete = $(this).parent().parent().attr("class");
-             cleanAllRow(rowNumberDelete);             
-           
+             cleanAllRow(rowNumberDelete);  
         })
 
         /**
-         * Función que mostrará el resultado del cálculo de los productos de una fila
+         * Función que mostrará el resultado del cálculo de los productos de las filas
          */
         $("#products_inputs_form .amounts, #products_inputs_form .price, #products_inputs_form .discount, #products_inputs_form #discount_input").change(function(){
               
@@ -81,14 +77,38 @@
         /**
          * Función inversa a la anterior. Al hacer click en botón restará las líneas de productos añadidas anteriormente
          */
-             $("#btn_delete_product_row").click(function() {                    
-                $(".hidden_rows").css("display", "none");
-                $(".btn_minus").css("display", "none");
-                $(".btn_add").css("display", "block");                
-            })
-
+        $("#btn_delete_product_row").click(function() {                    
+            $(".hidden_rows").css("display", "none");
+            $(".btn_minus").css("display", "none");
+            $(".btn_add").css("display", "block");                
+        })
+    
+    
+        /**
+         * Función que comprobará campos vacíos antes de enviar los datos del formulario a backend php. Capturará el submit del form
+         */
+        $("#btn_input_product_submit").click(function(){
+                // Se obtienen los valores introducidos en los diferentes campos obligatorios
+            var supplier = $("#father_select_item_category").val();            
+            var idProduct = $("#id_product_item1").val();
+            var concept = $("#product_name_item1").val();
+            var amount = $("#amount_item1").val();            
+                // Se verifican los campos vacíos y se bloquea el envío del formulario
+            if(supplier == "" || idProduct == "" || concept == "" || amount == 0) {
+                $(".require_fields").css("display", "block");                
+                return false;
+            }
+                // Si todo está correcto, se elimina mensaje de error previo y se deja enviar el submit
+            else {
+                $(".require_fields").css("display", "none");
+            }    
+        })
+    
+    
     })
 
+
+        // Fin bloque JQuery --------------------------------------------
 
 /**
  * Función que limpiará todos los campos de la fila seleccionada
@@ -97,23 +117,20 @@ function cleanAllRow(rowNumber) {
         // Limpiezas de todos los campos de la fila
     $("#id_product_item" + rowNumber).val("");
     $("#product_name_item" + rowNumber).val("");
-    $("#amount_item" + rowNumber).val("");
-    $("#price_item" + rowNumber).val("");
-    $("#discount_item" + rowNumber).val("");
+    $("#amount_item" + rowNumber).val(0);
+    $("#price_item" + rowNumber).val(0);
+    $("#discount_item" + rowNumber).val(0);
     $("#total_item" + rowNumber).val("");
     $("#row_number_selected").val(""); 
     $("#request_ajax").val("false"); 
-
-        // Si hubiera un valor almacenado en el array de la fila seleccionada se coloca a 0 para recalculo correcto
-    arrayResult[rowNumberDelete - 1] = 0;         
-
+        // Si hubiera un valor almacenado en el array de la fila seleccionada se coloca a 0 para recalculo correcto. (arrayResult declarado en línea 150 de este archivo) (rowNumberDelete declarado en línea 54 de este archivo)
+    arrayResult[rowNumberDelete - 1] = 0;
         // Limpieza de mensajes de errores y advertencias
     cleanCheck("#amount_item" + rowNumber);
     cleanCheck("#price_item" + rowNumber);
     cleanCheck("#discount_item" + rowNumber);
     $(".error_amount_field").css("display", "none");
-    $(".error_field").css("display", "none");
-    
+    $(".error_field").css("display", "none");    
         // Al limpiar todos los campos de una fila se recalculan los importes       
         calcRow();                  
         calcSubtotalRows();         
@@ -146,7 +163,11 @@ function calcRow() {
         
     }
     else {
-        $("#total_item" + rowNumberValue).val("");
+        $("#total_item" + rowNumberValue).val("");                              // Se limpia el total calculado de la fila
+        $("#btn_input_product_submit").submit(function(){                       // Se bloque el submit del formulario y no se deja pasar a backend php
+            return false;
+
+        })
     }
 
     return result;
@@ -189,7 +210,7 @@ function calcTotalInputsProducts() {
  */
 function validateFieldsInputs(selector, value) {
     var checkValidate = false;
-    var pattern = /^(\d{1,3}(\,\d{3})*|(\d+))(\.\d{2})?$/;  // Expresión regular que evalua números con decimales (con punto y coma)
+   // var pattern = /^(\d{1,3}(\,\d{3})*|(\d+))(\.\d{2})?$/;  // Expresión regular que evalua números con decimales (con punto y coma)
 
     if(isNaN(value)) { 
         checkKo(selector);

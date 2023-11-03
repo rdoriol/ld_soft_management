@@ -78,7 +78,7 @@
               {
                 include "pages/02.suppliers/" . $page . ".template.php";
               }
-              else if($page == "01-newProduct" || $page == "02-productsInputs" || $page == "03-productsList" || $page == "05-inventoryPopUpSearch")
+              else if($page == "01-newProduct" || $page == "02-productsInputs" || $page == "03-productsList" || $page == "05-inventoryPopUpSearch" || $page == "07-inputProductPopUpSearch")
               {
                 include "pages/03.inventory/" . $page . ".template.php";
               }
@@ -131,6 +131,7 @@
             <!-- end footer -------------->
 
     <script src="./js/mainNavBar.js"></script>
+    <script src="./js/calendar_search.js"></script>
     
     <script src="./views/pages/01.customers/05-customers.js"></script>
     <script src="./views/pages/01.customers/06-customers_validations.js"></script>
@@ -140,10 +141,11 @@
     <script src="./views/pages/02.suppliers/06-suppliers_validations.js"></script>
     <script src="./views/pages/02.suppliers/07-suppliers_prints.js"></script>
 
-    <script src="./views/pages/03.inventory/06-inventory.js"></script>
-    <script src="./views/pages/03.inventory/07-inventory_validations.js"></script>   
-    <script src="./views/pages/03.inventory/08-products_inputs.js"></script>    
-    <script src="./views/pages/03.inventory/09-inventory_prints.js"></script>
+    <script src="./views/pages/03.inventory/08-inventory.js"></script>
+    <script src="./views/pages/03.inventory/09-inventory_validations.js"></script>   
+    <script src="./views/pages/03.inventory/10-products_inputs.js"></script>   
+    <script src="./views/pages/03.inventory/11-products_inputs_hist_subwindow.js"></script>      
+    <script src="./views/pages/03.inventory/12-inventory_prints.js"></script>
 
   </body>
 </html>

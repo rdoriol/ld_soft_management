@@ -2,7 +2,7 @@
     <li>
         <form class="general_searchs_forms" id="" action="" method="post">     
                       
-            <select class="" id="" name="select_item">
+            <select class="bar_search" id="" name="select_item">
                 <option vaule="" selected disabled="true">Filtrar búsqueda</option>
                 <option value="full_list">Listado completo</option>
                 <option value="id_product">Id</option>
@@ -17,3 +17,4 @@
     </li>
     <li><button class="print_bar m-1 alert-info rounded" id="btn_print_inventory"><i class="fa-solid fa-print"></i>&nbspImprimir</button></li>
 </ul> 
+

@@ -40,7 +40,7 @@
         <label class="forms_label" for="customer_id">Id Cliente</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-list-ol forms_icons"></i>
-          <input type="text" class="forms_inputs" id="customer_id" name="customer_id" placeholder="" disabled value="<?php echo $customerData[0]->id ?>" />
+          <input type="text" class="forms_inputs" id="customer_id" name="customer_id" placeholder="auto" disabled value="<?php echo $customerData[0]->id ?>" />
         </div>      
     </div>
 
@@ -62,7 +62,7 @@
         <label class="forms_label" for="created_date">Fecha registro</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-calendar-days forms_icons"></i>
-          <input type="text" class="forms_inputs" id="created_date" name="created_date" placeholder="" disabled value="<?php echo $customerData[0]->created_date ?>" />
+          <input type="text" class="forms_inputs" id="created_date" name="created_date" placeholder="" disabled value="<?php echo date("d/m/Y"); ?> <?php echo $customerData[0]->created_date ?>" />
         </div>      
     </div>
   </fieldset>

@@ -14,6 +14,10 @@ footer {
     display: none;
 }
 
+.forms_subtitle{
+    margin-top: 30px;
+}
+
 .item_main_container_section {
     width: 100%;   
 }
@@ -31,7 +35,7 @@ footer {
 }
 
 #customers_lists_table .table_search:hover, #supplier_lists_table .table_search:hover, 
-#products_lists_table .table_search:hover {
+#products_lists_table .table_search:hover, #inputs_products_lists_table .table_search:hover {
     cursor: pointer;  
     background-color: #007BFF;   
     color: #ffffff;

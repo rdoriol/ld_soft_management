@@ -49,15 +49,18 @@ function closeSubwindow() {
  /**
  * Función que conectará con fichero php "ajax/ajax_search_subwindow"
  */
-function getRegisterProductAjax() {             
-    var rowNumber = $("#row_number_selected").val();        // Se obtiene valor de atributo "id" (número de fila) de fila seleccionada en 02-productsInputs.template.php
-    var tokenValue = $("#tokenProduct").val();              // Se obtiene valor a buscar en la base de datos
-    var idValue = $("#id_product_item" + rowNumber).val();  // Se obtiene valor del id a buscar en base de datos
-   
+function getRegisterProductAjax() {            
+    
+    var tokenValue = $("#tokenProduct").val();                  // Se obtiene valor a buscar en la base de datos
+    var rowNumber = $("#row_number_selected").val();            // Se obtiene valor de atributo "id" (número de fila) de fila seleccionada en 02-productsInputs.template.php
+    var idValue = $("#id_product_item" + rowNumber).val();      // Se obtiene valor del id a buscar en base de datos
+    var tokenInputsValue = $("#tokenInputs").val();             // Se obtiene valor del token de inputsProduct a buscar en base de datos
+
     var dataForm = new FormData(); 
-    //                    name         value   // Se generan datos de form para enviarlos en formato PHP ($_POST[])
-    dataForm.append("tokenProduct", tokenValue);               
-    dataForm.append("idProduct", idValue);                       
+    //                    name         value                    // Se generan datos de form para enviarlos en formato PHP ($_POST[])
+    dataForm.append("tokenProduct", tokenValue);                // Se utilizará para mostrar datos en 01-newProduct.template.php           
+    dataForm.append("idProduct", idValue);                      // Se utilizará para mostrar datos de productos en 02-productsInputs.template.php      
+    dataForm.append("tokenInputs", tokenInputsValue);          // Se utilizará para mostrar datos de movimientos de entradas en 02-productsInputs.template.php  
    
     $.ajax({
         url: "./ajax/ajax_search_subwindow.php",
@@ -68,7 +71,7 @@ function getRegisterProductAjax() {
         processData: false,
         dataType: "json",
         success: function(request){           
-                    if(request) {                                                                           
+                    if(request) {                                                                             
                                    
                             /* Bloque para mostrar datos en 01-newProduct.template.php
                             -----------------------------------------------------------*/
@@ -88,9 +91,20 @@ function getRegisterProductAjax() {
                         $("#id_product_item" + rowNumber).val(request[0].id_product);
                         $("#product_name_item" + rowNumber).val(request[0].name_product);
                        // $("#price_item" + rowNumber).val(request[0].sale_price_product); // Eliminar línea (cuando se haya implementado facturación)
-                        $("#request_ajax").val("true");                    
+                        $("#request_ajax").val("true");    
+                        
+                        /* Bloque para mostrar datos de movimientos de entradas en 02-productsInputs.template.php
+                            -------------------------------------------------------------------------------------*/ 
+                       /* $("#input_number").val(request[0].input_number);
+                        $("#select_supplier").val(request[0].id_supplier);
+                        $("#select_supplier").text(request[0].name_supplier);
+                        $("#input_product_created_date").val(request[0].created_date_supplier_invoice);
+                        $("#subtotal_input").val(request[0].subtotal_input);
+                        $("#discount_input").val(request[0].discount_input);
+                        $("#subtotal_discount_input").val(request[0].subtotal_with_discount);
+                        $("#tax_input").val(request[0].tax_input);
+                        $("#total_input").val(request[0].total_input);*/
                     }
-                  
         }
     })    
 } 

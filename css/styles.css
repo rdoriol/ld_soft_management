@@ -466,6 +466,10 @@ footer h3 {
     display: none;
 }
 
+.total_field {
+    width: 150px;
+}
+
 #products_inputs_form .hidden_rows {
     display: none;
 }

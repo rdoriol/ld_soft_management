@@ -36,7 +36,7 @@
         <label class="forms_label" for="supplier_id">Id Proveedor</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-list-ol forms_icons"></i>
-          <input type="text" class="forms_inputs" id="supplier_id" name="supplier_id" placeholder="" disabled value="<?php echo $supplierData[0]->id ?>" />
+          <input type="text" class="forms_inputs" id="supplier_id" name="supplier_id" placeholder="auto" disabled value="<?php echo $supplierData[0]->id ?>" />
         </div>      
     </div>
 
@@ -45,7 +45,7 @@
         <label class="forms_label" for="supplier_created_date">Fecha registro</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-calendar-days forms_icons"></i>
-          <input type="text" class="forms_inputs" id="supplier_created_date" name="supplier_created_date" placeholder="" disabled value="<?php echo $supplierData[0]->created_date ?>" />
+          <input type="text" class="forms_inputs" id="supplier_created_date" name="supplier_created_date" placeholder="" disabled value="<?php echo date("d/m/Y"); ?> <?php echo $supplierData[0]->created_date ?>" />
         </div>      
     </div>
   </fieldset>
