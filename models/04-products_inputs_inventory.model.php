@@ -79,7 +79,6 @@
             }
             return $check;
         }
-    
 
         /**
          * Método que listará la fila con el mayor valor indicado (asignará de forma automática números de entradas y capturará úlitmo registro grabado de supplier_invoice) 
@@ -101,9 +100,6 @@
             }
         }
 
-       
-
-
         /**
          * Método para leer/consultar todos los datos de las tablas "inputs_product", "products", "suppliers" y "supplier_invoices" (INNER JOIN)
          * @param string $table, $key, $null
@@ -112,19 +108,24 @@
         static public function mdlToListInputsProducts($table, $key=null, $value=null) {
             $sql = "";
             try {
-                if($key == null) {
-                  //  $sql = "SELECT * FROM $table;";    
+                if($key == null) {   
                     $sql = "SELECT si.*, DATE_FORMAT(si.created_date_supplier_invoice, '%d/%m/%Y') AS created_date_supplier_invoice, s.*, DATE_FORMAT(s.created_date, '%d/%m/%Y') AS created_date
                             FROM supplier_invoices si                           
                             INNER JOIN suppliers s ON s.id = si.id_supplier                            
-                            ORDER BY si.input_number ASC;";
-                }  
+                            ORDER BY si.input_number ASC;";                   // Consulta para listar tabla completa de supplier_invoices
+                }
+                else if($table == "inputs_product") {
+                    $sql = "SELECT *, DATE_FORMAT(created_date_input, '%d/%m/%Y') AS created_date_input
+                            FROM $table
+                            WHERE $key LIKE '%$value%'
+                            ORDER BY $key ASC;";                              // Consulta para listar filas de productos en un número de entrada concreto de la tabla inputs_product                              
+                }
                 else {
                     $sql = "SELECT si.*, DATE_FORMAT(si.created_date_supplier_invoice, '%d/%m/%Y') AS created_date_supplier_invoice, s.*, DATE_FORMAT(s.created_date, '%d/%m/%Y') AS created_date
                             FROM supplier_invoices si                           
                             INNER JOIN suppliers s ON s.id = si.id_supplier 
                             WHERE $key LIKE '%$value%'
-                            ORDER BY $key ASC;"; 
+                            ORDER BY $key ASC;";                               // Consulta para listar datos de entradas concretas de la tabla supplier_invoices
                 }
 
                 $stmt = Connection::mdlConnect()->prepare($sql);

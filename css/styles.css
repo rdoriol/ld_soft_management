@@ -10,9 +10,6 @@
     --carbonBlack: #1c1c1c;
     --formsIconsBackgroundColor: #E9ECEF;
     --headerFotter: #183153;
-   
-
-   
 }
 
      /* GENERAL STYLES
@@ -40,6 +37,14 @@ h2 {
 
 input {
     background-color: #ffffff;
+    text-align: center;
+}
+
+select {
+    background-color: #ffffff;
+    color: #000000;
+    padding-top: 1.3%;
+    padding-bottom: 1.3%;
 }
 
 .forms_subtitle {
@@ -60,7 +65,7 @@ input {
 .forms_fields {
     display: flex;
     flex-direction: column;
-    align-items: flex-start; 
+    /*align-items: flex-start; */
 }
 
 .forms_label {
@@ -384,11 +389,14 @@ footer h3 {
 }
 
 .error_field {
-    display: none;
-    
+    display: none;    
 }
 
 .error_amount_field {
+    display: none;
+}
+
+.submit_disabled {
     display: none;
 }
 

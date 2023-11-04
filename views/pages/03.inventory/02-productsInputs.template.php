@@ -41,14 +41,22 @@
           <i class="fa-solid fa-list-ol forms_icons"></i>
           <input type="text" class="forms_inputs" id="input_number" name="input_number" placeholder="auto" readonly value="<?php echo $inputNumber; ?>" />         
         </div>      
-    </div>
+      </div>
+
+      <div class="forms_fields">
+          <label class="forms_label" for="product_created_date">Fecha entrada</label>
+          <div class="forms_inputs_fields">
+            <i class="fa-solid fa-calendar-days forms_icons"></i>
+            <input type="text" class="forms_inputs" id="input_product_created_date" name="input_product_created_date" placeholder="auto" disabled value="<?php echo date("d/m/Y"); ?> <?php echo $inputProductData[0]->created_date_product; ?>" />
+          </div>     
+      </div>
 
     <div class="forms_fields">
-        <label class="forms_label" for="product_category">Proveedor</label>
+        <label class="forms_label" for="father_select_supplier">Proveedor</label>
         <div class="forms_inputs_fields">
             <i class="fa-solid fa-house forms_icons"></i> 
 
-            <select class="" id="father_select_item_category" name="select_supplier"> 
+            <select class="" id="father_select_supplier" name="select_supplier"> 
                 <option id="select_supplier" value="<?php //echo $inputProductData[0]->id; ?>" selected><?php //echo $inputProductData[0]->name_supplier; ?></option>
                
                 <?php                  
@@ -61,14 +69,7 @@
             </select>
         </div>      
       </div>
-   
-      <div class="forms_fields">
-        <label class="forms_label" for="product_created_date">Fecha entrada</label>
-        <div class="forms_inputs_fields">
-          <i class="fa-solid fa-calendar-days forms_icons"></i>
-          <input type="text" class="forms_inputs" id="input_product_created_date" name="input_product_created_date" placeholder="auto" disabled value="<?php echo date("d/m/Y"); ?> <?php echo $inputProductData[0]->created_date_product; ?>" />
-        </div>     
-      </div>
+      
   </fieldset>
 
   <fieldset class="">   
@@ -142,7 +143,7 @@
                         <td colspan="5" class="text-right font-weight-bold">
                             <h4>Total (€)</h4></td>
                         <td class="total_field">
-                            <h3><div class="forms_inputs_fields table_inputs_fields font-weight-bold"><input type="number" class="forms_inputs inputs_width number_input" id="total_input" name="total_input" placeholder="0 €" readonly value="" /></div></h3>
+                            <h5><div class="forms_inputs_fields table_inputs_fields font-weight-bold"><input type="number" class="forms_inputs inputs_width number_input" id="total_input" name="total_input" placeholder="0 €" readonly value="" /></div></h5>
                         </td>
                     </tr>
                 </tfoot>
@@ -175,6 +176,8 @@
     <div class="text-center alert-danger rounded error_amount_field"><p>El campo <i><b>Cant.</b></i> solo admiten caracteres numéricos sin decimales.</p></div>
     
     <div class='text-center alert-danger rounded require_fields'><p class='font-weight-bold'>Los siguientes campos son obligatorios:</p><ul><li>Proveedor</li><li>Ref.</li><li>Concepto</li><li>Cant.</li><li>Precio (€)</li></ul></div>
+
+    <div class='text-center alert-danger rounded submit_disabled'><p class='font-weight-bold'>No se pueden realizar modificaciones en Movimientos de Entradas de Productos.</p><br><p>En caso de necesitar modifcaciones debe tener privilegios de superusuario.</p></div>
     
                      <!-- -------------------------------------------------------------  -->
                      

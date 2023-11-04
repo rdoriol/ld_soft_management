@@ -1,0 +1,11 @@
+.item_main_container_nav {
+    display: none;
+}
+
+.item_main_container_section {
+    width: 100%;   
+}
+
+form {
+    background-color: var(--headerFotter);
+}

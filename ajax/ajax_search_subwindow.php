@@ -27,18 +27,19 @@
                         $resultData = InventoryController::ctrToListProduct($table, $key, $value);
                         break;
                     case "id_product":
-                        $resultData = InventoryController::ctrToListProduct($table, $key, $value);   
-                        //$resultData = "2"; 
+                        $resultData = InventoryController::ctrToListProduct($table, $key, $value);                        
                         break; 
                     case "token_supplier_invoice":
-                        $resultData = ProductInputController::ctrToListInputProduct($table, $key, $value);
-                        //$resultData = "1";
+                        $dataSupplierInvoice = ProductInputController::ctrToListInputProduct($table, $key, $value);                             // Se lanza método para obtener datos de tabla sql supplier_invoice
+                        $inputNumber = $dataSupplierInvoice[0]->input_number;                                                                   // De la tabla anterior se obtiene el número de movimiento (input_number)
+                        $dataInputsProducts = ProductInputController::ctrToListInputProduct("inputs_product", "input_number", $inputNumber);    // Se lanza método para obtener datos de tabla sql inputs_product con clausula WHERE $inputNumber
+                        
+                        $resultData = array ($dataSupplierInvoice, $dataInputsProducts);                                                        // Se genera array con datos en otros 2 arrays para enviarlo como respuesta a getRegisterInputsProductsAjax()
                         break;
                     default:
                        echo "No se ha recibido campo ni valor a buscar";
                 }                
-                echo json_encode($resultData);
-                //echo json_encode("pepe");
+                echo json_encode($resultData);                
             }
             catch(PDOException $ex) {
                 echo "Error interno toListDb(). Error: " . $ex->getMessage();

@@ -102,10 +102,11 @@
               {
                 include "pages/08.salesSetting/" . $page . ".template.php";
               }
-              /*else if($emergent == "06-popUpsearch")
+              else if($page == "06-indexERP")
               {
-                include $emergent . ".template.php";
-              }*/
+              //    include $page . ".template.php";
+                echo "Panel principal aplicación web ERP";
+              }
               else
               {
                 include "04-error404.template.php";
@@ -113,7 +114,8 @@
             }
             else
             {
-              echo "Panel principal aplicación web ERP";
+              // echo "Panel principal aplicación web ERP";
+              include "pages/09.login/01-login.template.php";
             }
           ?>
         </div>
