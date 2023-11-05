@@ -3,7 +3,7 @@
       <nav class=" p-2" id="main_nav">
         <ul class="menu">
           <li class="li_item" id="">
-            <button role="link" class="link_button" id="index_button" onClick="window.location='index.php'">inicio</button> <!--  DAR UNA VUELTA AL TEMA DE LINK INICIO -->
+            <button role="link" class="link_button" id="index_button" onClick="window.location='index.php?pages=06-home'">inicio</button> <!--  DAR UNA VUELTA AL TEMA DE LINK INICIO -->
           </li>
           <li class="li_item" id="">
             <button class="link_button" id="customers_button" title="Abrir opciones clientes"><i class="fa-solid fa-caret-right"></i>&nbsp Clientes</button>
@@ -58,6 +58,10 @@
               <li class="link_subButton" id="inventorySettingId"><a class="" href="index.php?pages=00-inventorySetting">Opciones productos </a></li>
               <li class="link_subButton" id="salesSettingId"><a class="" href="index.php?pages=00-salesSetting">Opciones ventas</a></li>
             </ul>
+          </li>
+
+          <li class="li_item" id="">
+            <button role="button" class="link_button text-center" id="exit_button" onClick="">Cerrar Sesión</button> <!--  DAR UNA VUELTA AL TEMA DE LINK INICIO -->
           </li>
 
         </ul>

@@ -160,6 +160,28 @@ select {
      /* END general styles
 --------------------------*/ 
 
+     /* LOGIN "09.login/01-login.template.php"
+---------------------------------------------*/
+
+.login_empty_fields {    
+    margin: 0 auto;
+    width: 375px;
+}
+
+.input_text {
+    text-align: left;
+}
+
+.eye_pwd {
+    width: 27px;
+    position: relative;
+    top: -18.9%;
+    left: 43%;
+    background-color: transparent;
+    opacity: 0.5;
+    z-index: 99;
+}
+
 
      /* HEADER "01-header.template.php"
 ------------------------------*/

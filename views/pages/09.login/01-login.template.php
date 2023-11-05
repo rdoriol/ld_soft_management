@@ -12,28 +12,35 @@
           <div class="input-group-prepend">
             <span class="input-group-text"><i class="fa-sharp fa-solid fa-envelope"></i></span>
           </div>
-          <input type="text" class="form-control" placeholder="Introduzca usuario" id="user_login" name="user_login" value="" />
+          <input type="text" class="form-control forms_inputs input_text" placeholder="Introduzca usuario" id="user_login" name="user_login" value="" />
         </div>
     </div>
 
     <div class="form-group">
         <label class="text-white" for="pass">Contraseña</label>
-        <div class="input-group">
+        <div class="input-group">          
           <div class="input-group-prepend">
             <span class="input-group-text"><i class="fa-solid fa-key"></i></span>
           </div>
-          <input type="password" class="form-control" placeholder="Introduzca contraseña" id="pass" name="pass" value="" />
-          
+          <input type="password" class="form-control forms_inputs input_text" placeholder="Introduzca contraseña" id="pass" name="pass" value="" />
         </div>
     </div>
-    
-    <?php      
-        //$result = new FormController();
-        //$result->ctrToLogin();       
-    ?>
+    <img class="eye_pwd" src="./images/hide_icon.png" />
     
     <div class="text-center">
-      <button type="submit" class="btn btn-primary mt-3" name="submitIngreso">Acceder</button>
+      <button type="submit" class="btn btn-primary mt-3 forms_inputs" name="submitLogin">Acceder</button>
     </div>
-  </form> 
+  </form>
 </div>
+
+<?php      // Se lanza método para comprobar credenciales del login
+        $result = new UserController();
+        $result->ctrToLogin();       
+?>
+
+<script>
+  // Para limpiar historial de búsqueda del formulario en el navegador
+  if(window.history.replaceState) {
+    window.history.replaceState(null, null, window.location.href);
+  }
+</script>

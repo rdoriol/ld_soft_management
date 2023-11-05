@@ -1,3 +1,8 @@
+<?php  
+  ob_start(); // Se lanza función de buffer para poder utilizar session_start() y header() en cualquier parte del código.
+  session_start(); 
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -61,15 +66,20 @@
 
             <!-- end delete register modal -->  
 
+            <!-- EXIT MODAL
+                ----------------------->
+                <?php include "08-modalExit.template.php"; ?>
+
+            <!-- end exit register modal -->  
+
           <?php
               /**
                * Controlador frontal/lista blanca de todas las páginas (seguridad informática) de la aplicación web que se renderizarán por pantalla. (se alimenta de "02-mainNavBar.template.php").
                */
-            if(isset($_GET["pages"]) /*|| isset($_GET["emergent"])*/) 
+            if(isset($_GET["pages"])) 
             {
               $page = $_GET["pages"]; // variable que almacena el valor de la variable GET
-              //$emergent = $_GET["emergent"]; // variable que almacena el valor de la variable GET
-
+              
               if($page == "01-newCustomer" || $page == "02-customersList" || $page == "04-customerPopUpSearch") 
               {
                 include "pages/01.customers/" . $page . ".template.php";     
@@ -102,10 +112,18 @@
               {
                 include "pages/08.salesSetting/" . $page . ".template.php";
               }
-              else if($page == "06-indexERP")
+              else if($page == "06-home")
               {
-              //    include $page . ".template.php";
-                echo "Panel principal aplicación web ERP";
+                include $page . ".template.php";
+                //echo "Panel principal aplicación web ERP";
+              }
+              else if($page == "01-login")
+              {
+                include "pages/09.login/" . $page . ".template.php";
+              }
+              else if($page == "07-exit")
+              {
+                include $page . ".template.php";
               }
               else
               {
@@ -148,6 +166,8 @@
     <script src="./views/pages/03.inventory/10-products_inputs.js"></script>   
     <script src="./views/pages/03.inventory/11-products_inputs_hist_subwindow.js"></script>      
     <script src="./views/pages/03.inventory/12-inventory_prints.js"></script>
+
+    <script src="./views/pages/09.login/02-login.js"></script>
 
   </body>
 </html>

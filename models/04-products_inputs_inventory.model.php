@@ -144,29 +144,3 @@
         }
 
     }
-
-
-
-
-
-
-
-
-    /* 
-       $sql = "SELECT si.*, ip.*, DATE_FORMAT(ip.created_date_input, '%d/%m/%Y') AS created_date_input, s.*, DATE_FORMAT(s.created_date, '%d/%m/%Y') AS created_date, p.*, DATE_FORMAT(p.created_date_product, '%d/%m/%Y') AS created_date_product
-                            FROM supplier_invoices si
-                            INNER JOIN inputs_product ip ON ip.id_supplier_invoice = si.id_supplier_invoice
-                            INNER JOIN suppliers s ON s.id = ip.id_supplier
-                            INNER JOIN products p ON p.id_product = ip.id_product
-                            ORDER BY si.input_number ASC;";
-    
-     $sql = "SELECT si.*, ip.*, DATE_FORMAT(ip.created_date_input, '%d/%m/%Y') AS created_date_input, s.*, DATE_FORMAT(s.created_date, '%d/%m/%Y') AS created_date, p.*, DATE_FORMAT(p.created_date_product, '%d/%m/%Y') AS created_date_product
-                            FROM supplier_invoices si
-                            INNER JOIN inputs_product ip ON ip.id_supplier_invoice = si.id_supplier_invoice
-                            INNER JOIN suppliers s ON s.id = ip.id_supplier
-                            INNER JOIN products p ON p.id_product = ip.id_product                            
-                            WHERE $key LIKE '%$value%'
-                            ORDER BY $key ASC;"; 
-    
-    
-    */
