@@ -37,7 +37,7 @@
   <fieldset class="d-flex justify-content-around"> <!-- CAMBIAR A ESTILO PROPIO CON CSS flex personalizado -->
     <div class="forms_flex">
       <div class="forms_fields">
-        <label class="forms_label" for="customer_id">Id Cliente</label>
+        <label class="forms_label" for="customer_id">Nº Cliente</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-list-ol forms_icons"></i>
           <input type="text" class="forms_inputs" id="customer_id" name="customer_id" placeholder="auto" disabled value="<?php echo $customerData[0]->id ?>" />

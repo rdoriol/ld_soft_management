@@ -92,7 +92,7 @@
               {
                 include "pages/03.inventory/" . $page . ".template.php";
               }
-              else if($page == "01-newOrder" || $page == "02-notes" || $page == "03-invoice"  || $page == "04-proInvoice" || $page == "05-budgets"  || $page == "06-salesLists")
+              else if($page == "01-newInvoice" || $page == "02-invoicesLists"|| $page == "04-invoicePopUpSearch") 
               {
                 include "pages/04.sales/" . $page . ".template.php";
               }
@@ -166,6 +166,9 @@
     <script src="./views/pages/03.inventory/10-products_inputs.js"></script>   
     <script src="./views/pages/03.inventory/11-products_inputs_hist_subwindow.js"></script>      
     <script src="./views/pages/03.inventory/12-inventory_prints.js"></script>
+
+    <script src="./views/pages/04.sales/05-invoice.js"></script>
+    <script src="./views/pages/04.sales/06-invoice_print.js"></script>
 
     <script src="./views/pages/09.login/02-login.js"></script>
 

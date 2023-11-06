@@ -36,6 +36,9 @@
                         
                         $resultData = array ($dataSupplierInvoice, $dataInputsProducts);                                                        // Se genera array con datos en otros 2 arrays para enviarlo como respuesta a getRegisterInputsProductsAjax()
                         break;
+                    case "id":
+                        $resultData = CustomerController::ctrToList($table, $key, $value);
+                        break;
                     default:
                        echo "No se ha recibido campo ni valor a buscar";
                 }                
@@ -84,7 +87,14 @@
         $searchProduct2 = new Search();
         $searchProduct2->toListDb("supplier_invoices", "token_supplier_invoice", $_POST["tokenInputs"]);
     }
-   
+ 
+    /**
+     * Objeto que recibirá datos del formulario AJAX generado en "03.inventory/products_inputs.js"
+     */
+    else if(isset($_POST["idCustomer"]) && !empty($_POST["idCustomer"])) {
+        $searchProduct3 = new Search();
+        $searchProduct3->toListDb("customers", "id", $_POST["idCustomer"]);
+    }
 
     
 

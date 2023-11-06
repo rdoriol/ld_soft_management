@@ -1,6 +1,9 @@
-<!-- CSS PERSONALIZADO
+<!-- SUBVENTANA BUSCADOR DE CLIENTES -->
+
+
+        <!-- CSS PERSONALIZADO
         ---------------------->
-        <style>@import url("./css/styles-06-search.template.php.css");</style>
+<style>@import url("./css/styles-06-search.template.php.css");</style>
         
 
 <h4 class="forms_subtitle rounded">Buscar Clientes</h4>
@@ -25,7 +28,7 @@
                 $dataCustomers = CustomerController::ctrToList("customers", $key, $value);       
                 foreach($dataCustomers as $item):                        
             ?>
-            <tr class="table_search" title="Seleccionar" onClick="getSubwindowValues(<?php echo '\''. $item->token .'\''; ?>);">
+            <tr class="table_search" title="Seleccionar" onClick="getSubwindowInvoiceValues(<?php echo '\''. $item->token .'\''; ?>);">
                 <td> <?php echo $item->id;?> </td>           
                 <td> <?php echo $item->nif_cif; ?> </td>
                 <td> <?php echo $item->name_customer; ?> </td>                 

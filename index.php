@@ -10,12 +10,14 @@
     require_once "./controllers/03-inventory.controller.php";    
     require_once "./controllers/04-inventory_validations.controller.php";
     require_once "./controllers/05-products_inputs_inventory.controller.php";
+    require_once "./controllers/06-sales.controller.php";
     require_once "./controllers/10-users.controller.php";
 
     require_once "./models/01-customers.model.php";
     require_once "./models/02-suppliers.model.php";
     require_once "./models/03-inventory.model.php";
     require_once "./models/04-products_inputs_inventory.model.php";
+    require_once "./models/05-sales.model.php";
     require_once "./models/10-users.model.php";
    
     $render = new BaseTemplateController();

@@ -78,7 +78,7 @@ $(document).ready(function(){
     */
     function getSubwindowValues(respuesta) {  
        
-        window.opener.$("#tokenCustomer").val(respuesta);
+        window.opener.$("#tokenCustomer").val(respuesta);       // Para almacenar token en 01-newCustomer (01.Customers)
         window.opener.getRegisterAjax();
         closeSubwindow();        
     }

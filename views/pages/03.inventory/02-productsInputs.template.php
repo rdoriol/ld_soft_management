@@ -1,11 +1,5 @@
 <?php
-  $productInputData = array();
-   
-      // Condición para controlar si se muestran datos en el formulario o se muestra en blanco
-  /*if((isset($_GET["token"]) && !empty($_GET["token"])) || (isset($_POST["tokenProduct"]) && !empty($_POST["tokenProduct"]))) {                                    
-    $inputProductData = InventoryController::ctrToListProduct("products", "token_product", $_GET["token"]);     // se llama a función para leer datos de la tabla "products"      
-    $inputProductData = InventoryController::ctrToListProduct("products", "token_product", $_SESSION["tokenProduct"]);     // se llama a función para leer datos de la tabla "products"      
-  }*/
+ 
      // script javascript para lanzar ventana modal confirmando actualizaciones o eliminaciones.
     echo "<script>
     if(window.sessionStorage.getItem('modalAlert') == 'true') {
@@ -47,7 +41,7 @@
           <label class="forms_label" for="product_created_date">Fecha entrada</label>
           <div class="forms_inputs_fields">
             <i class="fa-solid fa-calendar-days forms_icons"></i>
-            <input type="text" class="forms_inputs" id="input_product_created_date" name="input_product_created_date" placeholder="auto" disabled value="<?php echo date("d/m/Y"); ?> <?php echo $inputProductData[0]->created_date_product; ?>" />
+            <input type="text" class="forms_inputs" id="input_product_created_date" name="input_product_created_date" placeholder="auto" disabled value="<?php echo date("d/m/Y"); ?>" />
           </div>     
       </div>
 
@@ -57,7 +51,7 @@
             <i class="fa-solid fa-house forms_icons"></i> 
 
             <select class="" id="father_select_supplier" name="select_supplier"> 
-                <option id="select_supplier" value="<?php //echo $inputProductData[0]->id; ?>" selected><?php //echo $inputProductData[0]->name_supplier; ?></option>
+                <option id="select_supplier" value="" selected></option>
                
                 <?php                  
                   $selectCategory = CustomerController::ctrToList("suppliers", null); // Select con proveedores almacenados en la tabla "suppliers" de la base de datos
@@ -94,7 +88,7 @@
                         for($i = 1; $i <= 5; $i++) {                        
                             echo '<tr class="row_item">    
                                     <input type="hidden" name="numbers_rows[]" value="' . $i . '">      <!-- input oculto que almacenará número de fila -->                   
-                                    <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields div_id_product_item align_icon"><i class="fa-solid fa-magnifying-glass forms_icons search_icon" id="btn_input_search_product" title="Buscar producto"></i><input type="text" class="forms_inputs product_item_id input_id" id="id_product_item'. $i .'" name="id_product_item'. $i .'" placeholder="Id" value="" /></div></td>
+                                    <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields div_id_product_item align_icon"><i class="fa-solid fa-magnifying-glass forms_icons search_icon" id="btn_input_search_product" title="Buscar producto"></i><input type="text" class="forms_inputs product_item_id input_id" id="id_product_item'. $i .'" name="id_product_item'. $i .'" placeholder="Id producto" value="" /></div></td>
                                     <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="text" class="forms_inputs inputs_width" id="product_name_item'.$i.'" name="product_name_item'.$i.'" placeholder="Nombre del producto" value="" /></div></td>
                                     <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="number" class="forms_inputs inputs_width amounts" id="amount_item'.$i.'" name="amount_item'.$i.'" placeholder="0" value="0" /></div></td>
                                     <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="text" class="forms_inputs inputs_width price" id="price_item'.$i.'" name="price_item'.$i.'" placeholder="0 €" value="0" /></div></td>
@@ -106,7 +100,7 @@
                         for($i = 6; $i <= 10; $i++) { 
                           echo '<tr class="row_item hidden_rows"> 
                                   <input type="hidden" name="numbers_rows[]" value="' . $i . '">          <!-- input oculto que almacenará número de fila --> 
-                                  <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields div_id_product_item align_icon"><i class="fa-solid fa-magnifying-glass forms_icons search_icon" id="btn_input_search_product" title="Buscar producto"></i><input type="text" class="forms_inputs product_item_id input_id" id="id_product_item'. $i .'" name="id_product_item'. $i .'" placeholder="Id" value="" /></div></td>
+                                  <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields div_id_product_item align_icon"><i class="fa-solid fa-magnifying-glass forms_icons search_icon" id="btn_input_search_product" title="Buscar producto"></i><input type="text" class="forms_inputs product_item_id input_id" id="id_product_item'. $i .'" name="id_product_item'. $i .'" placeholder="Id producto" value="" /></div></td>
                                   <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="text" class="forms_inputs inputs_width" id="product_name_item'.$i.'" name="product_name_item'.$i.'" placeholder="Nombre del producto" value="" /></div></td>
                                   <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="number" class="forms_inputs inputs_width amounts" id="amount_item'.$i.'" name="amount_item'.$i.'" placeholder="" value="0" /></div></td>
                                   <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="text" class="forms_inputs inputs_width price" id="price_item'.$i.'" name="price_item'.$i.'" placeholder="" value="" /></div></td>
@@ -197,45 +191,16 @@
     <?php 
         /* Bloque condicional para grabar datos nuevos, actualizar o eliminar datos de un registro existente
         -----------------------------------------------------------------------------------------------------------------*/
-      if(isset($_GET["token"]) && !empty($_GET["token"])) {                
-                     
-        $updateProduct = InventoryController::ctrUpdateProduct("products", "token_product", $_GET["token"]);    // se lanza método para actualizar datos de clientes.
+   
+       $createProductInput = ProductInputController::ctrCreateProductInput("inputs_product"); // se lanza método para grabar datos de entradas de productos.       
       
-        $deleteProduct = new InventoryController(); 
-        $checkDeleteProduct = $deleteProduct->ctrDeleteProduct("products", "token_product", $_GET["token"]);   // se lanza método para eliminar registro concreto.
-      }
-      else if(isset($_POST["tokenProduct"]) && !empty($_POST["tokenProduct"])) {   
-      
-        $updateProduct = InventoryController::ctrUpdateProduct("products", "token_product", $_POST["tokenProduct"]);    // se lanza método para actualizar datos de proveedores.
-
-        $deleteProduct = new InventoryController();   //todo-> Finalmente no se utilizará, esta acción se realizará via AJAX. Eliminar más adelante
-        $checkDeleteProduct = $deleteProduct->ctrDeleteProduct("products", "token_product", $_POST["tokenProduct"]);   // se lanza método para eliminar registro concreto.
-      }
-      else {    
-
-          // Se recorre el array "numbers_rows[]" del name de las filas de productos para verificar que filas se van a enviar al archivo controller para generar el movimiento de entrada del producto
-        //foreach($_POST["numbers_rows"] as $item) {
-
-          //if(!empty($_POST["id_product_item" . $item])) {   
-            $createProductInput = ProductInputController::ctrCreateProductInput("inputs_product"); // se lanza método para grabar datos de entradas de productos.
-          //}
-        //}  
-      }
        
         /* Bloque condicional para lanzar ventana modal en función del éxito de la operación realizada
-        ---------------------------------------------------------------------------------------------*/
-      if($updateProduct == "true") {                
-
-        $newToken = md5(ucfirst($_POST["product_name"] . "+" . strtoupper($_POST["or_original_product"])));   // Se genera nuevo token para poder recargar página con datos actualizados.        
+        ---------------------------------------------------------------------------------------------*/    
 
           // 1º se guarda estado de la actualización/borrado en variable de sesión para a continuación poder lanzar ventana modal al recargar página.
           // 2º se refresca página con datos del registro actualizado. 
-        echo "<script>
-                window.sessionStorage.setItem('modalAlert', 'true');
-                window.location.replace('index.php?pages=02-productsInputs');
-              </scrip>";   
-      }
-      else if($checkDeleteProduct == "true" || $createProductInput == "true") {
+      if($createProductInput == "true") {
             echo "<script>
                     window.sessionStorage.setItem('modalAlert', 'true'); 
                     window.location.replace('index.php?pages=02-productsInputs');
@@ -246,7 +211,7 @@
     <?php
         /* Bloque condicional para borrar datos almacenados del formulario html una vez enviados.
         ----------------------------------------------------------------------------------------*/
-      if($createProductInput == "true" || $updateProduct == "true" || $checkDeleteRegister == "true") {
+      if($createProductInput == "true") {
         echo "<script>
                 if(window.history.replaceState) {
                   window.history.replaceState(null, null, window.location.href);

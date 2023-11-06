@@ -27,9 +27,9 @@
             $("#total_item" + rowNumber).val("");
             $("#request_ajax").val("false"); 
             $("#tokenProduct").val("");
-            //idValue = $(this).val();  // Se obtiene "id" de producto a buscar en base de datos (vía AJAX)
+           
             
-            getRegisterProductAjax(); // Se lanza función ubicada en 03.inventory/06-inventory.js   
+            getRegisterProductAjax(); // Se lanza función ubicada en 03.inventory/08-inventory.js   
                   
                 // Si el id del producto no existe en la base de datos se limpian todos los campos de la fila y eliminan mensajes de error previos
             if($("#request_ajax").val() == "false") {  

@@ -9,5 +9,4 @@
                 </ul>
         </div>
 </header>
-<i class="fa-solid fa-person-walking-arrow-right"></i>
 

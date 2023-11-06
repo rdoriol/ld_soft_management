@@ -37,7 +37,7 @@ h2 {
 
 input {
     background-color: #ffffff;
-    text-align: center;
+    text-align: left;
 }
 
 select {
@@ -454,7 +454,7 @@ footer h3 {
 
 
 
-     /* 03.INVENTORY "productsInputs.template.php"
+     /* 03.INVENTORY "productsInputs.template.php" (shared with 04.SALES "newInvoice.temmplate.php")
 -----------------------------------------------*/
 
 
@@ -508,7 +508,7 @@ footer h3 {
    padding: 3.5%;
 }
 
-#products_inputs_form .search_icon:hover {
+#products_inputs_form .search_icon:hover, .search_icon_customer:hover {
     cursor: pointer;
     opacity: 0.6;
 }
@@ -531,4 +531,20 @@ footer h3 {
 
 #products_inputs_form .hidden_rows {
     display: none;
+}
+
+     /* 04.SALES "newInvoice.template.php"
+-----------------------------------------------*/
+
+.flex_customer_field_father {
+    position: relative;
+}
+
+.flex_customer_field {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    position: absolute;
+    top: -35%;
+    left: 70%;
 }
