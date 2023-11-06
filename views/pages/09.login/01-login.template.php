@@ -25,7 +25,7 @@
           <input type="password" class="form-control forms_inputs input_text" placeholder="Introduzca contraseña" id="pass" name="pass" value="" />
         </div>
     </div>
-    <img class="eye_pwd" src="./images/hide_icon.png" />
+    <img class="eye_pwd" src="./images/login/hide_icon.png" />
     
     <div class="text-center">
       <button type="submit" class="btn btn-primary mt-3 forms_inputs" name="submitLogin">Acceder</button>
@@ -34,13 +34,15 @@
 </div>
 
 <?php      // Se lanza método para comprobar credenciales del login
-        $result = new UserController();
-        $result->ctrToLogin();       
+       $result = new UserController();
+        $result->ctrToLogin();  
 ?>
 
 <script>
-  // Para limpiar historial de búsqueda del formulario en el navegador
+    // Para limpiar historial de búsqueda del formulario en el navegador
   if(window.history.replaceState) {
     window.history.replaceState(null, null, window.location.href);
   }
 </script>
+
+

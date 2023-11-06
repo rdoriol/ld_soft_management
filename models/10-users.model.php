@@ -72,7 +72,7 @@
         public function mdlUpdateFailedAttemps($tokenValue, $attemptNumber=null) {
             $check = "false";            
             $sql = "";
-            $bindParamString = "";
+            //$bindParamString = "";
             try {
                 if($attemptNumber == "") {
                     $passwordLocked = crypt('passwordLocked','$2a$09$passwordLockeduseralt$');              

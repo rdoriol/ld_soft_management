@@ -9,7 +9,7 @@
         /**
          * Método que realizará el login de un usuario, comprobará las credenciales introducidas y actuará según el resultado.
          */
-        public function ctrToLogin() {
+         public function ctrToLogin() {
             $userValidation = "";
             try {
                 if(isset($_POST["submitLogin"])) {
@@ -34,9 +34,9 @@
 
                                     // Si la contraseña es erronea, se comprueba número de intentos erroneos del usuario (máximo 4 intentos fallidos)
                                 
-                                if($userData[0]->failed_attemps == 3) {
+                                if($userData[0]->failed_attemps >= 3) {
                                     $passLocked = new UserModel();
-                                    $passLocked->mdlUpdateFailedAttemps($attempsNumber[0]->token_user);
+                                    $passLocked->mdlUpdateFailedAttemps($userData[0]->token_user);
                                     echo "<div class='text-center alert-danger rounded login_empty_fields'><p>La <b>Contraseña</b> introducida no es correcta.</p><p>Número máximo de intentos superados. <b>Usuario bloqueado</b></p></div>";
                                 }
                                 else {
@@ -51,7 +51,8 @@
                             else {                                         
                                 $attempNumber = new UserModel();
                                 $attempNumber->mdlUpdateFailedAttemps($userData[0]->token_user, 0);
-                                                    
+                                $userValidation = "ok";
+
                                 $_SESSION["loginCheck"] = "ok";
                                 $_SESSION["user_name"] = $userData[0]->name_user;
                                 header("location: index.php?pages=06-home");                                       
@@ -63,6 +64,7 @@
                         echo "<div class='text-center alert-danger rounded login_empty_fields'><p>Los campos <b>Usuario</b> y <b>Contraseña</b> no pueden estar vacíos</p></div>";
                     }
                 }
+                return $userValidation;
             }
             catch(PDOException $ex) {
                 echo "Error interno ctrToLogin()" . $ex->getMessage();

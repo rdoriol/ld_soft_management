@@ -12,6 +12,15 @@ $(document).ready(function() {
             })
     })
 
+    $("#session_close").click(function(){
+    
+        $("#exit_modal").modal("show");
+        $("#btn_ok_exit").click(function(){
+            $("#exit_modal").modal("hide"); 
+            window.location.replace('index.php?pages=07-exit');
+        })
+})
+
     /**
      * Función que ocultará/mostrará contraseña de login
      */
@@ -20,11 +29,11 @@ $(document).ready(function() {
 
         if(eyeState == "password") {
             $("#pass").attr("type", "text");
-            $(".eye_pwd").attr("src", "./images/show_icon.png");
+            $(".eye_pwd").attr("src", "./images/login/show_icon.png");
         }
         else {
             $("#pass").attr("type", "password");
-            $(".eye_pwd").attr("src", "./images/hide_icon.png");
+            $(".eye_pwd").attr("src", "./images/login/hide_icon.png");
         }
     })
 })

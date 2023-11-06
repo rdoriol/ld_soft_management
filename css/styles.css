@@ -148,17 +148,11 @@ select {
     display: none;
 }
 
-        /* Delete Register Modal
-        ------------------------*/
-
-#delete_modal {
-   
-}
-
-
 
      /* END general styles
 --------------------------*/ 
+
+
 
      /* LOGIN "09.login/01-login.template.php"
 ---------------------------------------------*/
@@ -194,6 +188,43 @@ select {
     color: #ffffff;
  }
 
+ .user_name_header {
+    color: #ffffff;
+    float: right;
+    position: relative;   
+    top: -42px;
+    right: 15%;
+ }
+
+ .user_name_header ul {
+    display: -webkit-box;
+ }
+
+ .user_name_header ul li  {
+    vertical-align: unset;
+    padding-right: 10px;
+ }
+
+
+ #user_name:hover, .user_name_header:hover {
+    font-style: italic;
+    cursor: pointer;
+    color: gold;
+    transition: 1s;
+    #session_close {
+        display: block;
+    }    
+    #user_name {
+        display: none;
+     }
+}
+
+ #session_close {
+    display: none;
+ }
+
+
+
      /* MAIN CONTAINER "base.template.php"
 ------------------------------*/  
 .main_container {
@@ -216,7 +247,8 @@ select {
 #main_nav {
     position: fixed;
     font-size: 13px;
-    font-family: Helvetica;   
+    font-family: Helvetica;  
+    ; 
 }
 
 #main_nav .li_item {
@@ -314,9 +346,6 @@ select {
     overflow-y: auto;
   
 }
-
-
-
 
      /* FOOTER "03-footer.template.php"
 ----------------------------------*/
