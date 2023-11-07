@@ -9,8 +9,8 @@
 <h4 class="forms_subtitle rounded">Buscar Clientes</h4>
 
         <!-- SEARCH BAR
-            ---------------------->
-        <?php include "03-customerSearchBar.template.php"; ?>
+            ---------------------->        
+        <?php include "views/pages/01.customers/03-customerSearchBar.template.php"; ?>
 
         <!-- end search bar -------->
 

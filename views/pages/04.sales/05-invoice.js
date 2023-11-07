@@ -42,10 +42,10 @@ function getRegisterCustomerAjax() {
         contentType: false,
         processData: false,
         dataType: "json",
-        success: function(request){      console.log(request);
+        success: function(request){      
                     if(request) {                           
                                             
-                        $("#customer_number").text(request[0].id);
+                        $("#customer_number_inv").text(request[0].id);
                         $("#customer_name_inv").text(request[0].name_customer);
                         $("#customer_nif_inv").text(request[0].nif_cif);
                         $("#customer_address_inv").text(request[0].address_customer);
@@ -69,3 +69,22 @@ function getSubwindowInvoiceValues(respuesta) {
     window.opener.getRegisterCustomerAjax();
     closeSubwindow();
 }
+
+/** 
+ * Función para comprobar campos vacíos de 01-newInvoice y no permitir el envío de la factura al backend
+*/
+$("#btn_invoice_product_submit").click(function(){
+    var idCustomer = $("#customer_number_inv").text();
+    var idProduct = $(".id_product_item_c1").val();      
+    var concept = $(".product_name_item_c1").val();   
+    var amount = $(".amount_item_c1").val();   
+    var price = $(".price_item_inv1").val();  console.log(idCustomer + "\n"+ idProduct + "\n"+ concept + "\n"+ amount + "\n"+ price);
+
+    if(idCustomer == "" || idProduct == "" || concept == "" || amount == "" || price == "" || concept == 0 || amount == 0 || price == 0) {
+        $(".require_fields").css("display", "block");
+        return false;
+    }
+    else {
+        $(".require_fields").css("display", "none");
+    } 
+})

@@ -52,17 +52,20 @@
         $("#products_inputs_form .delete_row_input").click(function(){
            
              var rowNumberDelete = $(this).parent().parent().attr("class");
-             cleanAllRow(rowNumberDelete);  
+             cleanAllRow(rowNumberDelete);              
         })
 
         /**
          * Función que mostrará el resultado del cálculo de los productos de las filas
          */
-        $("#products_inputs_form .amounts, #products_inputs_form .price, #products_inputs_form .discount, #products_inputs_form #discount_input").change(function(){
+        $("#products_inputs_form .amounts, #products_inputs_form .price, #products_inputs_form .discount, #discount_input").change(function(){
               
-            calcRow();                  // Se lanza función para calcular y mostrar importe total de fila seleccionada
-            calcSubtotalRows();         // Se lanza función para calcular y mostrar importe subtotal de todas las filas
-            calcTotalInputsProducts();  // Se lanza función para calcular y mostrar importe total de de las entradas de productos
+            var result = calcRow();                  // Se lanza función para calcular y mostrar importe total de fila seleccionada
+                       
+            if(result  < 0 || result > 0) { 
+            calcSubtotalRows();                      // Se lanza función para calcular y mostrar importe subtotal de todas las filas
+            calcTotalInputsProducts();               // Se lanza función para calcular y mostrar importe total de de las entradas de productos
+            }
         }) 
 
         /**
@@ -82,7 +85,6 @@
             $(".btn_minus").css("display", "none");
             $(".btn_add").css("display", "block");                
         })
-    
     
         /**
          * Función que comprobará campos vacíos antes de enviar los datos del formulario a backend php. Capturará el submit del form
@@ -120,7 +122,7 @@ function cleanAllRow(rowNumber) {
     $("#amount_item" + rowNumber).val(0);
     $("#price_item" + rowNumber).val(0);
     $("#discount_item" + rowNumber).val(0);
-    $("#total_item" + rowNumber).val("");
+    $("#total_item" + rowNumber).val(0);
     $("#row_number_selected").val(""); 
     $("#request_ajax").val("false"); 
         // Si hubiera un valor almacenado en el array de la fila seleccionada se coloca a 0 para recalculo correcto. (arrayResult declarado en línea 150 de este archivo) (rowNumberDelete declarado en línea 54 de este archivo)
@@ -145,32 +147,37 @@ function calcRow() {
     var result = 0.00;
     var rowNumberValue =  $("#row_number_selected").val();                      // Se obtiene y almacena en variable número de fila  
     var amount = $("#amount_item" + rowNumberValue).val();                      // Se obtiene y almacena en variable número de unidades de producto
-    var priceItem = parseFloat($("#price_item" + rowNumberValue).val());        // Se obtiene y almacena en variable precio unitario de producto
-    var discount = parseFloat($("#discount_item" + rowNumberValue).val());      // Se obtiene y almacena en variable porcentaje de descuento de producto
-
+    var priceItem = parseFloat($("#price_item" + rowNumberValue).val());  
+    var discount = parseFloat($("#discount_item" + rowNumberValue).val());  
+                                                                                            
         // Bloque para validaciones de los valores obtenidos
     var checkAmount = validateFieldsInputs($("#amount_item" + rowNumberValue), amount); 
-    var checkPriceItem = validateFieldsInputs($("#price_item" + rowNumberValue), priceItem);
+    var checkPriceItem = validateFieldsInputs($("#price_item" + rowNumberValue), priceItem);        
     var checkDiscount = validateFieldsInputs($("#discount_item" + rowNumberValue), discount);
-
-    if(checkAmount == true && checkPriceItem == true && checkDiscount == true) {
+                                                                         
+    if(checkAmount == true && checkPriceItem == true && checkDiscount == true) {   
       
             // Se calcula el importe total de la fila 
         result += amount * priceItem / (1 + discount/100);                                          
 
             // Se muestra por pantalla resultado total del cálculo, redondeando a dos decimales
         $("#total_item" + rowNumberValue).val( (Math.round(result * 100) / 100).toFixed(2) );
+
+            // Se activan botones submit de 02-productInput y 01-newInvoice
+        $("#btn_input_product_submit").attr("type", "submit");              
+        $("#btn_invoice_product_submit").attr("type", "submit");            
         
     }
-    else {
-        $("#total_item" + rowNumberValue).val("");                              // Se limpia el total calculado de la fila
-        $("#btn_input_product_submit").submit(function(){                       // Se bloque el submit del formulario y no se deja pasar a backend php
-            return false;
+    else {     
+        $("#total_item" + rowNumberValue).val("");                          // Se limpia el total calculado de la fila
+        $("#btn_input_product_submit").attr("type", "button");              // Se desactiva botón submit de 02-productInput
+        $("#btn_invoice_product_submit").attr("type", "button");            // Se desactiva botón submit de 01-newInovice
+        // calcRow();
+        calcSubtotalRows();         
+        calcTotalInputsProducts(); 
+    }       
 
-        })
-    }
-
-    return result;
+    return parseFloat(result);
 }
    
 var arrayResult = new Array(); // Se declara array para almacenar de forma asociativa los resultados de cada fila en función calcSubtotalRows()
@@ -180,11 +187,17 @@ function calcSubtotalRows() {
     var totalResult = 0;
 
     arrayResult[rowNumber - 1] = $("#total_item" + rowNumber).val();
-                                                                                        console.log(arrayResult);
+                                                                                       
    for(var i = 0; i < arrayResult.length; i++) {
         totalResult += parseFloat(arrayResult[i]);
    }   
-   $("#subtotal_input").val( (Math.round(totalResult * 100) / 100).toFixed(2) );                                                                                     console.log("Resultado todas las filas: " + totalResult);
+   
+    if(isNaN(totalResult)) {
+        $("#subtotal_input").val(0);
+    }
+    else {
+        $("#subtotal_input").val( (Math.round(totalResult * 100) / 100).toFixed(2) );
+    }                                                  
 }
 
 function calcTotalInputsProducts() {
@@ -192,14 +205,31 @@ function calcTotalInputsProducts() {
     var subtotal = $("#subtotal_input").val();
     var inputDiscount = $("#discount_input").val();
 
-    var subtotalWithDiscount = parseFloat(subtotal / (1 + inputDiscount/100));
+    validateFieldsInputs($("#discount_input"), inputDiscount);     // Se valida valor obtenido del campo Descuento (%) (para mostrar mensajes de error)
+
+    var subtotalWithDiscount = parseFloat(subtotal / (1 + inputDiscount/100));  // Se calcula subtotal con descuento
     $("#subtotal_discount_input").val( (Math.round(subtotalWithDiscount * 100) / 100).toFixed(2) );
     
-    var tax = (21/100) * parseFloat(subtotalWithDiscount);
+    var tax = (21/100) * parseFloat(subtotalWithDiscount);      // Se calculan impuestos
     $("#tax_input").val( (Math.round(tax * 100) / 100).toFixed(2) );
 
-    var totalInputProduct = parseFloat(subtotalWithDiscount) + parseFloat(tax);
+    var totalInputProduct = parseFloat(subtotalWithDiscount) + parseFloat(tax);    // Se calcula total del documento
     $("#total_input").val( (Math.round(totalInputProduct * 100) / 100).toFixed(2) );
+
+
+    if(isNaN(subtotalWithDiscount) || isNaN(tax) || isNaN(totalInputProduct)) {     // Se comprueba que todos los valores obtenidos sean números
+        $("#subtotal_discount_input").val(0 );
+        $("#tax_input").val( 0);
+            
+            // Se desactivan botones submit de 02-productInput y 01-newInvoice
+        $("#btn_input_product_submit").attr("type", "button");              
+        $("#btn_invoice_product_submit").attr("type", "button");
+    }
+    else {
+            // Se desactivan botones submit de 02-productInput y 01-newInvoice
+        $("#btn_input_product_submit").attr("type", "submit");              
+        $("#btn_invoice_product_submit").attr("type", "submit");            
+    }
 }
 
 /**
@@ -213,12 +243,12 @@ function validateFieldsInputs(selector, value) {
    // var pattern = /^(\d{1,3}(\,\d{3})*|(\d+))(\.\d{2})?$/;  // Expresión regular que evalua números con decimales (con punto y coma)
 
     if(isNaN(value)) { 
-        checkKo(selector);
+        checkKo(selector);                                  
         $(".error_field").css("display", "block");
     }
     else if(selector.hasClass("amounts")) {       
        // if(pattern.test(value) == false) {
-            if(!isNaN(value) == false) {
+        if(!isNaN(value) == false) {
             checkKo(selector);
             $(".error_amount_field").css("display", "block");
         }

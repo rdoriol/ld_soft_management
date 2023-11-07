@@ -9,3 +9,7 @@
 form {
     background-color: var(--headerFotter);
 }
+
+.user_name_header {
+    display: none;
+}

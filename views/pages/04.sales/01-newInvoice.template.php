@@ -68,7 +68,7 @@
                 <h3 class="text-left">Cliente</h3>
 
             <table class="text-left">
-                <tr><th>Nº Cliente</th><td class="pl-1" id="customer_number"></td></tr>
+                <tr><th>Nº Cliente</th><td class="pl-1" id="customer_number_inv"></td></tr>
                 <tr><th>Nombre</th><td id="customer_name_inv"></td></tr>
                 <tr><th>NIF</th><td id="customer_nif_inv"></td></tr>
                 <tr><th>Dirección</th><td id="customer_address_inv"></td></tr>
@@ -117,10 +117,10 @@
                             for($i = 1; $i <= 5; $i++) {                        
                                 echo '<tr class="row_item">    
                                         <input type="hidden" name="numbers_rows[]" value="' . $i . '">      <!-- input oculto que almacenará número de fila -->                   
-                                        <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields div_id_product_item align_icon"><i class="fa-solid fa-magnifying-glass forms_icons search_icon" id="btn_input_search_product" title="Buscar producto"></i><input type="text" class="forms_inputs product_item_id input_id" id="id_product_item'. $i .'" name="id_product_item'. $i .'" placeholder="Id producto" value="" /></div></td>
-                                        <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="text" class="forms_inputs inputs_width" id="product_name_item'.$i.'" name="product_name_item'.$i.'" placeholder="Nombre del producto" value="" /></div></td>
-                                        <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="number" class="forms_inputs inputs_width amounts" id="amount_item'.$i.'" name="amount_item'.$i.'" placeholder="0" value="0" /></div></td>
-                                        <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="text" class="forms_inputs inputs_width price" id="price_item'.$i.'" name="price_item'.$i.'" placeholder="0 €" value="0" /></div></td>
+                                        <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields div_id_product_item align_icon"><i class="fa-solid fa-magnifying-glass forms_icons search_icon" id="btn_input_search_product" title="Buscar producto"></i><input type="text" class="forms_inputs product_item_id input_id id_product_item_c'. $i .'" id="id_product_item'. $i .'" name="id_product_item'. $i .'" placeholder="Id producto" value="" /></div></td>
+                                        <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="text" class="forms_inputs inputs_width product_name_item_c'.$i.'" id="product_name_item'.$i.'" name="product_name_item'.$i.'" placeholder="Nombre del producto" value="" /></div></td>
+                                        <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="number" class="forms_inputs inputs_width amounts amount_item_c'.$i.'" id="amount_item'.$i.'" name="amount_item'.$i.'" placeholder="0" value="0" /></div></td>
+                                        <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="text" class="forms_inputs inputs_width price price_item_inv'.$i.'" id="price_item'.$i.'" name="price_item'.$i.'" placeholder="0 €" value="0" /></div></td>
                                         <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="text" class="forms_inputs inputs_width discount" id="discount_item'.$i.'" name="discount_item'.$i.'" placeholder="0 %" value="0" /></div></td>
                                         <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="text" class="forms_inputs inputs_width total_item_row" id="total_item'.$i.'" name="total_item'.$i.'" placeholder="0 €" readonly value="" /><button type="button" class="btn btn-danger btn-sm p-0 pl-1 pr-1 ml-1 delete_row_input" id="" ><i class="fa-sharp fa-solid fa-trash-can fa-2s"></i></button></div></td>
                                     </tr>';
@@ -132,8 +132,8 @@
                                     <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields div_id_product_item align_icon"><i class="fa-solid fa-magnifying-glass forms_icons search_icon" id="btn_input_search_product" title="Buscar producto"></i><input type="text" class="forms_inputs product_item_id input_id" id="id_product_item'. $i .'" name="id_product_item'. $i .'" placeholder="Id producto" value="" /></div></td>
                                     <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="text" class="forms_inputs inputs_width" id="product_name_item'.$i.'" name="product_name_item'.$i.'" placeholder="Nombre del producto" value="" /></div></td>
                                     <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="number" class="forms_inputs inputs_width amounts" id="amount_item'.$i.'" name="amount_item'.$i.'" placeholder="" value="0" /></div></td>
-                                    <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="text" class="forms_inputs inputs_width price" id="price_item'.$i.'" name="price_item'.$i.'" placeholder="" value="" /></div></td>
-                                    <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="text" class="forms_inputs inputs_width discount" id="discount_item'.$i.'" name="discount_item'.$i.'" placeholder="" value="" /></div></td>
+                                    <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="text" class="forms_inputs inputs_width price" id="price_item'.$i.'" name="price_item'.$i.'" placeholder="" value="0" /></div></td>
+                                    <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="text" class="forms_inputs inputs_width discount" id="discount_item'.$i.'" name="discount_item'.$i.'" placeholder="" value="0" /></div></td>
                                     <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="text" class="forms_inputs inputs_width total_item_row" id="total_item'.$i.'" name="total_item'.$i.'" placeholder="0 €" readonly value="" /><button type="button" class="btn btn-danger btn-sm p-0 pl-1 pr-1 ml-1 delete_row_input" id="" ><i class="fa-sharp fa-solid fa-trash-can fa-2s"></i></button></div></td>
                                     </tr>';
                             } 
@@ -184,12 +184,12 @@
                         <!-- input oculto que almacenará valor de atributo "id" de la fila seleccionada -->
         <input type="hidden" id="row_number_selected" placeholder="nº fila seleccionada" value="" />
                         <!-- input oculto que almacenará chequeo de respuesta ajax de la fila seleccionada -->
-        <input type="hidden" id="request_ajax" placeholder="respuesta ajax" value="false" />
+        <input type="hidden" id="request_ajax" placeholder="request_ajax" value="false" />
                                                  
                                                   <!-- -------------------------- -->
 
     <div class="btn-group p-3 ">
-      <button type="submit" class="btn btn-primary mr-5" id="btn_input_product_submit" name="btn_input_product_submit"><i class="fa-solid fa-file-invoice-dollar"></i>&nbsp Facturar</button>
+      <button type="submit" class="btn btn-primary mr-5" id="btn_invoice_product_submit" name="btn_input_product_submit"><i class="fa-solid fa-file-invoice-dollar"></i>&nbsp Facturar</button>
       <button type="button" role="link" class="btn btn-secondary mr-5" name="exit_input_product" onClick="window.location='index.php?pages=01-newInvoice'"><i class="fa-sharp fa-solid fa-rectangle-xmark"></i>&nbsp Cerrar registro</button>      
     </div>
 
