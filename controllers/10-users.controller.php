@@ -45,7 +45,7 @@
                                     $attempNumber->mdlUpdateFailedAttemps($userData[0]->token_user, $newAttempsNumber);
                                 
                                     $remainingAttempts = 4 - $newAttempsNumber; // Intentos restantes
-                                    echo "<div class='text-center alert-danger rounded login_empty_fields'><p>La <b>Contraseña</b> introducida no es correcta.</p><p>Dispone de $remainingAttempts intentos más.</p></div>";
+                                    echo "<div class='text-center alert-danger rounded login_empty_fields'><p>La <b>Contraseña</b> introducida no es correcta.</p><p>Dispone de $remainingAttempts intentos.</p></div>";
                                 }
                             }
                             else {                                         

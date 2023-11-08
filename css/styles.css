@@ -189,6 +189,7 @@ select {
  }
 
  .user_name_header {
+    font-size: 14px;
     color: #ffffff;
     float: right;
     position: relative;   

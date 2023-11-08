@@ -14,12 +14,36 @@ $(document).ready(function(){
      * Función que al introducir número de cliente mostrará sus datos en factura
      */
     $("#id_customer_item").change(function(){
+                            
+            // Se limpian campos de cliente previamente mostrados (si los hubiera), así como el token oculto previamente almacenado
+        cleanInvoiceFields();        
+            
+            // Se lanza función para obtener datos de cliente 
         getRegisterCustomerAjax(); 
+
+        if($("#request_ajax").val() == "false") {  
+            $("#id_customer_item").val("");
+        }
     })
 
 
 
 })
+
+/**
+ * Función que limpiará todos los campos mostrados de Cliente
+ */
+function cleanInvoiceFields() {
+    $("#customer_number_inv").text("");
+    $("#customer_name_inv").text("");
+    $("#customer_nif_inv").text("");
+    $("#customer_address_inv").text("");
+    $("#customer_postal_code_inv").text("");
+    $("#customer_town_inv").text("");
+    $("#customer_province_inv").text("");
+    $("#request_ajax").val("false");        // token oculto donde se almacena si existe el registro buscado de forma manual (en este customer)
+    $("#token_customer").val("");   //todo
+}
 
     /**
      * Función que conectará con fichero php "ajax/ajax_search_subwindow"
@@ -43,7 +67,8 @@ function getRegisterCustomerAjax() {
         processData: false,
         dataType: "json",
         success: function(request){      
-                    if(request) {                           
+
+                    if(request) {                
                                             
                         $("#customer_number_inv").text(request[0].id);
                         $("#customer_name_inv").text(request[0].name_customer);
@@ -52,7 +77,11 @@ function getRegisterCustomerAjax() {
                         $("#customer_postal_code_inv").text(request[0].postal_code);
                         $("#customer_town_inv").text(request[0].town);
                         $("#customer_province_inv").text(request[0].province);
-                        //$("#customer_country_inv").text(request[0].country);                        
+                        //$("#customer_country_inv").text(request[0].country); 
+                        $("#request_ajax").val("true");                                     
+                    }
+                    else if(request == null) {  
+                        cleanInvoiceFields();
                     }
         }
     })
@@ -64,7 +93,7 @@ function getRegisterCustomerAjax() {
  * @return string respuesta
 */
 function getSubwindowInvoiceValues(respuesta) {  
-   
+    
     window.opener.$("#token_customer").val(respuesta);
     window.opener.getRegisterCustomerAjax();
     closeSubwindow();

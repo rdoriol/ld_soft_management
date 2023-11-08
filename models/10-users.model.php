@@ -24,7 +24,7 @@
                     $sql = "SELECT u.*, DATE_FORMAT(u.created_date_user, '%d/%m/%Y') AS created_date_user, ur.*
                             FROM $table u
                             INNER JOIN user_roles ur ON ur.id_user_role = u.id_user_role
-                            WHERE $key LIKE '%$value%'
+                            WHERE $key = '$value'
                             ORDER BY $key ASC";
                 }
                 $stmt = Connection::mdlConnect()->prepare($sql);
@@ -76,11 +76,11 @@
             try {
                 if($attemptNumber == "") {
                     $passwordLocked = crypt('passwordLocked','$2a$09$passwordLockeduseralt$');              
-                    $sql = "UPDATE users SET pwd = '$passwordLocked' WHERE token_user LIKE '%$tokenValue%'";
+                    $sql = "UPDATE users SET pwd = '$passwordLocked' WHERE token_user = '$tokenValue'";
                   //  $bindParamString = "':pwd', $passwordLocked, PDO::PARAM_STR";
                 }
                 else {
-                    $sql = "UPDATE users SET failed_attemps = $attemptNumber WHERE token_user LIKE '%$tokenValue%'";
+                    $sql = "UPDATE users SET failed_attemps = $attemptNumber WHERE token_user = '$tokenValue'";
                    // $bindParamString = '":attemptNumber", $attemptNumber, PDO::PARAM_INT';
                 }
 

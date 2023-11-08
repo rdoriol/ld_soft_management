@@ -106,7 +106,7 @@
             }    
         })
     
-    
+
     })
 
 
@@ -126,7 +126,8 @@ function cleanAllRow(rowNumber) {
     $("#row_number_selected").val(""); 
     $("#request_ajax").val("false"); 
         // Si hubiera un valor almacenado en el array de la fila seleccionada se coloca a 0 para recalculo correcto. (arrayResult declarado en línea 150 de este archivo) (rowNumberDelete declarado en línea 54 de este archivo)
-    arrayResult[rowNumberDelete - 1] = 0;
+    arrayResult[rowNumber - 1] = 0;
+    
         // Limpieza de mensajes de errores y advertencias
     cleanCheck("#amount_item" + rowNumber);
     cleanCheck("#price_item" + rowNumber);
@@ -151,12 +152,12 @@ function calcRow() {
     var discount = parseFloat($("#discount_item" + rowNumberValue).val());  
                                                                                             
         // Bloque para validaciones de los valores obtenidos
-    var checkAmount = validateFieldsInputs($("#amount_item" + rowNumberValue), amount); 
-    var checkPriceItem = validateFieldsInputs($("#price_item" + rowNumberValue), priceItem);        
-    var checkDiscount = validateFieldsInputs($("#discount_item" + rowNumberValue), discount);
-                                                                         
+    var checkAmount = validateFieldsInputs($("#amount_item" + rowNumberValue), amount);
+    var checkDiscount = validateFieldsInputs($("#discount_item" + rowNumberValue), discount); 
+    var checkPriceItem = validateFieldsInputs($("#price_item" + rowNumberValue), priceItem);     
+                                                                        
     if(checkAmount == true && checkPriceItem == true && checkDiscount == true) {   
-      
+        
             // Se calcula el importe total de la fila 
         result += amount * priceItem / (1 + discount/100);                                          
 
@@ -168,24 +169,29 @@ function calcRow() {
         $("#btn_invoice_product_submit").attr("type", "submit");            
         
     }
-    else {     
-        $("#total_item" + rowNumberValue).val("");                          // Se limpia el total calculado de la fila
+    else {   
+             // Se limpian cálculos 
+        $("#total_item" + rowNumberValue).val("");  
+        $("#subtotal_input").val("");
+        $("#subtotal_discount_input").val("");
+        $("#subtotal_discount_input").val("");
+        $("#tax_input").val("");
+        $("#total_input").val("");
+
         $("#btn_input_product_submit").attr("type", "button");              // Se desactiva botón submit de 02-productInput
         $("#btn_invoice_product_submit").attr("type", "button");            // Se desactiva botón submit de 01-newInovice
-        // calcRow();
-        calcSubtotalRows();         
-        calcTotalInputsProducts(); 
+              
     }       
 
     return parseFloat(result);
 }
    
-var arrayResult = new Array(); // Se declara array para almacenar de forma asociativa los resultados de cada fila en función calcSubtotalRows()
+var arrayResult = new Array(); // Se declara array para almacenar de forma asociativa los resultados de cada fila en función calcSubtotalRows() // todo
 
 function calcSubtotalRows() {      
     var rowNumber = $("#row_number_selected").val();        // Se obtiene y almacena número de fila
     var totalResult = 0;
-
+   
     arrayResult[rowNumber - 1] = $("#total_item" + rowNumber).val();
                                                                                        
    for(var i = 0; i < arrayResult.length; i++) {
@@ -201,7 +207,6 @@ function calcSubtotalRows() {
 }
 
 function calcTotalInputsProducts() {
-    var check = false;
     var subtotal = $("#subtotal_input").val();
     var inputDiscount = $("#discount_input").val();
 
@@ -216,20 +221,23 @@ function calcTotalInputsProducts() {
     var totalInputProduct = parseFloat(subtotalWithDiscount) + parseFloat(tax);    // Se calcula total del documento
     $("#total_input").val( (Math.round(totalInputProduct * 100) / 100).toFixed(2) );
 
-
-    if(isNaN(subtotalWithDiscount) || isNaN(tax) || isNaN(totalInputProduct)) {     // Se comprueba que todos los valores obtenidos sean números
-        $("#subtotal_discount_input").val(0 );
-        $("#tax_input").val( 0);
-            
-            // Se desactivan botones submit de 02-productInput y 01-newInvoice
-        $("#btn_input_product_submit").attr("type", "button");              
-        $("#btn_invoice_product_submit").attr("type", "button");
-    }
-    else {
-            // Se desactivan botones submit de 02-productInput y 01-newInvoice
-        $("#btn_input_product_submit").attr("type", "submit");              
-        $("#btn_invoice_product_submit").attr("type", "submit");            
-    }
+    if($("#btn_input_product_submit").attr("type") == "submit") {                       // Si después de validaciones en otros métodos el botón de grabar sigue siendo submit
+        
+        if(isNaN(subtotalWithDiscount) || isNaN(tax) || isNaN(totalInputProduct)) {     // Se comprueba que todos los valores obtenidos sean números
+            $("#subtotal_discount_input").val(0 );
+            $("#tax_input").val( 0);
+                                                                                    
+                // Se desactivan botones submit de 02-productInput y 01-newInvoice
+            $("#btn_input_product_submit").attr("type", "button");              
+            $("#btn_invoice_product_submit").attr("type", "button");
+        }
+        else {
+                // Se desactivan botones submit de 02-productInput y 01-newInvoice
+            $("#btn_input_product_submit").attr("type", "submit");              
+            $("#btn_invoice_product_submit").attr("type", "submit");            
+        }
+    }  
+    
 }
 
 /**
@@ -240,27 +248,16 @@ function calcTotalInputsProducts() {
  */
 function validateFieldsInputs(selector, value) {
     var checkValidate = false;
-   // var pattern = /^(\d{1,3}(\,\d{3})*|(\d+))(\.\d{2})?$/;  // Expresión regular que evalua números con decimales (con punto y coma)
+  
 
     if(isNaN(value)) { 
         checkKo(selector);                                  
         $(".error_field").css("display", "block");
     }
-    else if(selector.hasClass("amounts")) {       
-       // if(pattern.test(value) == false) {
-        if(!isNaN(value) == false) {
-            checkKo(selector);
-            $(".error_amount_field").css("display", "block");
-        }
-        else {
-            cleanCheck(selector);
-            $(".error_amount_field").css("display", "none");
-            checkValidate = true;
-        }
-    }
+
     else {
         cleanCheck(selector);
-        $(".error_field").css("display", "none");
+        $(".error_field").css("display", "none"); 
         checkValidate = true;
     }
     return checkValidate;

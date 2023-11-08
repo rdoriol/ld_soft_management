@@ -8,8 +8,14 @@
 
 form {
     background-color: var(--headerFotter);
+    box-shadow: 20px 20px 20px;
 }
 
 .user_name_header {
     display: none;
+}
+
+.login_empty_fields {
+    margin-top: 25px;
+    box-shadow: 10px 10px 10px;
 }

@@ -121,7 +121,7 @@
                                         <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="text" class="forms_inputs inputs_width product_name_item_c'.$i.'" id="product_name_item'.$i.'" name="product_name_item'.$i.'" placeholder="Nombre del producto" value="" /></div></td>
                                         <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="number" class="forms_inputs inputs_width amounts amount_item_c'.$i.'" id="amount_item'.$i.'" name="amount_item'.$i.'" placeholder="0" value="0" /></div></td>
                                         <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="text" class="forms_inputs inputs_width price price_item_inv'.$i.'" id="price_item'.$i.'" name="price_item'.$i.'" placeholder="0 €" value="0" /></div></td>
-                                        <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="text" class="forms_inputs inputs_width discount" id="discount_item'.$i.'" name="discount_item'.$i.'" placeholder="0 %" value="0" /></div></td>
+                                        <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="number" step="0.1" class="forms_inputs inputs_width discount" id="discount_item'.$i.'" name="discount_item'.$i.'" placeholder="0 %" value="0" /></div></td>
                                         <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="text" class="forms_inputs inputs_width total_item_row" id="total_item'.$i.'" name="total_item'.$i.'" placeholder="0 €" readonly value="" /><button type="button" class="btn btn-danger btn-sm p-0 pl-1 pr-1 ml-1 delete_row_input" id="" ><i class="fa-sharp fa-solid fa-trash-can fa-2s"></i></button></div></td>
                                     </tr>';
                             }
@@ -176,7 +176,7 @@
     </div> <!-- End div invoice-->                                                 <!-- ELEMENTOS INPUTS OCULTOS -->
 
                         <!-- input oculto que recibirá valor de token de customer de subventana -->
-        <input type="text" id="token_customer" name="token_customer" placeholder="token_customer Subwindow" value="<?php //echo $inputProductData[0]->token_input_product; ?>" /> 
+        <input type="hidden" id="token_customer" name="token_customer" placeholder="token_customer Subwindow" value="<?php //echo $inputProductData[0]->token_input_product; ?>" /> 
                         <!-- input oculto que recibirá valor de token de subventana -->
         <input type="hidden" id="tokenInputs" name="tokenInputs" placeholder="tokenInputs Subwindow" value="<?php //echo $inputProductData[0]->token_input_product; ?>" /> 
                         <!-- input oculto para recibir/capturar valor token de subventana buscador para búsqueda de productos  -->
@@ -184,7 +184,8 @@
                         <!-- input oculto que almacenará valor de atributo "id" de la fila seleccionada -->
         <input type="hidden" id="row_number_selected" placeholder="nº fila seleccionada" value="" />
                         <!-- input oculto que almacenará chequeo de respuesta ajax de la fila seleccionada -->
-        <input type="hidden" id="request_ajax" placeholder="request_ajax" value="false" />
+        <input type="text" id="request_ajax" placeholder="request_ajax" value="false" />
+                       
                                                  
                                                   <!-- -------------------------- -->
 
@@ -196,9 +197,7 @@
                     <!-- Mensajes ocultos de validaciones y realización de operaciones -->
     <div><p class="alert alert-success text-center hide_alert" id="alert_success">Operación realizada con éxito</p></div>
 
-    <div class="text-center alert-danger rounded error_field"><p>Los campos <i><b>Cant., Precio y Desc.(%)</b></i> solo admiten caracteres numéricos.</p></div>
-
-    <div class="text-center alert-danger rounded error_amount_field"><p>El campo <i><b>Cant.</b></i> solo admiten caracteres numéricos sin decimales.</p></div>
+    <div class="text-center alert-danger rounded error_field"><p>Los campos <i><b>Cant., Precio y Desc.(%)</b></i> solo admiten caracteres numéricos.</p></div>       
     
     <div class='text-center alert-danger rounded require_fields'><p class='font-weight-bold'>Los siguientes campos son obligatorios:</p><ul><li>Cliente</li><li>Ref.</li><li>Concepto</li><li>Cant.</li><li>Precio (€)</li></ul></div>
 
