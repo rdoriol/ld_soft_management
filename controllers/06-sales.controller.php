@@ -8,7 +8,7 @@
          * Método que recibirá datos del formulario Entrada Productos y los enviará a la base de datos mediante método del Modelo.
          * @param string $table
          */
-        static public function ctrCreateCustomerInvoice($table) {                         // todo DONE IT
+        static public function ctrCreateCustomerInvoice($table) {                     
             $check = "false";
             
              try {            
@@ -41,7 +41,7 @@
          * Método que recibirá datos del formulario Generar Factura y los enviará a la base de datos mediante método del Modelo.
          * @param string $table
          */
-        static public function ctrCreateProductOutput($table) {        
+        static public function ctrCreateProductOutput($table) {                
            $check = "false";
            $data = array();
             try {
@@ -119,7 +119,7 @@
         }
 
         /**
-         * Método que asignará de forma automática números de facturas // todo DONE IT
+         * Método que asignará de forma automática números de facturas
          * @param string $table
          * @return int $OutputNumber
          */
@@ -139,26 +139,26 @@
          * @param $table string, $key string, $value(string, int)
          * @return $data array de objetos con datos de la base de datos. 
          */
-        static public function ctrToListInputProduct($table, $key=null, $value=null, $valueDate=null) {  
+        static public function ctrToListOutputsProducts($table, $key=null, $value=null, $valueDate=null) {              
             try {                
                 if(isset($_POST["search"]) && $key != ""){ 
                     if($key == "full_list") {                      
-                        $data = ProductInputModel::mdlToListInputsProducts($table);  
+                        $data = SalesModel::mdlToListOutputsProducts($table);  
                     }
                     else if(!empty($valueDate) ) {
-                        $data = ProductInputModel::mdlToListInputsProducts($table, $key, $valueDate);
+                        $data = SalesModel::mdlToListOutputsProducts($table, $key, $valueDate);
                     }
                     else {                
-                        $data = ProductInputModel::mdlToListInputsProducts($table, $key, $value);
+                        $data = SalesModel::mdlToListOutputsProducts($table, $key, $value);
                     }
                 }
-                else {  // Para consultas realizadas desde la ventana principal
-                    $data = ProductInputModel::mdlToListInputsProducts($table, $key, $value);
+                else {  // Para consultas realizadas desde la página principal 01-newInvoice
+                    $data = SalesModel::mdlToListOutputsProducts($table, $key, $value);
                 }
                 return $data;
             }
             catch(PDOException $ex) {
-                echo "Error interno ctrToListInputProduct(). Error: " . $ex->getMessage();
+                echo "Error interno ctrToListOutputsProducts(). Error: " . $ex->getMessage();
             }
         }
 

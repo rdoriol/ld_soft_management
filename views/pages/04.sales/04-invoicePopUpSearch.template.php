@@ -10,7 +10,7 @@
 
         <!-- SEARCH BAR
             ---------------------->        
-        <?php include "views/pages/01.customers/03-customerSearchBar.template.php"; ?>
+        <?php include "views/pages/03-customerSearchBar.template.php"; ?>
 
         <!-- end search bar -------->
 

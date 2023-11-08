@@ -100,31 +100,32 @@
         }
 
         /**
-         * Método para leer/consultar todos los datos de las tablas "inputs_product", "products", "suppliers" y "supplier_invoices" (INNER JOIN)
+         * Método para leer/consultar todos los datos de las tablas "outputs_products", "products", "customers" y "customer_invoices" (INNER JOIN)
          * @param string $table, $key, $null
          * @return array de objetos @data
          */
-        static public function mdlToListInputsProducts($table, $key=null, $value=null) {
+        static public function mdlToListOutputsProducts($table, $key=null, $value=null) {                //todo  DEVELOPING
             $sql = "";
             try {
-                if($key == null) {   
-                    $sql = "SELECT si.*, DATE_FORMAT(si.created_date_supplier_invoice, '%d/%m/%Y') AS created_date_supplier_invoice, s.*, DATE_FORMAT(s.created_date, '%d/%m/%Y') AS created_date
-                            FROM supplier_invoices si                           
-                            INNER JOIN suppliers s ON s.id = si.id_supplier                            
-                            ORDER BY si.input_number ASC;";                   // Consulta para listar tabla completa de supplier_invoices
+            if($key == null) {                                                  // Consulta para listar tabla completa de customer_invoices
+                    $sql = "SELECT ci.*, DATE_FORMAT(ci.created_date_customer_invoice, '%d/%m/%Y') AS created_date_customer_invoice, c.*, DATE_FORMAT(c.created_date, '%d/%m/%Y') AS created_date
+                            FROM customer_invoices ci                           
+                            INNER JOIN customers c ON c.id = ci.id_customer_ci                            
+                            ORDER BY ci.output_number ASC;";                   
                 }
-                else if($table == "inputs_product") {
-                    $sql = "SELECT *, DATE_FORMAT(created_date_input, '%d/%m/%Y') AS created_date_input
-                            FROM $table
+            else if($table == "outputs_products") {                             // Consulta para listar filas de productos en un número de factura concreto de la tabla outputs_products 
+                    $sql = "SELECT op.*, DATE_FORMAT(op.created_date_output, '%d/%m/%Y') AS created_date_output, p.*, DATE_FORMAT(p.created_date_product, '%d/%m/%Y') AS created_date_product
+                            FROM outputs_products op
+                            INNER JOIN products p ON p.id_product = op.id_product_op
                             WHERE $key LIKE '%$value%'
-                            ORDER BY $key ASC;";                              // Consulta para listar filas de productos en un número de entrada concreto de la tabla inputs_product                              
+                            ORDER BY $key ASC;";                                                           
                 }
-                else {
-                    $sql = "SELECT si.*, DATE_FORMAT(si.created_date_supplier_invoice, '%d/%m/%Y') AS created_date_supplier_invoice, s.*, DATE_FORMAT(s.created_date, '%d/%m/%Y') AS created_date
-                            FROM supplier_invoices si                           
-                            INNER JOIN suppliers s ON s.id = si.id_supplier 
+                else {                                                          // Consulta para listar datos de facturas concretas de la tabla customer_invoices
+                    $sql = "SELECT ci.*, DATE_FORMAT(ci.created_date_customer_invoice, '%d/%m/%Y') AS created_date_customer_invoice, c.*, DATE_FORMAT(c.created_date, '%d/%m/%Y') AS created_date
+                            FROM customer_invoices ci                           
+                            INNER JOIN customers c ON c.id = ci.id_customer_ci
                             WHERE $key LIKE '%$value%'
-                            ORDER BY $key ASC;";                               // Consulta para listar datos de entradas concretas de la tabla supplier_invoices
+                            ORDER BY $key ASC;";                               
                 }
 
                 $stmt = Connection::mdlConnect()->prepare($sql);
@@ -138,7 +139,7 @@
                 }
             }
             catch(PDOException $ex) {
-                echo "Error interno mdlToListInputsProducts" . $ex->getMessage();
+                echo "Error interno mdlToListOutputsProducts()" . $ex->getMessage();
             }
         }
 
@@ -146,3 +147,12 @@
 
 
      // No se cierra etiqueta php por seguridad
+
+
+
+     /*
+                    $sql = "SELECT *, DATE_FORMAT(created_date_output, '%d/%m/%Y') AS created_date_output
+                            FROM $table
+                            WHERE $key LIKE '%$value%'
+                            ORDER BY $key ASC;";  
+     */

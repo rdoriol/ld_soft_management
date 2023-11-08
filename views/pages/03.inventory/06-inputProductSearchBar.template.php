@@ -16,7 +16,3 @@
     </li>
     <li><button class="print_bar m-1 alert-info rounded" id="btn_print_inventory"><i class="fa-solid fa-print"></i>&nbspImprimir</button></li>
 </ul> 
-
-<script>
-
-</script>

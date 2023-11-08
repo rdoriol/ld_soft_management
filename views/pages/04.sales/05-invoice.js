@@ -26,6 +26,29 @@ $(document).ready(function(){
         }
     })
 
+    /** 
+     * Función para comprobar campos vacíos de 01-newInvoice y no permitir el envío de la factura al backend, al mismo tiempo que comprobará si se están mostrando datos de una factura existente, las cuales no se pueden modificar ni eliminar
+    */
+    $("#btn_invoice_product_submit").click(function(){
+        var idCustomer = $("#customer_number_inv").text();
+        var idProduct = $(".id_product_item_c1").val();      
+        var concept = $(".product_name_item_c1").val();   
+        var amount = $(".amount_item_c1").val();   
+        var price = $(".price_item_inv1").val(); 
+        var idProductReadOnly = $(".id_product_item_c1").attr("readonly"); 
+
+        if(idCustomer == "" || idProduct == "" || concept == "" || amount == "" || price == "" || concept == 0 || amount == 0 || price == 0) {
+            $(".require_fields").css("display", "block");
+            return false;
+        }
+        else if(idProductReadOnly == "readonly") {
+            return false;
+        }
+        else {
+            $(".require_fields").css("display", "none");
+        }
+    })
+
 
 
 })
@@ -100,21 +123,3 @@ function getSubwindowInvoiceValues(respuesta) {
     closeSubwindow();
 }
 
-/** 
- * Función para comprobar campos vacíos de 01-newInvoice y no permitir el envío de la factura al backend
-*/
-$("#btn_invoice_product_submit").click(function(){
-    var idCustomer = $("#customer_number_inv").text();
-    var idProduct = $(".id_product_item_c1").val();      
-    var concept = $(".product_name_item_c1").val();   
-    var amount = $(".amount_item_c1").val();   
-    var price = $(".price_item_inv1").val();  console.log(idCustomer + "\n"+ idProduct + "\n"+ concept + "\n"+ amount + "\n"+ price);
-
-    if(idCustomer == "" || idProduct == "" || concept == "" || amount == "" || price == "" || concept == 0 || amount == 0 || price == 0) {
-        $(".require_fields").css("display", "block");
-        return false;
-    }
-    else {
-        $(".require_fields").css("display", "none");
-    } 
-})
