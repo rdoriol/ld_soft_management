@@ -39,9 +39,7 @@
         </div>
     </div>
                                          <!-- --------------------------------------- --> 
-          <?php 
-            $inputNumber = ProductInputController::ctrGenerateInputNumber("inputs_product")  // Se lanza método para asignar número de entrada de forma automática //todo
-          ?>
+         
   <div class="invoice mt-5">
     <div class="d-flex justify-content-between ml-2">
             <div class="col-xs-10 ">
@@ -68,6 +66,7 @@
                 <h3 class="text-left">Cliente</h3>
 
             <table class="text-left">
+                <input type="hidden" id="customer_number_inv_hidden" name="customer_number_inv" placeholder="customer_number_inv" value="<?php echo ""; ?>" /> <!-- input oculto para poder capturar valor $outputNumber-->
                 <tr><th>Nº Cliente</th><td class="pl-1" id="customer_number_inv"></td></tr>
                 <tr><th>Nombre</th><td id="customer_name_inv"></td></tr>
                 <tr><th>NIF</th><td id="customer_nif_inv"></td></tr>
@@ -79,22 +78,25 @@
 
             </div>      
         </div>
-
+              
             <div class="col-xs-2 text-right mr-2">
                 <strong>Fecha Factura</strong>
                 <br> 
                 <p>
-                    <?php echo date("d/m/Y"); ?> <?php echo $invoiceData[0]->created_date_product; ?>
+                    <?php echo date("d/m/Y"); // Se obtiene fecha del sistema ?>  
+                    <?php echo $invoiceData[0]->created_date_product; ?>  
                 <br>
                 <strong>Nº Factura</strong>
                 <br>
-                <?php echo $inputNumber; ?>
+                  <?php  
+                    $outputNumber = SalesController::ctrGenerateOutPutNumber("outputs_products");  // Se lanza método para asignar número de factura de forma automática. 
+                    echo $outputNumber; 
+                  ?>
+                  <input type="hidden" id="output_number" name="output_number" value="<?php echo $outputNumber; ?>" /> <!-- input oculto para poder capturar valor $outputNumber-->
                 </p>
             </div>
             
-        </div>
-        
-      
+        </div>            
 
     <fieldset class="">   
 
@@ -148,25 +150,25 @@
                             <div colspan="1"><button type="button" class="btn btn-primary mr-5 btn_minus" id="btn_delete_product_row" name="" title="Eliminar líneas de productos"><i class="fa-sharp fa-solid fa-minus"></i></button></div>  
                             </td>
                             <td colspan="4" class="text-right">Subtotal (€)</td>
-                            <td><div class="forms_inputs_fields table_inputs_fields"><input type="text" step="0.01"class="forms_inputs inputs_width number_input" id="subtotal_input" name="subtotal_input" placeholder="0 €" readonly value="" /></div></td>
+                            <td><div class="forms_inputs_fields table_inputs_fields"><input type="text" step="0.01"class="forms_inputs inputs_width number_input" id="subtotal_input" name="subtotal_invoice" placeholder="0 €" readonly value="" /></div></td>
                         </tr> 
                         <tr>
                             <td colspan="5" class="text-right">Descuento (%)</td>
-                            <td><div class="forms_inputs_fields table_inputs_fields"><input type="text" step="0.01"class="forms_inputs inputs_width number_input" id="discount_input" name="discount_input" placeholder="0 %" value="" /></div></td>
+                            <td><div class="forms_inputs_fields table_inputs_fields"><input type="text" step="0.01"class="forms_inputs inputs_width number_input" id="discount_input" name="discount_invoice" placeholder="0 %" value="" /></div></td>
                         </tr>
                         <tr>
                             <td colspan="5" class="text-right">Subtotal con descuento (€)</td>
-                            <td><div class="forms_inputs_fields table_inputs_fields"><input type="text" step="0.01"class="forms_inputs inputs_width number_input" id="subtotal_discount_input" name="subtotal_discount_input" placeholder="0 €" readonly value="" /></div></td>
+                            <td><div class="forms_inputs_fields table_inputs_fields"><input type="text" step="0.01"class="forms_inputs inputs_width number_input" id="subtotal_discount_input" name="subtotal_discount_invoice" placeholder="0 €" readonly value="" /></div></td>
                         </tr>  
                         <tr>
                             <td colspan="5" class="text-right">Impuestos (21%)</td>
-                            <td><div class="forms_inputs_fields table_inputs_fields"><input type="text" step="0.01"class="forms_inputs inputs_width number_input" id="tax_input" name="tax_input" placeholder="0 €" readonly value="" /></div></td>
+                            <td><div class="forms_inputs_fields table_inputs_fields"><input type="text" step="0.01"class="forms_inputs inputs_width number_input" id="tax_input" name="tax_invoice" placeholder="0 €" readonly value="" /></div></td>
                         </tr>
                         <tr>
                             <td colspan="5" class="text-right font-weight-bold">
                                 <h4>Total (€)</h4></td>
                             <td class="total_field">
-                                <h5><div class="forms_inputs_fields table_inputs_fields font-weight-bold"><input type="number" class="forms_inputs inputs_width number_input" id="total_input" name="total_input" placeholder="0 €" readonly value="" /></div></h5>
+                                <h5><div class="forms_inputs_fields table_inputs_fields font-weight-bold"><input type="number" class="forms_inputs inputs_width number_input" id="total_input" name="total_invoice" placeholder="0 €" readonly value="" /></div></h5>
                             </td>
                         </tr>
                     </tfoot>
@@ -190,7 +192,7 @@
                                                   <!-- -------------------------- -->
 
     <div class="btn-group p-3 ">
-      <button type="submit" class="btn btn-primary mr-5" id="btn_invoice_product_submit" name="btn_input_product_submit"><i class="fa-solid fa-file-invoice-dollar"></i>&nbsp Facturar</button>
+      <button type="submit" class="btn btn-primary mr-5" id="btn_invoice_product_submit" name="btn_output_product_submit"><i class="fa-solid fa-file-invoice-dollar"></i>&nbsp Facturar</button>
       <button type="button" role="link" class="btn btn-secondary mr-5" name="exit_input_product" onClick="window.location='index.php?pages=01-newInvoice'"><i class="fa-sharp fa-solid fa-rectangle-xmark"></i>&nbsp Cerrar registro</button>      
     </div>
 
@@ -221,7 +223,7 @@
     <?php 
         /* Bloque condicional para grabar datos nuevos, actualizar o eliminar datos de un registro existente
         -----------------------------------------------------------------------------------------------------------------*/
-      if(isset($_GET["token"]) && !empty($_GET["token"])) {                
+     /* if(isset($_GET["token"]) && !empty($_GET["token"])) {                
                      
         $updateProduct = InventoryController::ctrUpdateProduct("products", "token_product", $_GET["token"]);    // se lanza método para actualizar datos de clientes.
       
@@ -235,20 +237,14 @@
         $deleteProduct = new InventoryController();   //todo-> Finalmente no se utilizará, esta acción se realizará via AJAX. Eliminar más adelante
         $checkDeleteProduct = $deleteProduct->ctrDeleteProduct("products", "token_product", $_POST["tokenProduct"]);   // se lanza método para eliminar registro concreto.
       }
-      else {    
-
-          // Se recorre el array "numbers_rows[]" del name de las filas de productos para verificar que filas se van a enviar al archivo controller para generar el movimiento de entrada del producto
-        //foreach($_POST["numbers_rows"] as $item) {
-
-          //if(!empty($_POST["id_product_item" . $item])) {   
-            $createProductInput = ProductInputController::ctrCreateProductInput("inputs_product"); // se lanza método para grabar datos de entradas de productos.
-          //}
-        //}  
-      }
+      else {  
+        $createProductOutput = SalesController::ctrCreateProductOutput("outputs_products"); // se lanza método para grabar datos de Generar Factura.
        
+      } */
+      $createProductOutput = SalesController::ctrCreateProductOutput("outputs_products"); // se lanza método para grabar datos de Generar Factura.
         /* Bloque condicional para lanzar ventana modal en función del éxito de la operación realizada
         ---------------------------------------------------------------------------------------------*/
-      if($updateProduct == "true") {                
+     /* if($updateProduct == "true") {                
 
         $newToken = md5(ucfirst($_POST["product_name"] . "+" . strtoupper($_POST["or_original_product"])));   // Se genera nuevo token para poder recargar página con datos actualizados.        
 
@@ -264,13 +260,13 @@
                     window.sessionStorage.setItem('modalAlert', 'true'); 
                     window.location.replace('index.php?pages=02-productsInputs');
                   </script>"; 
-      }
+      }*/
     ?>
 
     <?php
         /* Bloque condicional para borrar datos almacenados del formulario html una vez enviados.
         ----------------------------------------------------------------------------------------*/
-      if($createProductInput == "true" || $updateProduct == "true" || $checkDeleteRegister == "true") {
+      if($createProductOutput == "true"/* || $updateProduct == "true" || $checkDeleteRegister == "true"*/) {
         echo "<script>
                 if(window.history.replaceState) {
                   window.history.replaceState(null, null, window.location.href);

@@ -68,7 +68,6 @@
 
   <fieldset class="">   
 
-
     <div class="row_table">
         <div class="col-xs-9">
             <table class="table table-condensed table-bordered table-striped">
@@ -189,10 +188,10 @@
     </div>
 
     <?php 
-        /* Bloque condicional para grabar datos nuevos, actualizar o eliminar datos de un registro existente
+        /* // Se lanza método para grabar datos de entradas de productos.  
         -----------------------------------------------------------------------------------------------------------------*/
    
-       $createProductInput = ProductInputController::ctrCreateProductInput("inputs_product"); // se lanza método para grabar datos de entradas de productos.       
+       $createProductInput = ProductInputController::ctrCreateProductInput("inputs_product");      
       
        
         /* Bloque condicional para lanzar ventana modal en función del éxito de la operación realizada

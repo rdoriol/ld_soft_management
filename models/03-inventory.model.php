@@ -146,34 +146,63 @@
         // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
         /**
-         * Método para actualizar stock y precio de coste de los productos ya existentes 
+         * Método para actualizar stock y precio de coste de los productos ya existentes para "entradas de productos" o unicamente stock para "opción generar facturas"
          */
-        static public function mdlUpdateStockProducts($table, $idValue, $amount, $costPrice) {
+        static public function mdlUpdateStockProducts($table, $idValue, $amount, $costPrice=null) {
             $check = "false";
             try {
                     // Se obtiene número de unidades de productos existentes en la base de datos
                 $product = self::mdlToListProduct($table, "id_product", $idValue);
                 $numberUnitsProduct = $product[0]->units_product;
 
-                    // Al número de unnidades anterior se le suman las que se van añadir
-                $currentNumberUnits = $amount + $numberUnitsProduct;
-                
-                    // Se realiza actualización del producto
-                $updateString = "units_product = :units_product,  last_unit_cost_product = :last_unit_cost_product";
-                $sql = "UPDATE $table SET $updateString WHERE id_product = $idValue";
-                $stmt = Connection::mdlConnect()->prepare($sql);
+                    // Condición para actualización si proviene de "Entrada de Productos" (unidades y precio)
+                if(isset($costPrice) && !empty($costPrice)) {
 
-                  // bloque con función bindParam() para vincular variable oculta en prepare statement con el valor recibido del form.
-                $stmt->bindParam(":units_product", $currentNumberUnits, PDO::PARAM_INT);               
-                $stmt->bindParam(":last_unit_cost_product", $costPrice);
+                        // Al número de unidades actuales se le suman las que se van añadir
+                    $currentNumberUnits = $amount + $numberUnitsProduct;
+                    
+                        // Se realiza actualización del producto
+                    $updateString = "units_product = :units_product,  last_unit_cost_product = :last_unit_cost_product";
+                    $sql = "UPDATE $table SET $updateString WHERE id_product = $idValue";
+                    $stmt = Connection::mdlConnect()->prepare($sql);
 
-                if($stmt->execute()) {
+                    // bloque con función bindParam() para vincular variable oculta en prepare statement con el valor recibido del form.
+                    $stmt->bindParam(":units_product", $currentNumberUnits, PDO::PARAM_INT);               
+                    $stmt->bindParam(":last_unit_cost_product", $costPrice);
+
                     $check = "true";
                 }
+
+                    // En caso contrario, la actualización se realizaría unicamente para unidades de producto, que proviene de "Generar Factura"
+                else {
+                        // Si el número de unidades de producto existente en la base de datos es superior a la cantidad que se le va a dar salida en factura
+                    if($numberUnitsProduct >= $amount) {
+                            // Al número de unidades actuales se le restan las que salen al ser facturadas
+                        $currentNumberUnits = $numberUnitsProduct - $amount;
+
+                            // Se realiza actualización del producto
+                        $updateString = "units_product = :units_product";
+                        $sql = "UPDATE $table SET $updateString WHERE id_product = $idValue";
+                        $stmt = Connection::mdlConnect()->prepare($sql);
+
+                            // Función bindParam() para vincular variable oculta en prepare statement con el valor recibido del form.
+                        $stmt->bindParam(":units_product", $currentNumberUnits, PDO::PARAM_INT);    
+                        $check = "true"; 
+                    }
+                }
+                if($check == "true") {
+                    if($stmt->execute()) {
+                        $check = "true";
+                    }
+                    else {
+                        $check = "false";
+                    }
+                }
+                
                 return $check;
             }
             catch(PDOException $ex) {
-                echo "Error interno updateStockProducts" . $ex->getMessage();       
+                echo "Error interno updateStockProducts()" . $ex->getMessage();       
             }
         }
 

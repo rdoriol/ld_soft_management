@@ -68,8 +68,9 @@ function getRegisterCustomerAjax() {
         dataType: "json",
         success: function(request){      
 
-                    if(request) {                
+                    if(request) {                           customer_number_inv
                                             
+                        $("#customer_number_inv_hidden").val(request[0].id);
                         $("#customer_number_inv").text(request[0].id);
                         $("#customer_name_inv").text(request[0].name_customer);
                         $("#customer_nif_inv").text(request[0].nif_cif);
