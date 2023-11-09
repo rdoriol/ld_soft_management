@@ -29,11 +29,11 @@ $(document).ready(function() {
 
         if(eyeState == "password") {
             $("#pass").attr("type", "text");
-            $(".eye_pwd").attr("src", "./images/login/show_icon.png");
+            $(".eye_pwd").attr("src", "./images/login/hide_icon.png");
         }
         else {
             $("#pass").attr("type", "password");
-            $(".eye_pwd").attr("src", "./images/login/hide_icon.png");
+            $(".eye_pwd").attr("src", "./images/login/show_icon.png");
         }
     })
 })

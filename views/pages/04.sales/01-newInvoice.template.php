@@ -35,14 +35,14 @@
         <div class="forms_field flex_customer_field">
             <label class="forms_label" for="invoice_created_date" id="btn_input_search_customer" title="Cliente a facturar">Cliente a facturar</label>
             <div class="forms_inputs_fields">  
-                <i class="fa-solid fa-magnifying-glass forms_icons search_icon_customer" title="Buscar cliente"></i>
+                <i class="fa-solid fa-magnifying-glass forms_icons search_icon_customer<?php echo $readOnly; ?>" title="Buscar cliente"></i>
                 <input type="text" class="forms_inputs product_item_id input_id" id="id_customer_item" name="id_customer_item" placeholder="Nº cliente" <?php echo $readOnly; ?> value="" />
             </div>     
         </div>
     </div>
                                          <!-- --------------------------------------- --> 
          
-  <div class="invoice mt-5">
+  <div class="invoice mt-5">                                <!---------------------------- DIV INVOICE --------------------------------> 
     <div class="d-flex justify-content-between ml-2">
             <div class="col-xs-10 ">
                 <h1>Factura</h1>
@@ -90,7 +90,7 @@
                             echo $customerInvoiceData[0]->created_date_customer_invoice;      // Para mostrar datos de facturas del historial
                         }
                         else {
-                            echo date("d/m/Y");     // En caso contrario se obtiene fecha del sistema
+                            echo date("d/m/Y");     // En caso contrario se obtiene y muestra fecha del sistema
                         }                    
                     ?>   
                 <br>
@@ -136,20 +136,20 @@
                                         <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="text" class="forms_inputs inputs_width product_name_item_c'.$i.'" id="product_name_item'.$i.'" name="product_name_item'.$i.'" placeholder="Nombre del producto" '. $readOnly .' value="' . $outputInvoiceData[$i-1]->name_product . '" /></div></td>
                                         <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="number" class="forms_inputs inputs_width amounts amount_item_c'.$i.'" id="amount_item'.$i.'" name="amount_item'.$i.'" placeholder="0" '. $readOnly .' value="'. $outputInvoiceData[$i-1]->output_units .'" /></div></td>
                                         <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="text" class="forms_inputs inputs_width price price_item_inv'.$i.'" id="price_item'.$i.'" name="price_item'.$i.'" placeholder="0 €" '. $readOnly .' value="'. $outputInvoiceData[$i-1]->unit_sales_price .'" /></div></td>
-                                        <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="number" step="0.01" class="forms_inputs inputs_width discount" id="discount_item'.$i.'" name="discount_item'.$i.'" placeholder="0 %" '. $readOnly .' value="'. $outputInvoiceData[$i-1]->unit_discount_product_op .'" /></div></td>
+                                        <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="number" step="0.01" class="forms_inputs inputs_width discount" id="discount_item'.$i.'" name="discount_item'.$i.'" placeholder="0 %" '. $readOnly .' value="0"'. $outputInvoiceData[$i-1]->unit_discount_product_op .'" /></div></td>
                                         <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="text" class="forms_inputs inputs_width total_item_row" id="total_item'.$i.'" name="total_item'.$i.'" placeholder="0 €" readonly value="'. $outputInvoiceData[$i-1]->total_row_output .'" /><button type="button" class="btn btn-danger btn-sm p-0 pl-1 pr-1 ml-1 delete_row_input" id="" ><i class="fa-sharp fa-solid fa-trash-can fa-2s"></i></button></div></td>
                                     </tr>';
                             }
                             // Bucle igual que el anterior pero oculto, será el usuario quien decida visualizarlo
                             for($i = 6; $i <= 10; $i++) { 
-                            echo '<tr class="row_item hidden_rows"> 
-                            <input type="hidden" name="numbers_rows[]" value="' . $i . '">      <!-- input oculto que almacenará número de fila -->                   
-                            <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields div_id_product_item align_icon"><i class="fa-solid fa-magnifying-glass forms_icons search_icon'. $readOnly .'" id="btn_input_search_product" title="Buscar producto"></i><input type="text" class="forms_inputs product_item_id input_id id_product_item_c'. $i .'" id="id_product_item'. $i .'" name="id_product_item'. $i .'" placeholder="Id producto" '. $readOnly .' value="' . $outputInvoiceData[$i-1]->id_product_op . '" /></div></td>
-                            <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="text" class="forms_inputs inputs_width product_name_item_c'.$i.'" id="product_name_item'.$i.'" name="product_name_item'.$i.'" placeholder="Nombre del producto" value="' . $outputInvoiceData[$i-1]->name_product . '" /></div></td>
-                            <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="number" class="forms_inputs inputs_width amounts amount_item_c'.$i.'" id="amount_item'.$i.'" name="amount_item'.$i.'" placeholder="0" '. $readOnly .' value="'. $outputInvoiceData[$i-1]->output_units .'" /></div></td>
-                            <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="text" class="forms_inputs inputs_width price price_item_inv'.$i.'" id="price_item'.$i.'" name="price_item'.$i.'" placeholder="0 €" '. $readOnly .' value="'. $outputInvoiceData[$i-1]->unit_sales_price .'" /></div></td>
-                            <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="number" step="0.1" class="forms_inputs inputs_width discount" id="discount_item'.$i.'" name="discount_item'.$i.'" placeholder="0 %" '. $readOnly .' value="'. $outputInvoiceData[$i-1]->unit_discount_product_op .'" /></div></td>
-                            <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="text" class="forms_inputs inputs_width total_item_row" id="total_item'.$i.'" name="total_item'.$i.'" placeholder="0 €" readonly value="'. $outputInvoiceData[$i-1]->total_row_output .'" /><button type="button" class="btn btn-danger btn-sm p-0 pl-1 pr-1 ml-1 delete_row_input" id="" ><i class="fa-sharp fa-solid fa-trash-can fa-2s"></i></button></div></td>
+                                echo '<tr class="row_item hidden_rows"> 
+                                <input type="hidden" name="numbers_rows[]" value="' . $i . '">      <!-- input oculto que almacenará número de fila -->                   
+                                <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields div_id_product_item align_icon"><i class="fa-solid fa-magnifying-glass forms_icons search_icon'. $readOnly .'" id="btn_input_search_product" title="Buscar producto"></i><input type="text" class="forms_inputs product_item_id input_id id_product_item_c'. $i .'" id="id_product_item'. $i .'" name="id_product_item'. $i .'" placeholder="Id producto" '. $readOnly .' value="' . $outputInvoiceData[$i-1]->id_product_op . '" /></div></td>
+                                <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="text" class="forms_inputs inputs_width product_name_item_c'.$i.'" id="product_name_item'.$i.'" name="product_name_item'.$i.'" placeholder="Nombre del producto" value="' . $outputInvoiceData[$i-1]->name_product . '" /></div></td>
+                                <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="number" class="forms_inputs inputs_width amounts amount_item_c'.$i.'" id="amount_item'.$i.'" name="amount_item'.$i.'" placeholder="0" '. $readOnly .' value="'. $outputInvoiceData[$i-1]->output_units .'" /></div></td>
+                                <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="text" class="forms_inputs inputs_width price price_item_inv'.$i.'" id="price_item'.$i.'" name="price_item'.$i.'" placeholder="0 €" '. $readOnly .' value="'. $outputInvoiceData[$i-1]->unit_sales_price .'" /></div></td>
+                                <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="number" step="0.1" class="forms_inputs inputs_width discount" id="discount_item'.$i.'" name="discount_item'.$i.'" placeholder="0 %" '. $readOnly .' value="0"'. $outputInvoiceData[$i-1]->unit_discount_product_op .'" /></div></td>
+                                <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="text" class="forms_inputs inputs_width total_item_row" id="total_item'.$i.'" name="total_item'.$i.'" placeholder="0 €" readonly value="'. $outputInvoiceData[$i-1]->total_row_output .'" /><button type="button" class="btn btn-danger btn-sm p-0 pl-1 pr-1 ml-1 delete_row_input" id="" ><i class="fa-sharp fa-solid fa-trash-can fa-2s"></i></button></div></td>
                                     </tr>';
                             } 
                         ?>
@@ -188,7 +188,9 @@
                 </table>
             </div>
         </div>
-    </div> <!-- End div invoice-->                                                 <!-- ELEMENTOS INPUTS OCULTOS -->
+    </div>                                                  <!---------------------------- END DIV INVOICE -------------------------------->     
+
+                                                            <!-- ELEMENTOS INPUTS OCULTOS -->
 
                         <!-- input oculto que recibirá valor de token de customer de subventana -->
         <input type="hidden" id="token_customer" name="token_customer" placeholder="token_customer Subwindow" value="<?php //echo $inputProductData[0]->token_input_product; ?>" /> 

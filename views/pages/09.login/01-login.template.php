@@ -25,7 +25,7 @@
           <input type="password" class="form-control forms_inputs input_text" placeholder="Introduzca contraseña" id="pass" name="pass" value="" />
         </div>
     </div>
-    <img class="eye_pwd" src="./images/login/hide_icon.png" />
+    <img class="eye_pwd" src="./images/login/show_icon.png" />
     
     <div class="text-center">
       <button type="submit" class="btn btn-primary mt-3 forms_inputs" name="submitLogin">Acceder</button>
