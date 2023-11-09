@@ -1,8 +1,16 @@
 <?php
+   // include_once "./vendor/autoload.php"; 
+    //use Dompdf\dompdf;
+
+    //require('./vendor/autoload.php');
+     require('./fpdf/fpdf.php');
+ 
+
+    
     /**
      * Clase que implementará métodos para realizar CRUD recibiendo datos de la Vista y enviándolos al Modelo.
      */
-    class SalesController { 
+    class SalesController extends FPDF { 
 
          /**
          * Método que recibirá datos del formulario Entrada Productos y los enviará a la base de datos mediante método del Modelo.
@@ -162,7 +170,45 @@
             }
         }
 
+        /**
+         * Método que creará archivos pdf
+         */
+        static public function generatePdf() {
+            try {
+                if(isset($_POST["btn_invoice_pdf"])) {
 
+                    $html='<h1>Prueba Roberto</h1>';    /*
+                    $dompdf = new Dompdf();
+                    $options = $dompdf->getOptions();
+                    $options->set(array('isRemoteEnabled'=>true));
+                    //$options->setDefaultFont('Courier');
+                    $dompdf->setOptions($options);
+                    $dompdf->set_option('isHtml5ParserEnabled', true);
+                    $dompdf->set_paper("A4", "portrait"); 
+                    $dompdf->load_html(utf8_decode($html));
+                    // Creamos una instancia a la clase
+                    //echo $html; exit;
+                    $dompdf->render();
+                    //$pdf = $dompdf->output();
+                    $dompdf->stream('Factura.pdf');
+                    exit();
+
+                    //header("Content-type: application/pdf");
+                    //header("Content-Disposition: inline; filename=Factura.pdf");
+                   // echo $dompdf->output(); */
+
+                  
+
+                }
+                
+            }
+            catch(PDOException $ex) {
+                echo "Error interno generatePdf(). Error: " . $ex->getMessage();
+            }
+        }   
 
 
     }
+
+
+  

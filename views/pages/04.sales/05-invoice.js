@@ -46,11 +46,67 @@ $(document).ready(function(){
         }
         else {
             $(".require_fields").css("display", "none");
-        }
+        }   
     })
 
+    //$("#btn_invoice_pdf").click(function(){               //todo ELIMINAR FUNCIÓN
 
+      //  var invoice = document.getElementById("invoice");
+       // var invoice = $("#invoice").text();
 
+     //   console.log(invoice);
+      /*
+
+        var doc = new jsPDF();
+
+        doc.text(20, 20, 'Hola mundo');
+        doc.text(20, 30, 'Vamos a generar un pdf desde el lado del cliente');
+
+        // Add new page
+        doc.addPage();
+        doc.text(20, 20, 'Visita programacion.net');
+
+        // Save the PDF
+        doc.save('Factura.pdf');        */
+
+     //   var doc = new jsPDF();
+   //     var elementHTML = $('#invoice').html();
+        /*var specialElementHandlers = {
+        '#elementH': function (element, renderer) {
+        return true;
+        }
+        };*/
+     //   doc.fromHTML(elementHTML, 15, 15, {
+     //   'width': 170
+        //'elementHandlers': specialElementHandlers
+     //   });
+
+        // Save the PDF
+     //   doc.save('Factura.pdf');
+        /*
+        html2pdf()
+        .set({
+            margin: 0,
+            filename: 'documento.pdf',
+            image: {
+                type: 'jpeg',
+                quality: 0.98
+            },
+            html2canvas: {
+                scale: 3, // A mayor escala, mejores gráficos, pero más peso
+                letterRendering: true,
+            },
+            jsPDF: {
+                unit: "in",
+                format: "a3",
+                orientation: 'portrait' // landscape o portrait
+            }
+        })
+        .from(invoice)
+        .save()
+        .catch(err => console.log(err));*/ 
+  //  })      
+    
 })
 
 /**
@@ -121,5 +177,36 @@ function getSubwindowInvoiceValues(respuesta) {
     window.opener.$("#token_customer").val(respuesta);
     window.opener.getRegisterCustomerAjax();
     closeSubwindow();
+}
+
+function prueba() {
+    document.addEventListener("DOMContentLoaded", () => {
+        // Escuchamos el click del botón
+        const $boton = document.querySelector("#btnCrearPdf");
+        $boton.addEventListener("click", () => {
+            const $elementoParaConvertir = document.body; // <-- Aquí puedes elegir cualquier elemento del DOM
+            html2pdf()
+                .set({
+                    margin: 1,
+                    filename: 'documento.pdf',
+                    image: {
+                        type: 'jpeg',
+                        quality: 0.98
+                    },
+                    html2canvas: {
+                        scale: 3, // A mayor escala, mejores gráficos, pero más peso
+                        letterRendering: true,
+                    },
+                    jsPDF: {
+                        unit: "in",
+                        format: "a3",
+                        orientation: 'portrait' // landscape o portrait
+                    }
+                })
+                .from($elementoParaConvertir)
+                .save()
+                .catch(err => console.log(err));
+        });
+    });
 }
 

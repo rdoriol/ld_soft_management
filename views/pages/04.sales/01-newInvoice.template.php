@@ -18,7 +18,7 @@
     }
   </script>"; 
       
-?>
+?>                      
 
 <h2 class="li_active_page rounded">Ventas</h2>
 
@@ -41,15 +41,17 @@
         </div>
     </div>
                                          <!-- --------------------------------------- --> 
+
+                                       
          
-  <div class="invoice mt-5">                                <!---------------------------- DIV INVOICE --------------------------------> 
+  <div class="document mt-5" id="invoice">                                <!---------------------------- DIV INVOICE --------------------------------> 
     <div class="d-flex justify-content-between ml-2">
             <div class="col-xs-10 ">
                 <h1>Factura</h1>
             </div>
             <div class="d-flex mr-2">
             <div class="col-xs-2">
-                    <img class="img img-responsive" src="" alt="Logo Empresa">
+                    <!-- <img class="img img-responsive" src="" alt="Logo Empresa"> -->
                 </div>
                 <div class="col-xs-10 pl-5 text-right">                
                     <h6><strong>LD SoftGestión, S.L.</strong></h6>
@@ -126,7 +128,7 @@
                             <th class="total">Total (€)</th>
                         </tr>
                     </thead>          
-                    <tbody class="rows_items">          
+                    <tbody class="rows_items">  
                         <?php              
                             //  Bucle para generar mismo tipo de columnas modificando unicamente el id y name del elemento html input          
                             for($i = 1; $i <= 5; $i++) {                        
@@ -208,7 +210,9 @@
 
     <div class="btn-group p-3 ">
       <button type="submit" class="btn btn-primary mr-5" id="btn_invoice_product_submit" name="btn_output_product_submit"><i class="fa-solid fa-file-invoice-dollar"></i>&nbsp Facturar</button>
-      <button type="button" role="link" class="btn btn-secondary mr-5" name="exit_input_product" onClick="window.location='index.php?pages=01-newInvoice'"><i class="fa-sharp fa-solid fa-rectangle-xmark"></i>&nbsp Cerrar registro</button>      
+      <button type="submit" class="btn btn-dark mr-5" id="btn_invoice_pdf" name="btn_invoice_pdf"><i class="fa-solid fa-file-pdf"></i>&nbsp Copia factura</button>
+      <button type="button" role="link" class="btn btn-secondary mr-5" name="exit_input_product" onClick="window.location='index.php?pages=01-newInvoice'"><i class="fa-sharp fa-solid fa-rectangle-xmark"></i>&nbsp Cerrar registro</button>    
+      
     </div>
 
                     <!-- Mensajes ocultos de validaciones y realización de operaciones -->
@@ -262,5 +266,18 @@
 
   </fieldset>
 
-</form>
+</form>           
 
+<?php 
+                //  LANZAR MÉTODO PARA GENERAR PDF
+             //   $salida = SalesController::generatePdf();
+  
+
+
+          
+
+         
+
+   
+
+?>

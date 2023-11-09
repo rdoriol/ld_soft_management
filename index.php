@@ -13,6 +13,9 @@
     require_once "./controllers/06-sales.controller.php";
     require_once "./controllers/10-users.controller.php";
 
+    
+    
+
     require_once "./models/01-customers.model.php";
     require_once "./models/02-suppliers.model.php";
     require_once "./models/03-inventory.model.php";
@@ -26,3 +29,5 @@
 
 
 // Por motivos de seguridad informática no se cierra etiqueta php
+
+

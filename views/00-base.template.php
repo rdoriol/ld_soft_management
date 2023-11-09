@@ -1,4 +1,5 @@
-<?php  
+<?php        
+
   ob_start(); // Se lanza función de buffer para poder utilizar session_start() y header() en cualquier parte del código.
   session_start(); 
 ?>
@@ -7,6 +8,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>login - LD Soft Gestión</title>   
     
@@ -23,7 +25,7 @@
         ---------------------->
     <style>@import url("./css/styles.css");</style>
 
-    <!-- PLUGINS JS 
+    <!-- PLUGINS JS                                  
         ---------------------->
                 <!-- BOOTSTRAP - jQuery library -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
@@ -36,7 +38,6 @@
             
                 <!-- FONTAWESOME - icons-->
     <script src="https://kit.fontawesome.com/9151328e30.js" crossorigin="anonymous"></script>
-    
 </head>
 <body>
                                                  
@@ -174,3 +175,4 @@
 
   </body>
 </html>
+            
