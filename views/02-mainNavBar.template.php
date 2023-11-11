@@ -1,5 +1,10 @@
 <aside class="item_main_container_nav" id="">
-    
+          <?php  
+               /* Archivo php para búsqueda de página activa y marcarla en el menú lateral
+                ------------------------*/
+                include "000-selectetOption.php";
+          ?>
+
       <nav class=" p-2" id="main_nav">
         <ul class="menu">
           <li class="li_item" id="">
@@ -8,7 +13,7 @@
           <li class="li_item" id="">
             <button class="link_button" id="customers_button" title="Abrir opciones clientes"><i class="fa-solid fa-caret-right"></i>&nbsp Clientes</button>
             <ul class="submenu" id="customers_submenu">
-              <li class="link_subButton" id="newCustomerId"><a class="" href="index.php?pages=01-newCustomer">Ficha cliente</a></li>             
+              <li class="link_subButton <?php echo $newCustomer; ?>" id="newCustomerId"><a class="" href="index.php?pages=01-newCustomer">Ficha cliente</a></li>             
               <li class="link_subButton" id="customersListId"><a class="" href="index.php?pages=02-customersList">Listados clientes</a></li>
             </ul>
           </li>
@@ -17,7 +22,7 @@
             <button class="link_button" id="suppliers_button" title="Abrir opciones proveedores"><i class="fa-solid fa-caret-right"></i>&nbsp Proveedores</button>
             <ul class="submenu" id="suppliers_submenu">
               <li class="link_subButton" id="newSupplierId"><a class="" href="index.php?pages=01-newSupplier">Ficha proveedor</a></li>              
-              <li class="link_subButton" id="suppliersListId"><a class="" href="index.php?pages=02-suppliersList">Listados proveedores </a></li>
+              <li class="link_subButton" id="suppliersListId"><a class="" href="index.php?pages=02-suppliersList">Listas proveedores </a></li>
             </ul>
           </li>
 

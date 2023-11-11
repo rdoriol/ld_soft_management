@@ -78,7 +78,8 @@
 
             <!-- end exit register modal -->  
 
-          <?php
+          <?php           
+
               /**
                * Controlador frontal/lista blanca de todas las páginas (seguridad informática) de la aplicación web que se renderizarán por pantalla. (se alimenta de "02-mainNavBar.template.php").
                */
@@ -102,7 +103,7 @@
               {
                 include "pages/04.sales/" . $page . ".template.php";
               }
-              else if($page == "01-newEmployee" || $page == "02-employeeFile" || $page == "04-employeesList")
+              else if($page == "01-newEmployee" || $page == "02-employeeFile" || $page == "03-employeesList")
               {
                 include "pages/05.employees/" . $page . ".template.php";
               }
@@ -138,8 +139,7 @@
             }
             else
             {
-              // echo "Panel principal aplicación web ERP";
-              include "pages/09.login/01-login.template.php";
+                include "pages/09.login/01-login.template.php";
             }
           ?>
         </div>

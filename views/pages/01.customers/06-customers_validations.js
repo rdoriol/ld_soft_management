@@ -57,10 +57,12 @@ $(document).ready(function(){
             if(request == "true") {
                 checkKo(selector);
                 $(".name_field_duplicate").css("display", "block");
+                $("#btn_customer_submit").attr("type", "button");
             }
             else {
-                checkOk(selector);
+               // checkOk(selector);
                 $(".name_field_duplicate").css("display", "none");
+                $("#btn_customer_submit").attr("type", "submit");
             }
         }
             // Bloque para validar campo nif (formato y duplicidad en base de datos)
@@ -72,18 +74,22 @@ $(document).ready(function(){
             if(checkFormatNif == true) {  // Si el formato es incorrecto
                 checkKo(selector);
                 $(".error_format_nif").css("display", "block"); 
+                $("#btn_customer_submit").attr("type", "button");
             }
             else {  // Si el formato es correcto
-                checkOk(selector); 
+               // checkOk(selector); 
                 $(".error_format_nif").css("display", "none");
+                $("#btn_customer_submit").attr("type", "submit");
 
                 if(request == "true") { // Si el formato es correcto a continuación se comprueba que no exista nif duplicado
                     checkKo(selector);
                     $(".nif_field_duplicate").css("display", "block");
+                    $("#btn_customer_submit").attr("type", "button");
                 }
                 else {
-                    checkOk(selector);
+                   // checkOk(selector);
                     $(".nif_field_duplicate").css("display", "none");
+                    $("#btn_customer_submit").attr("type", "submit");
                 }
             }
         }
@@ -97,10 +103,12 @@ $(document).ready(function(){
         if(formatPostalCode == true) {
             checkKo($(this));
             $(".error_format_postal_code").css("display", "block");
+            $("#btn_customer_submit").attr("type", "button");
         }
         else {
-            checkOk($(this));
+           // checkOk($(this));
             $(".error_format_postal_code").css("display", "none");
+            $("#btn_customer_submit").attr("type", "submit");
         }
     })
 
@@ -112,10 +120,12 @@ $(document).ready(function(){
             if(formatPhone == true) {
                 checkKo($(this));
                 $(".error_format_phone").css("display", "block");
+                $("#btn_customer_submit").attr("type", "button");
             }
             else {
-                checkOk($(this));
+                //checkOk($(this));
                 $(".error_format_phone").css("display", "none");
+                $("#btn_customer_submit").attr("type", "submit");
             }
         })
 })
@@ -166,8 +176,10 @@ function checkNif(nif) {
     var patternNifM = /^[Mm]{1}[0-9]{7}[A-Za-z]{1}$/;
     var patternNie = /^[XYZzyz]{1}[0-9]{7}[A-Za-z]{1}$/;
     var ckeck = false;
+    $("#btn_customer_submit").attr("type", "button");
 
     if(!patternDni.test(nif) && !patternCif.test(nif) && !patternNifM.test(nif) && !patternNie.test(nif)) {
+        $("#btn_customer_submit").attr("type", "submit");
         ckeck = true;                    
     }
     return ckeck;
@@ -181,8 +193,10 @@ function checkNif(nif) {
 function checkPostalCode(selector, postalCode) {
     var check = false;
     cleanCheck(selector);    // se limpian mensajes de errores previos
+    $("#btn_customer_submit").attr("type", "button");
     
     if(isNaN(postalCode) || postalCode.length != 5) {
+        $("#btn_customer_submit").attr("type", "submit");
         check = true;        
     }
     return check;
@@ -196,8 +210,10 @@ function checkPostalCode(selector, postalCode) {
 function checkPhone(selector, phone) {
     check = false;
     cleanCheck(selector);    // se limpian mensajes de errores previos
+    $("#btn_customer_submit").attr("type", "button");
 
     if(phone.length > 13 || phone.length < 9) {
+        $("#btn_customer_submit").attr("type", "submit");
         check = true;
     }
     return check;

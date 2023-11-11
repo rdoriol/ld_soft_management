@@ -310,7 +310,7 @@ select {
 }
 
 .link_subButton_active {
-    background-color: gold; 
+    background-color: gold;     
     font-weight: bold;
     width: 130px;
     padding: 5px;

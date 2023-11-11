@@ -107,36 +107,51 @@
         static public function mdlToListOutputsProducts($table, $key=null, $value=null) {              
             $sql = "";
             try {
-            if($key == null) {                                                  // Consulta para listar tabla completa de customer_invoices
+                if($key == null) {                                                  // Consulta para listar tabla completa de customer_invoices
                     $sql = "SELECT ci.*, DATE_FORMAT(ci.created_date_customer_invoice, '%d/%m/%Y') AS created_date_customer_invoice, c.*, DATE_FORMAT(c.created_date, '%d/%m/%Y') AS created_date
                             FROM customer_invoices ci                           
                             INNER JOIN customers c ON c.id = ci.id_customer_ci                            
                             ORDER BY ci.output_number ASC;";                   
-                }
-            else if($table == "outputs_products") {                             // Consulta para listar filas de productos en un número de factura concreto de la tabla outputs_products 
-                    $sql = "SELECT op.*, DATE_FORMAT(op.created_date_output, '%d/%m/%Y') AS created_date_output, p.*, DATE_FORMAT(p.created_date_product, '%d/%m/%Y') AS created_date_product
+                }                                   
+                else {                                                              // Consulta para listar filas de productos en un número de factura concreto de la tabla outputs_products 
+                    if($key == "ci.output_number" || $key == "id_customer_ci") {
+                        $sql = "SELECT op.*, DATE_FORMAT(op.created_date_output, '%d/%m/%Y') AS created_date_output, p.*, DATE_FORMAT(p.created_date_product, '%d/%m/%Y') AS created_date_product, 
+                            ci.*, DATE_FORMAT(ci.created_date_customer_invoice, '%d/%m/%Y') AS created_date_customer_invoice, c.*, DATE_FORMAT(c.created_date, '%d/%m/%Y') AS created_date
                             FROM outputs_products op
                             INNER JOIN products p ON p.id_product = op.id_product_op
+                            INNER JOIN customer_invoices ci ON ci.id_customer_invoice = op.id_customer_invoice
+                            INNER JOIN customers c ON c.id = op.id_customer_op
                             WHERE $key = '$value'
-                            ORDER BY $key ASC;";                                                           
-                }
-                else {                                                          // Consulta para listar datos de facturas concretas de la tabla customer_invoices
-                    $sql = "SELECT ci.*, DATE_FORMAT(ci.created_date_customer_invoice, '%d/%m/%Y') AS created_date_customer_invoice, c.*, DATE_FORMAT(c.created_date, '%d/%m/%Y') AS created_date
+                            ORDER BY $key ASC;";  
+                    }           
+                    else if($key == "created_date_customer_invoice") {
+                        $sql = "SELECT ci.*, DATE_FORMAT(ci.created_date_customer_invoice, '%d/%m/%Y') AS created_date_customer_invoice, c.*, DATE_FORMAT(c.created_date, '%d/%m/%Y') AS created_date
                             FROM customer_invoices ci                           
-                            INNER JOIN customers c ON c.id = ci.id_customer_ci
-                            WHERE $key LIKE '%$value%'
-                            ORDER BY $key ASC;";                               
+                            INNER JOIN customers c ON c.id = ci.id_customer_ci   
+                            WHERE $key LIKE '%$value%'                         
+                            ORDER BY $key ASC;";    
+                   }
+                    else {
+                        $sql = "SELECT op.*, DATE_FORMAT(op.created_date_output, '%d/%m/%Y') AS created_date_output, p.*, DATE_FORMAT(p.created_date_product, '%d/%m/%Y') AS created_date_product, 
+                        ci.*, DATE_FORMAT(ci.created_date_customer_invoice, '%d/%m/%Y') AS created_date_customer_invoice, c.*, DATE_FORMAT(c.created_date, '%d/%m/%Y') AS created_date
+                        FROM outputs_products op
+                        INNER JOIN products p ON p.id_product = op.id_product_op
+                        INNER JOIN customer_invoices ci ON ci.id_customer_invoice = op.id_customer_invoice
+                        INNER JOIN customers c ON c.id = op.id_customer_op
+                        WHERE $key LIKE '%$value%'
+                        ORDER BY $key ASC;";
+                    }                             
                 }
 
-                $stmt = Connection::mdlConnect()->prepare($sql);
-                if($stmt->execute() && $stmt->rowCount() > 0) {
-                    while($rowItem = $stmt->fetchObject()) {
-                        $data[] = $rowItem;
+                    $stmt = Connection::mdlConnect()->prepare($sql);
+                    if($stmt->execute() && $stmt->rowCount() > 0) {
+                        while($rowItem = $stmt->fetchObject()) {
+                            $data[] = $rowItem;
+                        }
+                        //$stmt->close();
+                        //$stmt = null;
+                        return $data;
                     }
-                    //$stmt->close();
-                    //$stmt = null;
-                    return $data;
-                }
             }
             catch(PDOException $ex) {
                 echo "Error interno mdlToListOutputsProducts()" . $ex->getMessage();
@@ -148,11 +163,3 @@
 
      // No se cierra etiqueta php por seguridad
 
-
-
-     /*
-                    $sql = "SELECT *, DATE_FORMAT(created_date_output, '%d/%m/%Y') AS created_date_output
-                            FROM $table
-                            WHERE $key LIKE '%$value%'
-                            ORDER BY $key ASC;";  
-     */

@@ -62,7 +62,7 @@ $(document).ready(function() {
                 $("#" + reloadSubmenuIdStore).show();
                 $("#" + reloadButtonIdStore).addClass("li_active_button");
                 $("#" + reloadButtonIdStore).children().attr("class", "fa-solid fa-caret-down");
-                $("#" + reloadAIdStore).addClass("link_subButton_active");
+               // $("#" + reloadAIdStore).addClass("link_subButton_active");
             }
         }
     }

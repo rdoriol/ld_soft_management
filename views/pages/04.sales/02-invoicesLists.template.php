@@ -20,9 +20,13 @@
                 
                 $key = $_POST["select_item"];
                 $value = $_POST["search_key"];
-
-                $dataInvoice = SalesController::ctrToListOutputsProducts("customer_invoices", $key, $value);  // Consulta a la tabla "customer_invoices"
-                
+                $valueDate = $_POST["calendar"];  
+                if($key == "created_date_customer_invoice") {
+                    $dataInvoice = SalesController::ctrToListOutputsProducts("customer_invoices", $key, $value, $valueDate);  // Consulta a la tabla "customer_invoices"    
+                }
+                else {
+                   $dataInvoice = SalesController::ctrToListOutputsProducts("outputs_products", $key, $value);  // Consulta a la tabla "customer_invoices"
+                }
 
                 foreach($dataInvoice as $itemInvoice):                  
             ?>
