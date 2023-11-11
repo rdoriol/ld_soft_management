@@ -1,6 +1,7 @@
 <?php
     $invoiceData = array();
     $readOnly = ""; 
+    
       // Condición para controlar si se muestran datos en el formulario o se muestra en blanco
     if((isset($_GET["token"]) && !empty($_GET["token"])) /*|| (isset($_POST["tokenProduct"]) && !empty($_POST["tokenProduct"]))*/) {                                    
         
@@ -28,14 +29,14 @@
                                             <!-- Lista de botones "Buscar facturas", "Imprimir", "Buscar clientes" -->
     <div class="d-flex justify-content-between flex_customer_field_father">
         <ul class="d-flex justify-content-first"> 
-            <li><button type="button" class="search_bar m-1 alert-info rounded" id="search_inputs_products"><i class="fa-solid fa-magnifying-glass"></i>&nbsp Historial de facturas</button></li>
+            <li><button type="button" class="search_bar m-1 alert-info rounded" id="search_invoice_history"><i class="fa-solid fa-magnifying-glass"></i>&nbsp Historial de facturas</button></li>
             <li><button type="button" class="print_bar m-1 alert-info rounded" id="print_product"><i class="fa-solid fa-print"></i>&nbsp Imprimir</button></li>
         </ul>
                                                     
         <div class="forms_field flex_customer_field">
             <label class="forms_label" for="invoice_created_date" id="btn_input_search_customer" title="Cliente a facturar">Cliente a facturar</label>
             <div class="forms_inputs_fields">  
-                <i class="fa-solid fa-magnifying-glass forms_icons search_icon_customer<?php echo $readOnly; ?>" title="Buscar cliente"></i>
+                <i class="fa-solid fa-magnifying-glass forms_icons search_icon_customer<?php echo $readOnly; ?>" id="searchCustomerInvoiceIcon" title="Buscar cliente"></i>
                 <input type="text" class="forms_inputs product_item_id input_id" id="id_customer_item" name="id_customer_item" placeholder="Nº cliente" <?php echo $readOnly; ?> value="" />
             </div>     
         </div>
@@ -45,22 +46,8 @@
                                        
          
   <div class="document mt-5" id="invoice">                                <!---------------------------- DIV INVOICE --------------------------------> 
-    <div class="d-flex justify-content-between ml-2">
-            <div class="col-xs-10 ">
-                <h1>Factura</h1>
-            </div>
-            <div class="d-flex mr-2">
-            <div class="col-xs-2">
-                    <!-- <img class="img img-responsive" src="" alt="Logo Empresa"> -->
-                </div>
-                <div class="col-xs-10 pl-5 text-right">                
-                    <h6><strong>LD SoftGestión, S.L.</strong></h6>
-                    <h6>B41229499</h6>
-                    <h6>C/ París, 59</h6>
-                    <h6>41003 - Sevilla</h6>
-                </div>
-              
-            </div>
+        <div class="col-xs-10 ">
+            <h1>Factura</h1>
         </div>
         <hr>
         <div class="d-flex justify-content-between">
@@ -81,35 +68,36 @@
             </table>
 
             </div>      
-        </div>
+        </div>        
               
-            <div class="col-xs-2 text-right mr-2">
-                <strong>Fecha Factura</strong>
-                <br> 
-                <p>
-                    <?php   
-                        if(isset($_GET["token"]) && !empty($_GET["token"])) {
-                            echo $customerInvoiceData[0]->created_date_customer_invoice;      // Para mostrar datos de facturas del historial
-                        }
-                        else {
-                            echo date("d/m/Y");     // En caso contrario se obtiene y muestra fecha del sistema
-                        }                    
-                    ?>   
-                <br>
-                <strong>Nº Factura</strong>
-                <br>
-                    <?php  
-                        if(isset($_GET["token"]) && !empty($_GET["token"])) {
-                            echo $customerInvoiceData[0]->output_number;                       // Para mostrar datos de facturas del historial
-                        }
-                        else {
-                            $outputNumber = SalesController::ctrGenerateOutPutNumber("outputs_products");  // Se lanza método para asignar número de factura de forma automática. 
-                            echo $outputNumber; 
-                        }  
-                    ?>
-                  <input type="hidden" id="output_number" name="output_number" value="<?php echo $outputNumber; ?>" /> <!-- input oculto para poder capturar por php valor $outputNumber -->
-                </p>
-            </div>
+        <div class="col-xs-2 text-right mr-2">
+            <strong>Fecha Factura</strong>
+            <br> 
+            <p id="output_number">
+                <?php   
+                    if(isset($_GET["token"]) && !empty($_GET["token"])) {
+                        echo $customerInvoiceData[0]->created_date_customer_invoice;      // Para mostrar datos de facturas del historial
+                    }
+                    else {
+                        echo date("d/m/Y");     // En caso contrario se obtiene y muestra fecha del sistema
+                    }                    
+                ?> 
+            </p>                 
+            <strong>Nº Factura</strong>
+            <br>
+            <p id="output_invoice_created_date">
+                <?php  
+                    if(isset($_GET["token"]) && !empty($_GET["token"])) {
+                        echo $customerInvoiceData[0]->output_number;                       // Para mostrar datos de facturas del historial
+                    }
+                    else {
+                        $outputNumber = SalesController::ctrGenerateOutPutNumber("outputs_products");  // Se lanza método para asignar número de factura de forma automática. 
+                        echo $outputNumber; 
+                    }  
+                ?>
+                <input type="hidden" id="output_number" name="output_number" value="<?php echo $outputNumber; ?>" /> <!-- input oculto para poder capturar por php valor $outputNumber (nº factura) -->
+            </p>
+        </div>
             
         </div>            
 
@@ -138,7 +126,7 @@
                                         <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="text" class="forms_inputs inputs_width product_name_item_c'.$i.'" id="product_name_item'.$i.'" name="product_name_item'.$i.'" placeholder="Nombre del producto" '. $readOnly .' value="' . $outputInvoiceData[$i-1]->name_product . '" /></div></td>
                                         <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="number" class="forms_inputs inputs_width amounts amount_item_c'.$i.'" id="amount_item'.$i.'" name="amount_item'.$i.'" placeholder="0" '. $readOnly .' value="'. $outputInvoiceData[$i-1]->output_units .'" /></div></td>
                                         <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="text" class="forms_inputs inputs_width price price_item_inv'.$i.'" id="price_item'.$i.'" name="price_item'.$i.'" placeholder="0 €" '. $readOnly .' value="'. $outputInvoiceData[$i-1]->unit_sales_price .'" /></div></td>
-                                        <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="number" step="0.01" class="forms_inputs inputs_width discount" id="discount_item'.$i.'" name="discount_item'.$i.'" placeholder="0 %" '. $readOnly .' value="0"'. $outputInvoiceData[$i-1]->unit_discount_product_op .'" /></div></td>
+                                        <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="text" class="forms_inputs inputs_width discount" id="discount_item'.$i.'" name="discount_item'.$i.'" placeholder="0 %" '. $readOnly .' value="0"'. $outputInvoiceData[$i-1]->unit_discount_product_op .'" /></div></td>
                                         <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="text" class="forms_inputs inputs_width total_item_row" id="total_item'.$i.'" name="total_item'.$i.'" placeholder="0 €" readonly value="'. $outputInvoiceData[$i-1]->total_row_output .'" /><button type="button" class="btn btn-danger btn-sm p-0 pl-1 pr-1 ml-1 delete_row_input" id="" ><i class="fa-sharp fa-solid fa-trash-can fa-2s"></i></button></div></td>
                                     </tr>';
                             }
@@ -150,7 +138,7 @@
                                 <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="text" class="forms_inputs inputs_width product_name_item_c'.$i.'" id="product_name_item'.$i.'" name="product_name_item'.$i.'" placeholder="Nombre del producto" value="' . $outputInvoiceData[$i-1]->name_product . '" /></div></td>
                                 <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="number" class="forms_inputs inputs_width amounts amount_item_c'.$i.'" id="amount_item'.$i.'" name="amount_item'.$i.'" placeholder="0" '. $readOnly .' value="'. $outputInvoiceData[$i-1]->output_units .'" /></div></td>
                                 <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="text" class="forms_inputs inputs_width price price_item_inv'.$i.'" id="price_item'.$i.'" name="price_item'.$i.'" placeholder="0 €" '. $readOnly .' value="'. $outputInvoiceData[$i-1]->unit_sales_price .'" /></div></td>
-                                <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="number" step="0.1" class="forms_inputs inputs_width discount" id="discount_item'.$i.'" name="discount_item'.$i.'" placeholder="0 %" '. $readOnly .' value="0"'. $outputInvoiceData[$i-1]->unit_discount_product_op .'" /></div></td>
+                                <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="text" class="forms_inputs inputs_width discount" id="discount_item'.$i.'" name="discount_item'.$i.'" placeholder="0 %" '. $readOnly .' value="0"'. $outputInvoiceData[$i-1]->unit_discount_product_op .'" /></div></td>
                                 <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields"><input type="text" class="forms_inputs inputs_width total_item_row" id="total_item'.$i.'" name="total_item'.$i.'" placeholder="0 €" readonly value="'. $outputInvoiceData[$i-1]->total_row_output .'" /><button type="button" class="btn btn-danger btn-sm p-0 pl-1 pr-1 ml-1 delete_row_input" id="" ><i class="fa-sharp fa-solid fa-trash-can fa-2s"></i></button></div></td>
                                     </tr>';
                             } 
@@ -165,25 +153,25 @@
                             <div colspan="1"><button type="button" class="btn btn-primary mr-5 btn_minus" id="btn_delete_product_row" name="" title="Eliminar líneas de productos"><i class="fa-sharp fa-solid fa-minus"></i></button></div>  
                             </td>
                             <td colspan="4" class="text-right">Subtotal (€)</td>
-                            <td><div class="forms_inputs_fields table_inputs_fields"><input type="text" step="0.01"class="forms_inputs inputs_width number_input" id="subtotal_input" name="subtotal_invoice" placeholder="0 €" readonly value="<?php echo $customerInvoiceData[0]->subtotal_invoice; ?>" /></div></td>
+                            <td><div class="forms_inputs_fields table_inputs_fields"><input type="text" class="forms_inputs inputs_width number_input" id="subtotal_input" name="subtotal_invoice" placeholder="0 €" readonly value="<?php echo $customerInvoiceData[0]->subtotal_invoice; ?>" /></div></td>
                         </tr> 
                         <tr>
                             <td colspan="5" class="text-right">Descuento (%)</td>
-                            <td><div class="forms_inputs_fields table_inputs_fields"><input type="text" step="0.01"class="forms_inputs inputs_width number_input" id="discount_input" name="discount_invoice" placeholder="0 %" <?php echo $readOnly; ?> value="<?php echo $customerInvoiceData[0]->discount_invoice; ?>" /></div></td>
+                            <td><div class="forms_inputs_fields table_inputs_fields"><input type="text" class="forms_inputs inputs_width number_input discount_document" id="discount_input" name="discount_invoice" placeholder="0 %" <?php echo $readOnly; ?> value="<?php echo $customerInvoiceData[0]->discount_invoice; ?>" /></div></td>
                         </tr>
                         <tr>
                             <td colspan="5" class="text-right">Subtotal con descuento (€)</td>
-                            <td><div class="forms_inputs_fields table_inputs_fields"><input type="text" step="0.01"class="forms_inputs inputs_width number_input" id="subtotal_discount_input" name="subtotal_discount_invoice" placeholder="0 €" readonly value="<?php echo $customerInvoiceData[0]->subtotal_with_discount_invoice; ?>" /></div></td>
+                            <td><div class="forms_inputs_fields table_inputs_fields"><input type="text" class="forms_inputs inputs_width number_input" id="subtotal_discount_input" name="subtotal_discount_invoice" placeholder="0 €" readonly value="<?php echo $customerInvoiceData[0]->subtotal_with_discount_invoice; ?>" /></div></td>
                         </tr>  
                         <tr>
                             <td colspan="5" class="text-right">Impuestos (21%)</td>
-                            <td><div class="forms_inputs_fields table_inputs_fields"><input type="text" step="0.01"class="forms_inputs inputs_width number_input" id="tax_input" name="tax_invoice" placeholder="0 €" readonly value="<?php echo $customerInvoiceData[0]->tax_invoice; ?>" /></div></td>
+                            <td><div class="forms_inputs_fields table_inputs_fields"><input type="text" class="forms_inputs inputs_width number_input" id="tax_input" name="tax_invoice" placeholder="0 €" readonly value="<?php echo $customerInvoiceData[0]->tax_invoice; ?>" /></div></td>
                         </tr>
                         <tr>
                             <td colspan="5" class="text-right font-weight-bold">
                                 <h4>Total (€)</h4></td>
                             <td class="total_field">
-                                <h5><div class="forms_inputs_fields table_inputs_fields font-weight-bold"><input type="number" class="forms_inputs inputs_width number_input" id="total_input" name="total_invoice" placeholder="0 €" readonly value="<?php echo $customerInvoiceData[0]->total_invoice; ?>" /></div></h5>
+                                <h5><div class="forms_inputs_fields table_inputs_fields font-weight-bold"><input type="text" class="forms_inputs inputs_width number_input" id="total_input" name="total_invoice" placeholder="0 €" readonly value="<?php echo $customerInvoiceData[0]->total_invoice; ?>" /></div></h5>
                             </td>
                         </tr>
                     </tfoot>
@@ -197,29 +185,32 @@
                         <!-- input oculto que recibirá valor de token de customer de subventana -->
         <input type="hidden" id="token_customer" name="token_customer" placeholder="token_customer Subwindow" value="<?php //echo $inputProductData[0]->token_input_product; ?>" /> 
                         <!-- input oculto que recibirá valor de token de subventana -->
-        <input type="hidden" id="tokenInputs" name="tokenInputs" placeholder="tokenInputs Subwindow" value="<?php //echo $inputProductData[0]->token_input_product; ?>" /> 
+        <input type="hidden" id="tokenOutputs" name="tokenOutputs" placeholder="tokenOutputs Subwindow" value="<?php //echo $inputProductData[0]->token_input_product; ?>" /> 
                         <!-- input oculto para recibir/capturar valor token de subventana buscador para búsqueda de productos  -->
          <input type="hidden" id="tokenProduct" placeholder="tokenProduct Subwindow. Hide" value="" />
                         <!-- input oculto que almacenará valor de atributo "id" de la fila seleccionada -->
         <input type="hidden" id="row_number_selected" placeholder="nº fila seleccionada" value="" />
                         <!-- input oculto que almacenará chequeo de respuesta ajax de la fila seleccionada -->
-        <input type="text" id="request_ajax" placeholder="request_ajax" value="false" />
+        <input type="hidden" id="request_ajax" placeholder="request_ajax" value="false" />
                        
                                                  
                                                   <!-- -------------------------- -->
 
-    <div class="btn-group p-3 ">
+    <div class="btn-group p-3 ">      
       <button type="submit" class="btn btn-primary mr-5" id="btn_invoice_product_submit" name="btn_output_product_submit"><i class="fa-solid fa-file-invoice-dollar"></i>&nbsp Facturar</button>
-      <button type="submit" class="btn btn-dark mr-5" id="btn_invoice_pdf" name="btn_invoice_pdf"><i class="fa-solid fa-file-pdf"></i>&nbsp Copia factura</button>
+      <a href="./pdf.php" target="_blank" class="btn btn-dark mr-5" id="btn_invoice_pdf"><i class="fa-solid fa-file-pdf"></i>&nbsp Copia factura</a>
       <button type="button" role="link" class="btn btn-secondary mr-5" name="exit_input_product" onClick="window.location='index.php?pages=01-newInvoice'"><i class="fa-sharp fa-solid fa-rectangle-xmark"></i>&nbsp Cerrar registro</button>    
-      
     </div>
 
                     <!-- Mensajes ocultos de validaciones y realización de operaciones -->
     <div><p class="alert alert-success text-center hide_alert" id="alert_success">Operación realizada con éxito</p></div>
 
-    <div class="text-center alert-danger rounded error_field"><p>Los campos <i><b>Cant., Precio y Desc.(%)</b></i> solo admiten caracteres numéricos.</p></div>       
+    <div class="text-center alert-danger rounded error_price_field"><p>El campo <i><b>Precio</b></i> solo admite caracteres numéricos.</p></div>
+
+    <div class="text-center alert-danger rounded error_discount_field"><p>El campo <i><b>Desc.(%)</b></i> solo admite caracteres numéricos.</p></div>
     
+    <div class="text-center alert-danger rounded error_discount_document_field"><p>El campo <i><b>Descuento (%)</b></i> solo admite caracteres numéricos.</p></div>
+
     <div class='text-center alert-danger rounded require_fields'><p class='font-weight-bold'>Los siguientes campos son obligatorios:</p><ul><li>Cliente</li><li>Ref.</li><li>Concepto</li><li>Cant.</li><li>Precio (€)</li></ul></div>
 
     <div class='text-center alert-danger rounded submit_disabled'><p class='font-weight-bold'>No se pueden realizar modificaciones de Facturas.</p><br><p>En caso de necesitar modifcaciones debe tener privilegios de superusuario.</p></div>
@@ -268,16 +259,3 @@
 
 </form>           
 
-<?php 
-                //  LANZAR MÉTODO PARA GENERAR PDF
-             //   $salida = SalesController::generatePdf();
-  
-
-
-          
-
-         
-
-   
-
-?>

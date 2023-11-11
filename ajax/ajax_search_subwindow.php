@@ -2,11 +2,13 @@
     require_once "../controllers/01-customers.controller.php";
     require_once "../controllers/03-inventory.controller.php";
     require_once "../controllers/05-products_inputs_inventory.controller.php"; 
+    require_once "../controllers/06-sales.controller.php";  
     require_once "../controllers/validations_general.controller.php";
 
     require_once "../models/01-customers.model.php";
     require_once "../models/03-inventory.model.php";
     require_once "../models/04-products_inputs_inventory.model.php";
+    require_once "../models/05-sales.model.php";    // todo
 
     /**
      * Clase que enviará via AJAX registros de la base de datos al documento HTML, pasando previamente por ficheros .js
@@ -38,6 +40,13 @@
                         break;
                     case "id":
                         $resultData = CustomerController::ctrToList($table, $key, $value);
+                        break;
+                    case "token_customer_invoice":
+                        $dataCustomerInvoice = SalesController::ctrToListOutputsProducts($table, $key, $value);                                   // Se lanza método para obtener datos de tabla sql customer_invoice
+                        $outputNumber = $dataCustomerInvoice[0]->output_number;                                                                 // De la tabla anterior se obtiene el número de movimiento (output_number)
+                        $dataOutputInvoice = SalesController::ctrToListOutputsProducts("outputs_products", "output_number", $outputNumber);     // Se lanza método para obtener datos de tabla sql outputs_product con clausula WHERE $outputNumber
+                        
+                        $resultData = array ($dataCustomerInvoice, $dataOutputInvoice);                                                       // Se genera array con datos en otros 2 arrays para enviarlo como respuesta a getRegisterOutputsProductsAjax()
                         break;
                     default:
                        echo "No se ha recibido campo ni valor a buscar";
@@ -94,6 +103,14 @@
     else if(isset($_POST["idCustomer"]) && !empty($_POST["idCustomer"])) {
         $searchProduct3 = new Search();
         $searchProduct3->toListDb("customers", "id", $_POST["idCustomer"]);
+    }
+
+     /**
+     * Objeto que recibirá datos del formulario AJAX generado en "11.inventory/products_inputs.js"
+     */
+    else if(isset($_POST["tokenOutputs"]) && !empty($_POST["tokenOutputs"])) {
+        $searchProduct4 = new Search();
+        $searchProduct4->toListDb("customer_invoices", "token_customer_invoice", $_POST["tokenOutputs"]);
     }
 
     

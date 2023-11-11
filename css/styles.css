@@ -4,12 +4,12 @@
 ------------------------------*/
 
     --backgroundColor: #d7d7d7;
-    
+                                    --pruebas: rgb(69, 69, 69);
     --buttons: #007bff; 
     --subButtons: #7bff;
     --carbonBlack: #1c1c1c;
     --formsIconsBackgroundColor: #E9ECEF;
-    --headerFotter: #183153;
+    --headerFotter: #173054;
 }
 
      /* GENERAL STYLES
@@ -182,20 +182,26 @@ select {
  header {
     background-color: var(--headerFotter);
     margin-bottom: 50px;
+    display: flex;
+    justify-content: space-between;
  }
 
  header h1 {
     color: #ffffff;
+    align-self: self-end;
+    font-family: 'Edu TAS Beginner', cursive;
+    font-weight: 600;
+ }
+
+ .logo_header {
+    width: 100px;   
  }
 
  .user_name_header {
     font-size: 14px;
     color: #ffffff;
-    float: right;
-    position: relative;   
-    top: -42px;
-    right: 15%;
- }
+    align-self: self-end;
+}
 
  .user_name_header ul {
     display: -webkit-box;
@@ -452,7 +458,17 @@ footer h3 {
     display: none;
 }
 
+.error_price_field {
+    display: none;
+}
 
+.error_discount_field {
+    display: none;
+}
+
+.error_discount_document_field {
+    display: none;
+}
 
 
      /* 03.INVENTORY "productsInputs.template.php" (shared with 04.SALES "newInvoice.temmplate.php")

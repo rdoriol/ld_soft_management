@@ -9,7 +9,7 @@
          /**
          * Método creará registro con entrada completa (con resultados totales )de todos los productos
          */
-        static public function mdlCreateCustomerInvoice($table, $data) {                      // todo DONE IT
+        static public function mdlCreateCustomerInvoice($table, $data) {                     
             $check = "false";
             try {
                 $sql = "INSERT INTO $table VALUES (null, :token_customer_invoice, :id_customer_ci, :output_number, :subtotal_invoice, :discount_invoice, :subtotal_with_discount, :tax_invoice, :total_invoice, null, null)";
@@ -42,7 +42,7 @@
          * @param $table de tipo string, $data array con datos obtenidos de un formulario.
          * @return $check de tipo string.
          */
-        static public function mdlCreateProductOutput($table, $data) {             // todo DONE IT
+        static public function mdlCreateProductOutput($table, $data) {             
             $check = "false";
             $sql = "INSERT INTO $table VALUES (null, :token, :id_customer_invoice, :output_number, :id_customer, :id_product, :product_concept, :output_units, :unit_sale_price, :unit_discount_product, :total_row_output, null)";
 
@@ -84,7 +84,7 @@
          * @param string $table
          * @return int object
          */
-        static public function mdltoListOutputProducts($table, $key) {            //todo DONE IT
+        static public function mdltoListOutputProducts($table, $key) {          
             try {
                 $sql = "SELECT MAX($key) AS '$key' FROM $table";
                
@@ -104,7 +104,7 @@
          * @param string $table, $key, $null
          * @return array de objetos @data
          */
-        static public function mdlToListOutputsProducts($table, $key=null, $value=null) {                //todo  DEVELOPING
+        static public function mdlToListOutputsProducts($table, $key=null, $value=null) {              
             $sql = "";
             try {
             if($key == null) {                                                  // Consulta para listar tabla completa de customer_invoices
@@ -117,7 +117,7 @@
                     $sql = "SELECT op.*, DATE_FORMAT(op.created_date_output, '%d/%m/%Y') AS created_date_output, p.*, DATE_FORMAT(p.created_date_product, '%d/%m/%Y') AS created_date_product
                             FROM outputs_products op
                             INNER JOIN products p ON p.id_product = op.id_product_op
-                            WHERE $key LIKE '%$value%'
+                            WHERE $key = '$value'
                             ORDER BY $key ASC;";                                                           
                 }
                 else {                                                          // Consulta para listar datos de facturas concretas de la tabla customer_invoices

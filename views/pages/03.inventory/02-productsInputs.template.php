@@ -118,19 +118,19 @@
                           <div colspan="1"><button type="button" class="btn btn-primary mr-5 btn_minus" id="btn_delete_product_row" name="" title="Eliminar líneas de productos"><i class="fa-sharp fa-solid fa-minus"></i></button></div>  
                         </td>
                         <td colspan="4" class="text-right">Subtotal (€)</td>
-                        <td><div class="forms_inputs_fields table_inputs_fields"><input type="text" step="0.01"class="forms_inputs inputs_width number_input" id="subtotal_input" name="subtotal_input" placeholder="0 €" readonly value="" /></div></td>
+                        <td><div class="forms_inputs_fields table_inputs_fields"><input type="text" class="forms_inputs inputs_width number_input" id="subtotal_input" name="subtotal_input" placeholder="0 €" readonly value="" /></div></td>
                     </tr> 
                     <tr>
                         <td colspan="5" class="text-right">Descuento (%)</td>
-                        <td><div class="forms_inputs_fields table_inputs_fields"><input type="text" step="0.01"class="forms_inputs inputs_width number_input" id="discount_input" name="discount_input" placeholder="0 %" value="" /></div></td>
+                        <td><div class="forms_inputs_fields table_inputs_fields"><input type="text" class="forms_inputs inputs_width number_input discount_document" id="discount_input" name="discount_input" placeholder="0 %" value="" /></div></td>
                     </tr>
                     <tr>
                         <td colspan="5" class="text-right">Subtotal con descuento (€)</td>
-                        <td><div class="forms_inputs_fields table_inputs_fields"><input type="text" step="0.01"class="forms_inputs inputs_width number_input" id="subtotal_discount_input" name="subtotal_discount_input" placeholder="0 €" readonly value="" /></div></td>
+                        <td><div class="forms_inputs_fields table_inputs_fields"><input type="text" class="forms_inputs inputs_width number_input" id="subtotal_discount_input" name="subtotal_discount_input" placeholder="0 €" readonly value="" /></div></td>
                     </tr>  
                     <tr>
                         <td colspan="5" class="text-right">Impuestos (21%)</td>
-                        <td><div class="forms_inputs_fields table_inputs_fields"><input type="text" step="0.01"class="forms_inputs inputs_width number_input" id="tax_input" name="tax_input" placeholder="0 €" readonly value="" /></div></td>
+                        <td><div class="forms_inputs_fields table_inputs_fields"><input type="text" class="forms_inputs inputs_width number_input" id="tax_input" name="tax_input" placeholder="0 €" readonly value="" /></div></td>
                     </tr>
                     <tr>
                         <td colspan="5" class="text-right font-weight-bold">
@@ -164,7 +164,11 @@
                     <!-- Mensajes ocultos de validaciones y realización de operaciones -->
     <div><p class="alert alert-success text-center hide_alert" id="alert_success">Operación realizada con éxito</p></div>
 
-    <div class="text-center alert-danger rounded error_field"><p>Los campos <i><b>Cant., Precio y Desc.(%)</b></i> solo admiten caracteres numéricos.</p></div>
+    <div class="text-center alert-danger rounded error_price_field"><p>El campo <i><b>Precio</b></i> solo admite caracteres numéricos.</p></div>
+
+    <div class="text-center alert-danger rounded error_discount_field"><p>El campo <i><b>Desc.(%)</b></i> solo admite caracteres numéricos.</p></div>
+
+    <div class="text-center alert-danger rounded error_discount_document_field"><p>El campo <i><b>Descuento (%)</b></i> solo admite caracteres numéricos.</p></div>
 
     <div class="text-center alert-danger rounded error_amount_field"><p>El campo <i><b>Cant.</b></i> solo admiten caracteres numéricos sin decimales.</p></div>
     

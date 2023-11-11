@@ -2,6 +2,7 @@
     /**
     * Fichero principal que renderizará por pantalla la plantilla base junto con las distintas páginas.
     */
+    //require('./fpdf/fpdf.php');
 
     require_once "./controllers/baseTemplate.controller.php";
     require_once "./controllers/validations_general.controller.php";
@@ -11,10 +12,7 @@
     require_once "./controllers/04-inventory_validations.controller.php";
     require_once "./controllers/05-products_inputs_inventory.controller.php";
     require_once "./controllers/06-sales.controller.php";
-    require_once "./controllers/10-users.controller.php";
-
-    
-    
+    require_once "./controllers/10-users.controller.php";    
 
     require_once "./models/01-customers.model.php";
     require_once "./models/02-suppliers.model.php";

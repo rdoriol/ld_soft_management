@@ -1,16 +1,8 @@
 <?php
-   // include_once "./vendor/autoload.php"; 
-    //use Dompdf\dompdf;
-
-    //require('./vendor/autoload.php');
-     require('./fpdf/fpdf.php');
- 
-
-    
     /**
      * Clase que implementará métodos para realizar CRUD recibiendo datos de la Vista y enviándolos al Modelo.
      */
-    class SalesController extends FPDF { 
+    class SalesController  { 
 
          /**
          * Método que recibirá datos del formulario Entrada Productos y los enviará a la base de datos mediante método del Modelo.
@@ -114,6 +106,8 @@
                                 }
                             }
                         }
+                            // Se lanza página externa para generar pdf de la factura 
+                        echo "<script>window.open('./pdf.php');</script>"; 
                     }
                     else {
                         echo "<div class='text-center alert-danger rounded'><p class='font-weight-bold'>No grabado.</p><p class='font-weight-bold'>Los siguientes campos son obligatorios:</p><ul><li>Cliente</li><li>Ref.</li><li>Cant.</li><li>Precio (€).</li></ul></div>";
@@ -131,11 +125,17 @@
          * @param string $table
          * @return int $OutputNumber
          */
-        static public function ctrGenerateOutPutNumber($table) {
+        static public function ctrGenerateOutPutNumber($table, $pdf=null) {
             try {
                 $lastOutputputNumber =  SalesModel::mdltoListOutputProducts($table, "output_number");       
-                $OutputNumber = $lastOutputputNumber->output_number + 1;     // Se suma uno al último número de factura exsitente en la base de datos
-                return $OutputNumber;
+
+                if($pdf == null) {      // Si la llamada al método proviene del archivo "01-newInvoice.php"
+                    $OutputNumber = $lastOutputputNumber->output_number + 1;     // Se suma uno al último número de factura exsitente en la base de datos
+                    return $OutputNumber;
+                }
+                else {
+                    return $lastOutputputNumber->output_number;
+                }
             }
             catch(PDOException $ex) {
                 echo "Error ctrGenerateOutPutNumber(). Error: " . $ex->getMessage();
@@ -169,46 +169,7 @@
                 echo "Error interno ctrToListOutputsProducts(). Error: " . $ex->getMessage();
             }
         }
-
-        /**
-         * Método que creará archivos pdf
-         */
-        static public function generatePdf() {
-            try {
-                if(isset($_POST["btn_invoice_pdf"])) {
-
-                    $html='<h1>Prueba Roberto</h1>';    /*
-                    $dompdf = new Dompdf();
-                    $options = $dompdf->getOptions();
-                    $options->set(array('isRemoteEnabled'=>true));
-                    //$options->setDefaultFont('Courier');
-                    $dompdf->setOptions($options);
-                    $dompdf->set_option('isHtml5ParserEnabled', true);
-                    $dompdf->set_paper("A4", "portrait"); 
-                    $dompdf->load_html(utf8_decode($html));
-                    // Creamos una instancia a la clase
-                    //echo $html; exit;
-                    $dompdf->render();
-                    //$pdf = $dompdf->output();
-                    $dompdf->stream('Factura.pdf');
-                    exit();
-
-                    //header("Content-type: application/pdf");
-                    //header("Content-Disposition: inline; filename=Factura.pdf");
-                   // echo $dompdf->output(); */
-
-                  
-
-                }
-                
-            }
-            catch(PDOException $ex) {
-                echo "Error interno generatePdf(). Error: " . $ex->getMessage();
-            }
-        }   
+}   
 
 
-    }
 
-
-  

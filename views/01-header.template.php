@@ -1,4 +1,5 @@
 <header class="" id="">
+        <img class="logo_header" src="./images/logo/logo_min.png" title="logo"/>
         <h1 class="text-center">LD SoftGestión</h1>
         <div class="user_name_header" title="Cerrar Sesión">
                 <ul>

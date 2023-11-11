@@ -35,7 +35,8 @@ footer {
 }
 
 #customers_lists_table .table_search:hover, #supplier_lists_table .table_search:hover, 
-#products_lists_table .table_search:hover, #inputs_products_lists_table .table_search:hover {
+#products_lists_table .table_search:hover, #inputs_products_lists_table .table_search:hover,
+#invoice_history_lists_table .table_search:hover {
     cursor: pointer;  
     background-color: #007BFF;   
     color: #ffffff;

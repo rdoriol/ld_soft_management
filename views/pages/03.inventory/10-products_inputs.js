@@ -152,11 +152,11 @@ function calcRow() {
     var discount = parseFloat($("#discount_item" + rowNumberValue).val());  
                                                                                             
         // Bloque para validaciones de los valores obtenidos
-    var checkAmount = validateFieldsInputs($("#amount_item" + rowNumberValue), amount);
+    // var checkAmount = validateFieldsInputs($("#amount_item" + rowNumberValue), amount);
     var checkDiscount = validateFieldsInputs($("#discount_item" + rowNumberValue), discount); 
     var checkPriceItem = validateFieldsInputs($("#price_item" + rowNumberValue), priceItem);     
-                                                                        
-    if(checkAmount == true && checkPriceItem == true && checkDiscount == true) {   
+                                                 console.log("amount: " + 5 + "\nprice: " + checkPriceItem + "\ndiscount: " + checkDiscount);                                    
+    if(/*checkAmount == true && */checkPriceItem == true && checkDiscount == true) {   
         
             // Se calcula el importe total de la fila 
         result += amount * priceItem / (1 + discount/100);                                          
@@ -210,34 +210,49 @@ function calcTotalInputsProducts() {
     var subtotal = $("#subtotal_input").val();
     var inputDiscount = $("#discount_input").val();
 
-    validateFieldsInputs($("#discount_input"), inputDiscount);     // Se valida valor obtenido del campo Descuento (%) (para mostrar mensajes de error)
-
-    var subtotalWithDiscount = parseFloat(subtotal / (1 + inputDiscount/100));  // Se calcula subtotal con descuento
-    $("#subtotal_discount_input").val( (Math.round(subtotalWithDiscount * 100) / 100).toFixed(2) );
+    var discountDocument = validateFieldsInputs($("#discount_input"), inputDiscount);     // Se valida valor obtenido del campo Descuento (%) (para mostrar mensajes de error)
     
-    var tax = (21/100) * parseFloat(subtotalWithDiscount);      // Se calculan impuestos
-    $("#tax_input").val( (Math.round(tax * 100) / 100).toFixed(2) );
+    if(discountDocument == false) { //todo
+            // Se desactivan botones submit de 02-productInput y 01-newInvoice
+        $("#btn_input_product_submit").attr("type", "button");              
+        $("#btn_invoice_product_submit").attr("type", "button");
 
-    var totalInputProduct = parseFloat(subtotalWithDiscount) + parseFloat(tax);    // Se calcula total del documento
-    $("#total_input").val( (Math.round(totalInputProduct * 100) / 100).toFixed(2) );
-
-    if($("#btn_input_product_submit").attr("type") == "submit") {                       // Si después de validaciones en otros métodos el botón de grabar sigue siendo submit
+        $("#subtotal_discount_input").val(0);
+        $("#tax_input").val(0);
+        $("#total_input").val(0);
         
-        if(isNaN(subtotalWithDiscount) || isNaN(tax) || isNaN(totalInputProduct)) {     // Se comprueba que todos los valores obtenidos sean números
-            $("#subtotal_discount_input").val(0 );
-            $("#tax_input").val( 0);
-                                                                                    
-                // Se desactivan botones submit de 02-productInput y 01-newInvoice
-            $("#btn_input_product_submit").attr("type", "button");              
-            $("#btn_invoice_product_submit").attr("type", "button");
-        }
-        else {
-                // Se desactivan botones submit de 02-productInput y 01-newInvoice
-            $("#btn_input_product_submit").attr("type", "submit");              
-            $("#btn_invoice_product_submit").attr("type", "submit");            
-        }
-    }  
-    
+    }
+    else {
+            // Se desactivan botones submit de 02-productInput y 01-newInvoice
+         $("#btn_input_product_submit").attr("type", "submit");              
+         $("#btn_invoice_product_submit").attr("type", "submit");     
+
+        var subtotalWithDiscount = parseFloat(subtotal / (1 + inputDiscount/100));  // Se calcula subtotal con descuento
+        $("#subtotal_discount_input").val( (Math.round(subtotalWithDiscount * 100) / 100).toFixed(2) );
+        
+        var tax = (21/100) * parseFloat(subtotalWithDiscount);      // Se calculan impuestos
+        $("#tax_input").val( (Math.round(tax * 100) / 100).toFixed(2) );
+
+        var totalInputProduct = parseFloat(subtotalWithDiscount) + parseFloat(tax);    // Se calcula total del documento
+        $("#total_input").val( (Math.round(totalInputProduct * 100) / 100).toFixed(2) );
+
+        if($("#btn_input_product_submit").attr("type") == "submit") {                       // Si después de validaciones en otros métodos el botón de grabar sigue siendo submit
+            
+            if(isNaN(subtotalWithDiscount) || isNaN(tax) || isNaN(totalInputProduct)) {     // Se comprueba que todos los valores obtenidos sean números
+                $("#subtotal_discount_input").val(0 );
+                $("#tax_input").val( 0);
+                                                                                        
+                    // Se desactivan botones submit de 02-productInput y 01-newInvoice
+                $("#btn_input_product_submit").attr("type", "button");              
+                $("#btn_invoice_product_submit").attr("type", "button");
+            }
+            else {
+                    // Se desactivan botones submit de 02-productInput y 01-newInvoice
+                $("#btn_input_product_submit").attr("type", "submit");              
+                $("#btn_invoice_product_submit").attr("type", "submit");            
+            }
+        }                           
+    }
 }
 
 /**
@@ -247,18 +262,40 @@ function calcTotalInputsProducts() {
  * @returns boolean chekValidate
  */
 function validateFieldsInputs(selector, value) {
-    var checkValidate = false;
-  
+    var checkValidate = false;   
 
-    if(isNaN(value)) { 
-        checkKo(selector);                                  
-        $(".error_field").css("display", "block");
+    if(selector.hasClass("price")) {               
+        if(isNaN(value)) {    
+            checkKo(selector);                                  
+            $(".error_price_field").css("display", "block");
+        }
+        else {
+            cleanCheck(selector);
+            $(".error_price_field").css("display", "none");
+            checkValidate = true;                                      
+        }
     }
-
-    else {
-        cleanCheck(selector);
-        $(".error_field").css("display", "none"); 
-        checkValidate = true;
+    else if(selector.hasClass("discount")) {           
+        if(isNaN(value)) { 
+            checkKo(selector);                                  
+            $(".error_discount_field").css("display", "block");
+        }
+        else {
+            cleanCheck(selector);
+            $(".error_discount_field").css("display", "none");
+            checkValidate = true;
+        }                       
+    }  
+    else if(selector.hasClass("discount_document")) {        
+        if(isNaN(value)) { 
+            checkKo(selector);                                  
+            $(".error_discount_document_field").css("display", "block");
+        }
+        else {
+            cleanCheck(selector);
+            $(".error_discount_document_field").css("display", "none");
+            checkValidate = true;
+        }   
     }
     return checkValidate;
 }

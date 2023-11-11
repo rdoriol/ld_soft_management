@@ -25,6 +25,11 @@
         ---------------------->
     <style>@import url("./css/styles.css");</style>
 
+    <!-- GOOGLE FONTS (Edu TAS Beginner)
+        ---------------------->
+
+    <style>@import url('https://fonts.googleapis.com/css2?family=Edu+TAS+Beginner:wght@500&display=swap');</style>
+
     <!-- PLUGINS JS                                  
         ---------------------->
                 <!-- BOOTSTRAP - jQuery library -->
@@ -93,7 +98,7 @@
               {
                 include "pages/03.inventory/" . $page . ".template.php";
               }
-              else if($page == "01-newInvoice" || $page == "02-invoicesLists"|| $page == "04-invoicePopUpSearch") 
+              else if($page == "01-newInvoice" || $page == "02-invoicesLists"|| $page == "04-invoicePopUpSearch" || $page == "06-invoiceHistoryPopUp") 
               {
                 include "pages/04.sales/" . $page . ".template.php";
               }
@@ -168,8 +173,9 @@
     <script src="./views/pages/03.inventory/11-products_inputs_hist_subwindow.js"></script>      
     <script src="./views/pages/03.inventory/12-inventory_prints.js"></script>
 
-    <script src="./views/pages/04.sales/05-invoice.js"></script>
-    <script src="./views/pages/04.sales/06-invoice_print.js"></script>
+    <script src="./views/pages/04.sales/07-invoice.js"></script>
+    <script src="./views/pages/04.sales/08-invoiceHistory.js"></script>
+    <script src="./views/pages/04.sales/09-invoice_print.js"></script>
 
     <script src="./views/pages/09.login/02-login.js"></script>
 

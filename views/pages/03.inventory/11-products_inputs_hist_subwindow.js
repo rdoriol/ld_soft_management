@@ -47,7 +47,7 @@ function getRegisterInputsProductsAjax() {
         contentType: false,
         processData: false,
         dataType: "json",
-        success: function(request){           
+        success: function(request){          
                     if(request) { 
 
                                 /* Bloque para mostrar datos de un movimiento de entrada concreto en 02-productsInputs.template.php (consulta recibida de la tabla sql supplier_invoices)
@@ -77,6 +77,7 @@ function getRegisterInputsProductsAjax() {
                                 // Se bloquean todos los campos para que no se puedan realizar modificaciones. Los movimientos de entradas no se pueden modificar ni eliminar
                         $("#discount_input").prop("readonly", "true");
                         $("#father_select_supplier").prop("disabled", "true");
+                        $(".search_icon").remove();
                         for(var x = 0; x < 10; x++) {
                             $("#id_product_item" + (x+1)).prop("readonly", "true");
                             $("#product_name_item" + (x+1)).prop("readonly", "true");
