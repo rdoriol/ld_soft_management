@@ -3,8 +3,7 @@
     /* COLORES PERSONALIZADOS
 ------------------------------*/
 
-    --backgroundColor: #d7d7d7;
-                                    --pruebas: rgb(69, 69, 69);
+    --backgroundColor: #d7d7d7;                                   
     --buttons: #007bff; 
     --subButtons: #7bff;
     --carbonBlack: #1c1c1c;
@@ -60,6 +59,8 @@ select {
 .forms_flex {
     display: flex;
     flex-wrap: wrap;
+    column-gap: 50px; /* puede afectar a resto de pa´ginas*/
+    row-gap: 20px;
 }
 
 .forms_fields {
@@ -73,6 +74,7 @@ select {
     padding-left: 30px;
     font-weight: bold;
     font-size: 14px;
+    text-align: left;
 }
 .forms_inputs_fields {
     display: flex;
@@ -125,10 +127,14 @@ select {
 }
 
 .forms_buttons:hover {
-   /* background-color: gold;*/
     color:#000000;
     opacity: 0.5;
 }
+
+.btn-group {
+    margin-top: 50px !important;
+    margin-bottom: 50px !important;
+} 
 
             /* General Options Bar
             -------------- */
@@ -184,23 +190,27 @@ select {
     margin-bottom: 50px;
     display: flex;
     justify-content: space-between;
- }
-
- header h1 {
-    color: #ffffff;
-    align-self: self-end;
-    font-family: 'Edu TAS Beginner', cursive;
-    font-weight: 600;
+    width: 100%;
  }
 
  .logo_header {
-    width: 100px;   
+    width: 100px;    
  }
+
+ .logo_header_inline {
+    display: none;
+ }
+
+ .title_header {
+    height: 60px;
+    align-self: center;  
+ } 
 
  .user_name_header {
     font-size: 14px;
     color: #ffffff;
-    align-self: self-end;
+    align-self: end;   
+    width: 12%;
 }
 
  .user_name_header ul {
@@ -212,7 +222,6 @@ select {
     padding-right: 10px;
  }
 
-
  #user_name:hover, .user_name_header:hover {
     font-style: italic;
     cursor: pointer;
@@ -223,12 +232,37 @@ select {
     }    
     #user_name {
         display: none;
-     }
+    }
 }
 
  #session_close {
     display: none;
  }
+
+     /* Responsive Web Disegn Header
+    -------------------------*/
+
+@media (max-width: 880px) {
+
+    header {
+        display: block;
+    }
+
+    .logo_header {
+        display: none;
+    }
+    
+    .title_header{
+        display: none;
+    } 
+
+    .logo_header_inline {
+        display: block;
+        width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+    }    
+}
 
 
 
@@ -295,8 +329,6 @@ select {
     background-color: var(--buttons);    
     color: #ffffff;
     border-radius: none;
-    /*text-decoration: underline;*/
-   
 }
 
 .li_active_button:hover, .li_active_page:hover {
@@ -306,7 +338,6 @@ select {
 
 .link_subButton {
     font-weight: bold;
-    
 }
 
 .link_subButton_active {
@@ -314,8 +345,6 @@ select {
     font-weight: bold;
     width: 130px;
     padding: 5px;
-    /*border-radius: 3px;*/   
-   
 }
 
 .li_active:hover, .link_subButton_active:hover {
@@ -324,6 +353,9 @@ select {
     text-decoration: none;
 }
 
+.hidden_option_menu {
+    display: none;
+}
 
             /*Responsive Web Design - MAIN NAVEGATION BAR */
 
@@ -331,7 +363,7 @@ select {
     display: none;
 }
 
-@media (max-width:700px) {
+@media (max-width: 880px) {
 
     #main_nav {
         display: none
@@ -340,18 +372,20 @@ select {
     .mobile_menu {
         display: block;
         top: 0;
-        right: 0;
+        left: 0;
         position: fixed;
+    }
+
+    .item_main_container_section {
+        width: 100%;   
     }
 
 }
 
      /* SECTION CONTAINER "base.template.php"
 ---------------------------------------------*/
-#main_container_section {
-   
-    overflow-y: auto;
-  
+#main_container_section {   
+    overflow-y: auto;  
 }
 
      /* FOOTER "03-footer.template.php"
@@ -372,23 +406,125 @@ footer h3 {
      /* 01.CUSTOMERS "newCustomer.template.php"
 -----------------------------------------------*/
 
+.box_1 {
+    display: flex;      
+    padding: 50px;
+    justify-content: center  
+}
+
+.box_1_2 {
+    display: flex;
+    column-gap: 10%;
+    row-gap: 30%   
+}
+
+.flex_box {
+    margin-left: 10%;
+}
+
+.input_ids {
+    width: 70%;
+}
+
 #radio_forms_fields {
-    border: 1px solid #000000;
-    border-radius: 5px;
+   /* border: 1px solid #000000;
+    border-radius: 5px; */
     width: 240px;
 }
 
 #radio_forms_fields > label {
     text-align: center;
     width: 100%;  
+    margin-bottom: 2%;
+    
 }
 #radio_forms_fields .forms_label {
     font-weight: 400;
 }
 
+.input_name {
+    width: 536px;
+}
+
+.input_address {
+    width: 532px;
+}
+
+.input_nif {
+    width: 227px;
+}
+
+.input_town {
+    width: 227px;
+}
+
+.input_country {
+    width: 229px;
+}
+
+.input_phone {
+    width: 229px;
+}
+
+.input_email {
+    width: 534px;
+}
+
+.input_contact_person {
+    width: 836px;
+}
+
 .hide_alert {
     display: none;
 }
+
+/* Responsive Web Design newInvoice */
+
+@media (max-width: 1020px) {
+
+    
+    .input_town, .input_name, .input_address, .input_nif, .input_country, .input_phone,
+    .input_email, .contact_person {
+       
+    }
+    .input_contact_person {
+        width: 531px;
+    }
+
+}   
+
+@media (max-width: 1020px) {
+    
+    .flex_box {
+        margin-left: 10%;
+    }
+}
+
+@media (max-width: 991px) {
+   
+    .box_1_2 {
+        column-gap: 0%;
+    }
+}
+
+@media (max-width: 767px) {
+    
+    .flex_box {
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 715px) {
+    
+    .input_town, .input_name, .input_address, .input_nif, .input_country, .input_phone,
+    .input_email, .input_contact_person, .input_postal_code, .input_province {
+        width: 357px;
+    }
+
+    .flex_box {
+        margin-left: 0;
+    }
+ }
 
 
      /* 01.CUSTOMERS "customerList.template.php"

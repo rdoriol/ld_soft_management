@@ -6,7 +6,7 @@
     if((isset($_GET["token"]) && !empty($_GET["token"])) /*|| (isset($_POST["tokenProduct"]) && !empty($_POST["tokenProduct"]))*/) {                                    
         
         $customerInvoiceData = SalesController::ctrToListOutputsProducts("customer_invoices", "token_customer_invoice", $_GET["token"]);     // Se llama a función para leer datos de la tabla "customer_invoices"      
-        $outputInvoiceData = SalesController::ctrToListOutputsProducts("outputs_products", "id_customer_invoice ", $customerInvoiceData[0]->id_customer_invoice );    // Se llama a función para leer datos de la tabla "outputsproducts"      
+        $outputInvoiceData = SalesController::ctrToListOutputsProducts("outputs_products", "op.id_customer_invoice ", $customerInvoiceData[0]->id_customer_invoice );    // Se llama a función para leer datos de la tabla "outputsproducts"      
         $readOnly = "readonly"; // variable que bloqueará todos los campos cuando se consulte una factura ya existente. (Las facturas no se pueden editar ni eliminar)
     }
      // script javascript para lanzar ventana modal confirmando actualizaciones o eliminaciones.
@@ -46,7 +46,7 @@
                                        
          
   <div class="document mt-5" id="invoice">                                <!---------------------------- DIV INVOICE --------------------------------> 
-        <div class="col-xs-10 ">
+        <div class="col-xs-10">
             <h1>Factura</h1>
         </div>
         <hr>

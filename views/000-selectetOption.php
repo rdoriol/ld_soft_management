@@ -1,22 +1,58 @@
 <?php
         //array asociativo para marcar fondo en amarillo de los submenús de la barra de navegación lateral
+    
+    $active = "link_subButton_active";  // Variable con cadena de texto que corresponde a una clase que se añadirá a etiqueta del subbutón para que tome propiedades css (background-color yellow)
 
-    $optionsNav = array("01-newCustomer"=> $newCustomer."='';", "02-customersList"=> $customersList, 
-                        "01-newSupplier"=> $newSupplier, "02-suppliersList"=> $suppliersList,
-                        "01-newProduct"=> $newProduct, "02-productsInputs"=> $productsInputs, "03-productsList"=> $productsList,
-                        "01-newInvoice"=> $newInvoice, "02-invoicesLists"=> $invoicesLists,
-                        "01-newEmployee"=> $newEmployee, "02-employeeFile"=> $employeeFile, "03-employeesList"=> $employeesList,
-                        "06-home" => $home
-                        );
+    if(isset($_GET["pages"])) {
+            
+        $page = $_GET["pages"]; // Se almacena página activa        
+    
+        switch ($page) {
+            case "01-newCustomer":
+                $newCustomer = $active;
+                break;
+            case "02-customersList":
+                $customersList = $active;
+                break;
+            case "01-newSupplier":
+                $newSupplier = $active;
+                break;
+            case "02-suppliersList":
+                $suppliersList = $active;
+                break;
+            case "01-newProduct":
+                $newProduct = $active;
+                break;
+            case "02-productsInputs":
+                $productsInputs = $active;
+                break;
+            case "03-productsList":
+                $productsList = $active;
+                break;
+            case "01-newInvoice":
+                $newInvoice = $active;
+                break;
+            case "02-invoicesLists":
+                $invoicesLists = $active;
+                break;
+            case "01-newEmployee":
+                $newEmployee = $active;
+                break;           
+            case "02-employeesList":
+                $employeesList = $active;
+                break;
+            case "06-home":
+                $home = "li_active_button"; // Botón inicio, diferente al resto
+                break;           
+            default:
+                return;
+        }
 
-    foreach($optionsNav as $key=> $value) { 
-        if(isset($_GET["pages"])){
-            if($_GET["pages"] == $key) {                
-                $value = "link_subButton_active";
-           
-            }            
-        }  
-    }  echo $newCustomer;
 
 
-?>
+
+
+
+
+
+    }

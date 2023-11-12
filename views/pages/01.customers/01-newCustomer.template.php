@@ -9,24 +9,21 @@
         // Condición para marcar opción radio ("Particular"/"Empresa") de cliente concreto. 
       if($customerData[0]->customer_type == "Particular") $particularCustomer = "checked"; else $privateCustomer = "checked";
     }
-
-     // script javascript para lanzar ventana modal confirmando actualizaciones o eliminaciones.
-    echo "<script>
+      
+?>
+<script>  // script javascript para lanzar ventana modal confirmando éxito de operaciones.
     if(window.sessionStorage.getItem('modalAlert') == 'true') {
       $(function(){ 
         $('#success_modal').modal('show');
       });
       window.sessionStorage.setItem('modalAlert', 'false');
     }
-  </script>"; 
-      
-?>
-
+  </script>
 
 <h2 class="li_active_page rounded">Ficha Cliente</h2>
 
 <form class="general_forms" id="new_customer_form" action="<?php $_SERVER['REQUEST_URI']; ?>" method="post" onsubmit= "">
-  <h4 class="forms_subtitle rounded">Crear | Editar | Eliminar</h4>
+  <h4 class="forms_subtitle rounded">Crear | Modificar | Eliminar</h4>
     
          
   <ul class="d-flex justify-content-first">
@@ -34,15 +31,15 @@
     <li><button type="button" class="print_bar m-1 alert-info rounded" id="print"><i class="fa-solid fa-print"></i>&nbspImprimir</button></li>
   </ul>
                                                                                                                                                                <div id="printCustomer">                        
-  <fieldset class="d-flex justify-content-around"> <!-- CAMBIAR A ESTILO PROPIO CON CSS flex personalizado -->
-    <div class="forms_flex">
+  <fieldset class="d-flex99 justify-content-around99 box_1"> 
+    <div class="forms_flex99 box_1_2">
       <div class="forms_fields">
         <label class="forms_label" for="customer_id">Nº Cliente</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-list-ol forms_icons"></i>
-          <input type="text" class="forms_inputs" id="customer_id" name="customer_id" placeholder="auto" disabled value="<?php echo $customerData[0]->id ?>" />
+          <input type="text" class="forms_inputs input_ids" id="customer_id" name="customer_id" placeholder="auto" disabled value="<?php echo $customerData[0]->id ?>" />
         </div>      
-    </div>
+      </div>
 
     <div class="forms_fields" id="radio_forms_fields">
       <label class="forms_label" style="font-weight:600;">Tipo cliente</label>
@@ -62,19 +59,19 @@
         <label class="forms_label" for="created_date">Fecha registro</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-calendar-days forms_icons"></i>
-          <input type="text" class="forms_inputs" id="created_date" name="created_date" placeholder="" disabled value="<?php echo date("d/m/Y"); ?> <?php echo $customerData[0]->created_date ?>" />
+          <input type="text" class="forms_inputs" id="created_date" name="created_date" placeholder="auto" disabled value="<?php echo $customerData[0]->created_date ?>" />
         </div>      
     </div>
   </fieldset>
-
-  <fieldset class="">   
+  <hr>
+  <fieldset class="flex_box">   
 
     <div class="forms_flex">
       <div class="forms_fields">
         <label class="forms_label" for="customer_name">Nombre / Razón Social</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-user forms_icons"></i>
-          <input type="text" class="forms_inputs" id="customer_name" name="customer_name" placeholder="Apellidos, Nombre / Empresa, S.L." value="<?php echo $customerData[0]->name_customer ?>" />
+          <input type="text" class="forms_inputs input_name" id="customer_name" name="customer_name" placeholder="Apellidos, Nombre / Empresa, S.L." value="<?php echo $customerData[0]->name_customer ?>" />
         </div>      
       </div>
 
@@ -82,7 +79,7 @@
         <label class="forms_label" for="customer_nifcif">NIF</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-address-card forms_icons"></i>
-          <input type="text" class="forms_inputs" id="customer_nifcif" name="customer_nifcif" placeholder="00000000L / B00000000" value="<?php echo $customerData[0]->nif_cif ?>"/>
+          <input type="text" class="forms_inputs input_nif" id="customer_nifcif" name="customer_nifcif" placeholder="00000000L / B00000000" value="<?php echo $customerData[0]->nif_cif ?>"/>
         </div>      
       </div>
 
@@ -90,7 +87,7 @@
         <label class="forms_label" for="customer_address">Dirección</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-house forms_icons"></i>
-          <input type="text" class="forms_inputs" id="customer_address" name="customer_address" placeholder="'C/' 'Avda.' 'Plaza'" value="<?php echo $customerData[0]->address_customer ?>"/>
+          <input type="text" class="forms_inputs input_address" id="customer_address" name="customer_address" placeholder="'C/' 'Avda.' 'Plaza'" value="<?php echo $customerData[0]->address_customer ?>"/>
         </div>      
       </div>
 
@@ -98,7 +95,7 @@
         <label class="forms_label" for="customer_postal_code">Código Postal</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-envelopes-bulk forms_icons"></i>
-          <input type="text" class="forms_inputs" id="customer_postal_code" name="customer_postal_code" placeholder="Ej: 41003" value="<?php echo $customerData[0]->postal_code ?>"/>
+          <input type="text" class="forms_inputs input_postal_code" id="customer_postal_code" name="customer_postal_code" placeholder="Ej: 41003" value="<?php echo $customerData[0]->postal_code ?>"/>
         </div>      
       </div>
 
@@ -106,7 +103,7 @@
         <label class="forms_label" for="customer_town">Ciudad</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-house forms_icons"></i>
-          <input type="text" class="forms_inputs" id="customer_town" name="customer_town" placeholder="Ej: Alcalá de Henares" value="<?php echo $customerData[0]->town ?>">
+          <input type="text" class="forms_inputs input_town" id="customer_town" name="customer_town" placeholder="Ej: Alcalá de Henares" value="<?php echo $customerData[0]->town ?>">
         </div>      
       </div>
 
@@ -114,7 +111,7 @@
         <label class="forms_label" for="customer_province">Provincia</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-city forms_icons"></i>
-          <input type="text" class="forms_inputs" id="customer_province" name="customer_province" placeholder="Ej: Madrid" value="<?php echo $customerData[0]->province ?>"/>
+          <input type="text" class="forms_inputs input_province" id="customer_province" name="customer_province" placeholder="Ej: Madrid" value="<?php echo $customerData[0]->province ?>"/>
         </div>      
       </div>
 
@@ -122,7 +119,7 @@
         <label class="forms_label" for="customer_country">País</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-earth-americas forms_icons"></i>
-          <input type="text" class="forms_inputs" id="customer_country" name="customer_country" placeholder="Ej: España" value="<?php echo $customerData[0]->country ?>"/>
+          <input type="text" class="forms_inputs input_country" id="customer_country" name="customer_country" placeholder="Ej: España" value="<?php echo $customerData[0]->country ?>"/>
         </div>      
       </div>
 
@@ -130,7 +127,7 @@
         <label class="forms_label" for="customer_phone">Teléfono</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-phone forms_icons"></i>
-          <input type="text" class="forms_inputs" id="customer_phone" name="customer_phone" placeholder="Ej: 666999666" value="<?php echo $customerData[0]->phone ?>"/>
+          <input type="text" class="forms_inputs input_phone" id="customer_phone" name="customer_phone" placeholder="Ej: 666999666" value="<?php echo $customerData[0]->phone ?>"/>
         </div>      
       </div>
 
@@ -138,15 +135,15 @@
         <label class="forms_label" for="customer_email">Correo electrónico</label>
         <div class="forms_inputs_fields">
           <i class="fa-sharp fa-solid fa-envelope forms_icons"></i>
-          <input type="text" class="forms_inputs" id="customer_email" name="customer_email" placeholder="ejemplo@ejemplo.com" value="<?php echo $customerData[0]->email ?>"/>
+          <input type="text" class="forms_inputs input_email" id="customer_email" name="customer_email" placeholder="ejemplo@ejemplo.com" value="<?php echo $customerData[0]->email ?>"/>
         </div>      
       </div>
 
       <div class="forms_fields">
-        <label class="forms_label" for="customer_contact_person">Persona de contacto</label>
+        <label class="forms_label" for="customer_contact_person">Persona de contacto - Departamento - Cargo</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-users forms_icons"></i>
-          <input type="text" class="forms_inputs" id="customer_contact_person" name="customer_contact_person" placeholder="Apellidos, Nombre" value="<?php echo $customerData[0]->contact_person ?>"/>
+          <input type="text" class="forms_inputs input_contact_person" id="customer_contact_person" name="customer_contact_person" placeholder="Apellidos, Nombre" value="<?php echo $customerData[0]->contact_person ?>"/>
         </div>      
       </div>
     </div>
@@ -156,10 +153,10 @@
     <input type="hidden" id="tokenCustomer" name="tokenCustomer" placeholder="tokenValue Subwindow" value="<?php echo $customerData[0]->token; ?>" /> 
                     <!-- ----------------------------------------------------------  -->
 
-    <div class="btn-group p-3">
+    <div class="btn-group btn_save">
       <button type="submit" class="btn btn-primary mr-5" id="btn_customer_submit" name="customer_submit"><i class="fa-sharp fa-solid fa-pencil"></i>&nbsp Grabar</button> 
-      <button type="button" role="link" class="btn btn-secondary mr-5" name="exit_customer" onClick="window.location='index.php?pages=01-newCustomer'"><i class="fa-sharp fa-solid fa-rectangle-xmark"></i>&nbsp Cerrar registro</button>
-      <button type="submit" class="btn btn-danger" name="delete_customer"><i class="fa-sharp fa-solid fa-trash-can"></i>&nbsp Eliminar registro</button> 
+      <button type="button" role="link" class="btn btn-secondary mr-5" name="exit_customer" onClick="window.location='index.php?pages=01-newCustomer'"><i class="fa-sharp fa-solid fa-rectangle-xmark"></i>&nbsp Cerrar</button>
+      <button type="submit" class="btn btn-danger" name="delete_customer"><i class="fa-sharp fa-solid fa-trash-can"></i>&nbsp Eliminar</button> 
     </div>
 
                     <!-- Mensajes ocultos de validaciones y realización de operaciones -->

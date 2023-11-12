@@ -10,7 +10,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>login - LD Soft Gestión</title>   
+    <title>LD Soft Gestión</title>   
     
     <!-- RESET CSS DE NAVEGADORES
         ---------------------->
@@ -24,11 +24,6 @@
     <!-- CSS PERSONALIZADO
         ---------------------->
     <style>@import url("./css/styles.css");</style>
-
-    <!-- GOOGLE FONTS (Edu TAS Beginner)
-        ---------------------->
-
-    <style>@import url('https://fonts.googleapis.com/css2?family=Edu+TAS+Beginner:wght@500&display=swap');</style>
 
     <!-- PLUGINS JS                                  
         ---------------------->
@@ -103,11 +98,11 @@
               {
                 include "pages/04.sales/" . $page . ".template.php";
               }
-              else if($page == "01-newEmployee" || $page == "02-employeeFile" || $page == "03-employeesList")
+              else if($page == "01-newEmployee" || $page == "02-employeesList")
               {
                 include "pages/05.employees/" . $page . ".template.php";
               }
-              else if($page == "00-users") // TODO añadir restos de páginas en lista blanca y enlaces correspondientes
+              else if($page == "00-users") // TODO-> A partir de aquí no propuesto para TFC, no desarrollados. Realizar como mejora más adelante
               {
                 include "pages/06.users/" . $page . ".template.php";
               }
@@ -117,7 +112,7 @@
               }
               else if($page == "00-salesSetting")
               {
-                include "pages/08.salesSetting/" . $page . ".template.php";
+                include "pages/08.salesSetting/" . $page . ".template.php";   // TODO-> Fín no propuesto para TFC...
               }
               else if($page == "06-home")
               {

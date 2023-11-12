@@ -1,5 +1,9 @@
 <style>@import url("./css/styles_login.css");</style>
 
+<script>    // Script js para limpiar datos almacenados en sessionStorage del navegador
+  sessionStorage.setItem("submenuShowStore", "false"); 
+</script>
+
 <h1 class="text-center">Login</h1>
 
 <div class="d-flex justify-content-center">

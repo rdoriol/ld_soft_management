@@ -1,3 +1,11 @@
+header {
+    display: block;
+}
+
+.title_header {
+    margin-left: 33.33%;
+}
+
 .item_main_container_nav {
     display: none;
 }

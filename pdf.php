@@ -19,7 +19,7 @@
                 $this->SetTextColor(69, 69, 69);
                 $this->Cell(50, 12, "Factura", 0, 1, "C");
 
-                $this->Image("./images/logo/logo_min.png", 160, 8);
+                $this->Image("./images/logo/logo_invoice.png", 157, 8);
                 $this->Ln(20);
 
                 $this->SetFont("Arial","B",14);  
@@ -56,13 +56,13 @@
     $lastInvoiceNumber = SalesController::ctrGenerateOutPutNumber("customer_invoices", "true");
 
         // Se realiza consulta de los datos del último número de factura generado en tabla customer_invoice (array de objetos)
-    $customerInvoice =  SalesController::ctrToListOutputsProducts("customer_invoices", "output_number", $lastInvoiceNumber);
+    $customerInvoice =  SalesController::ctrToListOutputsProducts("customer_invoices", "ci.output_number", $lastInvoiceNumber);
 
     // Se realiza consulta de los datos del último número de factura generado en tabla outputs_products (array de objetos)
-    $productsInvoice =  SalesController::ctrToListOutputsProducts("outputs_products", "output_number", $lastInvoiceNumber);
+    $productsInvoice =  SalesController::ctrToListOutputsProducts("outputs_products", "op.output_number", $lastInvoiceNumber);
    
     // Nombre de las columnas y ancho de las mísmas (array)
-    $columns = array("Ref."=>15 , "Concepto"=>100 , "Cant"=>13 , "Precio ($str)"=>22, "Desc (%)"=>18, "Total (€)"=>26);           
+    $columns = array("Ref."=> 15 , "Concepto"=> 100 , "Cant"=> 13 , "Precio ($str)"=> 22, "Desc (%)"=> 18, "Total (€)"=> 26);           
     
     
         $pdf = new Pdf(); 
@@ -147,6 +147,8 @@
                 $pdf->Cell(26, 7, utf8_DECODE($item->total_row_output), "RBL", 1, "R");
         }
         
+        /* Totales de factura
+        --------------------- */
 
 
 

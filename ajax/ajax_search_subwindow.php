@@ -41,10 +41,10 @@
                     case "id":
                         $resultData = CustomerController::ctrToList($table, $key, $value);
                         break;
-                    case "token_customer_invoice":
+                    case "ci.token_customer_invoice":
                         $dataCustomerInvoice = SalesController::ctrToListOutputsProducts($table, $key, $value);                                   // Se lanza método para obtener datos de tabla sql customer_invoice
                         $outputNumber = $dataCustomerInvoice[0]->output_number;                                                                 // De la tabla anterior se obtiene el número de movimiento (output_number)
-                        $dataOutputInvoice = SalesController::ctrToListOutputsProducts("outputs_products", "output_number", $outputNumber);     // Se lanza método para obtener datos de tabla sql outputs_product con clausula WHERE $outputNumber
+                        $dataOutputInvoice = SalesController::ctrToListOutputsProducts("outputs_products", "op.output_number", $outputNumber);     // Se lanza método para obtener datos de tabla sql outputs_product con clausula WHERE $outputNumber
                         
                         $resultData = array ($dataCustomerInvoice, $dataOutputInvoice);                                                       // Se genera array con datos en otros 2 arrays para enviarlo como respuesta a getRegisterOutputsProductsAjax()
                         break;
@@ -110,7 +110,7 @@
      */
     else if(isset($_POST["tokenOutputs"]) && !empty($_POST["tokenOutputs"])) {
         $searchProduct4 = new Search();
-        $searchProduct4->toListDb("customer_invoices", "token_customer_invoice", $_POST["tokenOutputs"]);
+        $searchProduct4->toListDb("customer_invoices", "ci.token_customer_invoice", $_POST["tokenOutputs"]);
     }
 
     
