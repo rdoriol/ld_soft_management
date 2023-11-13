@@ -8,18 +8,17 @@
         $customerInvoiceData = SalesController::ctrToListOutputsProducts("customer_invoices", "token_customer_invoice", $_GET["token"]);     // Se llama a función para leer datos de la tabla "customer_invoices"      
         $outputInvoiceData = SalesController::ctrToListOutputsProducts("outputs_products", "op.id_customer_invoice ", $customerInvoiceData[0]->id_customer_invoice );    // Se llama a función para leer datos de la tabla "outputsproducts"      
         $readOnly = "readonly"; // variable que bloqueará todos los campos cuando se consulte una factura ya existente. (Las facturas no se pueden editar ni eliminar)
-    }
-     // script javascript para lanzar ventana modal confirmando actualizaciones o eliminaciones.
-    echo "<script>
+    } 
+?>    
+
+    <script>    // script javascript para lanzar ventana modal confirmando éxito de operaciones.
     if(window.sessionStorage.getItem('modalAlert') == 'true') {
       $(function(){ 
         $('#product_success_modal').modal('show');    // Se muestra ventana emergente informativa
       });
       window.sessionStorage.setItem('modalAlert', 'false');
     }
-  </script>"; 
-      
-?>                      
+  </script>
 
 <h2 class="li_active_page rounded">Ventas</h2>
 
@@ -47,7 +46,7 @@
          
   <div class="document mt-5" id="invoice">                                <!---------------------------- DIV INVOICE --------------------------------> 
         <div class="col-xs-10">
-            <h1>Factura</h1>
+            <h1>Facturar</h1>
         </div>
         <hr>
         <div class="d-flex justify-content-between">

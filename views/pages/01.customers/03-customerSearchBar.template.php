@@ -1,8 +1,8 @@
 <ul class="general_options_bar" id="">
     <li>
-        <form class="general_searchs_forms" id="" action="" method="post">     
+        <form class="general_searchs_forms select_product" id="" action="" method="post">     
                       
-            <select class="" id="" name="select_item">
+            <select class="select_search" id="" name="select_item">
                 <option vaule="" selected disabled="true">Filtrar búsqueda</option>
                 <option value="full_list">Listado completo</option>
                 <option value="id">Id</option>
@@ -17,8 +17,8 @@
                 <option value="phone">Teléfono</option>
                 <option value="email">Correo electrónico</option>
              </select>
-            <input type="text" class="" id="" name="search_key" placeholder="búsqueda">
-            <button type="submit" class="btn btn-primary" id="btn_search" name="search"><i class="fa-solid fa-magnifying-glass"></i></button>
+            <input type="text" class="input_search" id="" name="search_key" placeholder="búsqueda">
+            <button type="submit" class="btn btn-primary btn_search_subwindow" id="btn_search" name="search"><i class="fa-solid fa-magnifying-glass icon_search_subwindow"></i></button>
            
         </form>
     </li>

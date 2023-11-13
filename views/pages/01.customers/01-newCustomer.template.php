@@ -31,8 +31,8 @@
     <li><button type="button" class="print_bar m-1 alert-info rounded" id="print"><i class="fa-solid fa-print"></i>&nbspImprimir</button></li>
   </ul>
                                                                                                                                                                <div id="printCustomer">                        
-  <fieldset class="d-flex99 justify-content-around99 box_1"> 
-    <div class="forms_flex99 box_1_2">
+  <fieldset class="box_1"> 
+    <div class="box_1_2">
       <div class="forms_fields">
         <label class="forms_label" for="customer_id">Nº Cliente</label>
         <div class="forms_inputs_fields">
@@ -48,7 +48,7 @@
         <label class="forms_label" for="private_customer">Particular</label>
         <input type="radio" class="forms_inputs" id="private_customer" name="customer_type" <?php echo $particularCustomer; ?> value="Particular"/>
 
-        <label class="forms_label" for="company">Empresa</label>
+        <label class="forms_label input_radio" for="company">Empresa</label>
         <input type="radio" class="forms_inputs" id="company" name="customer_type" <?php echo $privateCustomer; ?> value="Empresa"/>
 
       </div>      
@@ -59,7 +59,7 @@
         <label class="forms_label" for="created_date">Fecha registro</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-calendar-days forms_icons"></i>
-          <input type="text" class="forms_inputs" id="created_date" name="created_date" placeholder="auto" disabled value="<?php echo $customerData[0]->created_date ?>" />
+          <input type="text" class="forms_inputs input_date" id="created_date" name="created_date" placeholder="auto" disabled value="<?php echo $customerData[0]->created_date ?>" />
         </div>      
     </div>
   </fieldset>
@@ -87,7 +87,7 @@
         <label class="forms_label" for="customer_address">Dirección</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-house forms_icons"></i>
-          <input type="text" class="forms_inputs input_address" id="customer_address" name="customer_address" placeholder="'C/' 'Avda.' 'Plaza'" value="<?php echo $customerData[0]->address_customer ?>"/>
+          <input type="text" class="forms_inputs input_address" id="customer_address" name="customer_address" placeholder="C/ Avda. Plaza" value="<?php echo $customerData[0]->address_customer ?>"/>
         </div>      
       </div>
 
@@ -127,7 +127,7 @@
         <label class="forms_label" for="customer_phone">Teléfono</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-phone forms_icons"></i>
-          <input type="text" class="forms_inputs input_phone" id="customer_phone" name="customer_phone" placeholder="Ej: 666999666" value="<?php echo $customerData[0]->phone ?>"/>
+          <input type="text" class="forms_inputs input_phone" id="customer_phone" name="customer_phone" placeholder="Ej: +34 666999666" value="<?php echo $customerData[0]->phone ?>"/>
         </div>      
       </div>
 
@@ -140,10 +140,10 @@
       </div>
 
       <div class="forms_fields">
-        <label class="forms_label" for="customer_contact_person">Persona de contacto - Departamento - Cargo</label>
+        <label class="forms_label" for="customer_contact_person">Persona de contacto</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-users forms_icons"></i>
-          <input type="text" class="forms_inputs input_contact_person" id="customer_contact_person" name="customer_contact_person" placeholder="Apellidos, Nombre" value="<?php echo $customerData[0]->contact_person ?>"/>
+          <input type="text" class="forms_inputs input_contact_person" id="customer_contact_person" name="customer_contact_person" placeholder="Nombre - Dpto." value="<?php echo $customerData[0]->contact_person ?>"/>
         </div>      
       </div>
     </div>

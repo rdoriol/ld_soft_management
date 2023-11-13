@@ -41,3 +41,24 @@ footer {
     background-color: #007BFF;   
     color: #ffffff;
 }
+
+/* SEARCH BAR 
+--------------*/
+
+.select_search {
+    height: 30px;
+}
+
+.input_search {
+    height: 30px;
+    border: none;
+    outline: 1px solid gold;
+}
+
+.btn_search_subwindow {
+    height: 30px;
+}
+
+.icon_search_subwindow {
+    vertical-align: super;
+}

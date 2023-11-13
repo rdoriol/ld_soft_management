@@ -3,7 +3,7 @@
         <style>@import url("./css/styles-06-search.template.php.css");</style>
         
 
-<h4 class="forms_subtitle rounded">Buscar Registros</h4>
+<h4 class="forms_subtitle rounded">Buscar Facturas</h4>
 
         <!-- SEARCH BAR
             ---------------------->

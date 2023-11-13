@@ -5,18 +5,17 @@
   if((isset($_GET["token"]) && !empty($_GET["token"])) || (isset($_POST["tokenProduct"]) && !empty($_POST["tokenProduct"]))) {                                    
     $productData = InventoryController::ctrToListProduct("products", "token_product", $_GET["token"]);     // se llama a función para leer datos de la tabla "products"      
     $productData = InventoryController::ctrToListProduct("products", "token_product", $_SESSION["tokenProduct"]);     // se llama a función para leer datos de la tabla "products"      
-  }
-     // script javascript para lanzar ventana modal confirmando actualizaciones o eliminaciones.
-    echo "<script>
+  } 
+?>
+
+<script>   // script javascript para lanzar ventana modal confirmando actualizaciones o eliminaciones.
     if(window.sessionStorage.getItem('modalAlert') == 'true') {
       $(function(){ 
         $('#product_success_modal').modal('show');
       });
       window.sessionStorage.setItem('modalAlert', 'false');
     }
-  </script>"; 
-      
-?>
+  </script>
 
 <h2 class="li_active_page rounded">Ficha Productos</h2>
 
@@ -30,13 +29,13 @@
   </ul>
                                             <!-- --------------------------------------- -->      
 
-  <fieldset class="d-flex justify-content-around"> <!-- //todo-> CAMBIAR A ESTILO PROPIO CON CSS flex personalizado -->
-    <div class="forms_flex">
+  <fieldset class="box_1"> 
+    <div class="forms_flex forms_flex_products">
       <div class="forms_fields">
         <label class="forms_label" for="product_id">Id Producto</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-list-ol forms_icons"></i>
-          <input type="text" class="forms_inputs" id="product_id" name="product_id" placeholder="auto" disabled value="<?php echo $productData[0]->id_product; ?>" />
+          <input type="text" class="forms_inputs input_ids" id="product_id" name="product_id" placeholder="auto" disabled value="<?php echo $productData[0]->id_product; ?>" />
         </div>      
     </div>
 
@@ -45,7 +44,7 @@
         <div class="forms_inputs_fields">
             <i class="fa-solid fa-house forms_icons"></i> 
 
-            <select class="" id="father_select_item_category" name="select_item_category"> 
+            <select class="select_product" id="father_select_item_category" name="select_item_category"> 
                 <option id="select_item_category" value="<?php echo $productData[0]->id_product_category; ?>" selected><?php echo $productData[0]->name_product_category; ?></option>
                
                 <?php                  
@@ -64,12 +63,12 @@
         <label class="forms_label" for="product_created_date">Fecha registro</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-calendar-days forms_icons"></i>
-          <input type="text" class="forms_inputs" id="product_created_date" name="product_created_date" placeholder="" disabled value="<?php echo date("d/m/Y"); ?> <?php echo $productData[0]->created_date_product; ?>" />
+          <input type="text" class="forms_inputs input_date" id="product_created_date" name="product_created_date" placeholder="auto" disabled value="<?php echo $productData[0]->created_date_product; ?>" />
         </div>      
     </div>
   </fieldset>
-
-  <fieldset class="">   
+  <hr>
+  <fieldset class="flex_box">   
 
     <div class="forms_flex">
         <div class="forms_fields">
@@ -84,7 +83,7 @@
         <label class="forms_label" for="product_name">Nombre Producto</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-user forms_icons"></i>
-          <input type="text" class="forms_inputs" id="product_name" name="product_name" placeholder="Tóner laser HP" value="<?php echo $productData[0]->name_product; ?>" />
+          <input type="text" class="forms_inputs input_name" id="product_name" name="product_name" placeholder="Tóner laser HP" value="<?php echo $productData[0]->name_product; ?>" />
         </div>      
       </div>
 
@@ -97,30 +96,31 @@
       </div>
     </div>
 
-    <div class="forms_flex">
+    <div class="forms_flex box_2_products">
+
       <div class="forms_fields">
         <label class="forms_label" for="product_unit">Unidades</label>  
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-tree-city forms_icons"></i>
-          <input type="text" class="forms_inputs" id="product_unit" name="product_unit" placeholder="auto" disabled value="<?php echo $productData[0]->units_product; ?>">
+          <input type="text" class="forms_inputs input_numbers_product" id="product_unit" name="product_unit" placeholder="auto" disabled value="<?php echo $productData[0]->units_product; ?>">
         </div>      
       </div>
 
       <div class="forms_fields">
-        <label class="forms_label" for="last_cost_product">Último coste producto</label> 
+        <label class="forms_label" for="last_cost_product">Último coste</label> 
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-city forms_icons"></i>
-          <input type="text" class="forms_inputs" id="last_cost_product" name="last_cost_product" placeholder="auto" disabled value="<?php echo $productData[0]->last_unit_cost_product; ?>"/>
+          <input type="text" class="forms_inputs input_numbers_product" id="last_cost_product" name="last_cost_product" placeholder="auto" disabled value="<?php echo $productData[0]->last_unit_cost_product; ?>"/>
         </div>      
       </div>
 
       <div class="forms_fields">
-        <label class="forms_label" for="sale_price_product">Precio de venta</label>
+        <label class="forms_label" for="sale_price_product">Precio venta</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-earth-americas forms_icons"></i>
-          <input type="text" class="forms_inputs" id="sale_price_product" name="sale_price_product" placeholder="" value="<?php echo $productData[0]->sale_price_product; ?>"/>
+          <input type="text" class="forms_inputs input_numbers_product" id="sale_price_product" name="sale_price_product" placeholder="" value="<?php echo $productData[0]->sale_price_product; ?>"/>
         </div>      
-      </div>    
+    </div>    
 
      
 
@@ -130,8 +130,8 @@
     </div>
     <div class="btn-group p-3 ">
       <button type="submit" class="btn btn-primary mr-5" id="btn_product_submit" name="btn_product_submit"><i class="fa-sharp fa-solid fa-pencil"></i>&nbsp Grabar</button> 
-      <button type="button" role="link" class="btn btn-secondary mr-5" name="exit_product" onClick="window.location='index.php?pages=01-newProduct'"><i class="fa-sharp fa-solid fa-rectangle-xmark"></i>&nbsp Cerrar registro</button>
-      <button type="submit" class="btn btn-danger" id="btn_product_delete" name="delete_product" data-toggle="modal" data-target="#delete_modal"><i class="fa-sharp fa-solid fa-trash-can"></i>&nbsp Eliminar registro</button> 
+      <button type="button" role="link" class="btn btn-secondary mr-5" name="exit_product" onClick="window.location='index.php?pages=01-newProduct'"><i class="fa-sharp fa-solid fa-rectangle-xmark"></i>&nbsp Cerrar</button>
+      <button type="submit" class="btn btn-danger" id="btn_product_delete" name="delete_product" data-toggle="modal" data-target="#delete_modal"><i class="fa-sharp fa-solid fa-trash-can"></i>&nbsp Eliminar</button> 
     </div>
 
                     <!-- Mensajes ocultos de validaciones y realización de operaciones -->

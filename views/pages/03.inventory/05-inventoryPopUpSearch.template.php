@@ -3,7 +3,7 @@
         <style>@import url("./css/styles-06-search.template.php.css");</style>
         
 
-<h4 class="forms_subtitle rounded">Buscar Registros</h4>
+<h4 class="forms_subtitle rounded">Buscar Productos</h4>
 
         <!-- SEARCH BAR
             ---------------------->
@@ -34,7 +34,7 @@
         <tbody>
 </table>
 
-<button type="button" class="btn btn-primary mr-5 mt-5" id="btn_input_product_close" name=""><i class="fa-sharp fa-solid fa-rectangle-xmark"></i>&nbsp Cerrar</button>
+<button type="button" class="btn btn-primary mr-5 mt-5 mb-5" id="btn_customers_close" name=""><i class="fa-sharp fa-solid fa-rectangle-xmark"></i>&nbsp Cerrar</button>
 
 <!-- JavaScript para limpiar historial del formulario de búsqueda -->
 <script>                

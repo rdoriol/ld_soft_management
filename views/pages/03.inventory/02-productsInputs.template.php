@@ -1,16 +1,14 @@
-<?php
+
  
-     // script javascript para lanzar ventana modal confirmando actualizaciones o eliminaciones.
-    echo "<script>
+    
+  <script>   // script javascript para lanzar ventana modal confirmando éxito operaciones.
     if(window.sessionStorage.getItem('modalAlert') == 'true') {
       $(function(){ 
         $('#product_success_modal').modal('show');
       });
       window.sessionStorage.setItem('modalAlert', 'false');
     }
-  </script>"; 
-      
-?>
+  </script>    
 
 <h2 class="li_active_page rounded">Entradas Productos</h2>
 
@@ -24,7 +22,7 @@
   </ul>
                                             <!-- --------------------------------------- -->      
 
-  <fieldset class="d-flex justify-content-around"> <!-- //todo-> CAMBIAR A ESTILO PROPIO CON CSS flex personalizado -->
+  <fieldset class="box_1"> 
     <div class="forms_flex">
       <div class="forms_fields">
           <?php 
@@ -33,7 +31,7 @@
         <label class="forms_label" for="input_prodcut_id">Nº Entrada</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-list-ol forms_icons"></i>
-          <input type="text" class="forms_inputs" id="input_number" name="input_number" placeholder="auto" readonly value="<?php echo $inputNumber; ?>" />         
+          <input type="text" class="forms_inputs input_ids" id="input_number" name="input_number" placeholder="auto" readonly value="<?php echo $inputNumber; ?>" />         
         </div>      
       </div>
 
@@ -41,7 +39,7 @@
           <label class="forms_label" for="product_created_date">Fecha entrada</label>
           <div class="forms_inputs_fields">
             <i class="fa-solid fa-calendar-days forms_icons"></i>
-            <input type="text" class="forms_inputs" id="input_product_created_date" name="input_product_created_date" placeholder="auto" disabled value="<?php echo date("d/m/Y"); ?>" />
+            <input type="text" class="forms_inputs input_date" id="input_product_created_date" name="input_product_created_date" placeholder="auto" disabled value="<?php echo date("d/m/Y"); ?>" />
           </div>     
       </div>
 
@@ -156,7 +154,7 @@
                                                  
                                                   <!-- -------------------------- -->
 
-    <div class="btn-group p-3 ">
+    <div class="btn-group p-3">
       <button type="submit" class="btn btn-primary mr-5" id="btn_input_product_submit" name="btn_input_product_submit"><i class="fa-sharp fa-solid fa-pencil"></i>&nbsp Grabar</button>
       <button type="button" role="link" class="btn btn-secondary mr-5" name="exit_input_product" onClick="window.location='index.php?pages=02-productsInputs'"><i class="fa-sharp fa-solid fa-rectangle-xmark"></i>&nbsp Cerrar registro</button>      
     </div>
