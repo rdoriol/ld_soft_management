@@ -1,3 +1,14 @@
+    /* ESTILOS LOGIN TEMPLATE
+    --------------------------*/
+
+#login_template input {
+    outline: none;
+}
+
+#login_template input:focus {
+    outline: 2.5px solid gold;
+}
+
 .contact_header {
     display: block;
     margin-right: 2%;

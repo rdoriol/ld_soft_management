@@ -2,5 +2,13 @@
     "require": {
         "dompdf/dompdf": "^2.0",
         "mpdf/mpdf": "^6.1"
+    },
+    "autoload-dev": {
+        "psr-4": {
+          "Javleds\\tests\\ld_soft_gestion\\": "tests/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.6"
     }
 }

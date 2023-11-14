@@ -55,6 +55,10 @@ footer {
     outline: 1px solid gold;
 }
 
+.input_search:focus {
+    outline: 2px solid var(--buttons);
+}
+
 .btn_search_subwindow {
     height: 30px;
 }

@@ -44,7 +44,7 @@
         /**
          * Método que actualizará cualquier campo en la tabla "users"
          * @param int $attemptNumber
-         */
+         */ /*
         public function mdlUpdateUser($key, $value, $data) {
             $check = "false";
             try {
@@ -62,7 +62,7 @@
             catch(PDOException $ex) {
                 echo "Error interno mdlUpdateFailedAttemps()" . $ex->getMessage();
             }
-        }
+        } */
 
         /**
          * Método que actualizará en la tabla "users" el número de intentos fallidos al hacer login

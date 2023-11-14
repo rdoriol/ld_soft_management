@@ -44,8 +44,8 @@
             }
             catch(PDOException $ex) {
                 echo "error interno " . $ex->getMessage();
-                $stmt->close();
-                $stmt = null;
+                //$stmt->close();
+               // $stmt = null;
             }
             return $check;
         }

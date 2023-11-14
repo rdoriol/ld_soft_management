@@ -6,7 +6,7 @@
 
 <h1 class="text-center">Login</h1>
 
-<div class="d-flex justify-content-center">
+<div class="d-flex justify-content-center" id="login_template">
 
   <form class="p-5 rounded" action="" method="post">
 
