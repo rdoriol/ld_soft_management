@@ -10,5 +10,8 @@
                         <li><span id="session_close">Cerrar Sesión</span></li>
                 </ul>
         </div>
+        <div class= "contact_header">
+                <p mailto="rdoriol@gmail.com">Contacto: <a href="" mailto="soporte@ldsoft.es">soporte@ldsoft.es</a></p>
+        </div>
 </header>
 

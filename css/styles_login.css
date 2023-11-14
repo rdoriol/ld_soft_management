@@ -1,10 +1,19 @@
-header {
+.contact_header {
     display: block;
-}
+    margin-right: 2%;
+    color: gold;
+    font-size: 14px;
+ }
 
-.title_header {
-    margin-left: 37.5%;
-}
+ .contact_header a {
+    color: #ffffff;
+ }
+
+ .contact_header a:hover {
+    text-decoration: none;
+    color: gold;
+    font-style: italic;
+ }
 
 .item_main_container_nav {
     display: none;

@@ -216,6 +216,7 @@ select {
     display: flex;
     justify-content: space-between;
     width: 100%;
+    align-items: end;
  }
 
  .logo_header {
@@ -229,7 +230,7 @@ select {
  .title_header {
     height: 60px;
     align-self: center; 
-    margin-left: 7%; 
+    margin-left: 7%;
  } 
 
  .user_name_header {
@@ -262,6 +263,10 @@ select {
 }
 
  #session_close {
+    display: none;
+ }
+
+ .contact_header {
     display: none;
  }
 
