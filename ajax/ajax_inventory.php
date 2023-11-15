@@ -7,7 +7,7 @@
     require_once "../models/03-inventory.model.php";
 
     /**
-    * Clase para validaciones vía Ajax con base de datos
+    * Clase para validaciones y eliminaciones vía Ajax con base de datos
     */
     class AjaxInventory {
 
@@ -69,7 +69,7 @@
         $inventoryObject->checkInventoryFieldAjax("products", "name_product");
     }
 
-      /**
+    /**
      * Objeto que recibirá valor token del formulario y lanzará método deleteProductAjax()
      */
     else if(isset($_POST["token_product_form"]) && !empty($_POST["token_product_form"])) {

@@ -11,7 +11,7 @@
                 </ul>
         </div>
         <div class= "contact_header">
-                <p mailto="rdoriol@gmail.com">Contacto: <a href="" mailto="soporte@ldsoft.es">soporte@ldsoft.es</a></p>
+                <p mailto="rdoriol@gmail.com"><a href="mailto:soporte@ldsoft.es" >soporte@ldsoft.es</a></p>
         </div>
 </header>
 

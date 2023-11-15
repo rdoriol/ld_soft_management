@@ -1,18 +1,10 @@
 
 $(document).ready(function() {
     /**
-     * Función que abrirá modal para preguntar a usario si desea Cerrar Sesión
+     * Función que abrirá modal para preguntar a usario si desea Cerrar Sesión desde menú lateral
      */
-    $("#exit_button").click(function(){
-    
-            $("#exit_modal").modal("show");
-            $("#btn_ok_exit").click(function(){
-                $("#exit_modal").modal("hide"); 
-                window.location.replace('index.php?pages=07-exit');
-            })
-    })
-
-    $("#session_close").click(function(){
+   
+    $("#session_close, #session_close_home, #exit_button").click(function(){
     
         $("#exit_modal").modal("show");
         $("#btn_ok_exit").click(function(){

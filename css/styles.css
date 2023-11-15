@@ -4,7 +4,8 @@
 ------------------------------*/
 
     --backgroundColor: #d7d7d7;                                   
-    --buttons: #007bff; 
+    --buttons: #00456b;
+    --buttons2: #007bff; 
     --subButtons: #7bff;
     --carbonBlack: #1c1c1c;
     --formsIconsBackgroundColor: #E9ECEF;
@@ -338,6 +339,7 @@ select {
     padding: 5px;
     border-radius: 5px;
     text-align: start;
+    color: var(--buttons2);
 }
 
 .submenu {
@@ -432,6 +434,85 @@ footer {
 footer h3 {
     color: #ffffff;
 }
+
+ /* HOME "06-home.template.php"
+-----------------------------------------------*/
+
+#home_title {
+    margin-right: 19%;
+    margin-bottom: 60px;;
+}
+
+.grid_home {
+    margin: 0 auto;   
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);    
+    row-gap: 34px;
+    color: #ffffff;
+    width: 70%;
+    margin-right: 19%;    
+}
+
+.grid_container {
+    position: relative;    
+    background-color: var(--buttons);
+    background-color: var(--headerFotter);
+    border-radius: 4px;   
+    height: 120px;
+    width: 200px;
+    transition: .3s;
+    box-shadow: 10px 10px 10px #000000;
+}
+
+.grid_container img {
+    width: 30%;
+    transition: .7s;
+}
+
+.grid_container h5 {
+    text-align: center;
+}
+
+.grid_container li a {
+    display: block;   
+    color: var(--carbonBlack);
+    font-weight: bold;
+    font-size: 13px;
+    text-decoration: none;
+    width: 200px;
+    padding: 5px;
+    background-color: gold;
+    border-top: 1px sold var(--buttons);
+    border-bottom: 1px solid var(--buttons);
+    box-shadow: 10px 10px 10px #000000;  
+    cursor: pointer;  
+}
+
+.grid_container ul {
+   display: none; 
+    position: absolute;    
+    transition: width 3s;
+    background-color: var(--headerFotter);
+    z-index: 10;   
+}
+
+#session_close_home {
+    color: var(--carbonBlack);
+}
+
+.grid_container:hover > ul  {
+    display: block;
+}
+
+.grid_container:hover > img {
+    width: 20%;
+}
+
+.grid_container li a:hover {
+   opacity: 0.7;
+}
+
+
 
 
      /* 01.CUSTOMERS "newCustomer.template.php"
@@ -604,7 +685,15 @@ footer h3 {
     margin-top: 20px;
 }
 
-/*  Responsive Web Design
+.input_name_product {
+    width: 525px;
+}
+
+.label_text_area {
+    padding-left: 1px;
+}
+
+/*  Responsive Web Design - newProduct.template.php"
 ---------------------------*/
 
 @media (max-width: 1199px) {
@@ -622,6 +711,10 @@ footer h3 {
 }
 
 @media (max-width: 768px) {
+
+    .input_name_product {
+        width: 230px;
+    }
 
     .box_2_products {
         
@@ -797,4 +890,26 @@ footer h3 {
     position: absolute;
     top: -35%;
     left: 70%;
+}
+
+     /* VENTANAS MODALES
+-----------------------------------------------*/
+
+#btn_ok_exit:hover {
+    color: #ffffff;    
+    background-color: var(--buttons2) !important;
+}
+
+#btn_cancel_exit {
+    background-color: var(--buttons) !important;
+    color: #ffffff;
+}
+
+#btn_cancel_exit:hover {
+    background-color: var(--buttons2) !important;
+}
+
+#btn_ok_exit:hover + #btn_cancel_exit {
+    background-color: #ffffff !important;
+    color: var(--carbonBlack);
 }

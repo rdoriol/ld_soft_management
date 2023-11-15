@@ -11,6 +11,7 @@
     class AjaxValidation {
 
         public $customerFieldMatch;
+        public $tokenCustomerDelete;   
 
         /**
          * Método para comprobar con AJAX si el valor introducido en formulario ya existe en la base de datos.
@@ -28,15 +29,32 @@
                 echo "Error interno checkFieldAjax(). Error: " . $ex->getMessage();
             }           
         }
+
+        /**
+         * Función para eliminar registros vía AJAX
+        */
+        public function deleteCustomerAjax($table) {
+            $check = "false";
+            try {
+                $token = $this->tokenCustomerDelete;
+                $deleteCustomer = new CustomerController(); 
+                $check = $deleteCustomer->ctrDeleteRegister($table, "token", $token, "delete_customer_ajax");
+              
+                echo json_encode($check);
+            }
+            catch(PDOException $ex) {
+                echo "Error interno deleteCustomerAjax(). Error: " . $ex->getMessage();
+            }
+        }
+
+
     }
-
-
 
     /**
      * Bloque para llamar a función Ajax según el name del formulario recibido
      */
 
-            // Se captura el name recibido y se almacena en variable para itilizarla en una condición switch case
+            // Se captura el name recibido y se almacena en variable para utilizarla en una condición switch case
     foreach(array_keys($_POST) as $name) {
         $postName = $name;
     }     
@@ -67,21 +85,17 @@
             $ajaxObject->checkFieldAjax("suppliers", "nif");
             break;
 
-        defautl: echo "no se ha recibido valor name";
+               // Bloque que recibirá variable $_POST y lanzará función php "deleteCustomerAjax" para tabla Customers
+        case "token_customer_form":
+            $supplierDelete = new AjaxValidation();
+            $supplierDelete->tokenCustomerDelete = $_POST["token_customer_form"];
+            $supplierDelete->deleteCustomerAjax("customers");
+            break;
+
+        defautl: echo "no se ha recibido valor 'name'";
 
     }
     
     
 
 
-
-
-    
-
-
-
-  
-
-
-
-?>

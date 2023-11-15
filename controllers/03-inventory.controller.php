@@ -280,8 +280,6 @@
                         else {
                              echo "<div class='text-center alert-danger rounded'><p>Error. Tokens no coinciden</p></div>";
                         }
-                    
-                  
                 }
                 
             }
@@ -289,17 +287,5 @@
                 echo "Error interno ctrDeleteProduct. Error: " . $ex->getMessage();
             }
         }
-
-
-
-
-
-
-
-
-
-
-
-
     }   
 

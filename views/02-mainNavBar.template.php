@@ -61,7 +61,7 @@
           </li>
 
           <li class="li_item" id="">
-            <button role="button" class="link_button text-center" id="exit_button" onClick="">Cerrar Sesión</button> <!--  DAR UNA VUELTA AL TEMA DE LINK INICIO -->
+            <button role="button" class="link_button text-center" id="exit_button" onClick="">Cerrar Sesión</button> 
           </li>
 
         </ul>

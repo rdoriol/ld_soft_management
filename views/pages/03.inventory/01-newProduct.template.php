@@ -2,9 +2,8 @@
   $productData = array();
    
       // Condición para controlar si se muestran datos en el formulario o se muestra en blanco
-  if((isset($_GET["token"]) && !empty($_GET["token"])) || (isset($_POST["tokenProduct"]) && !empty($_POST["tokenProduct"]))) {                                    
-    $productData = InventoryController::ctrToListProduct("products", "token_product", $_GET["token"]);     // se llama a función para leer datos de la tabla "products"      
-    $productData = InventoryController::ctrToListProduct("products", "token_product", $_SESSION["tokenProduct"]);     // se llama a función para leer datos de la tabla "products"      
+  if((isset($_GET["token"]) && !empty($_GET["token"]))) {                                    
+    $productData = InventoryController::ctrToListProduct("products", "token_product", $_GET["token"]);     // se llama a función para leer datos de la tabla "products"    
   } 
 ?>
 
@@ -83,16 +82,16 @@
         <label class="forms_label" for="product_name">Nombre Producto</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-user forms_icons"></i>
-          <input type="text" class="forms_inputs input_name" id="product_name" name="product_name" placeholder="Tóner laser HP" value="<?php echo $productData[0]->name_product; ?>" />
+          <input type="text" class="forms_inputs input_name_product" id="product_name" name="product_name" placeholder="Tóner laser HP" value="<?php echo $productData[0]->name_product; ?>" />
         </div>      
       </div>
 
       <div class="forms_fields">
-        <label class="forms_label" for="product_description">Descripción producto</label>
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-envelopes-bulk forms_icons"></i>
-          <input type="text" class="forms_inputs" id="product_description" name="product_description" placeholder="Ej: Compatible con impresoras..." value="<?php echo $productData[0]->description_product; ?>"/>
-        </div>      
+          <label class="forms_label label_text_area" for="product_description">Descripción producto</label>
+        </div>   
+         <textarea  rows="4" cols="40" class="forms_inputs" id="product_description" name="product_description"><?php echo $productData[0]->description_product; ?></textarea> 
       </div>
     </div>
 
@@ -119,7 +118,7 @@
         <div class="forms_inputs_fields">
           <i class="fa-solid fa-earth-americas forms_icons"></i>
           <input type="text" class="forms_inputs input_numbers_product" id="sale_price_product" name="sale_price_product" placeholder="" value="<?php echo $productData[0]->sale_price_product; ?>"/>
-        </div>      
+      </div>      
     </div>    
 
      

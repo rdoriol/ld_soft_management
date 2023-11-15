@@ -157,11 +157,11 @@
         /**
          * Método que recibirá solicitud para eliminar de la "Vista" y se comunicará con "Modelo"para ejecturar la acción sobre la base de datos.
          */
-        public function ctrDeleteRegister($table, $key, $value) {
+        public function ctrDeleteRegister($table, $key, $value, $nameAjax=null) {
             $check = "false";
             try {
-                if(isset($_POST["delete_customer"]) && $key == "token") {                                   
-                    if(!empty($_POST["customer_name"]) && !empty($_POST["customer_nifcif"])) {            
+                if((isset($_POST["delete_customer"]) || $nameAjax == "delete_customer_ajax") && $key == "token") {                                   
+                    if((!empty($_POST["customer_name"]) && !empty($_POST["customer_nifcif"])) || $nameAjax == "delete_customer_ajax") {            
                         $actualToken = CustomerModel::mdlToList($table, $key, $value);
                         $checkToken = md5($actualToken[0]->name_customer . "+" . $actualToken[0]->nif_cif);
 
@@ -185,8 +185,6 @@
                 echo "Error interno ctrDeleteRegister. Error: " . $ex->getMessage();
             }
         }
-
-
     }
 
 

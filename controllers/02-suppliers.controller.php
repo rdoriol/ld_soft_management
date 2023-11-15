@@ -174,5 +174,37 @@
             }
         }
 
+         /**
+         * Método que recibirá solicitud para eliminar de la "Vista" y se comunicará con "Modelo"para ejecturar la acción sobre la base de datos mediante AJAX
+         */
+        public function ctrDeleteSupplierAjax($table, $key, $value) {
+            $check = "false";
+            try {
+                                                   
+                    if(!empty($table) && !empty($key) && !empty($value)) {            
+                        $actualToken = CustomerModel::mdlToList($table, $key, $value);
+                        $checkToken = md5($actualToken[0]->name_supplier . "+" . $actualToken[0]->nif);
+
+                        if($checkToken == $value) {    
+                            $deleteRegister = new CustomerModel();
+                            $deleteRegister->mdlDeleteRegister($table, $key, $value);                        
+                            $check = "true";
+                            return $check;
+                        }
+                        else {
+                             echo "<div class='text-center alert-danger rounded'><p>Error. Tokens no coinciden</p></div>";
+                        }
+                    }
+                    else {
+                        echo "<div class='text-center alert-danger rounded'><p>Registro no eliminado. <br> Campo/s vacíos</p></dv>";
+                    }
+                
+                
+            }
+            catch(PDOException $ex) {
+                echo "Error interno ctrDeleteSupplierAjax. Error: " . $ex->getMessage();
+            }
+        }
+
 
     }

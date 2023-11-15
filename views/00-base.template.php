@@ -60,6 +60,12 @@
       <section class="item_main_container item_main_container_section" id="main_container_section">
 
         <div class="text-center container" id="">   
+
+            <!--  SUCCESS MODAL
+                 ----------------------->
+              <?php include "09-modalnfo.template.php"; ?>
+
+            <!-- end success modal -->  
                        
             <!-- DELETE REGISTER MODAL
                  ----------------------->

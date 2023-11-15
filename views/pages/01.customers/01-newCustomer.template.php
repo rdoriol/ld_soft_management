@@ -156,7 +156,7 @@
     <div class="btn-group btn_save">
       <button type="submit" class="btn btn-primary mr-5" id="btn_customer_submit" name="customer_submit"><i class="fa-sharp fa-solid fa-pencil"></i>&nbsp Grabar</button> 
       <button type="button" role="link" class="btn btn-secondary mr-5" name="exit_customer" onClick="window.location='index.php?pages=01-newCustomer'"><i class="fa-sharp fa-solid fa-rectangle-xmark"></i>&nbsp Cerrar</button>
-      <button type="submit" class="btn btn-danger" name="delete_customer"><i class="fa-sharp fa-solid fa-trash-can"></i>&nbsp Eliminar</button> 
+      <button type="submit" class="btn btn-danger" id="btn_delete_customer" name="delete_customer"><i class="fa-sharp fa-solid fa-trash-can"></i>&nbsp Eliminar</button> 
     </div>
 
                     <!-- Mensajes ocultos de validaciones y realización de operaciones -->
@@ -169,7 +169,8 @@
     <div class='text-center alert-danger rounded error_format_phone'><p>El formato del campo <b><i>Teléfono</i></b> es erroneo<br>Ejemplos válidos: +34 666999333 / 666999333</p></div>
                      <!-- -------------------------------------------------------------  -->
                      
-    <div class="modal fade" id="success_modal" role="dialog">  <!-- MODAL DE CONFIRMACIÓN DE OPERACIÓN bootstrap 4  -->
+                     <!-- MODAL DE CONFIRMACIÓN DE OPERACIÓN bootstrap 4  -->
+    <div class="modal fade" id="success_modal" role="dialog">  
       <div class="modal-dialog">
           <div class="modal-content">
               <div class="modal-header">                 

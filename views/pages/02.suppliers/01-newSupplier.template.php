@@ -148,7 +148,7 @@
     <div class="btn-group p-3">
       <button type="submit" class="btn btn-primary mr-5" id="btn_supplier_submit" name="supplier_submit"><i class="fa-sharp fa-solid fa-pencil"></i>&nbsp Grabar</button> 
       <button type="button" role="link" class="btn btn-secondary mr-5" name="exit_supplier" onClick="window.location='index.php?pages=01-newSupplier'"><i class="fa-sharp fa-solid fa-rectangle-xmark"></i>&nbsp Cerrar</button>
-      <button type="submit" class="btn btn-danger" name="delete_supplier"><i class="fa-sharp fa-solid fa-trash-can"></i>&nbsp Eliminar</button> 
+      <button type="submit" class="btn btn-danger" id="btn_supplier_delete" name="delete_supplier"><i class="fa-sharp fa-solid fa-trash-can"></i>&nbsp Eliminar</button> 
     </div>
 
                     <!-- Mensajes ocultos de validaciones y realización de operaciones -->
