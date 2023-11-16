@@ -7,7 +7,7 @@
                   <h4 class="modal-title">Operación realizada con éxito</h4>
               </div>
               <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                  <button type="button" id="btn_close" class="btn btn-default" data-dismiss="modal">Cerrar</button>
               </div>
           </div>
       </div>

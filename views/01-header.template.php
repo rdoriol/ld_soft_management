@@ -7,7 +7,7 @@
                         <li><i class="fa-solid fa-user"></i></li>
                         <li><span id="user_name"><?php echo $_SESSION["user_name"]; ?></span></li>
                         <li><i class="fa-solid fa-arrow-right-to-bracket session_close_icon"></i></li>
-                        <li><span id="session_close">Cerrar Sesión</span></li>
+                        <li><span id="session_close">Salir</span></li>
                 </ul>
         </div>
         <div class= "contact_header">

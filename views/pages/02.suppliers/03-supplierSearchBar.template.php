@@ -20,5 +20,5 @@
             <button type="submit" class="btn btn-primary btn_search_subwindow" id="btn_search_supplier" name="search"><i class="fa-solid fa-magnifying-glass icon_search_subwindow"></i></button>
         </form>
     </li>
-    <li><button class="print_bar m-1 alert-info rounded" id="btn_print_supplier"><i class="fa-solid fa-print"></i>&nbspImprimir</button></li>
+    <li><button class="print_bar m-1 alert-info rounded" id="btn_print_supplier_lists"><i class="fa-solid fa-print"></i>&nbspImprimir</button></li>
 </ul> 

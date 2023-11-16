@@ -18,7 +18,7 @@
                                             <!-- Lista de botones "Buscar" e "Imprimir" -->
   <ul class="d-flex justify-content-first"> 
     <li><button type="button" class="search_bar m-1 alert-info rounded" id="search_inputs_products"><i class="fa-solid fa-magnifying-glass"></i>&nbsp Historial de entradas</button></li>
-    <li><button type="button" class="print_bar m-1 alert-info rounded" id="print_product"><i class="fa-solid fa-print"></i>&nbspImprimir</button></li>
+    <li><button type="button" class="print_bar m-1 alert-info rounded" id="print_product_inputs"><i class="fa-solid fa-print"></i>&nbspImprimir</button></li>
   </ul>
                                             <!-- --------------------------------------- -->      
 
@@ -82,7 +82,7 @@
                 <tbody class="rows_items"> 
                     <?php  
                           //  Bucle para generar mismo tipo de columnas modificando unicamente el id y name del elemento html input          
-                        for($i = 1; $i <= 5; $i++) {                        
+                        for($i = 1; $i <= 6; $i++) {                        
                             echo '<tr class="row_item">    
                                     <input type="hidden" name="numbers_rows[]" value="' . $i . '">      <!-- input oculto que almacenará número de fila -->                   
                                     <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields div_id_product_item align_icon"><i class="fa-solid fa-magnifying-glass forms_icons search_icon" id="btn_input_search_product" title="Buscar producto"></i><input type="text" class="forms_inputs product_item_id input_id" id="id_product_item'. $i .'" name="id_product_item'. $i .'" placeholder="Id producto" value="" /></div></td>
@@ -94,7 +94,7 @@
                                 </tr>';
                         }
                           // Bucle igual que el anterior pero oculto, será el usuario quien decida visualizarlo
-                        for($i = 6; $i <= 10; $i++) { 
+                        for($i = 7; $i <= 12; $i++) { 
                           echo '<tr class="row_item hidden_rows"> 
                                   <input type="hidden" name="numbers_rows[]" value="' . $i . '">          <!-- input oculto que almacenará número de fila --> 
                                   <td class="'. $i .'"><div class="forms_inputs_fields table_inputs_fields div_id_product_item align_icon"><i class="fa-solid fa-magnifying-glass forms_icons search_icon" id="btn_input_search_product" title="Buscar producto"></i><input type="text" class="forms_inputs product_item_id input_id" id="id_product_item'. $i .'" name="id_product_item'. $i .'" placeholder="Id producto" value="" /></div></td>

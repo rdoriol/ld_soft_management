@@ -137,8 +137,7 @@ select {
 
 .btn-group {
     margin-top: 50px !important;
-    margin-bottom: 50px !important;
-    margin-right: 20%;
+    margin-bottom: 50px !important;    
 } 
 
             /* General Options Bar
@@ -274,7 +273,7 @@ select {
      /* Responsive Web Disegn - Header
     -------------------------*/
 
-@media (max-width: 880px) {
+@media (max-width: 1050px) {
 
     header {
         display: block;
@@ -293,9 +292,8 @@ select {
         width: 50%;
         margin-left: auto;
         margin-right: auto;
-    }    
+    }  
 }
-
 
 
      /* MAIN CONTAINER "base.template.php"
@@ -321,7 +319,7 @@ select {
     position: fixed;
     font-size: 13px;
     font-family: Helvetica;  
-    ; 
+    display: block; 
 }
 
 #main_nav .li_item {
@@ -390,29 +388,70 @@ select {
     display: none;
 }
 
-            /*Responsive Web Design - MAIN NAVEGATION BAR */
-
 .mobile_menu {
     display: none;
 }
 
-@media (max-width: 880px) {
+        /* Responsive Web Design - MAIN NAVEGATION BAR */
+
+@media (max-width: 1050px) {     /* alternativa 880px  */
 
     #main_nav {
-        display: none
+        display: none;
+        position: fixed;
+        top: 56px;
+        left: 0;
+        z-index: 10;
+        background-color: var(--backgroundColor);
+        border-radius: 5px;       
+    }
+
+    header {
+        position: fixed;     
+        z-index: 10;
+    }
+
+    .logo_header_inline {
+        width: 250px;
+    }
+
+    .user_name_header {
+        position: absolute;
+        left: 81%;
+        top: 45%;       
+    }
+
+    h2 {
+        margin-top: 100px;
     }
 
     .mobile_menu {
-        display: block;
-        top: 0;
-        left: 0;
+        display: block;       
+        top: 7px;
+        left: 22px;
         position: fixed;
+        width: 4%;
+        cursor: pointer;
+        transition: .3s;
+        z-index: 10;
+    }
+
+    .mobile_menu:hover {
+        width: 5%;
     }
 
     .item_main_container_section {
         width: 100%;   
     }
 
+}
+
+@media (max-height: 483px) {  
+    
+    #main_nav {
+       
+       position: absolute;
+    }
 }
 
      /* SECTION CONTAINER "base.template.php"
@@ -426,20 +465,64 @@ select {
 footer {
     background-color: var(--headerFotter);
     width: 100%;   
-    text-align: center;  
-    overflow-y: auto;
-    bottom: 0;
+       overflow-y: auto;
+   /* bottom: 0; */
 }
 
-footer h3 {
+footer {
     color: #ffffff;
 }
+
+.flex_footer {
+    display: flex;
+    justify-content: space-between;   
+    align-items: baseline;
+    margin-left: 0.3%;
+}
+
+.flex_container img {
+    width: 100px;
+}
+
+.flex_container p {
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.flex_container p span {
+    color: gold;
+    font-size: 22px;;
+}
+
+.flex_container p a {   
+    color: gold;
+    font-size: 14px;
+    color: #ffffff;
+}
+
+.flex_container p a:hover {
+    text-decoration: none;
+    color: gold;
+    font-style: italic;
+ }
+
+    /* Responsive Web Design - Footer */
+
+@media (max-width: 600px) {
+    .flex_footer {
+        width: 100%; 
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+
 
  /* HOME "06-home.template.php"
 -----------------------------------------------*/
 
 #home_title {
-    margin-right: 19%;
+    /* margin-right: 19%; */
     margin-bottom: 60px;;
 }
 
@@ -450,7 +533,7 @@ footer h3 {
     row-gap: 34px;
     color: #ffffff;
     width: 70%;
-    margin-right: 19%;    
+  /*  margin-right: 19%; */   
 }
 
 .grid_container {
@@ -466,6 +549,7 @@ footer h3 {
 
 .grid_container img {
     width: 30%;
+    margin-top: 15px;
     transition: .7s;
 }
 
@@ -506,12 +590,70 @@ footer h3 {
 
 .grid_container:hover > img {
     width: 20%;
+    margin-top: 0;
 }
 
 .grid_container li a:hover {
    opacity: 0.7;
 }
 
+/* Responsive Web Design - Home
+-------------------------------*/
+
+@media (max-width: 1062px) {
+
+    .grid_home {
+       column-gap: 20px;
+       width: 77%;
+    }
+}
+
+@media (max-width: 1050px) {
+
+    .grid_home {
+        height:380px
+    }
+    .main_container {
+        display: block;
+    }
+}
+
+@media (max-width: 991px) {
+
+    .grid_home {
+       width: 90%;
+    }
+}
+
+@media (min-width: 767px) {
+    
+    .container {
+      max-width: 540px;
+    }   
+}
+
+@media (max-width: 700px) {
+    
+    .grid_home {
+      width: 100%;
+    }   
+}
+
+@media (max-width: 665px) {
+
+    .grid_home {
+        grid-template-columns: repeat(2, 1fr);
+        width: 68%;
+        height: 468px;;
+    }
+}
+
+@media (min-width: 576px) {
+    
+    .container {
+       max-width: 100% !important;
+    }
+}
 
 
 
@@ -650,7 +792,17 @@ footer h3 {
     width: 229px;
 }
 
+#new_supplier_form .btn-group {
+    margin-right: 20%; 
+}
+
 /* Responsive Web Design newCustomers - newSupplier */
+
+@media (max-width: 1139px) {
+    .flex_box {
+        margin-left: 0;
+    }
+}
 
 @media (max-width: 767px) {
     
@@ -681,8 +833,8 @@ footer h3 {
     width: 124px;
 }
 
-.box_2_products {
-    margin-top: 20px;
+.input_price_product {
+    width: 128px;
 }
 
 .input_name_product {
@@ -691,6 +843,10 @@ footer h3 {
 
 .label_text_area {
     padding-left: 1px;
+}
+
+#new_product_form .btn-group {
+    margin-right: 20%;
 }
 
 /*  Responsive Web Design - newProduct.template.php"
@@ -720,74 +876,7 @@ footer h3 {
         
         flex-direction: column;
     }
-}
-
-
-    /* Hidde error messages - Forms fields 
-    --------------------------------------------------*/
-
-.name_field_duplicate {
-    display: none;
-}
-
-.nif_field_duplicate {
-    display: none;
-}
-
-.error_format_nif {
-    display: none;
-}
-
-.error_format_postal_code {
-    display: none;
-}
-
-.error_format_phone {
-    display: none;
-}
-
-.require_fields {
-    display: none;
-}
-
-.or_field_duplicate {
-    display: none;
-}
-.error_format_name {
-    display: none;
-}
-
-.error_format_description {
-    display: none;
-}
-
-.error_format_sales_price {
-    display: none;
-}
-
-.error_field {
-    display: none;    
-}
-
-.error_amount_field {
-    display: none;
-}
-
-.submit_disabled {
-    display: none;
-}
-
-.error_price_field {
-    display: none;
-}
-
-.error_discount_field {
-    display: none;
-}
-
-.error_discount_document_field {
-    display: none;
-}
+}  
 
 
      /* 03.INVENTORY "productsInputs.template.php" (shared with 04.SALES "newInvoice.temmplate.php")
@@ -892,24 +981,92 @@ footer h3 {
     left: 70%;
 }
 
+
+ /* Hidde error messages - Forms fields - All pages
+    --------------------------------------------------*/
+
+    .name_field_duplicate {
+        display: none;
+    }
+    
+    .nif_field_duplicate {
+        display: none;
+    }
+    
+    .error_format_nif {
+        display: none;
+    }
+    
+    .error_format_postal_code {
+        display: none;
+    }
+    
+    .error_format_phone {
+        display: none;
+    }
+    
+    .require_fields {
+        display: none;
+    }
+    
+    .or_field_duplicate {
+        display: none;
+    }
+    .error_format_name {
+        display: none;
+    }
+    
+    .error_format_description {
+        display: none;
+    }
+    
+    .error_format_sales_price {
+        display: none;
+    }
+    
+    .error_field {
+        display: none;    
+    }
+    
+    .error_amount_field {
+        display: none;
+    }
+    
+    .submit_disabled {
+        display: none;
+    }
+    
+    .error_price_field {
+        display: none;
+    }
+    
+    .error_discount_field {
+        display: none;
+    }
+    
+    .error_discount_document_field {
+        display: none;
+    }
+
      /* VENTANAS MODALES
 -----------------------------------------------*/
 
-#btn_ok_exit:hover {
+#btn_ok_exit:hover, #btn_ok:hover {
     color: #ffffff;    
     background-color: var(--buttons2) !important;
 }
 
-#btn_cancel_exit {
+#btn_cancel_exit, #btn_cancel, #btn_close {
     background-color: var(--buttons) !important;
     color: #ffffff;
 }
 
-#btn_cancel_exit:hover {
+#btn_cancel_exit:hover, #btn_cancel:hover, #btn_close:hover {
     background-color: var(--buttons2) !important;
 }
 
-#btn_ok_exit:hover + #btn_cancel_exit {
+#btn_ok_exit:hover + #btn_cancel_exit, #btn_ok:hover + #btn_cancel {
     background-color: #ffffff !important;
     color: var(--carbonBlack);
 }
+

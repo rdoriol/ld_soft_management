@@ -8,7 +8,7 @@
       <nav class=" p-2" id="main_nav">
         <ul class="menu">
           <li class="li_item" id="">
-            <button role="link" class="link_button <?php echo $home; ?>" id="index_button" onClick="window.location='index.php?pages=06-home'">inicio</button> <!--  DAR UNA VUELTA AL TEMA DE LINK INICIO -->
+            <button role="link" class="link_button <?php echo $home; ?>" id="index_button" onClick="window.location='index.php?pages=06-home'" title="Ir a inicio">inicio</button> <!--  DAR UNA VUELTA AL TEMA DE LINK INICIO -->
           </li>
           <li class="li_item" id="">
             <button class="link_button" id="customers_button" title="Abrir opciones clientes"><i class="fa-solid fa-caret-right"></i>&nbsp Clientes</button>
@@ -61,7 +61,7 @@
           </li>
 
           <li class="li_item" id="">
-            <button role="button" class="link_button text-center" id="exit_button" onClick="">Cerrar Sesión</button> 
+            <button role="button" class="link_button text-center" id="exit_button" title="Salir">Cerrar Sesión</button> 
           </li>
 
         </ul>
@@ -72,9 +72,5 @@
                 <!-- mobile nav bar
                     ----------------->
 
-    <div class="mobile_menu">
-      <button title="Menú"><i class="fa-solid fa-bars fa-2xl" style="color: #007bff;"></i></button>
-        <nav>
-        </nav>
-    </div>
-                <!-- end mobile nav bar -->
+       <img src="./images/menu/menu_open.png" class="mobile_menu" id="" title="Menú" alt="icon_menu" />
+

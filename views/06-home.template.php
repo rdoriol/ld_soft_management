@@ -26,7 +26,7 @@
     </div>
 
     <div class="grid_container">
-        <img src="./images/home/customers.png" title="gestion_clientes" />
+        <img src="./images/home/suppliers.png" title="gestion_clientes" />
         <h5>Proveedores</h5>
         <ul>
             <li><a href="index.php?pages=01-newSupplier">Ficha proveedores</a></li>
@@ -35,7 +35,7 @@
     </div>
 
     <div class="grid_container">
-        <img src="./images/home/customers.png" title="gestion_clientes" />
+        <img src="./images/home/inventory.png" title="gestion_clientes" />
         <h5>Gestión Inventario</h5>
         <ul>
             <li><a href="index.php?pages=01-newProduct">Ficha producto</a></li>
@@ -46,7 +46,7 @@
     </div>
 
     <div class="grid_container">
-        <img src="./images/home/customers.png" title="gestion_clientes" />
+        <img src="./images/home/invoice.png" title="gestion_clientes" />
         <h5>Ventas</h5>
         <ul>
             <li><a href="index.php?pages=01-newInvoice">Generar facturas</a></li>
@@ -55,7 +55,7 @@
     </div>
 
     <div class="grid_container">
-        <img src="./images/home/customers.png" title="gestion_clientes" />
+        <img src="./images/home/employees.png" title="gestion_clientes" />
         <h5>Empleados</h5>
         <ul>
             <li><a href="index.php?pages=01-newEmployee">Alta empleado</a></li>
@@ -64,7 +64,7 @@
     </div>
 
     <div class="grid_container">
-        <img src="./images/home/customers.png" title="gestion_clientes" />
+        <img src="./images/home/session_close.png" title="gestion_clientes" />
         <h5>Cerrar Sesión</h5>
         <ul> 
             <li><a id="session_close_home">Cerrar</a></li>

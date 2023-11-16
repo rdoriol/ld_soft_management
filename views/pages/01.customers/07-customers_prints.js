@@ -3,32 +3,37 @@
 
 $(document).ready(function(){
    
+    /**
+     * Función para imprimir contenido de un div concreto
+     */
     $("#print").click(function(){
-        /*let printForm = $("#printCustomer");
-        let original = $("body");
-
-        $("body").text(printForm);
-        window.print();
-        $("body").text(original);*/
-        printCustomer($("#printCustomer").html());
-
-        
+        printDiv();    
     })
 
-
-
-
-
-
-
-
-
+    /**
+     * Función para imprimir contenido 02-customerList
+     */ 
+    $("#btn_print_customer").click(function(){
+        printDiv();       
+    })  
 })
 
-function printCustomer(containerPrint) {
-    let contenidoOriginal= document.body.innerHTML;
-    document.body.innerHTML = containerPrint;
-    window.print(); 
-    document.body.innerHTML = contenidoOriginal; 
+/**
+ * Función que se lanzará para imprimir contenido de 01-newCustomer
+ */ 
+function printDiv() {
+        // Se oculta contenido que no se desea imprimir
+    $("header").hide();
+    $("#main_nav").hide();
+    $("footer").hide();
+    $(".btn-group").hide();
 
-}
+        // Se imprime contenido visible
+    window.print();
+
+        // Se vuelve a mostrar el contenido completo del documento html
+    $("header").show();
+    $("#main_nav").show();
+    $("footer").show(); 
+    $(".btn-group").show();  
+} 

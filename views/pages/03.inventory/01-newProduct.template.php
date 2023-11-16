@@ -71,12 +71,12 @@
 
     <div class="forms_flex">
         <div class="forms_fields">
-        <label class="forms_label" for="or_original_product">Referencia Original</label>
-        <div class="forms_inputs_fields">
-          <i class="fa-solid fa-address-card forms_icons"></i>
-          <input type="text" class="forms_inputs" id="or_original_product" name="or_original_product" placeholder="C2540A" value="<?php echo $productData[0]->or_product; ?>"/>
-        </div>      
-      </div> 
+          <label class="forms_label" for="or_original_product">Referencia Original</label>
+          <div class="forms_inputs_fields">
+            <i class="fa-solid fa-address-card forms_icons"></i>
+            <input type="text" class="forms_inputs" id="or_original_product" name="or_original_product" placeholder="C2540A" value="<?php echo $productData[0]->or_product; ?>"/>
+          </div>      
+        </div> 
 
       <div class="forms_fields">
         <label class="forms_label" for="product_name">Nombre Producto</label>
@@ -93,35 +93,35 @@
         </div>   
          <textarea  rows="4" cols="40" class="forms_inputs" id="product_description" name="product_description"><?php echo $productData[0]->description_product; ?></textarea> 
       </div>
-    </div>
+    
 
-    <div class="forms_flex box_2_products">
+      <div class="box_2_products">
 
-      <div class="forms_fields">
-        <label class="forms_label" for="product_unit">Unidades</label>  
-        <div class="forms_inputs_fields">
-          <i class="fa-solid fa-tree-city forms_icons"></i>
-          <input type="text" class="forms_inputs input_numbers_product" id="product_unit" name="product_unit" placeholder="auto" disabled value="<?php echo $productData[0]->units_product; ?>">
-        </div>      
-      </div>
+        <div class="forms_fields">
+          <label class="forms_label" for="product_unit">Unidades</label>  
+          <div class="forms_inputs_fields">
+            <i class="fa-solid fa-tree-city forms_icons"></i>
+            <input type="text" class="forms_inputs input_numbers_product" id="product_unit" name="product_unit" placeholder="auto" disabled value="<?php echo $productData[0]->units_product; ?>">
+          </div>      
+        </div>
 
-      <div class="forms_fields">
-        <label class="forms_label" for="last_cost_product">Último coste</label> 
-        <div class="forms_inputs_fields">
-          <i class="fa-solid fa-city forms_icons"></i>
-          <input type="text" class="forms_inputs input_numbers_product" id="last_cost_product" name="last_cost_product" placeholder="auto" disabled value="<?php echo $productData[0]->last_unit_cost_product; ?>"/>
-        </div>      
-      </div>
+        <div class="forms_fields">
+          <label class="forms_label" for="last_cost_product">Último coste</label> 
+          <div class="forms_inputs_fields">
+            <i class="fa-solid fa-city forms_icons"></i>
+            <input type="text" class="forms_inputs input_numbers_product" id="last_cost_product" name="last_cost_product" placeholder="auto" disabled value="<?php echo $productData[0]->last_unit_cost_product; ?>"/>
+          </div>      
+        </div>
 
-      <div class="forms_fields">
-        <label class="forms_label" for="sale_price_product">Precio venta</label>
-        <div class="forms_inputs_fields">
-          <i class="fa-solid fa-earth-americas forms_icons"></i>
-          <input type="text" class="forms_inputs input_numbers_product" id="sale_price_product" name="sale_price_product" placeholder="" value="<?php echo $productData[0]->sale_price_product; ?>"/>
-      </div>      
-    </div>    
-
-     
+        <div class="forms_fields">
+          <label class="forms_label" for="sale_price_product">Precio venta</label>
+          <div class="forms_inputs_fields">
+            <i class="fa-solid fa-earth-americas forms_icons"></i>
+            <input type="text" class="forms_inputs input_price_product" id="sale_price_product" name="sale_price_product" placeholder="" value="<?php echo $productData[0]->sale_price_product; ?>"/>
+        </div>   
+           
+      </div>    
+    </div>  
 
                 <!-- input oculto que recibirá valor de token de subventana -->
         <input type="hidden" id="tokenProduct" name="tokenProduct" placeholder="tokenValue Subwindow" value="<?php echo $productData[0]->token_product; ?>" /> 

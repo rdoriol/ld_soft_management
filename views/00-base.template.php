@@ -157,7 +157,8 @@
 
             <!-- end footer -------------->
 
-    <script src="./js/mainNavBar.js"></script>
+    <script src="./js/mainNavBar.js"></script>  
+    <script src="./js/mobileNavBar.js"></script>
     <script src="./js/calendar_search.js"></script>
     
     <script src="./views/pages/01.customers/05-customers.js"></script>

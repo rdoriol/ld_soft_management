@@ -27,103 +27,103 @@
     <li><button type="button" class="search_bar m-1 alert-info rounded" id="search_supplier" onClick=""><i class="fa-solid fa-magnifying-glass"></i>&nbsp Buscar Proveedor</button></li>
     <li><button type="button" class="print_bar m-1 alert-info rounded" id="print_supplier"><i class="fa-solid fa-print"></i>&nbspImprimir</button></li>
   </ul>
-                                                   
-  <fieldset class="box_1 box_1_supplier"> 
-    <div class="forms_flex forms_flex_supplier">
-      <div class="forms_fields">
-        <label class="forms_label" for="supplier_id">Id Proveedor</label>
-        <div class="forms_inputs_fields">
-          <i class="fa-solid fa-list-ol forms_icons"></i>
-          <input type="text" class="forms_inputs input_ids" id="supplier_id" name="supplier_id" placeholder="auto" disabled value="<?php echo $supplierData[0]->id ?>" />
-        </div>      
-    </div>
-
-    <div class="forms_flex" >
-      <div class="forms_fields forms_flex_supplier">
-        <label class="forms_label" for="supplier_created_date">Fecha registro</label>
-        <div class="forms_inputs_fields">
-          <i class="fa-solid fa-calendar-days forms_icons"></i>
-          <input type="text" class="forms_inputs input_date" id="supplier_created_date" name="supplier_created_date" placeholder="auto" disabled value="<?php echo $supplierData[0]->created_date ?>" />
-        </div>      
-    </div>
-  </fieldset>
-
-  <hr>
-
-  <fieldset class="flex_box">   
-
-    <div class="forms_flex">
-      <div class="forms_fields">
-        <label class="forms_label" for="supplier_name">Nombre Proveedor</label>
-        <div class="forms_inputs_fields">
-          <i class="fa-solid fa-user forms_icons"></i>
-          <input type="text" class="forms_inputs input_name" id="supplier_name" name="supplier_name" placeholder="Empresa, S.L." value="<?php echo $supplierData[0]->name_supplier ?>" />
-        </div>      
+                                             
+    <fieldset class="box_1 box_1_supplier"> 
+      <div class="forms_flex forms_flex_supplier">
+        <div class="forms_fields">
+          <label class="forms_label" for="supplier_id">Id Proveedor</label>
+          <div class="forms_inputs_fields">
+            <i class="fa-solid fa-list-ol forms_icons"></i>
+            <input type="text" class="forms_inputs input_ids" id="supplier_id" name="supplier_id" placeholder="auto" disabled value="<?php echo $supplierData[0]->id ?>" />
+          </div>      
       </div>
 
-      <div class="forms_fields">
-        <label class="forms_label" for="supplier_nif">NIF</label>
-        <div class="forms_inputs_fields">
-          <i class="fa-solid fa-address-card forms_icons"></i>
-          <input type="text" class="forms_inputs input_nif" id="supplier_nif" name="supplier_nif" placeholder="00000000L / B00000000" value="<?php echo $supplierData[0]->nif ?>"/>
-        </div>      
+      <div class="forms_flex" >
+        <div class="forms_fields forms_flex_supplier">
+          <label class="forms_label" for="supplier_created_date">Fecha registro</label>
+          <div class="forms_inputs_fields">
+            <i class="fa-solid fa-calendar-days forms_icons"></i>
+            <input type="text" class="forms_inputs input_date" id="supplier_created_date" name="supplier_created_date" placeholder="auto" disabled value="<?php echo $supplierData[0]->created_date ?>" />
+          </div>      
       </div>
+    </fieldset>
 
-      <div class="forms_fields">
-        <label class="forms_label" for="supplier_address">Dirección</label>
-        <div class="forms_inputs_fields">
-          <i class="fa-solid fa-house forms_icons"></i>
-          <input type="text" class="forms_inputs input_address" id="supplier_address" name="supplier_address" placeholder="C/ Avda. Plaza" value="<?php echo $supplierData[0]->address ?>"/>
-        </div>      
-      </div>
+    <hr>
 
-      <div class="forms_fields">
-        <label class="forms_label" for="supplier_postal_code">Código Postal</label>
-        <div class="forms_inputs_fields">
-          <i class="fa-solid fa-envelopes-bulk forms_icons"></i>
-          <input type="text" class="forms_inputs input_postal_code_supplier" id="supplier_postal_code" name="supplier_postal_code" placeholder="Ej: 41003" value="<?php echo $supplierData[0]->postal_code ?>"/>
-        </div>      
-      </div>
+    <fieldset class="flex_box">   
 
-      <div class="forms_fields">
-        <label class="forms_label" for="supplier_town">Ciudad</label>
-        <div class="forms_inputs_fields">
-          <i class="fa-solid fa-tree-city forms_icons"></i>
-          <input type="text" class="forms_inputs input_town" id="supplier_town" name="supplier_town" placeholder="Ej: Villaluenga del Rosario" value="<?php echo $supplierData[0]->town ?>">
-        </div>      
-      </div>
+      <div class="forms_flex">
+        <div class="forms_fields">
+          <label class="forms_label" for="supplier_name">Nombre Proveedor</label>
+          <div class="forms_inputs_fields">
+            <i class="fa-solid fa-user forms_icons"></i>
+            <input type="text" class="forms_inputs input_name" id="supplier_name" name="supplier_name" placeholder="Empresa, S.L." value="<?php echo $supplierData[0]->name_supplier ?>" />
+          </div>      
+        </div>
 
-      <div class="forms_fields">
-        <label class="forms_label" for="supplier_province">Provincia</label>
-        <div class="forms_inputs_fields">
-          <i class="fa-solid fa-city forms_icons"></i>
-          <input type="text" class="forms_inputs input_province_supplier" id="supplier_province" name="supplier_province" placeholder="Ej: Cádiz" value="<?php echo $supplierData[0]->province ?>"/>
-        </div>      
-      </div>
+        <div class="forms_fields">
+          <label class="forms_label" for="supplier_nif">NIF</label>
+          <div class="forms_inputs_fields">
+            <i class="fa-solid fa-address-card forms_icons"></i>
+            <input type="text" class="forms_inputs input_nif" id="supplier_nif" name="supplier_nif" placeholder="00000000L / B00000000" value="<?php echo $supplierData[0]->nif ?>"/>
+          </div>      
+        </div>
 
-      <div class="forms_fields">
-        <label class="forms_label" for="supplier_country">País</label>
-        <div class="forms_inputs_fields">
-          <i class="fa-solid fa-earth-americas forms_icons"></i>
-          <input type="text" class="forms_inputs input_country_supplier" id="supplier_country" name="supplier_country" placeholder="Ej: España" value="<?php echo $supplierData[0]->country ?>"/>
-        </div>      
-      </div>
+        <div class="forms_fields">
+          <label class="forms_label" for="supplier_address">Dirección</label>
+          <div class="forms_inputs_fields">
+            <i class="fa-solid fa-house forms_icons"></i>
+            <input type="text" class="forms_inputs input_address" id="supplier_address" name="supplier_address" placeholder="C/ Avda. Plaza" value="<?php echo $supplierData[0]->address ?>"/>
+          </div>      
+        </div>
 
-      <div class="forms_fields">
-        <label class="forms_label" for="supplier_phone">Teléfono</label>
-        <div class="forms_inputs_fields">
-          <i class="fa-solid fa-phone forms_icons"></i>
-          <input type="text" class="forms_inputs input_phone_supplier" id="supplier_phone" name="supplier_phone" placeholder="Ej: 666999666 / +34 666333555" value="<?php echo $supplierData[0]->phone ?>"/>
-        </div>      
-      </div>
+        <div class="forms_fields">
+          <label class="forms_label" for="supplier_postal_code">Código Postal</label>
+          <div class="forms_inputs_fields">
+            <i class="fa-solid fa-envelopes-bulk forms_icons"></i>
+            <input type="text" class="forms_inputs input_postal_code_supplier" id="supplier_postal_code" name="supplier_postal_code" placeholder="Ej: 41003" value="<?php echo $supplierData[0]->postal_code ?>"/>
+          </div>      
+        </div>
 
-      <div class="forms_fields">
-        <label class="forms_label" for="supplier_email">Correo electrónico</label>
-        <div class="forms_inputs_fields">
-          <i class="fa-sharp fa-solid fa-envelope forms_icons"></i>
-          <input type="text" class="forms_inputs input_email_supplier" id="supplier_email" name="supplier_email" placeholder="proveedor@ejemplo.com" value="<?php echo $supplierData[0]->email ?>"/>
-        </div>      
-      </div>
+        <div class="forms_fields">
+          <label class="forms_label" for="supplier_town">Ciudad</label>
+          <div class="forms_inputs_fields">
+            <i class="fa-solid fa-tree-city forms_icons"></i>
+            <input type="text" class="forms_inputs input_town" id="supplier_town" name="supplier_town" placeholder="Ej: Villaluenga del Rosario" value="<?php echo $supplierData[0]->town ?>">
+          </div>      
+        </div>
+
+        <div class="forms_fields">
+          <label class="forms_label" for="supplier_province">Provincia</label>
+          <div class="forms_inputs_fields">
+            <i class="fa-solid fa-city forms_icons"></i>
+            <input type="text" class="forms_inputs input_province_supplier" id="supplier_province" name="supplier_province" placeholder="Ej: Cádiz" value="<?php echo $supplierData[0]->province ?>"/>
+          </div>      
+        </div>
+
+        <div class="forms_fields">
+          <label class="forms_label" for="supplier_country">País</label>
+          <div class="forms_inputs_fields">
+            <i class="fa-solid fa-earth-americas forms_icons"></i>
+            <input type="text" class="forms_inputs input_country_supplier" id="supplier_country" name="supplier_country" placeholder="Ej: España" value="<?php echo $supplierData[0]->country ?>"/>
+          </div>      
+        </div>
+
+        <div class="forms_fields">
+          <label class="forms_label" for="supplier_phone">Teléfono</label>
+          <div class="forms_inputs_fields">
+            <i class="fa-solid fa-phone forms_icons"></i>
+            <input type="text" class="forms_inputs input_phone_supplier" id="supplier_phone" name="supplier_phone" placeholder="Ej: 666999666 / +34 666333555" value="<?php echo $supplierData[0]->phone ?>"/>
+          </div>      
+        </div>
+
+        <div class="forms_fields">
+          <label class="forms_label" for="supplier_email">Correo electrónico</label>
+          <div class="forms_inputs_fields">
+            <i class="fa-sharp fa-solid fa-envelope forms_icons"></i>
+            <input type="text" class="forms_inputs input_email_supplier" id="supplier_email" name="supplier_email" placeholder="proveedor@ejemplo.com" value="<?php echo $supplierData[0]->email ?>"/>
+          </div>      
+        </div>
 
       <div class="forms_fields">
         <label class="forms_label" for="supplier_web">Web corporativa</label>
@@ -140,7 +140,8 @@
           <input type="text" class="forms_inputs input_contact_person" id="supplier_contact_person" name="supplier_contact_person" placeholder="Apellidos, Nombre" value="<?php echo $supplierData[0]->contact_person ?>"/>
         </div>      
       </div>
-    </div>
+      </div>
+    
                 <!-- input oculto que recibirá valor de token de ventana principal y subventana buscador -->    
     <input type="hidden" id="tokenSupplier" name="tokenSupplier" placeholder="tokenValue Subwindow" value="<?php echo $supplierData[0]->token; ?>" /> 
                 <!-- ------------------------------------------------------- -->

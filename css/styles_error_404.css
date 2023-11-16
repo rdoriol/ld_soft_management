@@ -1,0 +1,57 @@
+/* ERROR 404 
+------------*/
+
+#main_nav {
+    display: none;
+}
+.main_container {
+    display: block;   
+    width: 100%;
+}
+
+.item_main_container_section {
+    width: 100%
+}
+
+body {
+    background-color: #191919;
+}
+
+.error_404 {
+    width: 20%;
+    margin-right: 5%;
+}
+
+h1 {
+    font-weight: 600;
+    color: #ffffff;
+    
+ }
+
+ h4 {
+    background-color: var(--buttons);
+    width: 30%;
+    margin: 0 auto;
+    padding-top: 8px;
+    padding-top: 8px;
+    border-radius: 8px;
+    
+ }
+ a {
+    color: gold;
+    transition: .3s;
+    vertical-align: super;
+    
+ }
+ a:hover {
+    color: #ffffff;
+    font-size: 20px;;
+    text-decoration: none;
+
+ }
+
+ @media (max-width: 1050px) {
+    .error_404 {
+        margin-top: 100px;
+    }
+ }

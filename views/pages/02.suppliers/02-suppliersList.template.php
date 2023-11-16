@@ -42,6 +42,7 @@
         <tbody>
 </table>
 
+
 <!-- JavaScript para limpiar historial del formulario de búsqueda -->
 <script>                
     window.history.replaceState(null, null, window.location.href);

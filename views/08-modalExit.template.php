@@ -12,7 +12,7 @@
                 </div>
                 <div class="modal-footer btn_group">
                     <button type="button" id="btn_ok_exit" class="btn btn-default" data-toggle="modal" data-whatever="ok">Aceptar</button>
-                    <button type="button" id="btn_cancel_exit" class="btn" data-dismiss="modal">Cancelar</button>
+                    <button type="button" id="btn_cancel_exit" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
         </div>
