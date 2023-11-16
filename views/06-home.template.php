@@ -67,7 +67,8 @@
         <img src="./images/home/warning.png" title="gestion_clientes" />
         <h5>Incidencias</h5>
         <ul> 
-            <li style="color:gold;">Contactar <a href="mailto:soporte@ldsoft.es">soporte@ldsoft.es</a></li>
+            <li style="color:gold;">Contactar <a href="#">901 253 654</a></li>
+            <li><a href="mailto:soporte@ldsoft.es">soporte@ldsoft.es</a></li>
         </ul>
     </div>
 

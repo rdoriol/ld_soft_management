@@ -786,6 +786,10 @@ footer {
     display: none;
 }
 
+#new_customer_form .btn-group {
+    margin-right: 15%; 
+}
+
 /* Responsive Web Design newCustomer */
 
 @media (max-width: 715px) {
@@ -812,9 +816,6 @@ footer {
     font-size: 14px;
 }
 
-#new_customer_form .btn-group {
-    margin-right: 20%; 
-}
 
  /* 02.SUPPLIER " newSupplier.template.php"
 -----------------------------------------------*/
