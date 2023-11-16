@@ -301,7 +301,7 @@ select {
 ------------------------------*/  
 .main_container {
     display: flex;
-    min-height: 800px;
+    min-height: 743px;
 }
 
 .item_main_container_nav {
@@ -358,7 +358,7 @@ select {
 
     /* para activar/desactivar botón a través de JQuery */
 .li_active_button, .li_active_page {
-    background-color: var(--buttons);    
+    background-color: var(--headerFotter);   
     color: #ffffff;
     border-radius: none;
 }
@@ -471,6 +471,7 @@ footer {
     min-height: 10%;
     padding-top: 1%;
     padding-bottom: 1%;
+    bottom: 0;
 }
 
 footer {
@@ -481,7 +482,6 @@ footer {
     display: flex;
     justify-content: space-between;   
     align-items: end;
-    margin-left: 0.3%;
 }
 
 .flex_container img {

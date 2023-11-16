@@ -9,15 +9,4 @@ $(document).ready(function(){
     $("#print_invoice").click(function(){
         printDiv();                         // función ubicada en 07-customers_prints.js
     })
-
-    /**
-     * Función para imprimir contenido List
-     */ 
-    $("#").click(function(){
-        printDiv();       
-    })  
-
- 
-
-   
 })
