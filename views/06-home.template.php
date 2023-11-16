@@ -64,6 +64,14 @@
     </div>
 
     <div class="grid_container">
+        <img src="./images/home/warning.png" title="gestion_clientes" />
+        <h5>Incidencias</h5>
+        <ul> 
+            <li style="color:gold;">Contactar <a href="mailto:soporte@ldsoft.es">soporte@ldsoft.es</a></li>
+        </ul>
+    </div>
+
+    <div class="grid_container">
         <img src="./images/home/session_close.png" title="gestion_clientes" />
         <h5>Cerrar Sesión</h5>
         <ul> 

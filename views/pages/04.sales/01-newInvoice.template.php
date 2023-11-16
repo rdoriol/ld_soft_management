@@ -52,7 +52,7 @@
             <div class="col-xs-6">
                 <h3 class="text-left">Cliente</h3>
 
-            <table class="text-left">
+            <table class="text-left ml-4 mt-3">
                 <input type="hidden" id="customer_number_inv_hidden" name="customer_number_inv" placeholder="customer_number_inv" value="<?php echo ""; ?>" /> <!-- input oculto para poder capturar valor $outputNumber-->
                 <tr><th>Nº Cliente</th><td class="pl-1" id="customer_number_inv"><?php echo $customerInvoiceData[0]->id_customer_ci; ?></td></tr> 
                 <tr><th>Nombre</th><td id="customer_name_inv"><?php echo $customerInvoiceData[0]->name_customer; ?></td></tr>
@@ -66,7 +66,7 @@
             </div>      
         </div>        
               
-        <div class="col-xs-2 text-right mr-2">
+        <div class="col-xs-2 text-right mr-4 mt-5">
             <strong>Fecha Factura</strong>
             <br> 
             <p id="output_number">

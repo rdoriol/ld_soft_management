@@ -1,8 +1,10 @@
 <footer>
 
-    <div class="flex_footer">
-        <div class="flex_container contact_email">
-            <p mailto="rdoriol@gmail.com"><a href="mailto:soporte@ldsoft.es">soporte@ldsoft.es</a></p>
+    <div class="flex_footer">      
+
+        <div class="cau">
+            <h5><img src="./images/home/warning.png">Incidencias</h5>
+            <a href="mailto:soporte@ldsoft.es">soporte@ldsoft.es</a>
         </div>
 
         <div class="flex_container">
