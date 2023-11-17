@@ -1,5 +1,14 @@
 <?php 
     require_once "validations_general.controller.php";
+
+   /**
+    * Se protege fichero modelo.php. Si alguien intenta acceder al fichero directamente se el reenvía a página de error
+    */  /*
+    if(!defined("CON_CONTROLADOR")) 
+    {   header("location: ../index.php?pages=error");
+        echo "Fichero no accesible";
+        die();
+    }   /*
     
     /**
      * Clase para implementar métodos devalidaciones para carpeta "03.inventory"

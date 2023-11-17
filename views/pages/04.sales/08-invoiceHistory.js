@@ -10,6 +10,16 @@ $(document).ready(function(){
         subwindowInvoiceHistory = window.open("index.php?pages=06-invoiceHistoryPopUp", "Búsqueda", options); 
     })
 
+    /**
+     * Función que lanzará fichero php para generar un documento pdf (copias de facturas)
+     */
+    $("#btn_invoice_copy_pdf").click(function() {                  
+
+        if($("#id_customer_item").attr("readonly")) {
+            window.open('./pdf_invoice_copy.php');                  
+        }
+    })  
+
 })
 
 /**
@@ -27,10 +37,10 @@ function getSubwindowOutputProduct(respuesta) {
  */
 function getRegisterOutputProductsAjax() {  
    
-    var tokenOutputsValue = $("#tokenOutputs").val();             // Se obtiene valor del token de inputsProduct a buscar en base de datos
+    var tokenOutputsValue = $("#tokenOutputs").val();            // Se obtiene valor del token de inputsProduct a buscar en base de datos
 
     var dataForm = new FormData(); 
-    //                    name         value                    // Se generan datos de form para enviarlos en formato PHP ($_POST[])   
+    //                    name         value                     // Se generan datos de form para enviarlos en formato PHP ($_POST[])   
     dataForm.append("tokenOutputs", tokenOutputsValue);          // Se utilizará para mostrar datos de movimientos de entradas en 02-productsInputs.template.php  
    
     $.ajax({
@@ -42,7 +52,9 @@ function getRegisterOutputProductsAjax() {
         processData: false,
         dataType: "json",
         success: function(request){           
-                    if(request) { 
+                    if(request) {                          
+                                // Se crea cookie con token para utilizar en copia de facturas pdf 
+                        document.cookie = "token_customer_invoice="+request[0][0].token_customer_invoice;
 
                                 /* Bloque para mostrar datos de una factura concreta en 01-newInvoice.template.php (consulta recibida de la tabla sql customer_invoices)
                                     -------------------------------------------------------------------------------------*/ 

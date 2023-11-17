@@ -133,6 +133,10 @@
               {
                 include $page . ".template.php";
               }
+              else if($page == "pdf_invoice_copy") //todo
+              {
+                include $page . ".php";
+              }
               else
               {
                 include "04-error404.template.php";

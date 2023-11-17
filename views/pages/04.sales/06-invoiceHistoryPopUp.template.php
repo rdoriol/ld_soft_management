@@ -1,9 +1,23 @@
+<?php
+      // Condición para verificar que se ha iniciado sesión por usuario, si no es así, se reenviará a página de login 
+    if(!isset($_SESSION["loginCheck"])) {
+      header("location: index.php");
+      exit;   
+    }
+    else {
+      if($_SESSION["loginCheck"]  != "ok") {
+          header("location: index.php");
+          exit;
+      }
+    }  
+?>
+
 <!-- CSS PERSONALIZADO
         ---------------------->
         <style>@import url("./css/styles-06-search.template.php.css");</style>
         
 
-<h4 class="forms_subtitle rounded">Buscar Facturas</h4>
+<h4 class="forms_subtitle rounded title_h2">Buscar Facturas</h4>
 
         <!-- SEARCH BAR
             ---------------------->

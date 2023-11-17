@@ -50,6 +50,10 @@ select {
     border: none;
 }
 
+.title_h2 {
+    margin-top: 50px;
+}
+
 .forms_subtitle {
     background-color: gold;
     width: 50%;
@@ -213,7 +217,7 @@ select {
 ------------------------------*/
  header {
     background-color: var(--headerFotter);
-    margin-bottom: 50px;
+    /* margin-bottom: 50px; */
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -294,6 +298,10 @@ select {
         margin-left: auto;
         margin-right: auto;
     }  
+
+    .title_h2 {
+        margin-top: 100px;
+    }
 }
 
 
@@ -307,6 +315,7 @@ select {
 .item_main_container_nav {
     width: 13%;
     /* overflow-y: scroll; */
+    background-color: #CCCCCC;
 }
 
 .item_main_container_section {
@@ -321,6 +330,7 @@ select {
     font-size: 13px;
     font-family: Helvetica;  
     display: block; 
+    margin-top: 50px;
 }
 
 #main_nav .li_item {
@@ -336,9 +346,10 @@ select {
     font-weight: bold; 
     width: 145px;
     padding: 5px;
-    border-radius: 5px;
+    border-radius: 4px;
     text-align: start;
     color: var(--buttons2);
+    box-shadow: 3px 3px 3px var(--headerFotter);
 }
 
 .submenu {
@@ -348,6 +359,7 @@ select {
     border-bottom-right-radius: 5px;
     border-top-right-radius: none;
     border-top-left-radius: none;
+    box-shadow: 2px 2px 2px var(--headerFotter);
 }
 
 .submenu li {
@@ -410,6 +422,7 @@ select {
     header {
         position: fixed;     
         z-index: 10;
+        top: 0;
     }
 
     .logo_header_inline {
@@ -460,7 +473,7 @@ select {
      /* SECTION CONTAINER "base.template.php"
 ---------------------------------------------*/
 #main_container_section {   
-    overflow-y: auto;  
+   /* overflow-y: auto;   */
 }
 
      /* FOOTER "03-footer.template.php"
@@ -482,10 +495,12 @@ footer {
     display: flex;
     justify-content: space-between;   
     align-items: end;
+    width: 95%;
 }
 
 .flex_container img {
     width: 100px;
+    /*margin-left: 50%;*/
 }
 
 .flex_container p {
@@ -565,7 +580,7 @@ footer {
 -----------------------------------------------*/
 
 #home_title {
-    /* margin-right: 19%; */
+    /* margin-right: 19%; */   
     margin-bottom: 60px;;
 }
 
@@ -576,7 +591,8 @@ footer {
     row-gap: 34px;
     color: #ffffff;
     width: 70%;
-  /*  margin-right: 19%; */   
+    margin-right: 19%; 
+    margin-top: 100px;
 }
 
 .grid_container {
@@ -659,12 +675,17 @@ footer {
     .main_container {
         display: block;
     }
+
+    .grid_home {       
+        margin-right: 11%;        
+    }
 }
 
 @media (max-width: 991px) {
 
     .grid_home {
        width: 90%;
+       margin-right: 0;
     }
 }
 
@@ -687,7 +708,8 @@ footer {
     .grid_home {
         grid-template-columns: repeat(2, 1fr);
         width: 68%;
-        height: 468px;;
+        height: 468px;
+        margin-right: 20%
     }
 }
 
@@ -852,6 +874,12 @@ footer {
     }
 }
 
+@media (max-width: 894px) {
+    .flex_box {
+        margin-left: 130px;
+    }
+}
+
 @media (max-width: 767px) {
     
     .forms_flex_supplier {   
@@ -865,7 +893,16 @@ footer {
         width: 357px;
     }
 
+    #new_supplier_form .btn-group {
+        margin-right: 34%; 
+    }
  }
+
+ @media (max-width: 550px) {
+    .flex_box {
+        margin-left: 10%;
+    }
+}
 
   /* 03.INVENTORY " newProduct.template.php"
 -----------------------------------------------*/

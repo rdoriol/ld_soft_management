@@ -12,7 +12,7 @@
     }                                     
 ?>
 
-<h2 class="li_active_page rounded" id="home_title">Inicio</h2>
+<!-- <h2 class="li_active_page rounded title_h2" id="home_title">Inicio</h2> -->
 
 <div class="grid_home" id="home">
 

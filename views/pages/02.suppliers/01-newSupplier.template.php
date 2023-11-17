@@ -1,4 +1,18 @@
 <?php
+      // Condición para verificar que se ha iniciado sesión por usuario, si no es así, se reenviará a página de login 
+    if(!isset($_SESSION["loginCheck"])) {
+      header("location: index.php");
+      exit;   
+    }
+    else {
+      if($_SESSION["loginCheck"]  != "ok") {
+          header("location: index.php");
+          exit;
+      }
+    }  
+?>
+
+<?php
   $supplierData = array();
     
       // Condición para controlar si se muestran datos en el formulario o se muestra en blanco
@@ -17,7 +31,7 @@
   </script>
 
 
-<h2 class="li_active_page rounded">Ficha Proveedores</h2>
+<h2 class="li_active_page rounded title_h2">Ficha Proveedores</h2>
 
 <form class="general_forms" id="new_supplier_form" action="<?php $_SERVER['REQUEST_URI']; ?>" method="post" onsubmit= "">
   <h4 class="forms_subtitle rounded">Altas | Modificar | Eliminar</h4>

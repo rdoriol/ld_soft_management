@@ -1,4 +1,18 @@
 <?php
+      // Condición para verificar que se ha iniciado sesión por usuario, si no es así, se reenviará a página de login 
+    if(!isset($_SESSION["loginCheck"])) {
+      header("location: index.php");
+      exit;   
+    }
+    else {
+      if($_SESSION["loginCheck"]  != "ok") {
+          header("location: index.php");
+          exit;
+      }
+    }  
+?>
+
+<?php
   $productData = array();
    
       // Condición para controlar si se muestran datos en el formulario o se muestra en blanco
@@ -16,7 +30,7 @@
     }
   </script>
 
-<h2 class="li_active_page rounded">Ficha Productos</h2>
+<h2 class="li_active_page rounded title_h2">Ficha Productos</h2>
 
 <form class="general_forms" id="new_product_form" action="<?php echo $SESSION['PHP_SELF']; ?>" method="post" onsubmit="">
   <h4 class="forms_subtitle rounded">Altas | Modificar | Eliminar</h4>

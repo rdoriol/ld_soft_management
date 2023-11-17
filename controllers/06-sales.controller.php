@@ -1,11 +1,21 @@
 <?php
+
+     /**
+    * Se protege fichero modelo.php. Si alguien intenta acceder al fichero directamente se el reenvía a página de error
+    */  /*
+    if(!defined("CON_CONTROLADOR")) 
+    {   header("location: ../index.php?pages=error");
+        echo "Fichero no accesible";
+        die();
+    }   /*
+
     /**
      * Clase que implementará métodos para realizar CRUD recibiendo datos de la Vista y enviándolos al Modelo.
      */
     class SalesController  { 
 
          /**
-         * Método que recibirá datos del formulario Entrada Productos y los enviará a la base de datos mediante método del Modelo.
+         * Método que recibirá datos del formulario Entrada Productos y los enviará a la base de datos mediante método del Modelo. Este método se empleará en método ctrCreateProductOutput() de esta misma clase
          * @param string $table
          */
         static public function ctrCreateCustomerInvoice($table) {                     
@@ -107,7 +117,7 @@
                             }
                         }
                             // Se lanza página externa para generar pdf de la factura 
-                        echo "<script>window.open('./pdf.php');</script>"; 
+                        echo "<script>window.open('./pdf_invoice.php');</script>"; 
                     }
                     else {
                         echo "<div class='text-center alert-danger rounded'><p class='font-weight-bold'>No grabado.</p><p class='font-weight-bold'>Los siguientes campos son obligatorios:</p><ul><li>Cliente</li><li>Ref.</li><li>Cant.</li><li>Precio (€).</li></ul></div>";
@@ -147,7 +157,8 @@
          * @param $table string, $key string, $value(string, int)
          * @return $data array de objetos con datos de la base de datos. 
          */
-        static public function ctrToListOutputsProducts($table, $key=null, $value=null, $valueDate=null) {              
+        static public function ctrToListOutputsProducts($table, $key=null, $value=null, $valueDate=null) {  
+                    
             try {                
                 if(isset($_POST["search"]) && $key != ""){ 
                     if($key == "full_list") {                      
@@ -155,13 +166,25 @@
                     }
                     else if(!empty($valueDate) ) {
                         $data = SalesModel::mdlToListOutputsProducts($table, $key, $valueDate);
+
+                        if($table == "customer_invoices") { // Condición para grabar token en variable global $_COOKIE. Se utilizará para generar copias de facturas en pdf
+                            setcookie("token_customer_invoice", $data[0]->token_customer_invoice); // Se crea cookie para utilizar en copias de facturas pdf
+                        }                            
                     }
                     else {                
                         $data = SalesModel::mdlToListOutputsProducts($table, $key, $value);
+
+                        if($table == "customer_invoices") { // Condición para grabar token en variable global $_COOKIE
+                            setcookie("token_customer_invoice", $data[0]->token_customer_invoice); // Se crea cookie para utilizar en copias de facturas pdf
+                        }  
                     }
                 }
-                else {  // Para consultas realizadas desde la página principal 01-newInvoice
+                else {  // Para consultas realizadas desde la página principal 01-newInvoice (subventana)
                     $data = SalesModel::mdlToListOutputsProducts($table, $key, $value);
+
+                    if($table == "customer_invoices") { // Condición para grabar token en variable global $_COOKIE
+                        setcookie("token_customer_invoice", $data[0]->token_customer_invoice); // Se crea cookie para utilizar en copias de facturas pdf
+                    }  
                 }
                 return $data;
             }

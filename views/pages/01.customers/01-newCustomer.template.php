@@ -1,4 +1,17 @@
 <?php
+      // Condición para verificar que se ha iniciado sesión por usuario, si no es así, se reenviará a página de login 
+    if(!isset($_SESSION["loginCheck"])) {
+      header("location: index.php");
+      exit;   
+    }
+    else {
+      if($_SESSION["loginCheck"]  != "ok") {
+          header("location: index.php");
+          exit;
+      }
+    }  
+?>
+<?php
   $customerData = array();
   $particularCustomer; 
   $privateCustomer;
@@ -20,7 +33,7 @@
     }
   </script>
 
-<h2 class="li_active_page rounded">Ficha Cliente</h2>
+<h2 class="li_active_page rounded title_h2">Ficha Cliente</h2>
 
 <form class="general_forms" id="new_customer_form" action="<?php $_SERVER['REQUEST_URI']; ?>" method="post" onsubmit= "">
   <h4 class="forms_subtitle rounded">Crear | Modificar | Eliminar</h4>

@@ -1,8 +1,13 @@
 <?php
+    /** 
+     * Variable que contralará que nadie aacceda directamente a un fichero php interno
+    */
+    const CON_CONTROLADOR = 1;
+
     /**
     * Fichero principal que renderizará por pantalla la plantilla base junto con las distintas páginas.
     */
-    //require('./fpdf/fpdf.php');
+ 
 
     require_once "./controllers/baseTemplate.controller.php";
     require_once "./controllers/validations_general.controller.php";

@@ -1,5 +1,14 @@
 <?php
-        require_once "connection.model.php";
+    require_once "connection.model.php";
+
+     /**
+    * Se protege fichero modelo.php. Si alguien intenta acceder al fichero directamente se el reenvía a página de error
+    */  /*
+    if(!defined("CON_CONTROLADOR")) 
+    {   header("location: ../index.php?pages=error");
+        echo "Fichero no accesible";
+        die();
+    }   */
 
     /**
      * Clase que implentará métodos para realizar un CRUD completo en la tabla "outputs_products" y "customer_invoices" de la base de datos.

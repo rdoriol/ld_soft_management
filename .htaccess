@@ -11,14 +11,15 @@ Options All -Indexes
 # RewriteCond %{HTTP_HOST} !on
 # RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
 
-    # Asegurando archivo .htaccess
-<FilesMatch "\.php$">
-    Order Allow,Deny
-    Deny from all
-</FilesMatch>
 
-<FilesMatch "index[0-9]?\.php$">
-    Order Allow,Deny
-    Allow from all
-</FilesMatch>
+    # Asegurando archivo .htaccess
+# <FilesMatch "\.php$">
+#   Order Allow,Deny
+#  Deny from all
+# </FilesMatch>
+
+# <FilesMatch "index[0-9]?\.php$">
+#    Order Allow,Deny
+#    Allow from all
+# </FilesMatch>
 

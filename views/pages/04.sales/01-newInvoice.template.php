@@ -1,4 +1,18 @@
 <?php
+      // Condición para verificar que se ha iniciado sesión por usuario, si no es así, se reenviará a página de login 
+    if(!isset($_SESSION["loginCheck"])) {
+      header("location: index.php");
+      exit;   
+    }
+    else {
+      if($_SESSION["loginCheck"]  != "ok") {
+          header("location: index.php");
+          exit;
+      }
+    }  
+?>
+
+<?php
     $invoiceData = array();
     $readOnly = ""; 
     
@@ -8,7 +22,7 @@
         $customerInvoiceData = SalesController::ctrToListOutputsProducts("customer_invoices", "token_customer_invoice", $_GET["token"]);     // Se llama a función para leer datos de la tabla "customer_invoices"      
         $outputInvoiceData = SalesController::ctrToListOutputsProducts("outputs_products", "op.id_customer_invoice ", $customerInvoiceData[0]->id_customer_invoice );    // Se llama a función para leer datos de la tabla "outputsproducts"      
         $readOnly = "readonly"; // variable que bloqueará todos los campos cuando se consulte una factura ya existente. (Las facturas no se pueden editar ni eliminar)
-    } 
+    }      
 ?>    
 
     <script>    // script javascript para lanzar ventana modal confirmando éxito de operaciones.
@@ -20,7 +34,7 @@
     }
   </script>
 
-<h2 class="li_active_page rounded">Ventas</h2>
+<h2 class="li_active_page rounded title_h2">Ventas</h2>
 
 <form class="general_forms" id="products_inputs_form" action="" method="post" onsubmit="">
   <h4 class="forms_subtitle rounded">Generar factura</h4>
@@ -69,7 +83,7 @@
         <div class="col-xs-2 text-right mr-4 mt-5">
             <strong>Fecha Factura</strong>
             <br> 
-            <p id="output_number">
+            <p id="output_invoice_created_date">
                 <?php   
                     if(isset($_GET["token"]) && !empty($_GET["token"])) {
                         echo $customerInvoiceData[0]->created_date_customer_invoice;      // Para mostrar datos de facturas del historial
@@ -81,7 +95,7 @@
             </p>                 
             <strong>Nº Factura</strong>
             <br>
-            <p id="output_invoice_created_date">
+            <p id="output_number">
                 <?php  
                     if(isset($_GET["token"]) && !empty($_GET["token"])) {
                         echo $customerInvoiceData[0]->output_number;                       // Para mostrar datos de facturas del historial
@@ -181,7 +195,7 @@
                         <!-- input oculto que recibirá valor de token de customer de subventana -->
         <input type="hidden" id="token_customer" name="token_customer" placeholder="token_customer Subwindow" value="<?php //echo $inputProductData[0]->token_input_product; ?>" /> 
                         <!-- input oculto que recibirá valor de token de subventana -->
-        <input type="hidden" id="tokenOutputs" name="tokenOutputs" placeholder="tokenOutputs Subwindow" value="<?php //echo $inputProductData[0]->token_input_product; ?>" /> 
+        <input type="hidden" id="tokenOutputs" name="tokenOutputs" placeholder="tokenOutputs Subwindow" value="<?php echo $customerInvoiceData[0]->token_customer_invoice; ?>" /> 
                         <!-- input oculto para recibir/capturar valor token de subventana buscador para búsqueda de productos  -->
          <input type="hidden" id="tokenProduct" placeholder="tokenProduct Subwindow. Hide" value="" />
                         <!-- input oculto que almacenará valor de atributo "id" de la fila seleccionada -->
@@ -190,12 +204,12 @@
         <input type="hidden" id="request_ajax" placeholder="request_ajax" value="false" />
                        
                                                  
-                                                  <!-- -------------------------- -->
+                                                  <!-- -------------------------- -->      
 
     <div class="btn-group p-3 ">      
-      <button type="submit" class="btn btn-primary mr-5" id="btn_invoice_product_submit" name="btn_output_product_submit"><i class="fa-solid fa-file-invoice-dollar"></i>&nbsp Facturar</button>
-      <a href="./pdf.php" target="_blank" class="btn btn-dark mr-5" id="btn_invoice_pdf"><i class="fa-solid fa-file-pdf"></i>&nbsp Copia factura</a>
-      <button type="button" role="link" class="btn btn-secondary mr-5" name="exit_input_product" onClick="window.location='index.php?pages=01-newInvoice'"><i class="fa-sharp fa-solid fa-rectangle-xmark"></i>&nbsp Cerrar registro</button>    
+        <button type="submit" class="btn btn-primary mr-5" id="btn_invoice_product_submit" name="btn_output_product_submit"><i class="fa-solid fa-file-invoice-dollar"></i>&nbsp Facturar</button>
+        <button type="button" target="_blank" class="btn btn-dark mr-5" id="btn_invoice_copy_pdf"><i class="fa-solid fa-file-pdf"></i>&nbsp Copia factura</button>
+        <button type="button" role="link" class="btn btn-secondary mr-5" name="exit_input_product" onClick="window.location='index.php?pages=01-newInvoice'"><i class="fa-sharp fa-solid fa-rectangle-xmark"></i>&nbsp Cerrar registro</button>    
     </div>
 
                     <!-- Mensajes ocultos de validaciones y realización de operaciones -->
@@ -232,7 +246,7 @@
  
         /* Bloque condicional para borrar datos almacenados del formulario html una vez enviados.
         ----------------------------------------------------------------------------------------*/
-      if($createProductOutput == "true"/* || $updateProduct == "true" || $checkDeleteRegister == "true"*/) {
+      if($createProductOutput == "true") {
         echo "<script>
                 if(window.history.replaceState) {
                   window.history.replaceState(null, null, window.location.href);

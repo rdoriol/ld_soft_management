@@ -1,16 +1,27 @@
-
- 
-    
-  <script>   // script javascript para lanzar ventana modal confirmando éxito operaciones.
-    if(window.sessionStorage.getItem('modalAlert') == 'true') {
-      $(function(){ 
-        $('#product_success_modal').modal('show');
-      });
-      window.sessionStorage.setItem('modalAlert', 'false');
+<?php
+      // Condición para verificar que se ha iniciado sesión por usuario, si no es así, se reenviará a página de login 
+    if(!isset($_SESSION["loginCheck"])) {
+      header("location: index.php");
+      exit;   
     }
-  </script>    
+    else {
+      if($_SESSION["loginCheck"]  != "ok") {
+          header("location: index.php");
+          exit;
+      }
+    }  
+?> 
+    
+<script>   // script javascript para lanzar ventana modal confirmando éxito operaciones.
+  if(window.sessionStorage.getItem('modalAlert') == 'true') {
+    $(function(){ 
+      $('#product_success_modal').modal('show');
+    });
+    window.sessionStorage.setItem('modalAlert', 'false');
+  }
+</script>    
 
-<h2 class="li_active_page rounded">Entradas Productos</h2>
+<h2 class="li_active_page rounded title_h2">Entradas Productos</h2>
 
 <form class="general_forms" id="products_inputs_form" action="" method="post" onsubmit="">
   <h4 class="forms_subtitle rounded">Movimientos de entradas</h4>

@@ -1,4 +1,13 @@
-<?php    
+<?php  
+   /**
+    * Se protege fichero modelo.php. Si alguien intenta acceder al fichero directamente se el reenvía a página de error
+    */  /*
+    if(!defined("CON_CONTROLADOR")) 
+    {   header("location: ../index.php?pages=error");
+        echo "Fichero no accesible";
+        die();
+    }   /*
+
     /**
      * Clase que conectará la vista base.template.php con index.php
      */

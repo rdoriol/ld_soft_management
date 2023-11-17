@@ -8,8 +8,16 @@
     require_once "../models/01-customers.model.php";
     require_once "../models/03-inventory.model.php";
     require_once "../models/04-products_inputs_inventory.model.php";
-    require_once "../models/05-sales.model.php";    // todo
+    require_once "../models/05-sales.model.php";   
 
+      /**
+    * Se protege fichero modelo.php. Si alguien intenta acceder al fichero directamente se el reenvía a página de error
+    */  /*
+    if(!defined("CON_CONTROLADOR")) 
+    {   header("location: ../index.php?pages=error");
+        echo "Fichero no accesible";
+        die();
+    }   */
     /**
      * Clase que enviará via AJAX registros de la base de datos al documento HTML, pasando previamente por ficheros .js
      */
@@ -43,10 +51,10 @@
                         break;
                     case "ci.token_customer_invoice":
                         $dataCustomerInvoice = SalesController::ctrToListOutputsProducts($table, $key, $value);                                   // Se lanza método para obtener datos de tabla sql customer_invoice
-                        $outputNumber = $dataCustomerInvoice[0]->output_number;                                                                 // De la tabla anterior se obtiene el número de movimiento (output_number)
-                        $dataOutputInvoice = SalesController::ctrToListOutputsProducts("outputs_products", "op.output_number", $outputNumber);     // Se lanza método para obtener datos de tabla sql outputs_product con clausula WHERE $outputNumber
-                        
-                        $resultData = array ($dataCustomerInvoice, $dataOutputInvoice);                                                       // Se genera array con datos en otros 2 arrays para enviarlo como respuesta a getRegisterOutputsProductsAjax()
+                        $outputNumber = $dataCustomerInvoice[0]->output_number;                                                                   // De la tabla anterior se obtiene el número de movimiento (output_number)
+                        $dataOutputInvoice = SalesController::ctrToListOutputsProducts("outputs_products", "op.output_number", $outputNumber);    // Se lanza método para obtener datos de tabla sql outputs_product con clausula WHERE $outputNumber
+                       
+                        $resultData = array ($dataCustomerInvoice, $dataOutputInvoice);                                                           // Se genera array con datos en otros 2 arrays para enviarlo como respuesta a getRegisterOutputsProductsAjax()
                         break;
                     default:
                        echo "No se ha recibido campo ni valor a buscar";
