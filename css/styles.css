@@ -309,7 +309,7 @@ select {
 ------------------------------*/  
 .main_container {
     display: flex;
-    min-height: 1200px;
+    min-height: 800px;
 }
 
 .item_main_container_nav {

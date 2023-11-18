@@ -80,7 +80,7 @@
             </div>      
         </div>        
               
-        <div class="col-xs-2 text-right mr-4 mt-5">
+        <div class="col-xs-2 text-right mr-5 mt-5">
             <strong>Fecha Factura</strong>
             <br> 
             <p id="output_invoice_created_date">
