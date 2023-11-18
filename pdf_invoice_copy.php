@@ -15,6 +15,7 @@
          * Método que sobreescribirá el Header por defecto de fpdf
          */
         function Header() {
+
                 $this->SetFont("Helvetica","B",35);   
                 $this->SetTextColor(69, 69, 69);
                 $this->Cell(50, 12, "Factura", 0, 1, "C");
@@ -35,8 +36,18 @@
         /**
          * Método que sobreescribirá el Footer por defecto de fpdf
          */
-        Function Footer() {
-                $this->SetY(-50);
+        function Footer() {
+
+                $this->SetY(-10);
+                $this->SetFont("Arial", "", 9);
+                $this->Cell(0,10, utf8_DECODE("Página ").$this->PageNo()."",0,0,"C");
+        }
+
+        /**
+         * Método que mostrará la forma de pago de la factura
+         */
+        function paymentMethods() {
+                $this->SetY(-59.5);
 
                 $this->SetTextColor(69, 69, 69);
                 $this->SetFont("Arial","BU",12);                
@@ -45,13 +56,10 @@
                 $this->MultiCell(80, 6, utf8_DECODE("- Tarjeta"), "LR", "L");
                 $this->MultiCell(80, 6, utf8_DECODE("- Recibo Domiciliado"), "LR", "L");
                 $this->MultiCell(80, 6, utf8_DECODE("- Transferencia bancaria"), "LRB", "L");
-
-                $this->SetY(-10);
-                $this->Cell(0,10, utf8_DECODE("Página ").$this->PageNo()."",0,0,"C");
         }
     }                                               
 
-    
+   
         // Se obtiene valor de token de historial de factura, previamente almacenado en una cookie (tabla customer_invoices)
     if(isset($_COOKIE["token_customer_invoice"]) && !empty($_COOKIE["token_customer_invoice"])) {       
     
@@ -62,7 +70,7 @@
         $productsInvoice =  SalesController::ctrToListOutputsProducts("outputs_products", "op.output_number", $customerInvoice[0]->output_number);
     
         // Nombre de las columnas y ancho de las mísmas (array)
-        $columns = array("Ref."=> 15 , "Concepto"=> 100 , "Cant"=> 13 , "Precio ($str)"=> 22, "Desc (%)"=> 18, "Total (€)"=> 26);           
+        $columns = array("Ref."=> 15 , "Concepto"=> 100 , "Cant"=> 13 , "Precio (€)"=> 22, "Desc (%)"=> 18, "Total (€)"=> 26);           
     
     
         $pdf = new Pdf(); 
@@ -108,18 +116,18 @@
         $pdf->SetFont("Arial","",10);
         $pdf->Cell(43, 5, utf8_DECODE($customerInvoice[0]->address_customer), 0, 1, "L"); 
 
-        $pdf->SetFont("Arial","B",10);
-        $pdf->Cell(20, 5, utf8_DECODE("C. Postal"), 0, 0, "L", "T"); 
+        $pdf->SetFont("Arial","",10);
+        $pdf->Cell(20, 5, utf8_DECODE("C. Postal"), 0, 0, "R", "T"); 
         $pdf->SetFont("Arial","",10);
         $pdf->Cell(43, 5, $customerInvoice[0]->postal_code, 0, 1, "L"); 
 
-        $pdf->SetFont("Arial","B",10);
-        $pdf->Cell(20, 5, utf8_DECODE("Localidad"), 0, 0, "L", "T"); 
+        $pdf->SetFont("Arial","",10);
+        $pdf->Cell(20, 5, utf8_DECODE("Localidad"), 0, 0, "R", "T"); 
         $pdf->SetFont("Arial","",10);
         $pdf->Cell(43, 5, $customerInvoice[0]->town, 0, 1, "L"); 
 
-        $pdf->SetFont("Arial","B",10);
-        $pdf->Cell(20, 5, utf8_DECODE("Provincia"), 0, 0, "L", "T"); 
+        $pdf->SetFont("Arial","",10);
+        $pdf->Cell(20, 5, utf8_DECODE("Provincia"), 0, 0, "R", "T"); 
         $pdf->SetFont("Arial","",10);
         $pdf->Cell(43, 5, $customerInvoice[0]->province, 0, 1, "L"); 
 
@@ -127,11 +135,11 @@
 
         /* Filas de productos
         --------------------- */
-               
+              
 
-        $pdf->SetFont("Arial", "B", 11);
+        $pdf->SetFont("Helvetica", "B", 11);
         foreach($columns as $columnItem => $columnValue) {
-                $pdf->Cell($columnValue, 7, utf8_DECODE($columnItem), 1, 0, "C", "T");
+                $pdf->Cell($columnValue, 7,  iconv('UTF-8', 'windows-1252', $columnItem), 1, 0, "C", "T");
         }
 
         $pdf->Ln();
@@ -150,7 +158,45 @@
         /* Totales de factura
         --------------------- */
 
+        $pdf->SetY(-78);
+        $pdf->SetX(126);
+        $pdf->SetFont("Arial","B",11);
+        $pdf->Cell(52, 8, iconv('UTF-8', 'windows-1252', "Subtotal (€)"), "B", 0, "R"); 
+        $pdf->SetFont("Arial","B",11);
+        $pdf->Cell(26, 8, $customerInvoice[0]->subtotal_invoice, "B", 1, "R");
 
+        $pdf->SetY(-68);
+        $pdf->SetX(126);
+        $pdf->SetFont("Arial","B",11);
+        $pdf->Cell(52, 8, utf8_DECODE("Descuento (%)"), "B", 0, "R"); 
+        $pdf->SetFont("Arial","B",11);
+        $pdf->Cell(26, 8, $customerInvoice[0]->discount_invoice, "B", 1, "R");
+
+        $pdf->SetY(-58);
+        $pdf->SetX(126);
+        $pdf->SetFont("Arial","B",11);
+        $pdf->Cell(52, 8, iconv('UTF-8', 'windows-1252', "Subtotal con descuento (€)"), "B", 0, "R"); 
+        $pdf->SetFont("Arial","B",11);
+        $pdf->Cell(26, 8, $customerInvoice[0]->subtotal_with_discount_invoice, "B", 1, "R");
+
+        $pdf->SetY(-48.3);
+        $pdf->SetX(126);
+        $pdf->SetFont("Arial","B",11);
+        $pdf->Cell(52, 8, utf8_DECODE("Impuestos (21%)"), "B", 0, "R"); 
+        $pdf->SetFont("Arial","B",11);
+        $pdf->Cell(26, 8, $customerInvoice[0]->tax_invoice, "B", 1, "R");
+
+        $pdf->SetY(-40);
+        $pdf->SetX(126);
+        $pdf->SetFont("Arial","B",15);
+        $pdf->Cell(52, 8, iconv('UTF-8', 'windows-1252', "Total (€)"), "B", 0, "R", "T"); 
+        $pdf->SetFont("Arial","B",15);
+        $pdf->Cell(26, 8, $customerInvoice[0]->total_invoice, "B", 1, "R", "T");
+
+        /* Datos de pago
+        ---------------- */
+        $pdf->paymentMethods();
+       
 
 
        

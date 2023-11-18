@@ -309,7 +309,7 @@ select {
 ------------------------------*/  
 .main_container {
     display: flex;
-    min-height: 743px;
+    min-height: 1200px;
 }
 
 .item_main_container_nav {
@@ -472,9 +472,7 @@ select {
 
      /* SECTION CONTAINER "base.template.php"
 ---------------------------------------------*/
-#main_container_section {   
-   /* overflow-y: auto;   */
-}
+
 
      /* FOOTER "03-footer.template.php"
 ----------------------------------*/
@@ -483,7 +481,7 @@ footer {
     width: 100%;   
     min-height: 10%;
     padding-top: 1%;
-    padding-bottom: 1%;
+    padding-bottom: 1%;    
     bottom: 0;
 }
 
@@ -867,12 +865,6 @@ footer {
 }
 
 /* Responsive Web Design newCustomers - newSupplier */
-
-@media (max-width: 1139px) {
-    .flex_box {
-        margin-left: 0;
-    }
-}
 
 @media (max-width: 894px) {
     .flex_box {

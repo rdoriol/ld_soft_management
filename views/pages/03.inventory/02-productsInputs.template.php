@@ -167,7 +167,7 @@
 
     <div class="btn-group p-3">
       <button type="submit" class="btn btn-primary mr-5" id="btn_input_product_submit" name="btn_input_product_submit"><i class="fa-sharp fa-solid fa-pencil"></i>&nbsp Grabar</button>
-      <button type="button" role="link" class="btn btn-secondary mr-5" name="exit_input_product" onClick="window.location='index.php?pages=02-productsInputs'"><i class="fa-sharp fa-solid fa-rectangle-xmark"></i>&nbsp Cerrar registro</button>      
+      <button type="button" role="link" class="btn btn-secondary mr-5" name="exit_input_product" onClick="window.location='index.php?pages=02-productsInputs'"><i class="fa-sharp fa-solid fa-rectangle-xmark"></i>&nbsp Cerrar</button>      
     </div>
 
                     <!-- Mensajes ocultos de validaciones y realización de operaciones -->

@@ -76,7 +76,7 @@
         <img src="./images/home/session_close.png" title="gestion_clientes" />
         <h5>Cerrar Sesión</h5>
         <ul> 
-            <li><a id="session_close_home">Cerrar</a></li>
+            <li><a id="session_close_home">Salir</a></li>
         </ul>
     </div>
 

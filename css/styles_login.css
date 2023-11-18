@@ -9,6 +9,10 @@
     outline: 2.5px solid gold;
 }
 
+h1 {
+    margin-top: 100px;    
+}
+
 .contact_header {
     display: block;
     margin-right: 2%;
@@ -65,9 +69,5 @@ form {
         position: absolute;
         left: 80%;
         top: 42%;
-    }
-
-    #login_template {
-        margin-top: 100px !important;
     }
 }

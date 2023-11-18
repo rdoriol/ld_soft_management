@@ -12,7 +12,8 @@ Options All -Indexes
 # RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
 
 
-    # Asegurando archivo .htaccess
+
+    # Asegurando archivo .htaccess   Opciones que se deja comentadas, desactiva la función de búsqueda a través de ventanas emergentes que la aplicación tiene implementada
 # <FilesMatch "\.php$">
 #   Order Allow,Deny
 #  Deny from all

@@ -26,7 +26,7 @@ footer {
     min-height: auto;
 }
 
-#btn_print, #btn_print_supplier, #btn_print_inventory {
+#btn_print, #btn_print_customer, #btn_print_supplier, #btn_print_inventory, #btn_print_supplier_lists, #btn_print_output_product {
     display: none;
 }
 

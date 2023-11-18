@@ -209,7 +209,7 @@
     <div class="btn-group p-3 ">      
         <button type="submit" class="btn btn-primary mr-5" id="btn_invoice_product_submit" name="btn_output_product_submit"><i class="fa-solid fa-file-invoice-dollar"></i>&nbsp Facturar</button>
         <button type="button" target="_blank" class="btn btn-dark mr-5" id="btn_invoice_copy_pdf"><i class="fa-solid fa-file-pdf"></i>&nbsp Copia factura</button>
-        <button type="button" role="link" class="btn btn-secondary mr-5" name="exit_input_product" onClick="window.location='index.php?pages=01-newInvoice'"><i class="fa-sharp fa-solid fa-rectangle-xmark"></i>&nbsp Cerrar registro</button>    
+        <button type="button" role="link" class="btn btn-secondary mr-5" name="exit_input_product" onClick="window.location='index.php?pages=01-newInvoice'"><i class="fa-sharp fa-solid fa-rectangle-xmark"></i>&nbsp Cerrar</button>    
     </div>
 
                     <!-- Mensajes ocultos de validaciones y realización de operaciones -->

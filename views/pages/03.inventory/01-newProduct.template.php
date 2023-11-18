@@ -55,7 +55,7 @@
     <div class="forms_fields">
         <label class="forms_label" for="product_category">Categoría Producto</label>
         <div class="forms_inputs_fields">
-            <i class="fa-solid fa-house forms_icons"></i> 
+            <i class="fa-solid fa-newspaper forms_icons"></i> 
 
             <select class="select_product" id="father_select_item_category" name="select_item_category"> 
                 <option id="select_item_category" value="<?php echo $productData[0]->id_product_category; ?>" selected><?php echo $productData[0]->name_product_category; ?></option>
@@ -87,7 +87,7 @@
         <div class="forms_fields">
           <label class="forms_label" for="or_original_product">Referencia Original</label>
           <div class="forms_inputs_fields">
-            <i class="fa-solid fa-address-card forms_icons"></i>
+            <i class="fa-solid fa-circle-check forms_icons"></i>
             <input type="text" class="forms_inputs" id="or_original_product" name="or_original_product" placeholder="C2540A" value="<?php echo $productData[0]->or_product; ?>"/>
           </div>      
         </div> 
@@ -95,14 +95,14 @@
       <div class="forms_fields">
         <label class="forms_label" for="product_name">Nombre Producto</label>
         <div class="forms_inputs_fields">
-          <i class="fa-solid fa-user forms_icons"></i>
+          <i class="fa-solid fa-file-signature forms_icons"></i>
           <input type="text" class="forms_inputs input_name_product" id="product_name" name="product_name" placeholder="Tóner laser HP" value="<?php echo $productData[0]->name_product; ?>" />
         </div>      
       </div>
 
       <div class="forms_fields">
         <div class="forms_inputs_fields">
-          <i class="fa-solid fa-envelopes-bulk forms_icons"></i>
+          <i class="fa-solid fa-pen-to-square forms_icons"></i>
           <label class="forms_label label_text_area" for="product_description">Descripción producto</label>
         </div>   
          <textarea  rows="4" cols="40" class="forms_inputs" id="product_description" name="product_description"><?php echo $productData[0]->description_product; ?></textarea> 
@@ -114,7 +114,7 @@
         <div class="forms_fields">
           <label class="forms_label" for="product_unit">Unidades</label>  
           <div class="forms_inputs_fields">
-            <i class="fa-solid fa-tree-city forms_icons"></i>
+            <i class="fa-solid fa-list-ol forms_icons"></i>
             <input type="text" class="forms_inputs input_numbers_product" id="product_unit" name="product_unit" placeholder="auto" disabled value="<?php echo $productData[0]->units_product; ?>">
           </div>      
         </div>
@@ -122,7 +122,7 @@
         <div class="forms_fields">
           <label class="forms_label" for="last_cost_product">Último coste</label> 
           <div class="forms_inputs_fields">
-            <i class="fa-solid fa-city forms_icons"></i>
+            <i class="fa-solid fa-comments-dollar forms_icons"></i>
             <input type="text" class="forms_inputs input_numbers_product" id="last_cost_product" name="last_cost_product" placeholder="auto" disabled value="<?php echo $productData[0]->last_unit_cost_product; ?>"/>
           </div>      
         </div>
@@ -130,7 +130,7 @@
         <div class="forms_fields">
           <label class="forms_label" for="sale_price_product">Precio venta</label>
           <div class="forms_inputs_fields">
-            <i class="fa-solid fa-earth-americas forms_icons"></i>
+            <i class="fa-solid fa-money-check-dollar forms_icons"></i>
             <input type="text" class="forms_inputs input_price_product" id="sale_price_product" name="sale_price_product" placeholder="" value="<?php echo $productData[0]->sale_price_product; ?>"/>
         </div>   
            

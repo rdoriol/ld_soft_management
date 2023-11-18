@@ -25,7 +25,7 @@
 <table class="general_tables table table-striped text-center" id="customers_lists_table">
     <thead>
         <tr>
-            <th>Id</th><th>NIF</th><th>Nombre</th><th>Teléfono</th><th>Correo Electrónico</th><th>Dirección</th><th>Código Postal</th><th>Población</th><th>Provincia</th><th>País</th><th>Editar</th>
+            <th>Id</th><th>NIF</th><th>Nombre</th><th>Teléfono</th><th>Correo Electrónico</th><th>Dirección</th><th>Código Postal</th><th>Población</th><th>Provincia</th><th>País</th>
         </tr>
         </thead>
         <tbody>

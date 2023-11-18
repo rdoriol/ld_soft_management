@@ -4,7 +4,7 @@
   sessionStorage.setItem("submenuShowStore", "false"); 
 </script>
 
-<h1 class="text-center">Login</h1>
+<h1 class="text-center">Inicio Sesión</h1>
 
 <div class="d-flex justify-content-center" id="login_template">
 
