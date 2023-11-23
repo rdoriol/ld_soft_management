@@ -26,8 +26,7 @@
                                 
                 $stmt->bindParam(":token_supplier_invoice", $data["token_supplier_invoices"], PDO::PARAM_STR);                
                 $stmt->bindParam(":id_supplier", $data["select_supplier"], PDO::PARAM_INT);
-                $stmt->bindParam(":input_number", $data["input_number"], PDO::PARAM_INT);
-                //$stmt->bindParam(":invoice_date", $data["input_product_created_date"]); //todo aqui?? el ERROR CON LO RECIBIDO DE DATE
+                $stmt->bindParam(":input_number", $data["input_number"], PDO::PARAM_INT);                
                 $stmt->bindParam(":subtotal_input", $data["subtotal_input"]);
                 $stmt->bindParam(":discount_input", $data["discount_input"]);
                 $stmt->bindParam(":subtotal_with_discount", $data["subtotal_discount_input"]);
